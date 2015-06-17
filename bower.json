@@ -1,0 +1,29 @@
+{
+  "name": "react-burger-menu",
+  "version": "0.0.0",
+  "description": "react-burger-menu",
+  "main": "dist/react-burger-menu.min.js",
+  "homepage": "https://github.com/negomi/react-burger-menu",
+  "authors": [
+    "Imogen Wentworth"
+  ],
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "react",
+    "react-component"
+  ],
+  "license": "MIT",
+  "ignore": [
+    ".editorconfig",
+    ".gitignore",
+    "package.json",
+    "src",
+    "node_modules",
+    "example",
+    "test"
+  ]
+}

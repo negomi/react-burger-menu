@@ -1,0 +1,117 @@
+@import url(http://fonts.googleapis.com/css?family=Raleway:200,400,700,800);
+
+*, *:after, *:before { -webkit-box-sizing: border-box; box-sizing: border-box; }
+.clearfix:before, .clearfix:after { content: ''; display: table; }
+.clearfix:after { clear: both; }
+
+body {
+  background: #b4bad2;
+  color: #fffce1;
+  font-family: 'Raleway', Arial, sans-serif;
+}
+
+a {
+  color: #4e4a46;
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    color: #c94e50;
+  }
+}
+
+main {
+  padding: 3em 2em;
+  text-align: center;
+}
+
+h1 {
+  font-weight: 800;
+  font-size: 3.75em;
+}
+
+h2 {
+  max-width: 25em;
+  margin: 0 auto;
+  line-height: 1.3em;
+  font-weight: 400;
+}
+
+.demo-buttons {
+  font-size: 1em;
+  max-width: 1200px;
+  margin: 3em auto 5em;
+  padding: 2em 10em 0;
+
+  a {
+    display: inline-block;
+    margin: 0.75em;
+    padding: 1.35em 1.1em;
+    width: 15em;
+    background: #fffce1;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 800;
+    border-top-left-radius: 20px 50px;
+    border-top-right-radius: 20px 50px;
+    border-bottom-right-radius: 20px 50px;
+    border-bottom-left-radius: 20px 50px;
+    cursor: pointer;
+
+    &.current-demo {
+      background: #c94e50;
+      color: #fffce1;
+    }
+  }
+}
+
+@media screen and (max-width: 40em) {
+  body {
+    font-size: 80%;
+  }
+
+  h1 {
+    font-size: 2.5em;
+  }
+
+  .demo-buttons {
+    max-width: 900px;
+    padding: 2em 2em 0;
+  }
+}
+
+//
+// Burger menu custom styles
+//
+
+.bm-burger-icon {
+  background: #373a47;
+}
+
+.bm-cross {
+  background: #bdc3c7;
+}
+
+.bm-menu {
+  background: #373a47;
+  padding: 2.5em 1.5em 0;
+  font-size: 1.15em;
+
+  a {
+    color: #b8b7ad;
+
+    &:hover,
+    &:focus {
+      color: #c94e50;
+    }
+  }
+}
+
+.bm-item-list a {
+  padding: 0.8em;
+
+  span {
+    margin-left: 10px;
+    font-weight: 700;
+  }
+}
