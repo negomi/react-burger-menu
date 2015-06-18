@@ -58,6 +58,13 @@ var styles = {
       transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(100%, 0, 0)',
       transition: isOpen ? 'opacity 0.3s' : 'opacity 0.3s, transform 0s 0.3s'
     });
+  },
+
+  pageWrap(isOpen) {
+    return appendVendorPrefix({
+      transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(100px, 0, 0)',
+      transition: isOpen ? 'transform 0.3s' : 'transform 0.3s 0.1s'
+    });
   }
 };
 

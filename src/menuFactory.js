@@ -22,6 +22,12 @@ export default (styles) => {
       return { isOpen: false }
     },
 
+    componentWillMount() {
+      if (styles.pageWrap && !this.props.pageWrapId) {
+        console.warn("No pageWrapId supplied");
+      }
+    },
+
     componentDidMount() {
       window.addEventListener("click", this.listenForClose);
       window.addEventListener("keydown", this.listenForClose);
@@ -30,6 +36,29 @@ export default (styles) => {
     componentWillUnmount() {
       window.removeEventListener("click", this.listenForClose);
       window.removeEventListener("keydown", this.listenForClose);
+    },
+
+    componentWillUpdate() {
+      var wrapper, wrapperStyles, prop;
+
+      if (styles.pageWrap) {
+        if (!this.props.pageWrapId) return;
+
+        wrapper = document.getElementById(this.props.pageWrapId);
+
+        if (!wrapper) {
+          console.error("Element with ID '" + this.props.pageWrapId + "' not found");
+          return;
+        }
+
+        wrapperStyles = styles.pageWrap(this.state.isOpen);
+
+        for (prop in wrapperStyles) {
+          if (wrapperStyles.hasOwnProperty(prop)) {
+            wrapper.style[prop] = wrapperStyles[prop];
+          }
+        }
+      }
     },
 
     componentDidUpdate() {
@@ -54,14 +83,14 @@ export default (styles) => {
     render() {
       var items, svg, closeButtonStyles;
 
-      items = this.props.config.items.map((item, index) => {
+      items = this.props.items.map((item, index) => {
         return (
           <a key={ index }
             href={ item.href || '' }
             style={ styles.item(this.state.isOpen, index + 1) }
             dangerouslySetInnerHTML={ { __html: item.content } }>
           </a>
-        )
+        );
       });
 
       if (styles.svg) {
