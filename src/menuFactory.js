@@ -1,5 +1,6 @@
 var React = require('react');
 var appendVendorPrefix = require('react-kit/appendVendorPrefix');
+var Snap = require('snapsvg');
 
 var BurgerIcon = React.createClass({
 
@@ -67,7 +68,8 @@ var CrossIcon = React.createClass({
       top: 14,
       right: 18,
       cursor: 'pointer',
-      transform: type === 'before' ? 'rotate(45deg)' : 'rotate(-45deg)'
+      transform: type === 'before' ? 'rotate(45deg)' : 'rotate(-45deg)',
+      zIndex: 1
     });
   },
 
@@ -85,7 +87,8 @@ var CrossIcon = React.createClass({
       border: 'none',
       background: 'transparent',
       color: 'transparent',
-      outline: 'none'
+      outline: 'none',
+      zIndex: 1
     });
 
     return (
@@ -110,7 +113,7 @@ export default (styles) => {
 
     listenForClose(e) {
       if (e.target.id === 'bm-overlay' || e.key === 'Escape' || e.keyCode === 27) {
-        this.setState({ isOpen: false })
+        this.setState({ isOpen: false });
       }
     },
 
@@ -119,17 +122,48 @@ export default (styles) => {
     },
 
     componentDidMount() {
-      window.addEventListener("click", this.listenForClose, true);
-      window.addEventListener("keydown", this.listenForClose, true);
+      window.addEventListener("click", this.listenForClose);
+      window.addEventListener("keydown", this.listenForClose);
     },
 
     componentWillUnmount() {
-      window.removeEventListener("click", this.listenForClose, true);
-      window.removeEventListener("keydown", this.listenForClose, true);
+      window.removeEventListener("click", this.listenForClose);
+      window.removeEventListener("keydown", this.listenForClose);
+    },
+
+    componentDidUpdate() {
+      var s, path;
+
+      if (styles.svg) {
+        s = Snap('.bm-morph-shape');
+        path = s.select('path');
+
+        if (this.state.isOpen) {
+          // Animate SVG path.
+          path.animate({ path: styles.svg.pathOpen }, 400, mina.easeinout);
+        } else {
+          // Reset path (timeout ensures animation happens off screen).
+          setTimeout(() => {
+            path.attr('d', styles.svg.pathInitial);
+          }, 300)
+        }
+      }
     },
 
     render() {
-      var items = this.props.config.items.map((item, index) => {
+      var svg, items;
+
+      if (styles.svg) {
+        svg = (
+          <div className="bm-morph-shape" style={ styles.morphShape() }>
+            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 800" preserveAspectRatio="none">
+              <path d={ styles.svg.pathInitial }/>
+            </svg>
+          </div>
+        );
+      }
+
+      items = this.props.config.items.map((item, index) => {
         return (
           <a key={ index }
             href={ item.href || '' }
@@ -142,11 +176,14 @@ export default (styles) => {
       return (
         <div>
           <div id="bm-overlay" style={ styles.overlay(this.state.isOpen) }></div>
-          <div className="bm-menu" style={ styles.menu(this.state.isOpen) }>
-            <nav className="bm-item-list" style={ { height: '100%' } }>
-              { items }
-            </nav>
+          <div className="bm-menu-wrap" style={ styles.menuWrap(this.state.isOpen) }>
+            <div className="bm-menu" style={ styles.menu() } >
+              <nav className="bm-item-list" style={ { height: '100%' } }>
+                { items }
+              </nav>
+            </div>
             <CrossIcon onClick={ this.toggleMenu } />
+            { svg }
           </div>
           <BurgerIcon onClick={ this.toggleMenu } />
         </div>

@@ -3,7 +3,7 @@ var appendVendorPrefix = require('react-kit/appendVendorPrefix');
 
 var styles = {
 
-  menu(isOpen) {
+  menuWrap(isOpen) {
     return appendVendorPrefix({
       position: 'fixed',
       zIndex: 2,
@@ -14,11 +14,18 @@ var styles = {
     });
   },
 
+  menu() {
+    return appendVendorPrefix({
+      height: '100%'
+    });
+  },
+
   item(isOpen, nthChild) {
     return appendVendorPrefix({
       display: 'block',
       transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(0, ' + nthChild * 500 + 'px, 0)',
-      transition: isOpen ? 'transform 0.8s cubic-bezier(0.7, 0, 0.3, 1)' : 'transform 0s 0.2s cubic-bezier(0.7, 0, 0.3, 1)'
+      transition: isOpen ? 'transform 0.8s cubic-bezier(0.7, 0, 0.3, 1)' : 'transform 0s 0.2s cubic-bezier(0.7, 0, 0.3, 1)',
+      outline: 'none'
     });
   },
 
