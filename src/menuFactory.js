@@ -41,7 +41,7 @@ export default (styles) => {
 
         if (this.state.isOpen) {
           // Animate SVG path.
-          path.animate({ path: styles.svg.pathOpen }, 400, mina.easeinout);
+          styles.svg.animate(path);
         } else {
           // Reset path (timeout ensures animation happens off screen).
           setTimeout(() => {
@@ -52,7 +52,17 @@ export default (styles) => {
     },
 
     render() {
-      var svg, items;
+      var items, svg, closeButtonStyles;
+
+      items = this.props.config.items.map((item, index) => {
+        return (
+          <a key={ index }
+            href={ item.href || '' }
+            style={ styles.item(this.state.isOpen, index + 1) }
+            dangerouslySetInnerHTML={ { __html: item.content } }>
+          </a>
+        )
+      });
 
       if (styles.svg) {
         svg = (
@@ -64,27 +74,21 @@ export default (styles) => {
         );
       }
 
-      items = this.props.config.items.map((item, index) => {
-        return (
-          <a key={ index }
-            href={ item.href || '' }
-            style={ styles.item(this.state.isOpen, index + 1) }
-            dangerouslySetInnerHTML={ { __html: item.content } }>
-          </a>
-        )
-      }.bind(this));
+      closeButtonStyles = styles.closeButton ? styles.closeButton(this.state.isOpen) : {}
 
       return (
         <div>
           <div id="bm-overlay" style={ styles.overlay(this.state.isOpen) }></div>
           <div className="bm-menu-wrap" style={ styles.menuWrap(this.state.isOpen) }>
-            <div className="bm-menu" style={ styles.menu() } >
+            { svg }
+            <div className="bm-menu" style={ styles.menu(this.state.isOpen) } >
               <nav className="bm-item-list" style={ { height: '100%' } }>
                 { items }
               </nav>
             </div>
-            <CrossIcon onClick={ this.toggleMenu } />
-            { svg }
+            <div style={ closeButtonStyles }>
+              <CrossIcon onClick={ this.toggleMenu } />
+            </div>
           </div>
           <BurgerIcon onClick={ this.toggleMenu } />
         </div>
