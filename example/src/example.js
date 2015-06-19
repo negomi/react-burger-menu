@@ -33,7 +33,7 @@ var Demo = React.createClass({
     });
 
     return (
-      <div>
+      <div style={ { height: '100%' } }>
         <Menu items={ this.state.menuItems } pageWrapId={ "content-wrap" } openInstantly={ this.state.openInstantly } />
         <main id="content-wrap">
           <h1>react-burger-menu</h1>
@@ -62,7 +62,7 @@ var menus = {
   elastic: { text: 'Elastic', items: menuItems },
   bubble: { text: 'Bubble', items: menuItems },
   slideOnTop: { text: 'Slide On Top', items: menuItems },
-  push: { text: 'push', items: menuItems }
+  push: { text: 'Push', items: menuItems }
 };
 
 React.render(<Demo menus={ menus }/>, document.body);

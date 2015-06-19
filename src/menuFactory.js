@@ -9,12 +9,36 @@ export default (styles) => {
   return React.createClass({
 
     toggleMenu() {
-      this.setState({ isOpen: !this.state.isOpen })
+      // Order important: handle any page wrap before setting sidebar state.
+      if (styles.pageWrap && this.props.pageWrapId) {
+        this.handlePageWrap();
+      }
+
+      this.setState({ isOpen: !this.state.isOpen });
+    },
+
+    handlePageWrap() {
+      var wrapper, wrapperStyles, prop;
+
+      wrapper = document.getElementById(this.props.pageWrapId);
+
+      if (!wrapper) {
+        console.error("Element with ID '" + this.props.pageWrapId + "' not found");
+        return;
+      }
+
+      wrapperStyles = styles.pageWrap(this.state.isOpen);
+
+      for (prop in wrapperStyles) {
+        if (wrapperStyles.hasOwnProperty(prop)) {
+          wrapper.style[prop] = wrapperStyles[prop];
+        }
+      }
     },
 
     listenForClose(e) {
-      if (e.target.id === 'bm-overlay' || e.key === 'Escape' || e.keyCode === 27) {
-        this.setState({ isOpen: false });
+      if (this.state.isOpen && (e.target.id === 'bm-overlay' || e.key === 'Escape' || e.keyCode === 27)) {
+        this.toggleMenu();
       }
     },
 
@@ -33,38 +57,15 @@ export default (styles) => {
       window.addEventListener("keydown", this.listenForClose);
 
       if (this.props.openInstantly) {
-        setTimeout(function() {
+        setTimeout(() => {
           this.toggleMenu();
-        }.bind(this), 50);
+        }, 50);
       }
     },
 
     componentWillUnmount() {
       window.removeEventListener("click", this.listenForClose);
       window.removeEventListener("keydown", this.listenForClose);
-    },
-
-    componentWillUpdate() {
-      var wrapper, wrapperStyles, prop;
-
-      if (styles.pageWrap) {
-        if (!this.props.pageWrapId) return;
-
-        wrapper = document.getElementById(this.props.pageWrapId);
-
-        if (!wrapper) {
-          console.error("Element with ID '" + this.props.pageWrapId + "' not found");
-          return;
-        }
-
-        wrapperStyles = styles.pageWrap(this.state.isOpen);
-
-        for (prop in wrapperStyles) {
-          if (wrapperStyles.hasOwnProperty(prop)) {
-            wrapper.style[prop] = wrapperStyles[prop];
-          }
-        }
-      }
     },
 
     componentDidUpdate() {
