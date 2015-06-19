@@ -36,12 +36,12 @@ var Demo = React.createClass({
       <div id="outer-container" style={ { height: '100%' } }>
         <Menu items={ this.state.menuItems } pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } openInstantly={ this.state.openInstantly } />
         <main id="page-wrap">
-          <h1>react-burger-menu</h1>
-          <h2>An off-canvas menu React component with effects and styles using CSS transitions and SVG path animations, inspired by <a href="https://github.com/codrops/OffCanvasMenuEffects">Codrops</a>.</h2>
+          <h1><a href="https://github.com/negomi/react-burger-menu">react-burger-menu</a></h1>
+          <h2>An off-canvas sidebar React component with effects and styles using CSS transforms and transitions and SVG path animations.</h2>
           <nav className="demo-buttons">
             { buttons }
           </nav>
-          <a href="https://github.com/negomi/react-burger-menu">View the project on GitHub</a>
+          Inspired by <a href="https://github.com/codrops/OffCanvasMenuEffects">Off-Canvas Menu Effects</a> and <a href="https://github.com/codrops/SidebarTransitions">Sidebar Transitions</a> by Codrops
         </main>
       </div>
     );
