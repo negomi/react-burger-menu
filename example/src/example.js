@@ -6,14 +6,16 @@ var Demo = React.createClass({
   changeMenu(menu) {
     this.setState({
       currentMenu: menu,
-      menuItems: this.props.menus[menu].items
+      menuItems: this.props.menus[menu].items,
+      openInstantly: true
     })
   },
 
   getInitialState() {
     return {
       currentMenu: 'sideSlide',
-      menuItems: this.props.menus['sideSlide'].items
+      menuItems: this.props.menus['sideSlide'].items,
+      openInstantly: false
     }
   },
 
@@ -32,7 +34,7 @@ var Demo = React.createClass({
 
     return (
       <div>
-        <Menu items={ this.state.menuItems } pageWrapId={ "content-wrap" }/>
+        <Menu items={ this.state.menuItems } pageWrapId={ "content-wrap" } openInstantly={ this.state.openInstantly } />
         <main id="content-wrap">
           <h1>react-burger-menu</h1>
           <h2>An off-canvas menu React component with effects and styles using CSS transitions and SVG path animations, inspired by <a href="https://github.com/codrops/OffCanvasMenuEffects">Codrops</a>.</h2>
