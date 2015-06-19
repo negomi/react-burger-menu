@@ -1,7 +1,7 @@
 export default {
-  sideSlide: require('./menus/sideSlide'),
+  simpleSlide: require('./menus/simpleSlide'),
+  stack: require('./menus/stack'),
   elastic: require('./menus/elastic'),
   bubble: require('./menus/bubble'),
-  slideOnTop: require('./menus/slideOnTop'),
   push: require('./menus/push')
 }

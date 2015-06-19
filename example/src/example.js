@@ -13,8 +13,8 @@ var Demo = React.createClass({
 
   getInitialState() {
     return {
-      currentMenu: 'sideSlide',
-      menuItems: this.props.menus['sideSlide'].items,
+      currentMenu: 'stack',
+      menuItems: this.props.menus['stack'].items,
       openInstantly: false
     }
   },
@@ -58,10 +58,10 @@ var menuItems = [
 ];
 
 var menus = {
-  sideSlide: { text: 'Side Slide', items: menuItems },
+  simpleSlide: { text: 'Simple Slide', items: menuItems },
+  stack: { text: 'Stack', items: menuItems },
   elastic: { text: 'Elastic', items: menuItems },
   bubble: { text: 'Bubble', items: menuItems },
-  slideOnTop: { text: 'Slide On Top', items: menuItems },
   push: { text: 'Push', items: menuItems }
 };
 
