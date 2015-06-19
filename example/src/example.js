@@ -13,8 +13,8 @@ var Demo = React.createClass({
 
   getInitialState() {
     return {
-      currentMenu: 'stack',
-      menuItems: this.props.menus['stack'].items,
+      currentMenu: 'simpleSlide',
+      menuItems: this.props.menus['simpleSlide'].items,
       openInstantly: false
     }
   },
@@ -33,9 +33,9 @@ var Demo = React.createClass({
     });
 
     return (
-      <div style={ { height: '100%' } }>
-        <Menu items={ this.state.menuItems } pageWrapId={ "content-wrap" } openInstantly={ this.state.openInstantly } />
-        <main id="content-wrap">
+      <div id="outer-container" style={ { height: '100%' } }>
+        <Menu items={ this.state.menuItems } pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } openInstantly={ this.state.openInstantly } />
+        <main id="page-wrap">
           <h1>react-burger-menu</h1>
           <h2>An off-canvas menu React component with effects and styles using CSS transitions and SVG path animations, inspired by <a href="https://github.com/codrops/OffCanvasMenuEffects">Codrops</a>.</h2>
           <nav className="demo-buttons">
@@ -62,7 +62,8 @@ var menus = {
   stack: { text: 'Stack', items: menuItems },
   elastic: { text: 'Elastic', items: menuItems },
   bubble: { text: 'Bubble', items: menuItems },
-  push: { text: 'Push', items: menuItems }
+  push: { text: 'Push', items: menuItems },
+  pushRotate: { text: 'Push Rotate', items: menuItems }
 };
 
 React.render(<Demo menus={ menus }/>, document.body);

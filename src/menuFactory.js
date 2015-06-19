@@ -9,25 +9,30 @@ export default (styles) => {
   return React.createClass({
 
     toggleMenu() {
-      // Order important: handle any page wrap before setting sidebar state.
+      // Order important: handle any external wrapper elements
+      // before setting sidebar state.
       if (styles.pageWrap && this.props.pageWrapId) {
-        this.handlePageWrap();
+        this.handleExternalWrapper(this.props.pageWrapId, styles.pageWrap);
+      }
+
+      if (styles.outerContainer && this.props.outerContainerId) {
+        this.handleExternalWrapper(this.props.outerContainerId, styles.outerContainer);
       }
 
       this.setState({ isOpen: !this.state.isOpen });
     },
 
-    handlePageWrap() {
+    handleExternalWrapper(id, fn) {
       var wrapper, wrapperStyles, prop;
 
-      wrapper = document.getElementById(this.props.pageWrapId);
+      wrapper = document.getElementById(id);
 
       if (!wrapper) {
-        console.error("Element with ID '" + this.props.pageWrapId + "' not found");
+        console.error("Element with ID '" + id + "' not found");
         return;
       }
 
-      wrapperStyles = styles.pageWrap(this.state.isOpen);
+      wrapperStyles = fn(this.state.isOpen);
 
       for (prop in wrapperStyles) {
         if (wrapperStyles.hasOwnProperty(prop)) {
@@ -49,6 +54,10 @@ export default (styles) => {
     componentWillMount() {
       if (styles.pageWrap && !this.props.pageWrapId) {
         console.warn("No pageWrapId supplied");
+      }
+
+      if (styles.outerContainer && !this.props.outerContainerId) {
+        console.warn("No outerContainerId supplied");
       }
     },
 

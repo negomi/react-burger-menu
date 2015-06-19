@@ -3,5 +3,6 @@ export default {
   stack: require('./menus/stack'),
   elastic: require('./menus/elastic'),
   bubble: require('./menus/bubble'),
-  push: require('./menus/push')
+  push: require('./menus/push'),
+  pushRotate: require('./menus/pushRotate')
 }

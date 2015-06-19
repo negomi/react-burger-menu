@@ -35,7 +35,7 @@ var styles = {
       background: 'rgba(0, 0, 0, 0.3)',
       opacity: isOpen ? 1 : 0,
       transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(100%, 0, 0)',
-      transition: 'opacity 0.5s',
+      transition: isOpen ? 'opacity 0.5s' : 'opacity 0.5s, transform 0.1s 0.5s',
       zIndex: 1
     });
   },
