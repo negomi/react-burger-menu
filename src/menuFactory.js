@@ -64,12 +64,6 @@ export default (styles) => {
     componentDidMount() {
       window.addEventListener("click", this.listenForClose);
       window.addEventListener("keydown", this.listenForClose);
-
-      if (this.props.openInstantly) {
-        setTimeout(() => {
-          this.toggleMenu();
-        }, 50);
-      }
     },
 
     componentWillUnmount() {

@@ -6,16 +6,14 @@ var Demo = React.createClass({
   changeMenu(menu) {
     this.setState({
       currentMenu: menu,
-      menuItems: this.props.menus[menu].items,
-      openInstantly: true
+      menuItems: this.props.menus[menu].items
     })
   },
 
   getInitialState() {
     return {
       currentMenu: 'simpleSlide',
-      menuItems: this.props.menus['simpleSlide'].items,
-      openInstantly: false
+      menuItems: this.props.menus['simpleSlide'].items
     }
   },
 
@@ -34,7 +32,7 @@ var Demo = React.createClass({
 
     return (
       <div id="outer-container" style={ { height: '100%' } }>
-        <Menu items={ this.state.menuItems } pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } openInstantly={ this.state.openInstantly } />
+        <Menu items={ this.state.menuItems } pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } />
         <main id="page-wrap">
           <h1><a href="https://github.com/negomi/react-burger-menu">react-burger-menu</a></h1>
           <h2>An off-canvas sidebar React component with effects and styles using CSS transforms and transitions and SVG path animations.</h2>
