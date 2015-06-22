@@ -4,5 +4,6 @@ export default {
   elastic: require('./menus/elastic'),
   bubble: require('./menus/bubble'),
   push: require('./menus/push'),
-  pushRotate: require('./menus/pushRotate')
+  pushRotate: require('./menus/pushRotate'),
+  rotateIn: require('./menus/rotateIn')
 }

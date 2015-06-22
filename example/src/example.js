@@ -61,7 +61,8 @@ var menus = {
   elastic: { text: 'Elastic', items: menuItems },
   bubble: { text: 'Bubble', items: menuItems },
   push: { text: 'Push', items: menuItems },
-  pushRotate: { text: 'Push Rotate', items: menuItems }
+  pushRotate: { text: 'Push Rotate', items: menuItems },
+  rotateIn: { text: 'Rotate In', items: menuItems }
 };
 
 React.render(<Demo menus={ menus }/>, document.body);
