@@ -5,5 +5,6 @@ export default {
   bubble: require('./menus/bubble'),
   push: require('./menus/push'),
   pushRotate: require('./menus/pushRotate'),
-  rotateIn: require('./menus/rotateIn')
+  rotateIn: require('./menus/rotateIn'),
+  rotateOut: require('./menus/rotateOut')
 }
