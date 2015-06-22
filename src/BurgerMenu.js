@@ -6,5 +6,6 @@ export default {
   push: require('./menus/push'),
   pushRotate: require('./menus/pushRotate'),
   rotateIn: require('./menus/rotateIn'),
-  rotateOut: require('./menus/rotateOut')
+  rotateOut: require('./menus/rotateOut'),
+  scaleDown: require('./menus/scaleDown')
 }
