@@ -43,6 +43,7 @@ var styles = {
   pageWrap(isOpen) {
     return appendVendorPrefix({
       transform: isOpen ? 'translate3d(0, 0, 1px)' : 'translate3d(0, 0, -300px)',
+      transformOrigin: '100%',
       transformStyle: 'preserve-3d',
       transition: 'transform 0.5s'
     });

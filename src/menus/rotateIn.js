@@ -49,10 +49,11 @@ var styles = {
     });
   },
 
-  outerContainer() {
+  outerContainer(isOpen) {
     return appendVendorPrefix({
       perspective: '1500px',
-      perspectiveOrigin: '0% 50%'
+      perspectiveOrigin: '0% 50%',
+      overflow: isOpen ? 'auto' : 'hidden'
     });
   }
 };
