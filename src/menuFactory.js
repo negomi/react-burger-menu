@@ -9,20 +9,39 @@ export default (styles) => {
   return React.createClass({
 
     toggleMenu() {
-      // Order important: handle any external wrapper elements
-      // before setting sidebar state.
-      if (styles.pageWrap && this.props.pageWrapId) {
-        this.handleExternalWrapper(this.props.pageWrapId, styles.pageWrap);
-      }
-
-      if (styles.outerContainer && this.props.outerContainerId) {
-        this.handleExternalWrapper(this.props.outerContainerId, styles.outerContainer);
-      }
+      // Order important: handle wrappers before setting sidebar state.
+      this.applyWrapperStyles();
 
       this.setState({ isOpen: !this.state.isOpen });
     },
 
-    handleExternalWrapper(id, fn) {
+    // Applies component-specific styles to external wrapper elements.
+    applyWrapperStyles() {
+      if (styles.pageWrap && this.props.pageWrapId) {
+        this.handleExternalWrapper(this.props.pageWrapId, styles.pageWrap, true);
+      }
+
+      if (styles.outerContainer && this.props.outerContainerId) {
+        this.handleExternalWrapper(this.props.outerContainerId, styles.outerContainer, true);
+      }
+    },
+
+    // Removes component-specific styles applied to external wrapper elements.
+    clearWrapperStyles() {
+      if (styles.pageWrap && this.props.pageWrapId) {
+        this.handleExternalWrapper(this.props.pageWrapId, styles.pageWrap, false);
+      }
+
+      if (styles.outerContainer && this.props.outerContainerId) {
+        this.handleExternalWrapper(this.props.outerContainerId, styles.outerContainer, false);
+      }
+    },
+
+    // Sets or unsets styles on DOM elements outside the menu component.
+    // This is necessary for correct page interaction with some of the menus.
+    // Throws and returns if the required external elements don't exist,
+    // which means any external page animations won't be applied.
+    handleExternalWrapper(id, styles, set) {
       var wrapper, wrapperStyles, prop;
 
       wrapper = document.getElementById(id);
@@ -32,11 +51,11 @@ export default (styles) => {
         return;
       }
 
-      wrapperStyles = fn(this.state.isOpen);
+      wrapperStyles = styles(this.state.isOpen);
 
       for (prop in wrapperStyles) {
         if (wrapperStyles.hasOwnProperty(prop)) {
-          wrapper.style[prop] = wrapperStyles[prop];
+          wrapper.style[prop] = set ? wrapperStyles[prop] : '';
         }
       }
     },
@@ -52,6 +71,8 @@ export default (styles) => {
     },
 
     componentWillMount() {
+      // Warn if the selected menu requires external wrapper elements
+      // but none were supplied.
       if (styles.pageWrap && !this.props.pageWrapId) {
         console.warn("No pageWrapId supplied");
       }
@@ -69,6 +90,8 @@ export default (styles) => {
     componentWillUnmount() {
       window.removeEventListener("click", this.listenForClose);
       window.removeEventListener("keydown", this.listenForClose);
+
+      this.clearWrapperStyles();
     },
 
     componentDidUpdate() {
