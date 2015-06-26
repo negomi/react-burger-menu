@@ -53,7 +53,7 @@ var styles = {
     return appendVendorPrefix({
       perspective: '1500px',
       perspectiveOrigin: '0% 50%',
-      overflow: isOpen ? 'auto' : 'hidden'
+      overflow: isOpen ? '' : 'hidden'
     });
   }
 };

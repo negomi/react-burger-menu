@@ -9,9 +9,7 @@ var styles = {
       zIndex: 2,
       width: 300,
       height: '100%',
-      transform: isOpen ? 'translate3d(0, 0, 0) rotateY(1deg)' : 'translate3d(-100%, 0, 0) rotateY(90deg)',
-      transformOrigin: '100% 50%',
-      transformStyle: 'preserve-3d',
+      transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-100%, 0, 0)',
       transition: 'transform 0.5s'
     });
   },
@@ -44,15 +42,17 @@ var styles = {
 
   pageWrap(isOpen) {
     return appendVendorPrefix({
-      transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(300px, 0, 0)',
-      transition: 'transform 0.5s'
+      transform: isOpen ? '' : 'rotateY(-10deg)',
+      transformOrigin: '100% 50%',
+      transformStyle: 'preserve-3d',
+      transition: 'transform 0.5s',
+      overflow: isOpen ? 'scroll' : 'hidden'
     });
   },
 
   outerContainer(isOpen) {
     return appendVendorPrefix({
       perspective: '1500px',
-      perspectiveOrigin: '0% 50%',
       overflow: isOpen ? '' : 'hidden'
     });
   }

@@ -45,14 +45,14 @@ var styles = {
       transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(100px, 0, -600px) rotateY(-20deg)',
       transformStyle: 'preserve-3d',
       transition: 'transform 0.5s',
-      overflow: isOpen ? 'auto' : 'hidden'
+      overflow: isOpen ? '' : 'hidden'
     });
   },
 
   outerContainer(isOpen) {
     return appendVendorPrefix({
       perspective: '1500px',
-      overflow: isOpen ? 'auto' : 'hidden'
+      overflow: isOpen ? '' : 'hidden'
     });
   }
 };
