@@ -12,8 +12,8 @@ var Demo = React.createClass({
 
   getInitialState() {
     return {
-      currentMenu: 'simpleSlide',
-      menuItems: this.props.menus['simpleSlide'].items
+      currentMenu: 'slide',
+      menuItems: this.props.menus['slide'].items
     }
   },
 
@@ -35,7 +35,7 @@ var Demo = React.createClass({
         <Menu items={ this.state.menuItems } pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } />
         <main id="page-wrap">
           <h1><a href="https://github.com/negomi/react-burger-menu">react-burger-menu</a></h1>
-          <h2>An off-canvas sidebar React component with effects and styles using CSS transforms and transitions and SVG path animations.</h2>
+          <h2>An off-canvas sidebar React component with a collection of effects and styles using CSS transitions and SVG path animations.</h2>
           <nav className="demo-buttons">
             { buttons }
           </nav>
@@ -56,7 +56,7 @@ var menuItems = [
 ];
 
 var menus = {
-  simpleSlide: { text: 'Simple Slide', items: menuItems },
+  slide: { text: 'Slide', items: menuItems },
   stack: { text: 'Stack', items: menuItems },
   elastic: { text: 'Elastic', items: menuItems },
   bubble: { text: 'Bubble', items: menuItems },
