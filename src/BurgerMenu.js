@@ -9,5 +9,6 @@ export default {
   rotateOut: require('./menus/rotateOut'),
   scaleDown: require('./menus/scaleDown'),
   scaleRotate: require('./menus/scaleRotate'),
-  openDoor: require('./menus/openDoor')
+  openDoor: require('./menus/openDoor'),
+  fallDown: require('./menus/fallDown')
 }
