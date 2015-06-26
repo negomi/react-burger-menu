@@ -38,9 +38,9 @@ var styles = {
     return appendVendorPrefix({
       position: 'fixed',
       zIndex: 2,
-      width: 280,
+      width: 300,
       height: '100%',
-      transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-280px, 0, 0)',
+      transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-300px, 0, 0)',
       transition: isOpen ? 'transform 0.4s 0s' : 'transform 0.4s'
     });
   },
