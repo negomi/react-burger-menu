@@ -67,7 +67,8 @@ var menus = {
   scaleDown: { text: 'Scale Down', items: menuItems },
   scaleRotate: { text: 'Scale Rotate', items: menuItems },
   openDoor: { text: 'Open Door', items: menuItems },
-  fallDown: { text: 'Fall Down', items: menuItems }
+  fallDown: { text: 'Fall Down', items: menuItems },
+  delayRotate: { text: 'Delay Rotate', items: menuItems }
 };
 
 React.render(<Demo menus={ menus }/>, document.body);

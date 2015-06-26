@@ -10,5 +10,6 @@ export default {
   scaleDown: require('./menus/scaleDown'),
   scaleRotate: require('./menus/scaleRotate'),
   openDoor: require('./menus/openDoor'),
-  fallDown: require('./menus/fallDown')
+  fallDown: require('./menus/fallDown'),
+  delayRotate: require('./menus/delayRotate')
 }
