@@ -8,6 +8,12 @@ export default (styles) => {
 
   return React.createClass({
 
+    propTypes: {
+      items: React.PropTypes.array,
+      pageWrapId: React.PropTypes.string,
+      outerContainerId: React.PropTypes.string
+    },
+
     toggleMenu() {
       // Order important: handle wrappers before setting sidebar state.
       this.applyWrapperStyles();
@@ -63,6 +69,12 @@ export default (styles) => {
     listenForClose(e) {
       if (this.state.isOpen && (e.target.id === 'bm-overlay' || e.key === 'Escape' || e.keyCode === 27)) {
         this.toggleMenu();
+      }
+    },
+
+    getDefaultProps() {
+      return {
+        items: []
       }
     },
 
