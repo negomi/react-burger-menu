@@ -74,24 +74,24 @@ h2 {
 }
 
 @media screen and (max-width: 40em) {
-  body {
+  main {
     font-size: 80%;
   }
 
   h1 {
+    padding-top: 1em;
     font-size: 2.5em;
   }
 
   .demo-buttons {
     max-width: 900px;
-    padding: 2em 2em 0;
+    padding: 0 2em;
   }
 }
 
 //
 // Burger menu custom styles
 //
-
 .bm-burger-icon {
   background: #373a47;
 }
@@ -106,8 +106,6 @@ h2 {
 
 .bm-menu {
   background: #373a47;
-  padding: 2.5em 1.5em 0;
-  font-size: 1.15em;
 
   a {
     color: #b8b7ad;
@@ -126,4 +124,120 @@ h2 {
     margin-left: 10px;
     font-weight: 700;
   }
+}
+
+//
+// Mixins
+//
+.menu-1 {
+  .bm-menu {
+    padding: 2.5em 1.5em 0;
+    font-size: 1.15em;
+  }
+}
+
+.menu-2 {
+  .bm-cross {
+    background: #999;
+  }
+
+  .bm-menu {
+    padding: 3.4em 1em 0;
+  }
+
+  .bm-item-list a {
+    padding: 1em;
+  }
+
+  .bm-item-list i {
+    font-size: 1.7em;
+    vertical-align: middle;
+    color: #282a35;
+  }
+}
+
+.menu-3 {
+  .bm-cross {
+    background: #888;
+  }
+
+  .bm-menu {
+    padding: 2em 1em;
+    font-size: 1.15em;
+  }
+
+  .bm-item-list a {
+    i {
+      opacity: 0.5;
+    }
+
+    span {
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.75em;
+    }
+  }
+}
+
+.menu-4 {
+  .bm-cross {
+    background: #888;
+  }
+
+  .bm-item-list a {
+    text-transform: uppercase;
+    transition: background 0.3s, box-shadow 0.3s;
+    box-shadow: inset 0 -1px rgba(0, 0, 0, 0.2);
+    padding: 1em;
+
+    span {
+      letter-spacing: 1px;
+      font-weight: 400;
+    }
+
+    &:first-child {
+      pointer-events: none;
+      text-transform: none;
+      letter-spacing: normal;
+      padding: 2.5em 1em 2em;
+      color: rgba(0,0,0,0.4);
+
+      i {
+        margin-left: 0.2em;
+      }
+
+      span {
+        font-size: 2em;
+        font-weight: 700;
+      }
+    }
+
+    &:hover,
+    &:focus {
+      background: rgba(0, 0, 0, 0.2);
+      box-shadow: inset 0 -1px rgba(0, 0, 0, 0);
+      color: #b8b7ad;
+    }
+  }
+}
+
+#slide,
+#stack {
+  .menu-1;
+}
+
+#bubble,
+#push {
+  .menu-2;
+}
+
+#elastic {
+  .menu-3;
+}
+
+#scaleDown,
+#scaleRotate,
+#pushRotate,
+#fallDown {
+  .menu-4;
 }

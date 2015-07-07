@@ -10,6 +10,7 @@ export default (styles) => {
 
     propTypes: {
       items: React.PropTypes.array,
+      id: React.PropTypes.string,
       pageWrapId: React.PropTypes.string,
       outerContainerId: React.PropTypes.string
     },
@@ -74,7 +75,10 @@ export default (styles) => {
 
     getDefaultProps() {
       return {
-        items: []
+        items: [],
+        id: '',
+        pageWrapId: '',
+        outerContainerId: ''
       }
     },
 
@@ -86,22 +90,22 @@ export default (styles) => {
       // Warn if the selected menu requires external wrapper elements
       // but none were supplied.
       if (styles.pageWrap && !this.props.pageWrapId) {
-        console.warn("No pageWrapId supplied");
+        console.warn('No pageWrapId supplied');
       }
 
       if (styles.outerContainer && !this.props.outerContainerId) {
-        console.warn("No outerContainerId supplied");
+        console.warn('No outerContainerId supplied');
       }
     },
 
     componentDidMount() {
-      window.addEventListener("click", this.listenForClose);
-      window.addEventListener("keydown", this.listenForClose);
+      window.addEventListener('click', this.listenForClose);
+      window.addEventListener('keydown', this.listenForClose);
     },
 
     componentWillUnmount() {
-      window.removeEventListener("click", this.listenForClose);
-      window.removeEventListener("keydown", this.listenForClose);
+      window.removeEventListener('click', this.listenForClose);
+      window.removeEventListener('keydown', this.listenForClose);
 
       this.clearWrapperStyles();
     },
@@ -153,7 +157,7 @@ export default (styles) => {
       return (
         <div>
           <div id="bm-overlay" style={ styles.overlay(this.state.isOpen) }></div>
-          <div className="bm-menu-wrap" style={ styles.menuWrap(this.state.isOpen) }>
+          <div id={ this.props.id } className="bm-menu-wrap" style={ styles.menuWrap(this.state.isOpen) }>
             { svg }
             <div className="bm-menu" style={ styles.menu(this.state.isOpen) } >
               <nav className="bm-item-list" style={ { height: '100%' } }>

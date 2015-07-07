@@ -32,7 +32,7 @@ var Demo = React.createClass({
 
     return (
       <div id="outer-container" style={ { height: '100%' } }>
-        <Menu items={ this.state.menuItems } pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } />
+        <Menu items={ this.state.menuItems } id={ this.state.currentMenu } pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }/>
         <main id="page-wrap">
           <h1><a href="https://github.com/negomi/react-burger-menu">react-burger-menu</a></h1>
           <h2>An off-canvas sidebar React component with a collection of effects and styles using CSS transitions and SVG path animations.</h2>
@@ -55,16 +55,25 @@ var menuItems = [
   { content: '<i class="fa fa-fw fa-newspaper-o"></i><span>Reading List</span>' }
 ];
 
+var menuItems2 = [
+  { content: '<i class="fa fa-fw fa-inbox fa-3x"></i><span>Sidebar</span>' },
+  { content: '<i class="fa fa-fw fa-database"></i><span>Data Management</span>' },
+  { content: '<i class="fa fa-fw fa-map-marker"></i><span>Location</span>' },
+  { content: '<i class="fa fa-fw fa-mortar-board"></i><span>Study</span>' },
+  { content: '<i class="fa fa-fw fa-picture-o"></i><span>Collections</span>' },
+  { content: '<i class="fa fa-fw fa-money"></i><span>Credits</span>' }
+];
+
 var menus = {
   slide: { text: 'Slide', items: menuItems },
   stack: { text: 'Stack', items: menuItems },
   elastic: { text: 'Elastic', items: menuItems },
   bubble: { text: 'Bubble', items: menuItems },
   push: { text: 'Push', items: menuItems },
-  pushRotate: { text: 'Push Rotate', items: menuItems },
-  scaleDown: { text: 'Scale Down', items: menuItems },
-  scaleRotate: { text: 'Scale Rotate', items: menuItems },
-  fallDown: { text: 'Fall Down', items: menuItems }
+  pushRotate: { text: 'Push Rotate', items: menuItems2 },
+  scaleDown: { text: 'Scale Down', items: menuItems2 },
+  scaleRotate: { text: 'Scale Rotate', items: menuItems2 },
+  fallDown: { text: 'Fall Down', items: menuItems2 }
 };
 
 React.render(<Demo menus={ menus }/>, document.body);
