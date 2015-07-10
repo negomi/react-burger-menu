@@ -36,7 +36,8 @@ var styles = {
       position: 'fixed',
       width: 'calc(100% - 120px)',
       height: '100%',
-      whiteSpace: 'nowrap'
+      whiteSpace: 'nowrap',
+      boxSizing: 'border-box'
     });
   },
 

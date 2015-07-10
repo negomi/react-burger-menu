@@ -156,7 +156,7 @@ export default (styles) => {
       return (
         <div>
           <div id="bm-overlay" style={ styles.overlay(this.state.isOpen) }></div>
-          <div id={ this.props.id } className="bm-menu-wrap" style={ styles.menuWrap(this.state.isOpen) }>
+          <div id={ this.props.id } style={ styles.menuWrap(this.state.isOpen) }>
             { svg }
             <div className="bm-menu" style={ styles.menu(this.state.isOpen) } >
               <nav className="bm-item-list" style={ { height: '100%' } }>

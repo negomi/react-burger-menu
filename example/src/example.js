@@ -27,7 +27,7 @@ var Demo = React.createClass({
       case 2:
         jsx = (
           <Menu id={ this.state.currentMenu } pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }>
-            <a href=""><i className="fa fa-fw fa-inbox fa-3x"></i><span>Sidebar</span></a>
+            <h2><i className="fa fa-fw fa-inbox fa-2x"></i><span>Sidebar</span></h2>
             <a href=""><i className="fa fa-fw fa-database"></i><span>Data Management</span></a>
             <a href=""><i className="fa fa-fw fa-map-marker"></i><span>Location</span></a>
             <a href=""><i className="fa fa-fw fa-mortar-board"></i><span>Study</span></a>

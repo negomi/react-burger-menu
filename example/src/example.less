@@ -1,8 +1,6 @@
-@import url(http://fonts.googleapis.com/css?family=Raleway:200,400,700,800);
+@import url(http://fonts.googleapis.com/css?family=Raleway:400,700,800);
 
 *, *:after, *:before { -webkit-box-sizing: border-box; box-sizing: border-box; }
-.clearfix:before, .clearfix:after { content: ''; display: table; }
-.clearfix:after { clear: both; }
 
 html {
   height: 100%;
@@ -96,10 +94,6 @@ h2 {
   background: #373a47;
 }
 
-.bm-cross {
-  background: #bdc3c7;
-}
-
 .bm-morph-shape {
   fill: #373a47;
 }
@@ -130,6 +124,10 @@ h2 {
 // Mixins
 //
 .menu-1 {
+  .bm-cross {
+    background: #bdc3c7;
+  }
+
   .bm-menu {
     padding: 2.5em 1.5em 0;
     font-size: 1.15em;
@@ -145,11 +143,11 @@ h2 {
     padding: 3.4em 1em 0;
   }
 
-  .bm-item-list a {
+  a {
     padding: 1em;
   }
 
-  .bm-item-list i {
+  i {
     font-size: 1.7em;
     vertical-align: middle;
     color: #282a35;
@@ -166,16 +164,14 @@ h2 {
     font-size: 1.15em;
   }
 
-  .bm-item-list a {
-    i {
-      opacity: 0.5;
-    }
+  i {
+    opacity: 0.5;
+  }
 
-    span {
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-size: 0.75em;
-    }
+  span {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.75em;
   }
 }
 
@@ -184,32 +180,30 @@ h2 {
     background: #888;
   }
 
-  .bm-item-list a {
+  h2 {
+    padding: 2em 1em;
+    color: rgba(0, 0, 0, 0.4);
+    box-shadow: inset 0 -1px rgba(0, 0, 0, 0.2);
+
+    i {
+      margin-left: 0.2em;
+    }
+
+    span {
+      font-size: 1.6em;
+      font-weight: 700;
+    }
+  }
+
+  a {
+    padding: 1em;
     text-transform: uppercase;
     transition: background 0.3s, box-shadow 0.3s;
     box-shadow: inset 0 -1px rgba(0, 0, 0, 0.2);
-    padding: 1em;
 
     span {
       letter-spacing: 1px;
       font-weight: 400;
-    }
-
-    &:first-child {
-      pointer-events: none;
-      text-transform: none;
-      letter-spacing: normal;
-      padding: 2.5em 1em 2em;
-      color: rgba(0,0,0,0.4);
-
-      i {
-        margin-left: 0.2em;
-      }
-
-      span {
-        font-size: 2em;
-        font-weight: 700;
-      }
     }
 
     &:hover,
