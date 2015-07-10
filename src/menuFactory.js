@@ -132,16 +132,17 @@ export default (styles) => {
     render() {
       var items, svg, closeButtonStyles;
 
-      items = this.props.items.map((item, index) => {
-        return (
-          <a key={ index }
-            href={ item.href || '' }
-            style={ styles.item(this.state.isOpen, index + 1) }
-            dangerouslySetInnerHTML={ { __html: item.content } }>
-          </a>
-        );
+      // Add animation styles to user-defined menu items.
+      items = this.props.children.map((item, index) => {
+        var extraProps = {
+          key: index,
+          style: styles.item(this.state.isOpen, index + 1)
+        };
+
+        return React.cloneElement(item, extraProps);
       });
 
+      // Add a morph shape for animations that use SVG.
       if (styles.svg) {
         svg = (
           <div className="bm-morph-shape" style={ styles.morphShape() }>
@@ -151,8 +152,6 @@ export default (styles) => {
           </div>
         );
       }
-
-      closeButtonStyles = styles.closeButton ? styles.closeButton(this.state.isOpen) : {}
 
       return (
         <div>
@@ -164,7 +163,7 @@ export default (styles) => {
                 { items }
               </nav>
             </div>
-            <div style={ closeButtonStyles }>
+            <div style={ styles.closeButton ? styles.closeButton(this.state.isOpen) : {} }>
               <CrossIcon onClick={ this.toggleMenu } />
             </div>
           </div>
