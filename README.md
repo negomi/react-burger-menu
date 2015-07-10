@@ -28,22 +28,26 @@ npm install react-burger-menu --save
 
 ## Usage
 
-Items for the menu are passed through the `items` property. It should be an array of objects, each with a required `content` key and optional `href` key. Content can be any string, and can also include HTML.
+Items for the sidebar should be passed as child elements of the component using JSX.
 
 ```
 var Menu = require('react-burger-menu/nameOfAnimation');
 
 var Example = React.createClass({
+  showSettings: function(event) {
+    event.preventDefault();
+    .
+    .
+    .
+  },
   render: function() {
-    var sidebarItems = [
-      { content: 'Home', href: '/' },
-      { content: 'About', href: '/about' },
-      { content: 'Contact', href: '/contact' },
-      { content: '<span id="settings" class="small">Settings</span>' }
-    ];
-
     return (
-      <Menu items={ sidebarItems } />
+      <Menu>
+        <a id="home" className="menu-item" href="/">Home</a>
+        <a id="about" className="menu-item" href="/about">About</a>
+        <a id="contact" className="menu-item" href="/contact">Contact</a>
+        <a onClick={ this.showSettings } className="menu-item--small" href="">Settings</a>
+      </Menu>
     );
   }
 });
@@ -69,7 +73,7 @@ Some animations require certain other elements to be on your page:
 * **Page wrapper** - an element wrapping the rest of the content on your page, placed after the menu component
 
   ```
-  <Menu items={ [] } pageWrapId={ "page-wrap" }/>
+  <Menu pageWrapId={ "page-wrap" }/>
   <main id="page-wrap">
     .
     .
@@ -80,7 +84,7 @@ Some animations require certain other elements to be on your page:
 * **Outer container** - an element containing everything, including the menu component
   ```
   <div id="outer-container">
-    <Menu items={ [] } pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }/>
+    <Menu pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }/>
     <main id="page-wrap">
       .
       .
@@ -108,7 +112,7 @@ Animation | `pageWrapId` | `outerContainerId`
 There is also an optional `id` prop, which will simply add an ID to the rendered menu's outermost element. This is not required for any functionality.
 
 ```
-<Menu items={ [] } id={ "sidebar" }/>
+<Menu id={ "sidebar" }/>
 ```
 
 ### Styling
@@ -130,7 +134,7 @@ The component has the following helper classes:
 
 // Background color of sidebar
 .bm-menu,
-.bm-morph-shape {
+.bm-morph-shape { // Morph shape necessary with bubble or elastic
   background: #373a47;
 }
 
@@ -140,15 +144,10 @@ The component has the following helper classes:
   font-size: 1.15em;
 }
 
-// Styles for each menu item
-.bm-item-list a {
+// Wrapper for item list
+.bm-item-list {
   color: #b8b7ad;
   padding: 0.8em;
-}
-
-.bm-item-list a:hover,
-.bm-item-list a:focus {
-  color: #c94e50;
 }
 
 ```
