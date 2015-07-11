@@ -101,9 +101,9 @@ Animation | `pageWrapId` | `outerContainerId`
 --- | :---: | :---:
 `slide` | |
 `stack` | |
-`elastic` | &#x2713; |
+`elastic` | &#x2713; | &#x2713;
 `bubble` | |
-`push` | &#x2713; |
+`push` | &#x2713; | &#x2713;
 `pushRotate` |  &#x2713;  |  &#x2713;
 `scaleDown` |  &#x2713;  |  &#x2713;
 `scaleRotate` |  &#x2713;  |  &#x2713;
@@ -155,5 +155,3 @@ The component has the following helper classes:
 ### License
 
 MIT
-
-Copyright (c) 2015 Imogen Wentworth.

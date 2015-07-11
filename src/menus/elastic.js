@@ -56,7 +56,7 @@ var styles = {
       height: '100%',
       background: 'rgba(0, 0, 0, 0.3)',
       opacity: isOpen ? 1 : 0,
-      transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(100%, 0, 0)',
+      transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-100%, 0, 0)',
       transition: isOpen ? 'opacity 0.3s' : 'opacity 0.3s, transform 0s 0.3s'
     });
   },
@@ -65,6 +65,12 @@ var styles = {
     return appendVendorPrefix({
       transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(100px, 0, 0)',
       transition: isOpen ? 'transform 0.3s' : 'transform 0.3s 0.1s'
+    });
+  },
+
+  outerContainer(isOpen) {
+    return appendVendorPrefix({
+      overflow: isOpen ? '' : 'hidden'
     });
   }
 };
