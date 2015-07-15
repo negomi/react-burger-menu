@@ -19,7 +19,11 @@ var taskConfig = {
       'react',
       'react/addons'
     ],
-    lib: 'lib'
+    lib: 'lib',
+    file: 'src/BurgerMenu.js',
+    src: 'src',
+    dist: 'dist',
+    pkgName: 'react-burger-menu'
   },
 
   example: {
