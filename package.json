@@ -42,5 +42,6 @@
   "keywords": [
     "react",
     "react-component"
-  ]
+  ],
+  "license": "MIT"
 }

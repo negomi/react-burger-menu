@@ -20,7 +20,7 @@ var taskConfig = {
     name: 'BurgerMenu',
     dependencies: dependencies,
     lib: 'lib',
-    file: 'src/BurgerMenu.js',
+    file: 'BurgerMenu.js',
     src: 'src',
     dist: 'dist',
     pkgName: pkg.name
