@@ -30,7 +30,7 @@ npm install react-burger-menu --save
 
 Items for the sidebar should be passed as child elements of the component using JSX.
 
-```
+``` javascript
 var Menu = require('react-burger-menu/nameOfAnimation');
 
 var Example = React.createClass({
@@ -72,7 +72,7 @@ Some animations require certain other elements to be on your page:
 
 * **Page wrapper** - an element wrapping the rest of the content on your page, placed after the menu component
 
-  ```
+  ``` javascript
   <Menu pageWrapId={ "page-wrap" }/>
   <main id="page-wrap">
     .
@@ -82,7 +82,7 @@ Some animations require certain other elements to be on your page:
   ```
 
 * **Outer container** - an element containing everything, including the menu component
-  ```
+  ``` javascript
   <div id="outer-container">
     <Menu pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }/>
     <main id="page-wrap">
@@ -111,7 +111,7 @@ Animation | `pageWrapId` | `outerContainerId`
 
 There is also an optional `id` prop, which will simply add an ID to the rendered menu's outermost element. This is not required for any functionality.
 
-```
+``` javascript
 <Menu id={ "sidebar" }/>
 ```
 
@@ -121,7 +121,7 @@ All the animations are handled internally by the component. However, the visual 
 
 The component has the following helper classes:
 
-```
+``` css
 // Color of burger icon
 .bm-burger-icon {
   background: #373a47;
