@@ -10,15 +10,18 @@ var initGulpTasks = require('react-component-gulp-tasks');
  * You can also add your own additional gulp tasks if you like.
  */
 
-// Read the package.json to detect the package name and dependencies.
+// Read the package.json to detect the package name
 var pkg = JSON.parse(require('fs').readFileSync('./package.json'));
-var dependencies = [].concat(Object.keys(pkg.dependencies));
 
 var taskConfig = {
 
   component: {
     name: 'BurgerMenu',
-    dependencies: dependencies,
+    dependencies: [
+      'classnames',
+      'react',
+      'snapsvg'
+    ],
     lib: 'lib',
     file: 'BurgerMenu.js',
     src: 'src',
