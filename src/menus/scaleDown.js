@@ -10,7 +10,7 @@ var styles = {
       width: 300,
       height: '100%',
       transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-100%, 0, 0)',
-      transition: 'transform 0.5s'
+      transition: 'all 0.5s'
     });
   },
 
@@ -45,7 +45,7 @@ var styles = {
       transform: isOpen ? 'translate3d(0, 0, 1px)' : 'translate3d(0, 0, -300px)',
       transformOrigin: '100%',
       transformStyle: 'preserve-3d',
-      transition: 'transform 0.5s'
+      transition: 'all 0.5s'
     });
   },
 

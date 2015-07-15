@@ -10,7 +10,7 @@ var styles = {
       width: 300,
       height: '100%',
       transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(0, -100%, 0)',
-      transition: 'transform 0.5s ease-in-out'
+      transition: 'all 0.5s ease-in-out'
     });
   },
 
@@ -43,7 +43,7 @@ var styles = {
   pageWrap(isOpen) {
     return appendVendorPrefix({
       transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(300px, 0, 0)',
-      transition: 'transform 0.5s'
+      transition: 'all 0.5s'
     });
   },
 
