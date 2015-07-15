@@ -152,6 +152,12 @@ The component has the following helper classes:
 
 ```
 
+### Browser Support
+
+Because this project uses CSS3 features, it's only meant for modern browsers. It also relies on React's implementation of inline styles, which means some browsers currently fail to apply some of the animations correctly.
+
+Chrome and Firefox have full support, Safari and IE have strange behavior for some of the menus.
+
 ### License
 
 MIT
