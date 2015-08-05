@@ -2,7 +2,7 @@
   "name": "react-burger-menu",
   "version": "1.0.1",
   "description": "An off-canvas sidebar component with a collection of effects and styles using CSS transitions and SVG path animations",
-  "main": "src/ReactBurgerMenu.js",
+  "main": "src/BurgerMenu.js",
   "author": "Imogen Wentworth",
   "homepage": "https://github.com/negomi/react-burger-menu",
   "repository": {
@@ -19,11 +19,15 @@
     "snapsvg": "^0.4.0"
   },
   "devDependencies": {
+    "babel": "^5.8.20",
     "babel-eslint": "^3.1.9",
+    "chai": "^3.2.0",
     "eslint": "^0.21.2",
     "eslint-plugin-react": "^2.3.0",
-    "react-component-gulp-tasks": "^0.7.0",
-    "gulp": "^3.8.11"
+    "gulp": "^3.8.11",
+    "jsdom": "^5.6.1",
+    "mocha": "^2.2.5",
+    "react-component-gulp-tasks": "^0.7.0"
   },
   "browserify-shim": {
     "react": "global:React"
@@ -35,7 +39,8 @@
     "publish:site": "gulp publish:examples",
     "release": "gulp release",
     "start": "gulp dev",
-    "test": "echo \"no tests yet\" && exit 0",
+    "test": "mocha",
+    "tdd": "mocha --watch",
     "watch": "gulp watch:lib"
   },
   "readmeFilename": "README.md",

@@ -1,0 +1,3 @@
+--compilers js:babel/register
+--reporter list
+--require test/utils/dom.js
