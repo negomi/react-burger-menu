@@ -10,7 +10,6 @@ export default (styles) => {
   return React.createClass({
 
     propTypes: {
-      children: React.PropTypes.array,
       id: React.PropTypes.string,
       outerContainerId: React.PropTypes.string,
       pageWrapId: React.PropTypes.string
