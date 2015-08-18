@@ -1,3 +1,5 @@
+'use strict';
+
 import React from 'react';
 import snap from 'snapsvg';
 import BurgerIcon from './BurgerIcon';
@@ -65,7 +67,9 @@ export default (styles) => {
     },
 
     listenForClose(e) {
-      if (this.state.isOpen && (e.target.id === 'bm-overlay' || e.key === 'Escape' || e.keyCode === 27)) {
+      e = e || window.event;
+
+      if (this.state.isOpen && (e.key === 'Escape' || e.keyCode === 27)) {
         this.toggleMenu();
       }
     },
@@ -99,13 +103,11 @@ export default (styles) => {
     },
 
     componentDidMount() {
-      window.addEventListener('click', this.listenForClose);
-      window.addEventListener('keydown', this.listenForClose);
+      window.onkeydown = this.listenForClose;
     },
 
     componentWillUnmount() {
-      window.removeEventListener('click', this.listenForClose);
-      window.removeEventListener('keydown', this.listenForClose);
+      window.onkeydown = null;
 
       this.clearWrapperStyles();
     },
@@ -165,7 +167,7 @@ export default (styles) => {
 
       return (
         <div>
-          <div id="bm-overlay" style={ styles.overlay(this.state.isOpen) }></div>
+          <div id="bm-overlay" ref="overlay" onClick={ this.toggleMenu } style={ styles.overlay(this.state.isOpen) }></div>
           <div id={ this.props.id } style={ styles.menuWrap(this.state.isOpen) }>
             { svg }
             <div className="bm-menu" style={ styles.menu(this.state.isOpen) } >
