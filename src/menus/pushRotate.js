@@ -1,69 +1,61 @@
 'use strict';
 
 import menuFactory from '../menuFactory';
+import appendVendorPrefix from 'react-kit/appendVendorPrefix';
 
 let styles = {
 
   menuWrap(isOpen) {
-    return {
+    return appendVendorPrefix({
       position: 'fixed',
       zIndex: 2,
       width: 300,
       height: '100%',
-      WebkitTransform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-100%, 0, 0)',
       transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-100%, 0, 0)',
-      WebkitTransition: 'all 0.5s',
       transition: 'all 0.5s'
-    };
+    });
   },
 
   menu() {
-    return {
+    return appendVendorPrefix({
       height: '100%'
-    };
+    });
   },
 
   item() {
-    return {
+    return appendVendorPrefix({
       display: 'block',
       outline: 'none'
-    };
+    });
   },
 
   overlay(isOpen) {
-    return {
+    return appendVendorPrefix({
       position: 'fixed',
       width: '100%',
       height: '100%',
       background: 'rgba(0, 0, 0, 0.3)',
       opacity: isOpen ? 1 : 0,
-      WebkitTransform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-100%, 0, 0)',
       transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-100%, 0, 0)',
-      WebkitTransition: isOpen ? 'opacity 0.5s' : 'opacity 0.5s, transform 0.1s 0.5s',
       transition: isOpen ? 'opacity 0.5s' : 'opacity 0.5s, transform 0.1s 0.5s',
       zIndex: 1
-    };
+    });
   },
 
   pageWrap(isOpen) {
-    return {
-      WebkitTransform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(300px, 0, 0) rotateY(-15deg)',
+    return appendVendorPrefix({
       transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(300px, 0, 0) rotateY(-15deg)',
-      WebkitTransformOrigin: '0% 50%',
       transformOrigin: '0% 50%',
-      WebkitTransformStyle: 'preserve-3d',
       transformStyle: 'preserve-3d',
-      WebkitTransition: 'all 0.5s',
       transition: 'all 0.5s'
-    };
+    });
   },
 
   outerContainer(isOpen) {
-    return {
-      WebkitPerspective: '1500px',
+    return appendVendorPrefix({
       perspective: '1500px',
       overflow: isOpen ? '' : 'hidden'
-    };
+    });
   }
 };
 

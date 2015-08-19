@@ -20,11 +20,11 @@ describe('stack', () => {
   });
 
   it('has correct overlay styles', () => {
-    expect(Object.keys(overlay.props.style)).to.have.length(10);
+    expect(Object.keys(overlay.props.style)).to.have.length(7);
   });
 
   it('has correct menuWrap styles', () => {
-    expect(Object.keys(menuWrap.props.style)).to.have.length(8);
+    expect(Object.keys(menuWrap.props.style)).to.have.length(5);
   });
 
   it('has correct menu styles', () => {
@@ -33,6 +33,6 @@ describe('stack', () => {
   });
 
   it('has correct item styles', () => {
-    expect(Object.keys(item.props.style)).to.have.length(6);
+    expect(Object.keys(item.props.style)).to.have.length(3);
   });
 });

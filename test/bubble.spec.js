@@ -23,20 +23,20 @@ describe('bubble', () => {
   });
 
   it('has correct overlay styles', () => {
-    expect(Object.keys(overlay.props.style)).to.have.length(10);
+    expect(Object.keys(overlay.props.style)).to.have.length(7);
   });
 
   it('has correct menuWrap styles', () => {
-    expect(Object.keys(menuWrap.props.style)).to.have.length(8);
+    expect(Object.keys(menuWrap.props.style)).to.have.length(5);
   });
 
   it('has correct menu styles', () => {
-    expect(Object.keys(menu.props.style)).to.have.length(7);
+    expect(Object.keys(menu.props.style)).to.have.length(4);
     expect(menu.props.style.height).to.equal('100%');
   });
 
   it('has correct item styles', () => {
-    expect(Object.keys(item.props.style)).to.have.length(7);
+    expect(Object.keys(item.props.style)).to.have.length(4);
   });
 
   it('has correct morph shape styles', () => {
@@ -49,6 +49,6 @@ describe('bubble', () => {
   });
 
   it('has correct close button styles', () => {
-		expect(Object.keys(closeButton.props.style)).to.have.length(5);
+    expect(Object.keys(closeButton.props.style)).to.have.length(2);
   });
 });

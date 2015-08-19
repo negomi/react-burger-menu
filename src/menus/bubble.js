@@ -1,6 +1,7 @@
 'use strict';
 
 import menuFactory from '../menuFactory';
+import appendVendorPrefix from 'react-kit/appendVendorPrefix';
 
 let styles = {
 
@@ -28,74 +29,64 @@ let styles = {
   },
 
   morphShape() {
-    return {
+    return appendVendorPrefix({
       position: 'fixed',
       width: '100%',
       height: '100%',
       right: 0
-    };
+    });
   },
 
   menuWrap(isOpen) {
-    return {
+    return appendVendorPrefix({
       position: 'fixed',
       zIndex: 2,
       width: 300,
       height: '100%',
-      WebkitTransform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-300px, 0, 0)',
       transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-300px, 0, 0)',
-      WebkitTransition: isOpen ? 'transform 0.4s 0s' : 'transform 0.4s',
       transition: isOpen ? 'transform 0.4s 0s' : 'transform 0.4s'
-    };
+    });
   },
 
   menu(isOpen) {
-    return {
+    return appendVendorPrefix({
       position: 'fixed',
       height: '100%',
-      WebkitTransform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-160px, 0, 0)',
       transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-160px, 0, 0)',
-      WebkitTransition: isOpen ? 'opacity 0.3s 0.4s cubic-bezier(.17, .67, .1, 1.27), transform 0.3s 0.4s cubic-bezier(.17, .67, .1, 1.27)' : 'opacity 0s 0.3s cubic-bezier(.17, .67, .1, 1.27), transform 0s 0.3s cubic-bezier(.17, .67, .1, 1.27)',
       transition: isOpen ? 'opacity 0.3s 0.4s cubic-bezier(.17, .67, .1, 1.27), transform 0.3s 0.4s cubic-bezier(.17, .67, .1, 1.27)' : 'opacity 0s 0.3s cubic-bezier(.17, .67, .1, 1.27), transform 0s 0.3s cubic-bezier(.17, .67, .1, 1.27)',
       opacity: isOpen ? 1 : 0
-    };
+    });
   },
 
   item(isOpen) {
-    return {
+    return appendVendorPrefix({
       display: 'block',
       outline: 'none',
-      WebkitTransform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-160px, 0, 0)',
       transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-160px, 0, 0)',
-      WebkitTransition: isOpen ? 'opacity 0.3s 0.4s, transform 0.3s 0.4s' : 'opacity 0s 0.3s cubic-bezier(.17, .67, .1, 1.27), transform 0s 0.3s cubic-bezier(.17, .67, .1, 1.27)',
       transition: isOpen ? 'opacity 0.3s 0.4s, transform 0.3s 0.4s' : 'opacity 0s 0.3s cubic-bezier(.17, .67, .1, 1.27), transform 0s 0.3s cubic-bezier(.17, .67, .1, 1.27)',
       opacity: isOpen ? 1 : 0
-    };
+    });
   },
 
   closeButton(isOpen) {
-    return {
-      WebkitTransform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-160px, 0, 0)',
+    return appendVendorPrefix({
       transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-160px, 0, 0)',
-      WebkitTransition: isOpen ? 'opacity 0.3s 0.4s cubic-bezier(.17, .67, .1, 1.27), transform 0.3s 0.4s cubic-bezier(.17, .67, .1, 1.27)' : 'opacity 0s 0.3s cubic-bezier(.17, .67, .1, 1.27), transform 0s 0.3s cubic-bezier(.17, .67, .1, 1.27)',
       transition: isOpen ? 'opacity 0.3s 0.4s cubic-bezier(.17, .67, .1, 1.27), transform 0.3s 0.4s cubic-bezier(.17, .67, .1, 1.27)' : 'opacity 0s 0.3s cubic-bezier(.17, .67, .1, 1.27), transform 0s 0.3s cubic-bezier(.17, .67, .1, 1.27)',
       opacity: isOpen ? 1 : 0
-    };
+    });
   },
 
   overlay(isOpen) {
-    return {
+    return appendVendorPrefix({
       position: 'fixed',
       zIndex: 1,
       width: '100%',
       height: '100%',
       background: 'rgba(0, 0, 0, 0.3)',
       opacity: isOpen ? 1 : 0,
-      WebkitTransform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-100%, 0, 0)',
       transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-100%, 0, 0)',
-      WebkitTransition: isOpen ? 'opacity 0.4s' : 'opacity 0.4s, transform 0s 0.4s',
       transition: isOpen ? 'opacity 0.4s' : 'opacity 0.4s, transform 0s 0.4s'
-    };
+    });
   }
 };
 
