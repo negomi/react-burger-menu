@@ -56,7 +56,9 @@ let styles = {
 
   outerContainer(isOpen) {
     return {
+      WebkitPerspective: '1500px',
       perspective: '1500px',
+      WebkitPerspectiveOrigin: '0% 50%',
       perspectiveOrigin: '0% 50%',
       overflow: isOpen ? '' : 'hidden'
     };
