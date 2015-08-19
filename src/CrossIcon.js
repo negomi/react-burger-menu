@@ -1,7 +1,9 @@
-var React = require('react');
-var appendVendorPrefix = require('react-kit/appendVendorPrefix');
+'use strict';
 
-var CrossIcon = React.createClass({
+import React from 'react';
+import appendVendorPrefix from 'react-kit/appendVendorPrefix';
+
+let CrossIcon = React.createClass({
 
   getCrossStyle(type) {
     return appendVendorPrefix({
