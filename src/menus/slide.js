@@ -1,34 +1,35 @@
-var menuFactory = require('../menuFactory');
-var appendVendorPrefix = require('react-kit/appendVendorPrefix');
+'use strict';
 
-var styles = {
+import menuFactory from '../menuFactory';
+
+let styles = {
 
   menuWrap(isOpen) {
-    return appendVendorPrefix({
+    return {
       position: 'fixed',
       zIndex: 2,
       width: 300,
       height: '100%',
       transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-100%, 0, 0)',
       transition: 'all 0.5s'
-    });
+    };
   },
 
   menu() {
-    return appendVendorPrefix({
+    return {
       height: '100%'
-    });
+    };
   },
 
   item() {
-    return appendVendorPrefix({
+    return {
       display: 'block',
       outline: 'none'
-    });
+    };
   },
 
   overlay(isOpen) {
-    return appendVendorPrefix({
+    return {
       position: 'fixed',
       zIndex: 1,
       width: '100%',
@@ -37,7 +38,7 @@ var styles = {
       opacity: isOpen ? 1 : 0,
       transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-100%, 0, 0)',
       transition: isOpen ? 'opacity 0.5s' : 'opacity 0.5s, transform 0.1s 0.5s'
-    });
+    };
   }
 };
 
