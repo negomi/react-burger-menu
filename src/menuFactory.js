@@ -113,7 +113,7 @@ export default (styles) => {
 
     componentDidUpdate() {
       if (styles.svg) {
-        let s = snap('.bm-morph-shape');
+        let s = snap(React.findDOMNode(this, '.bm-morph-shape'));
         let path = s.select('path');
 
         if (this.state.isOpen) {
