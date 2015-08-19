@@ -181,15 +181,18 @@ describe('menuFactory', () => {
       expect(menuWrap.props.children).to.have.length.of(3);
     });
 
-    it('contains menu and item list elements', () => {
+    it('contains menu and item list elements with correct attributes', () => {
       const menu = menuWrap.props.children[1];
       const itemList = menu.props.children;
+
       expect(menu).to.be.an.instanceof(Object);
       expect(menu.type).to.equal('div');
       expect(menu.props.className).to.contain('bm-menu');
+
       expect(itemList).to.be.an.instanceof(Object);
       expect(itemList.type).to.equal('nav');
       expect(itemList.props.className).to.contain('bm-item-list');
+      expect(itemList.props.style).to.deep.equal({ height: '100%' });
     });
 
     it('contains a CrossIcon component', () => {
