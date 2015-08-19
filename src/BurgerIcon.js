@@ -1,7 +1,9 @@
-var React = require('react');
-var appendVendorPrefix = require('react-kit/appendVendorPrefix');
+'use strict';
 
-var BurgerIcon = React.createClass({
+import React from 'react';
+import appendVendorPrefix from 'react-kit/appendVendorPrefix';
+
+let BurgerIcon = React.createClass({
 
   getLineStyle(index) {
     return appendVendorPrefix({
