@@ -1,5 +1,5 @@
-var React = require('react/addons');
-var TestUtils = React.addons.TestUtils;
+import React from 'react/addons';
+const TestUtils = React.addons.TestUtils;
 
 export default createComponent;
 
