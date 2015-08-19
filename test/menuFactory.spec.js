@@ -84,7 +84,7 @@ describe('menuFactory', () => {
     it('contains an overlay', () => {
       const overlay = component.props.children[0];
       expect(component.type).to.equal('div');
-      expect(overlay.props.id).to.contain('overlay');
+      expect(overlay.props.id).to.contain('bm-overlay');
     });
 
     it('contains a menuWrap element with an optional ID', () => {
@@ -184,9 +184,12 @@ describe('menuFactory', () => {
     it('contains menu and item list elements', () => {
       const menu = menuWrap.props.children[1];
       const itemList = menu.props.children;
-      assert.ok(menu, 'menu exists');
+      expect(menu).to.be.an.instanceof(Object);
+      expect(menu.type).to.equal('div');
+      expect(menu.props.className).to.contain('bm-menu');
       expect(itemList).to.be.an.instanceof(Object);
       expect(itemList.type).to.equal('nav');
+      expect(itemList.props.className).to.contain('bm-item-list');
     });
 
     it('contains a CrossIcon component', () => {
