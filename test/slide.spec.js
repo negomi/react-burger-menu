@@ -23,6 +23,10 @@ describe('slide', () => {
     expect(Object.keys(overlay.props.style)).to.have.length(8);
   });
 
+  it('has correct menuWrap styles', () => {
+    expect(Object.keys(menuWrap.props.style)).to.have.length(6);
+  });
+
   it('has correct menu styles', () => {
     expect(Object.keys(menu.props.style)).to.have.length(1);
     expect(menu.props.style.height).to.equal('100%');
@@ -30,9 +34,5 @@ describe('slide', () => {
 
   it('has correct item styles', () => {
     expect(Object.keys(item.props.style)).to.have.length(2);
-  });
-
-  it('has correct menuWrap styles', () => {
-    expect(Object.keys(menuWrap.props.style)).to.have.length(6);
   });
 });

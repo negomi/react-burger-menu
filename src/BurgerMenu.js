@@ -8,4 +8,4 @@ export default {
   scaleDown: require('./menus/scaleDown'),
   scaleRotate: require('./menus/scaleRotate'),
   fallDown: require('./menus/fallDown')
-}
+};
