@@ -1,7 +1,9 @@
-var menuFactory = require('../menuFactory');
-var appendVendorPrefix = require('react-kit/appendVendorPrefix');
+'use strict';
 
-var styles = {
+import menuFactory from '../menuFactory';
+import appendVendorPrefix from 'react-kit/appendVendorPrefix';
+
+let styles = {
 
   menuWrap(isOpen) {
     return appendVendorPrefix({
