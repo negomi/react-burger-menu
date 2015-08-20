@@ -28,7 +28,8 @@
     "istanbul": "^0.3.17",
     "jsdom": "^5.6.1",
     "mocha": "^2.2.5",
-    "react-component-gulp-tasks": "^0.7.0"
+    "react-component-gulp-tasks": "^0.7.0",
+    "sinon": "^1.16.1"
   },
   "browserify-shim": {
     "react": "global:React"
