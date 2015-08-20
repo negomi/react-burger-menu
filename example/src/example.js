@@ -1,15 +1,15 @@
-var React = require('react');
-var BurgerMenu = require('react-burger-menu');
+import React from 'react';
+import BurgerMenu from 'react-burger-menu';
 
-var Demo = React.createClass({
+let Demo = React.createClass({
 
   changeMenu(menu) {
-    this.setState({ currentMenu: menu })
+    this.setState({ currentMenu: menu });
   },
 
   getMenu() {
-    var Menu = BurgerMenu[this.state.currentMenu];
-    var jsx;
+    let Menu = BurgerMenu[this.state.currentMenu];
+    let jsx;
 
     switch (this.props.menus[this.state.currentMenu].items) {
       case 1:
@@ -53,18 +53,18 @@ var Demo = React.createClass({
   },
 
   getInitialState() {
-    return { currentMenu: 'slide' }
+    return { currentMenu: 'slide' };
   },
 
   render() {
-    var buttons = Object.keys(this.props.menus).map((menu) => {
+    let buttons = Object.keys(this.props.menus).map((menu) => {
       return (
         <a key={ menu }
           className={ menu === this.state.currentMenu ? 'current-demo' : '' }
           onClick={ this.changeMenu.bind(this, menu) }>
           { this.props.menus[menu].buttonText }
         </a>
-      )
+      );
     });
 
     return (
@@ -83,7 +83,7 @@ var Demo = React.createClass({
   }
 });
 
-var menus = {
+let menus = {
   slide: { buttonText: 'Slide', items: 1 },
   stack: { buttonText: 'Stack', items: 1 },
   elastic: { buttonText: 'Elastic', items: 1 },
