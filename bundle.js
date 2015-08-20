@@ -3,31 +3,31 @@ require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof requ
 
 var getVendorPropertyName = require('./getVendorPropertyName');
 
-module.exports = function (target, sources){
-    var to = Object(target);
-    var hasOwnProperty = Object.prototype.hasOwnProperty;
+module.exports = function(target, sources) {
+  var to = Object(target);
+  var hasOwnProperty = Object.prototype.hasOwnProperty;
 
-    for (var nextIndex = 1; nextIndex < arguments.length; nextIndex++) {
-        var nextSource = arguments[nextIndex];
-        if (nextSource == null) {
-            continue;
-        }
-
-        var from = Object(nextSource);
-
-        for (var key in from) {
-            if (hasOwnProperty.call(from, key)) {
-                to[key] = from[key];
-            }
-        }
+  for (var nextIndex = 1; nextIndex < arguments.length; nextIndex++) {
+    var nextSource = arguments[nextIndex];
+    if (nextSource == null) {
+      continue;
     }
 
-    var prefixed = {};
-    for (var key in to) {
-        prefixed[getVendorPropertyName(key)] = to[key]
-    }
+    var from = Object(nextSource);
 
-    return prefixed
+    for (var key in from) {
+      if (hasOwnProperty.call(from, key)) {
+        to[key] = from[key];
+      }
+    }
+  }
+
+  var prefixed = {};
+  for (var key in to) {
+    prefixed[getVendorPropertyName(key)] = to[key]
+  }
+
+  return prefixed
 }
 
 },{"./getVendorPropertyName":2}],2:[function(require,module,exports){
@@ -38,22 +38,22 @@ var prefixes = ['Moz', 'Webkit', 'O', 'ms'];
 var domVendorPrefix;
 
 // Helper function to get the proper vendor property name. (transition => WebkitTransition)
-module.exports = function (prop) {
+module.exports = function(prop) {
 
-    if (prop in div.style) return prop;
+  if (prop in div.style) return prop;
 
-    var prop = prop.charAt(0).toUpperCase() + prop.substr(1);
-    if(domVendorPrefix){
-        return domVendorPrefix + prop;
-    }else{
-        for (var i=0; i<prefixes.length; ++i) {
-            var vendorProp = prefixes[i] + prop;
-            if (vendorProp in div.style) {
-                domVendorPrefix = prefixes[i];
-                return vendorProp;
-            }
-        }
+  var prop = prop.charAt(0).toUpperCase() + prop.substr(1);
+  if (domVendorPrefix) {
+    return domVendorPrefix + prop;
+  } else {
+    for (var i = 0; i < prefixes.length; ++i) {
+      var vendorProp = prefixes[i] + prop;
+      if (vendorProp in div.style) {
+        domVendorPrefix = prefixes[i];
+        return vendorProp;
+      }
     }
+  }
 }
 
 },{}],3:[function(require,module,exports){
@@ -62,14 +62,22 @@ module.exports = function (prop) {
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var React = require('react');
-var appendVendorPrefix = require('react-kit/appendVendorPrefix');
 
-var BurgerIcon = React.createClass({
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactKitAppendVendorPrefix = require('react-kit/appendVendorPrefix');
+
+var _reactKitAppendVendorPrefix2 = _interopRequireDefault(_reactKitAppendVendorPrefix);
+
+var BurgerIcon = _react2['default'].createClass({
   displayName: 'BurgerIcon',
 
   getLineStyle: function getLineStyle(index) {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       position: 'fixed',
       height: 6,
       width: 36,
@@ -89,7 +97,7 @@ var BurgerIcon = React.createClass({
   },
 
   render: function render() {
-    var buttonStyle = appendVendorPrefix({
+    var buttonStyle = (0, _reactKitAppendVendorPrefix2['default'])({
       position: 'fixed',
       zIndex: 1,
       margin: 24,
@@ -104,13 +112,13 @@ var BurgerIcon = React.createClass({
       outline: 'none'
     });
 
-    return React.createElement(
+    return _react2['default'].createElement(
       'div',
       null,
-      React.createElement('span', { className: 'bm-burger-icon', style: this.getLineStyle(0) }),
-      React.createElement('span', { className: 'bm-burger-icon', style: this.getLineStyle(1) }),
-      React.createElement('span', { className: 'bm-burger-icon', style: this.getLineStyle(2) }),
-      React.createElement(
+      _react2['default'].createElement('span', { className: 'bm-burger-icon', style: this.getLineStyle(0) }),
+      _react2['default'].createElement('span', { className: 'bm-burger-icon', style: this.getLineStyle(1) }),
+      _react2['default'].createElement('span', { className: 'bm-burger-icon', style: this.getLineStyle(2) }),
+      _react2['default'].createElement(
         'button',
         { onClick: this.props.onClick,
           onMouseEnter: this.handleHover,
@@ -131,14 +139,22 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var React = require('react');
-var appendVendorPrefix = require('react-kit/appendVendorPrefix');
 
-var CrossIcon = React.createClass({
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactKitAppendVendorPrefix = require('react-kit/appendVendorPrefix');
+
+var _reactKitAppendVendorPrefix2 = _interopRequireDefault(_reactKitAppendVendorPrefix);
+
+var CrossIcon = _react2['default'].createClass({
   displayName: 'CrossIcon',
 
   getCrossStyle: function getCrossStyle(type) {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       position: 'absolute',
       width: 3,
       height: 14,
@@ -151,7 +167,7 @@ var CrossIcon = React.createClass({
   },
 
   render: function render() {
-    var buttonStyle = appendVendorPrefix({
+    var buttonStyle = (0, _reactKitAppendVendorPrefix2['default'])({
       width: 14,
       height: 14,
       position: 'absolute',
@@ -168,12 +184,12 @@ var CrossIcon = React.createClass({
       zIndex: 1
     });
 
-    return React.createElement(
+    return _react2['default'].createElement(
       'div',
       null,
-      React.createElement('span', { className: 'bm-cross', style: this.getCrossStyle('before') }),
-      React.createElement('span', { className: 'bm-cross', style: this.getCrossStyle('after') }),
-      React.createElement(
+      _react2['default'].createElement('span', { className: 'bm-cross', style: this.getCrossStyle('before') }),
+      _react2['default'].createElement('span', { className: 'bm-cross', style: this.getCrossStyle('after') }),
+      _react2['default'].createElement(
         'button',
         { onClick: this.props.onClick, style: buttonStyle },
         'Close Menu'
@@ -191,21 +207,33 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var React = require('react');
-var Snap = require('snapsvg');
-var appendVendorPrefix = require('react-kit/appendVendorPrefix');
-var BurgerIcon = require('./BurgerIcon');
-var CrossIcon = require('./CrossIcon');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _snapsvg = require('snapsvg');
+
+var _snapsvg2 = _interopRequireDefault(_snapsvg);
+
+var _BurgerIcon = require('./BurgerIcon');
+
+var _BurgerIcon2 = _interopRequireDefault(_BurgerIcon);
+
+var _CrossIcon = require('./CrossIcon');
+
+var _CrossIcon2 = _interopRequireDefault(_CrossIcon);
 
 exports['default'] = function (styles) {
 
-  return React.createClass({
+  return _react2['default'].createClass({
 
     propTypes: {
-      items: React.PropTypes.array,
-      id: React.PropTypes.string,
-      pageWrapId: React.PropTypes.string,
-      outerContainerId: React.PropTypes.string
+      id: _react2['default'].PropTypes.string,
+      outerContainerId: _react2['default'].PropTypes.string,
+      pageWrapId: _react2['default'].PropTypes.string
     },
 
     toggleMenu: function toggleMenu() {
@@ -241,19 +269,17 @@ exports['default'] = function (styles) {
     // This is necessary for correct page interaction with some of the menus.
     // Throws and returns if the required external elements don't exist,
     // which means any external page animations won't be applied.
-    handleExternalWrapper: function handleExternalWrapper(id, styles, set) {
-      var wrapper, wrapperStyles, prop;
-
-      wrapper = document.getElementById(id);
+    handleExternalWrapper: function handleExternalWrapper(id, wrapperStyles, set) {
+      var wrapper = document.getElementById(id);
 
       if (!wrapper) {
         console.error('Element with ID \'' + id + '\' not found');
         return;
       }
 
-      wrapperStyles = styles(this.state.isOpen);
+      wrapperStyles = wrapperStyles(this.state.isOpen);
 
-      for (prop in wrapperStyles) {
+      for (var prop in wrapperStyles) {
         if (wrapperStyles.hasOwnProperty(prop)) {
           wrapper.style[prop] = set ? wrapperStyles[prop] : '';
         }
@@ -261,17 +287,18 @@ exports['default'] = function (styles) {
     },
 
     listenForClose: function listenForClose(e) {
-      if (this.state.isOpen && (e.target.id === 'bm-overlay' || e.key === 'Escape' || e.keyCode === 27)) {
+      e = e || window.event;
+
+      if (this.state.isOpen && (e.key === 'Escape' || e.keyCode === 27)) {
         this.toggleMenu();
       }
     },
 
     getDefaultProps: function getDefaultProps() {
       return {
-        items: [],
         id: '',
-        pageWrapId: '',
-        outerContainerId: ''
+        outerContainerId: '',
+        pageWrapId: ''
       };
     },
 
@@ -280,6 +307,10 @@ exports['default'] = function (styles) {
     },
 
     componentWillMount: function componentWillMount() {
+      if (!styles || !Object.keys(styles).length) {
+        throw new Error('No styles supplied');
+      }
+
       // Warn if the selected menu requires external wrapper elements
       // but none were supplied.
       if (styles.pageWrap && !this.props.pageWrapId) {
@@ -292,88 +323,103 @@ exports['default'] = function (styles) {
     },
 
     componentDidMount: function componentDidMount() {
-      window.addEventListener('click', this.listenForClose);
-      window.addEventListener('keydown', this.listenForClose);
+      window.onkeydown = this.listenForClose;
     },
 
     componentWillUnmount: function componentWillUnmount() {
-      window.removeEventListener('click', this.listenForClose);
-      window.removeEventListener('keydown', this.listenForClose);
+      window.onkeydown = null;
 
       this.clearWrapperStyles();
     },
 
     componentDidUpdate: function componentDidUpdate() {
-      var s, path;
+      var _this = this;
 
       if (styles.svg) {
-        s = Snap('.bm-morph-shape');
-        path = s.select('path');
+        (function () {
+          var s = (0, _snapsvg2['default'])(_react2['default'].findDOMNode(_this, '.bm-morph-shape'));
+          var path = s.select('path');
 
-        if (this.state.isOpen) {
-          // Animate SVG path.
-          styles.svg.animate(path);
-        } else {
-          // Reset path (timeout ensures animation happens off screen).
-          setTimeout(function () {
-            path.attr('d', styles.svg.pathInitial);
-          }, 300);
-        }
+          if (_this.state.isOpen) {
+            // Animate SVG path.
+            styles.svg.animate(path);
+          } else {
+            // Reset path (timeout ensures animation happens off screen).
+            setTimeout(function () {
+              path.attr('d', styles.svg.pathInitial);
+            }, 300);
+          }
+        })();
       }
     },
 
     render: function render() {
-      var _this = this;
+      var _this2 = this;
 
-      var items, svg, closeButtonStyles;
+      var items = undefined,
+          svg = undefined;
 
       // Add animation styles to user-defined menu items.
-      items = this.props.children.map(function (item, index) {
-        var extraProps = {
-          key: index,
-          style: styles.item(_this.state.isOpen, index + 1)
-        };
+      if (this.props.children) {
+        (function () {
+          var extraProps = undefined;
 
-        return React.cloneElement(item, extraProps);
-      });
+          if (_this2.props.children.length) {
+            items = _this2.props.children.map(function (item, index) {
+              extraProps = {
+                key: index,
+                style: styles.item(_this2.state.isOpen, index + 1)
+              };
+
+              return _react2['default'].cloneElement(item, extraProps);
+            });
+          } else {
+            extraProps = {
+              style: styles.item(_this2.state.isOpen, 1)
+            };
+
+            items = _react2['default'].cloneElement(_this2.props.children, extraProps);
+          }
+        })();
+      }
 
       // Add a morph shape for animations that use SVG.
       if (styles.svg) {
-        svg = React.createElement(
+        svg = _react2['default'].createElement(
           'div',
           { className: 'bm-morph-shape', style: styles.morphShape() },
-          React.createElement(
+          _react2['default'].createElement(
             'svg',
             { xmlns: 'http://www.w3.org/2000/svg', width: '100%', height: '100%', viewBox: '0 0 100 800', preserveAspectRatio: 'none' },
-            React.createElement('path', { d: styles.svg.pathInitial })
+            _react2['default'].createElement('path', { d: styles.svg.pathInitial })
           )
         );
       }
 
-      return React.createElement(
+      return _react2['default'].createElement(
         'div',
         null,
-        React.createElement('div', { id: 'bm-overlay', style: styles.overlay(this.state.isOpen) }),
-        React.createElement(
+        _react2['default'].createElement('div', { id: 'bm-overlay', ref: 'overlay', onClick: this.toggleMenu, style: styles.overlay(this.state.isOpen) }),
+        _react2['default'].createElement(
           'div',
           { id: this.props.id, style: styles.menuWrap(this.state.isOpen) },
           svg,
-          React.createElement(
+          _react2['default'].createElement(
             'div',
             { className: 'bm-menu', style: styles.menu(this.state.isOpen) },
-            React.createElement(
+            _react2['default'].createElement(
               'nav',
               { className: 'bm-item-list', style: { height: '100%' } },
               items
             )
           ),
-          React.createElement(
+          _react2['default'].createElement(
             'div',
             { style: styles.closeButton ? styles.closeButton(this.state.isOpen) : {} },
-            React.createElement(CrossIcon, { onClick: this.toggleMenu })
+            _react2['default'].createElement(_CrossIcon2['default'], { onClick: this.toggleMenu })
           )
         ),
-        React.createElement(BurgerIcon, { onClick: this.toggleMenu })
+        _react2['default'].createElement(_BurgerIcon2['default'], { onClick: this.toggleMenu })
       );
     }
   });
@@ -381,14 +427,22 @@ exports['default'] = function (styles) {
 
 module.exports = exports['default'];
 
-},{"./BurgerIcon":3,"./CrossIcon":4,"react":undefined,"react-kit/appendVendorPrefix":1,"snapsvg":undefined}],6:[function(require,module,exports){
+},{"./BurgerIcon":3,"./CrossIcon":4,"react":undefined,"snapsvg":undefined}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var menuFactory = require('../menuFactory');
-var appendVendorPrefix = require('react-kit/appendVendorPrefix');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _menuFactory = require('../menuFactory');
+
+var _menuFactory2 = _interopRequireDefault(_menuFactory);
+
+var _reactKitAppendVendorPrefix = require('react-kit/appendVendorPrefix');
+
+var _reactKitAppendVendorPrefix2 = _interopRequireDefault(_reactKitAppendVendorPrefix);
 
 var styles = {
 
@@ -399,6 +453,7 @@ var styles = {
       var pos = 0;
       var steps = this.pathOpen.split(';');
       var stepsTotal = steps.length;
+      var mina = window.mina;
 
       var nextStep = function nextStep() {
         if (pos > stepsTotal - 1) return;
@@ -415,7 +470,7 @@ var styles = {
   },
 
   morphShape: function morphShape() {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       position: 'fixed',
       width: '100%',
       height: '100%',
@@ -424,7 +479,7 @@ var styles = {
   },
 
   menuWrap: function menuWrap(isOpen) {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       position: 'fixed',
       zIndex: 2,
       width: 300,
@@ -435,7 +490,7 @@ var styles = {
   },
 
   menu: function menu(isOpen) {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       position: 'fixed',
       height: '100%',
       transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-160px, 0, 0)',
@@ -445,7 +500,7 @@ var styles = {
   },
 
   item: function item(isOpen) {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       display: 'block',
       outline: 'none',
       transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-160px, 0, 0)',
@@ -455,7 +510,7 @@ var styles = {
   },
 
   closeButton: function closeButton(isOpen) {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-160px, 0, 0)',
       transition: isOpen ? 'opacity 0.3s 0.4s cubic-bezier(.17, .67, .1, 1.27), transform 0.3s 0.4s cubic-bezier(.17, .67, .1, 1.27)' : 'opacity 0s 0.3s cubic-bezier(.17, .67, .1, 1.27), transform 0s 0.3s cubic-bezier(.17, .67, .1, 1.27)',
       opacity: isOpen ? 1 : 0
@@ -463,7 +518,7 @@ var styles = {
   },
 
   overlay: function overlay(isOpen) {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       position: 'fixed',
       zIndex: 1,
       width: '100%',
@@ -476,7 +531,7 @@ var styles = {
   }
 };
 
-exports['default'] = menuFactory(styles);
+exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
 
 },{"../menuFactory":5,"react-kit/appendVendorPrefix":1}],7:[function(require,module,exports){
@@ -485,8 +540,16 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var menuFactory = require('../menuFactory');
-var appendVendorPrefix = require('react-kit/appendVendorPrefix');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _menuFactory = require('../menuFactory');
+
+var _menuFactory2 = _interopRequireDefault(_menuFactory);
+
+var _reactKitAppendVendorPrefix = require('react-kit/appendVendorPrefix');
+
+var _reactKitAppendVendorPrefix2 = _interopRequireDefault(_reactKitAppendVendorPrefix);
 
 var styles = {
 
@@ -494,12 +557,12 @@ var styles = {
     pathInitial: 'M-1,0h101c0,0-97.833,153.603-97.833,396.167C2.167,627.579,100,800,100,800H-1V0z',
     pathOpen: 'M-1,0h101c0,0,0-1,0,395c0,404,0,405,0,405H-1V0z',
     animate: function animate(path) {
-      path.animate({ path: this.pathOpen }, 400, mina.easeinout);
+      path.animate({ path: this.pathOpen }, 400, window.mina.easeinout);
     }
   },
 
   morphShape: function morphShape() {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       position: 'fixed',
       width: 120,
       height: '100%',
@@ -508,7 +571,7 @@ var styles = {
   },
 
   menuWrap: function menuWrap(isOpen) {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       position: 'fixed',
       zIndex: 2,
       width: 300,
@@ -519,7 +582,7 @@ var styles = {
   },
 
   menu: function menu() {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       position: 'fixed',
       width: 'calc(100% - 120px)',
       height: '100%',
@@ -529,14 +592,14 @@ var styles = {
   },
 
   item: function item() {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       display: 'block',
       outline: 'none'
     });
   },
 
   overlay: function overlay(isOpen) {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       position: 'fixed',
       zIndex: 1,
       width: '100%',
@@ -549,20 +612,20 @@ var styles = {
   },
 
   pageWrap: function pageWrap(isOpen) {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(100px, 0, 0)',
       transition: isOpen ? 'all 0.3s' : 'all 0.3s 0.1s'
     });
   },
 
   outerContainer: function outerContainer(isOpen) {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       overflow: isOpen ? '' : 'hidden'
     });
   }
 };
 
-exports['default'] = menuFactory(styles);
+exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
 
 },{"../menuFactory":5,"react-kit/appendVendorPrefix":1}],8:[function(require,module,exports){
@@ -571,13 +634,21 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var menuFactory = require('../menuFactory');
-var appendVendorPrefix = require('react-kit/appendVendorPrefix');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _menuFactory = require('../menuFactory');
+
+var _menuFactory2 = _interopRequireDefault(_menuFactory);
+
+var _reactKitAppendVendorPrefix = require('react-kit/appendVendorPrefix');
+
+var _reactKitAppendVendorPrefix2 = _interopRequireDefault(_reactKitAppendVendorPrefix);
 
 var styles = {
 
   menuWrap: function menuWrap(isOpen) {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       position: 'fixed',
       zIndex: 2,
       width: 300,
@@ -588,20 +659,20 @@ var styles = {
   },
 
   menu: function menu() {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       height: '100%'
     });
   },
 
   item: function item() {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       display: 'block',
       outline: 'none'
     });
   },
 
   overlay: function overlay(isOpen) {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       position: 'fixed',
       width: '100%',
       height: '100%',
@@ -614,21 +685,22 @@ var styles = {
   },
 
   pageWrap: function pageWrap(isOpen) {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(300px, 0, 0)',
       transition: 'all 0.5s'
     });
   },
 
   outerContainer: function outerContainer(isOpen) {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       perspective: '1500px',
       perspectiveOrigin: '0% 50%',
       overflow: isOpen ? '' : 'hidden'
     });
-  } };
+  }
+};
 
-exports['default'] = menuFactory(styles);
+exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
 
 },{"../menuFactory":5,"react-kit/appendVendorPrefix":1}],9:[function(require,module,exports){
@@ -637,13 +709,21 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var menuFactory = require('../menuFactory');
-var appendVendorPrefix = require('react-kit/appendVendorPrefix');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _menuFactory = require('../menuFactory');
+
+var _menuFactory2 = _interopRequireDefault(_menuFactory);
+
+var _reactKitAppendVendorPrefix = require('react-kit/appendVendorPrefix');
+
+var _reactKitAppendVendorPrefix2 = _interopRequireDefault(_reactKitAppendVendorPrefix);
 
 var styles = {
 
   menuWrap: function menuWrap(isOpen) {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       position: 'fixed',
       zIndex: 2,
       width: 300,
@@ -654,20 +734,20 @@ var styles = {
   },
 
   menu: function menu() {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       height: '100%'
     });
   },
 
   item: function item() {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       display: 'block',
       outline: 'none'
     });
   },
 
   overlay: function overlay(isOpen) {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       position: 'fixed',
       width: '100%',
       height: '100%',
@@ -680,20 +760,20 @@ var styles = {
   },
 
   pageWrap: function pageWrap(isOpen) {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(300px, 0, 0)',
       transition: 'all 0.5s'
     });
   },
 
   outerContainer: function outerContainer(isOpen) {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       overflow: isOpen ? '' : 'hidden'
     });
   }
 };
 
-exports['default'] = menuFactory(styles);
+exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
 
 },{"../menuFactory":5,"react-kit/appendVendorPrefix":1}],10:[function(require,module,exports){
@@ -702,13 +782,21 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var menuFactory = require('../menuFactory');
-var appendVendorPrefix = require('react-kit/appendVendorPrefix');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _menuFactory = require('../menuFactory');
+
+var _menuFactory2 = _interopRequireDefault(_menuFactory);
+
+var _reactKitAppendVendorPrefix = require('react-kit/appendVendorPrefix');
+
+var _reactKitAppendVendorPrefix2 = _interopRequireDefault(_reactKitAppendVendorPrefix);
 
 var styles = {
 
   menuWrap: function menuWrap(isOpen) {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       position: 'fixed',
       zIndex: 2,
       width: 300,
@@ -719,20 +807,20 @@ var styles = {
   },
 
   menu: function menu() {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       height: '100%'
     });
   },
 
   item: function item() {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       display: 'block',
       outline: 'none'
     });
   },
 
   overlay: function overlay(isOpen) {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       position: 'fixed',
       width: '100%',
       height: '100%',
@@ -745,7 +833,7 @@ var styles = {
   },
 
   pageWrap: function pageWrap(isOpen) {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(300px, 0, 0) rotateY(-15deg)',
       transformOrigin: '0% 50%',
       transformStyle: 'preserve-3d',
@@ -754,14 +842,14 @@ var styles = {
   },
 
   outerContainer: function outerContainer(isOpen) {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       perspective: '1500px',
       overflow: isOpen ? '' : 'hidden'
     });
   }
 };
 
-exports['default'] = menuFactory(styles);
+exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
 
 },{"../menuFactory":5,"react-kit/appendVendorPrefix":1}],11:[function(require,module,exports){
@@ -770,13 +858,21 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var menuFactory = require('../menuFactory');
-var appendVendorPrefix = require('react-kit/appendVendorPrefix');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _menuFactory = require('../menuFactory');
+
+var _menuFactory2 = _interopRequireDefault(_menuFactory);
+
+var _reactKitAppendVendorPrefix = require('react-kit/appendVendorPrefix');
+
+var _reactKitAppendVendorPrefix2 = _interopRequireDefault(_reactKitAppendVendorPrefix);
 
 var styles = {
 
   menuWrap: function menuWrap(isOpen) {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       position: 'fixed',
       zIndex: 2,
       width: 300,
@@ -787,20 +883,20 @@ var styles = {
   },
 
   menu: function menu() {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       height: '100%'
     });
   },
 
   item: function item() {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       display: 'block',
       outline: 'none'
     });
   },
 
   overlay: function overlay(isOpen) {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       position: 'fixed',
       width: '100%',
       height: '100%',
@@ -813,7 +909,7 @@ var styles = {
   },
 
   pageWrap: function pageWrap(isOpen) {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       transform: isOpen ? 'translate3d(0, 0, 1px)' : 'translate3d(0, 0, -300px)',
       transformOrigin: '100%',
       transformStyle: 'preserve-3d',
@@ -822,13 +918,13 @@ var styles = {
   },
 
   outerContainer: function outerContainer() {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       perspective: '1500px'
     });
   }
 };
 
-exports['default'] = menuFactory(styles);
+exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
 
 },{"../menuFactory":5,"react-kit/appendVendorPrefix":1}],12:[function(require,module,exports){
@@ -837,13 +933,21 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var menuFactory = require('../menuFactory');
-var appendVendorPrefix = require('react-kit/appendVendorPrefix');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _menuFactory = require('../menuFactory');
+
+var _menuFactory2 = _interopRequireDefault(_menuFactory);
+
+var _reactKitAppendVendorPrefix = require('react-kit/appendVendorPrefix');
+
+var _reactKitAppendVendorPrefix2 = _interopRequireDefault(_reactKitAppendVendorPrefix);
 
 var styles = {
 
   menuWrap: function menuWrap(isOpen) {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       position: 'fixed',
       zIndex: 2,
       width: 300,
@@ -854,20 +958,20 @@ var styles = {
   },
 
   menu: function menu() {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       height: '100%'
     });
   },
 
   item: function item() {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       display: 'block',
       outline: 'none'
     });
   },
 
   overlay: function overlay(isOpen) {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       position: 'fixed',
       width: '100%',
       height: '100%',
@@ -880,7 +984,7 @@ var styles = {
   },
 
   pageWrap: function pageWrap(isOpen) {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(100px, 0, -600px) rotateY(-20deg)',
       transformStyle: 'preserve-3d',
       transition: 'all 0.5s',
@@ -889,14 +993,14 @@ var styles = {
   },
 
   outerContainer: function outerContainer(isOpen) {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       perspective: '1500px',
       overflow: isOpen ? '' : 'hidden'
     });
   }
 };
 
-exports['default'] = menuFactory(styles);
+exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
 
 },{"../menuFactory":5,"react-kit/appendVendorPrefix":1}],13:[function(require,module,exports){
@@ -905,13 +1009,21 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var menuFactory = require('../menuFactory');
-var appendVendorPrefix = require('react-kit/appendVendorPrefix');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _menuFactory = require('../menuFactory');
+
+var _menuFactory2 = _interopRequireDefault(_menuFactory);
+
+var _reactKitAppendVendorPrefix = require('react-kit/appendVendorPrefix');
+
+var _reactKitAppendVendorPrefix2 = _interopRequireDefault(_reactKitAppendVendorPrefix);
 
 var styles = {
 
   menuWrap: function menuWrap(isOpen) {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       position: 'fixed',
       zIndex: 2,
       width: 300,
@@ -922,20 +1034,20 @@ var styles = {
   },
 
   menu: function menu() {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       height: '100%'
     });
   },
 
   item: function item() {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       display: 'block',
       outline: 'none'
     });
   },
 
   overlay: function overlay(isOpen) {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       position: 'fixed',
       zIndex: 1,
       width: '100%',
@@ -948,7 +1060,7 @@ var styles = {
   }
 };
 
-exports['default'] = menuFactory(styles);
+exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
 
 },{"../menuFactory":5,"react-kit/appendVendorPrefix":1}],14:[function(require,module,exports){
@@ -957,13 +1069,21 @@ module.exports = exports['default'];
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var menuFactory = require('../menuFactory');
-var appendVendorPrefix = require('react-kit/appendVendorPrefix');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _menuFactory = require('../menuFactory');
+
+var _menuFactory2 = _interopRequireDefault(_menuFactory);
+
+var _reactKitAppendVendorPrefix = require('react-kit/appendVendorPrefix');
+
+var _reactKitAppendVendorPrefix2 = _interopRequireDefault(_reactKitAppendVendorPrefix);
 
 var styles = {
 
   menuWrap: function menuWrap(isOpen) {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       position: 'fixed',
       zIndex: 2,
       width: 300,
@@ -974,13 +1094,13 @@ var styles = {
   },
 
   menu: function menu() {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       height: '100%'
     });
   },
 
   item: function item(isOpen, nthChild) {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       display: 'block',
       transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(0, ' + nthChild * 500 + 'px, 0)',
       transition: isOpen ? 'transform 0.8s cubic-bezier(0.7, 0, 0.3, 1)' : 'transform 0s 0.2s cubic-bezier(0.7, 0, 0.3, 1)',
@@ -989,7 +1109,7 @@ var styles = {
   },
 
   overlay: function overlay(isOpen) {
-    return appendVendorPrefix({
+    return (0, _reactKitAppendVendorPrefix2['default'])({
       position: 'fixed',
       zIndex: 1,
       width: '100%',
@@ -1002,7 +1122,7 @@ var styles = {
   }
 };
 
-exports['default'] = menuFactory(styles);
+exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
 
 },{"../menuFactory":5,"react-kit/appendVendorPrefix":1}],"react-burger-menu":[function(require,module,exports){
