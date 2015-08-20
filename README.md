@@ -19,6 +19,8 @@ Then open [`localhost:8000`](http://localhost:8000) in a browser.
 
 The test suite uses Mocha, Chai and Sinon, with jsdom.
 
+*You will need [io.js](https://iojs.org/en/index.html) to run the tests, due to jsdom depending on it.*
+
 To run the tests once, run:
 
 ```
@@ -52,7 +54,7 @@ npm install react-burger-menu --save
 Items for the sidebar should be passed as child elements of the component using JSX.
 
 ``` javascript
-var Menu = require('react-burger-menu/nameOfAnimation');
+var Menu = require('react-burger-menu').nameOfAnimation;
 
 var Example = React.createClass({
   showSettings: function(event) {
@@ -143,29 +145,29 @@ All the animations are handled internally by the component. However, the visual 
 The component has the following helper classes:
 
 ``` css
-// Color of burger icon
+/* Color of burger icon */
 .bm-burger-icon {
   background: #373a47;
 }
 
-// Color of close button cross
+/* Color of close button cross */
 .bm-cross {
   background: #bdc3c7;
 }
 
-// Background color of sidebar
+/* Background color of sidebar */
 .bm-menu,
-.bm-morph-shape { // Morph shape necessary with bubble or elastic
+.bm-morph-shape { /* Morph shape necessary with bubble or elastic */
   background: #373a47;
 }
 
-// General menu styles
+/* General menu styles */
 .bm-menu {
   padding: 2.5em 1.5em 0;
   font-size: 1.15em;
 }
 
-// Wrapper for item list
+/* Wrapper for item list */
 .bm-item-list {
   color: #b8b7ad;
   padding: 0.8em;
