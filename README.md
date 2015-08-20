@@ -1,4 +1,4 @@
-# react-burger-menu
+# react-burger-menu [![Build Status](https://travis-ci.org/negomi/react-burger-menu.svg?branch=master)](https://travis-ci.org/negomi/react-burger-menu)
 
 An off-canvas sidebar React component with a collection of effects and styles using CSS transitions and SVG path animations.
 
