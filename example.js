@@ -1,10 +1,17 @@
 require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
-var React = require('react');
-var BurgerMenu = require('react-burger-menu');
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-var Demo = React.createClass({
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactBurgerMenu = require('react-burger-menu');
+
+var _reactBurgerMenu2 = _interopRequireDefault(_reactBurgerMenu);
+
+var Demo = _react2['default'].createClass({
   displayName: 'Demo',
 
   changeMenu: function changeMenu(menu) {
@@ -12,69 +19,69 @@ var Demo = React.createClass({
   },
 
   getMenu: function getMenu() {
-    var Menu = BurgerMenu[this.state.currentMenu];
-    var jsx;
+    var Menu = _reactBurgerMenu2['default'][this.state.currentMenu];
+    var jsx = undefined;
 
     switch (this.props.menus[this.state.currentMenu].items) {
       case 1:
-        jsx = React.createElement(
+        jsx = _react2['default'].createElement(
           Menu,
           { id: this.state.currentMenu, pageWrapId: 'page-wrap', outerContainerId: 'outer-container' },
-          React.createElement(
+          _react2['default'].createElement(
             'a',
             { href: '' },
-            React.createElement('i', { className: 'fa fa-fw fa-star-o' }),
-            React.createElement(
+            _react2['default'].createElement('i', { className: 'fa fa-fw fa-star-o' }),
+            _react2['default'].createElement(
               'span',
               null,
               'Favorites'
             )
           ),
-          React.createElement(
+          _react2['default'].createElement(
             'a',
             { href: '' },
-            React.createElement('i', { className: 'fa fa-fw fa-bell-o' }),
-            React.createElement(
+            _react2['default'].createElement('i', { className: 'fa fa-fw fa-bell-o' }),
+            _react2['default'].createElement(
               'span',
               null,
               'Alerts'
             )
           ),
-          React.createElement(
+          _react2['default'].createElement(
             'a',
             { href: '' },
-            React.createElement('i', { className: 'fa fa-fw fa-envelope-o' }),
-            React.createElement(
+            _react2['default'].createElement('i', { className: 'fa fa-fw fa-envelope-o' }),
+            _react2['default'].createElement(
               'span',
               null,
               'Messages'
             )
           ),
-          React.createElement(
+          _react2['default'].createElement(
             'a',
             { href: '' },
-            React.createElement('i', { className: 'fa fa-fw fa-comment-o' }),
-            React.createElement(
+            _react2['default'].createElement('i', { className: 'fa fa-fw fa-comment-o' }),
+            _react2['default'].createElement(
               'span',
               null,
               'Comments'
             )
           ),
-          React.createElement(
+          _react2['default'].createElement(
             'a',
             { href: '' },
-            React.createElement('i', { className: 'fa fa-fw fa-bar-chart-o' }),
-            React.createElement(
+            _react2['default'].createElement('i', { className: 'fa fa-fw fa-bar-chart-o' }),
+            _react2['default'].createElement(
               'span',
               null,
               'Analytics'
             )
           ),
-          React.createElement(
+          _react2['default'].createElement(
             'a',
             { href: '' },
-            React.createElement('i', { className: 'fa fa-fw fa-newspaper-o' }),
-            React.createElement(
+            _react2['default'].createElement('i', { className: 'fa fa-fw fa-newspaper-o' }),
+            _react2['default'].createElement(
               'span',
               null,
               'Reading List'
@@ -83,64 +90,64 @@ var Demo = React.createClass({
         );
         break;
       case 2:
-        jsx = React.createElement(
+        jsx = _react2['default'].createElement(
           Menu,
           { id: this.state.currentMenu, pageWrapId: 'page-wrap', outerContainerId: 'outer-container' },
-          React.createElement(
+          _react2['default'].createElement(
             'h2',
             null,
-            React.createElement('i', { className: 'fa fa-fw fa-inbox fa-2x' }),
-            React.createElement(
+            _react2['default'].createElement('i', { className: 'fa fa-fw fa-inbox fa-2x' }),
+            _react2['default'].createElement(
               'span',
               null,
               'Sidebar'
             )
           ),
-          React.createElement(
+          _react2['default'].createElement(
             'a',
             { href: '' },
-            React.createElement('i', { className: 'fa fa-fw fa-database' }),
-            React.createElement(
+            _react2['default'].createElement('i', { className: 'fa fa-fw fa-database' }),
+            _react2['default'].createElement(
               'span',
               null,
               'Data Management'
             )
           ),
-          React.createElement(
+          _react2['default'].createElement(
             'a',
             { href: '' },
-            React.createElement('i', { className: 'fa fa-fw fa-map-marker' }),
-            React.createElement(
+            _react2['default'].createElement('i', { className: 'fa fa-fw fa-map-marker' }),
+            _react2['default'].createElement(
               'span',
               null,
               'Location'
             )
           ),
-          React.createElement(
+          _react2['default'].createElement(
             'a',
             { href: '' },
-            React.createElement('i', { className: 'fa fa-fw fa-mortar-board' }),
-            React.createElement(
+            _react2['default'].createElement('i', { className: 'fa fa-fw fa-mortar-board' }),
+            _react2['default'].createElement(
               'span',
               null,
               'Study'
             )
           ),
-          React.createElement(
+          _react2['default'].createElement(
             'a',
             { href: '' },
-            React.createElement('i', { className: 'fa fa-fw fa-picture-o' }),
-            React.createElement(
+            _react2['default'].createElement('i', { className: 'fa fa-fw fa-picture-o' }),
+            _react2['default'].createElement(
               'span',
               null,
               'Collections'
             )
           ),
-          React.createElement(
+          _react2['default'].createElement(
             'a',
             { href: '' },
-            React.createElement('i', { className: 'fa fa-fw fa-money' }),
-            React.createElement(
+            _react2['default'].createElement('i', { className: 'fa fa-fw fa-money' }),
+            _react2['default'].createElement(
               'span',
               null,
               'Credits'
@@ -149,64 +156,64 @@ var Demo = React.createClass({
         );
         break;
       default:
-        jsx = React.createElement(
+        jsx = _react2['default'].createElement(
           Menu,
           { id: this.state.currentMenu, pageWrapId: 'page-wrap', outerContainerId: 'outer-container' },
-          React.createElement(
+          _react2['default'].createElement(
             'a',
             { href: '' },
-            React.createElement('i', { className: 'fa fa-fw fa-star-o' }),
-            React.createElement(
+            _react2['default'].createElement('i', { className: 'fa fa-fw fa-star-o' }),
+            _react2['default'].createElement(
               'span',
               null,
               'Favorites'
             )
           ),
-          React.createElement(
+          _react2['default'].createElement(
             'a',
             { href: '' },
-            React.createElement('i', { className: 'fa fa-fw fa-bell-o' }),
-            React.createElement(
+            _react2['default'].createElement('i', { className: 'fa fa-fw fa-bell-o' }),
+            _react2['default'].createElement(
               'span',
               null,
               'Alerts'
             )
           ),
-          React.createElement(
+          _react2['default'].createElement(
             'a',
             { href: '' },
-            React.createElement('i', { className: 'fa fa-fw fa-envelope-o' }),
-            React.createElement(
+            _react2['default'].createElement('i', { className: 'fa fa-fw fa-envelope-o' }),
+            _react2['default'].createElement(
               'span',
               null,
               'Messages'
             )
           ),
-          React.createElement(
+          _react2['default'].createElement(
             'a',
             { href: '' },
-            React.createElement('i', { className: 'fa fa-fw fa-comment-o' }),
-            React.createElement(
+            _react2['default'].createElement('i', { className: 'fa fa-fw fa-comment-o' }),
+            _react2['default'].createElement(
               'span',
               null,
               'Comments'
             )
           ),
-          React.createElement(
+          _react2['default'].createElement(
             'a',
             { href: '' },
-            React.createElement('i', { className: 'fa fa-fw fa-bar-chart-o' }),
-            React.createElement(
+            _react2['default'].createElement('i', { className: 'fa fa-fw fa-bar-chart-o' }),
+            _react2['default'].createElement(
               'span',
               null,
               'Analytics'
             )
           ),
-          React.createElement(
+          _react2['default'].createElement(
             'a',
             { href: '' },
-            React.createElement('i', { className: 'fa fa-fw fa-newspaper-o' }),
-            React.createElement(
+            _react2['default'].createElement('i', { className: 'fa fa-fw fa-newspaper-o' }),
+            _react2['default'].createElement(
               'span',
               null,
               'Reading List'
@@ -226,7 +233,7 @@ var Demo = React.createClass({
     var _this = this;
 
     var buttons = Object.keys(this.props.menus).map(function (menu) {
-      return React.createElement(
+      return _react2['default'].createElement(
         'a',
         { key: menu,
           className: menu === _this.state.currentMenu ? 'current-demo' : '',
@@ -235,40 +242,40 @@ var Demo = React.createClass({
       );
     });
 
-    return React.createElement(
+    return _react2['default'].createElement(
       'div',
       { id: 'outer-container', style: { height: '100%' } },
       this.getMenu(),
-      React.createElement(
+      _react2['default'].createElement(
         'main',
         { id: 'page-wrap' },
-        React.createElement(
+        _react2['default'].createElement(
           'h1',
           null,
-          React.createElement(
+          _react2['default'].createElement(
             'a',
             { href: 'https://github.com/negomi/react-burger-menu' },
             'react-burger-menu'
           )
         ),
-        React.createElement(
+        _react2['default'].createElement(
           'h2',
           null,
           'An off-canvas sidebar React component with a collection of effects and styles using CSS transitions and SVG path animations.'
         ),
-        React.createElement(
+        _react2['default'].createElement(
           'nav',
           { className: 'demo-buttons' },
           buttons
         ),
         'Inspired by ',
-        React.createElement(
+        _react2['default'].createElement(
           'a',
           { href: 'https://github.com/codrops/OffCanvasMenuEffects' },
           'Off-Canvas Menu Effects'
         ),
         ' and ',
-        React.createElement(
+        _react2['default'].createElement(
           'a',
           { href: 'https://github.com/codrops/SidebarTransitions' },
           'Sidebar Transitions'
@@ -291,6 +298,6 @@ var menus = {
   fallDown: { buttonText: 'Fall Down', items: 2 }
 };
 
-React.render(React.createElement(Demo, { menus: menus }), document.body);
+_react2['default'].render(_react2['default'].createElement(Demo, { menus: menus }), document.body);
 
 },{"react":undefined,"react-burger-menu":undefined}]},{},[1]);
