@@ -156,9 +156,12 @@ The component has the following helper classes:
 }
 
 /* Background color of sidebar */
-.bm-menu,
-.bm-morph-shape { /* Morph shape necessary with bubble or elastic */
+.bm-menu {
   background: #373a47;
+}
+
+.bm-morph-shape {
+  fill: #373a47; /* Morph shape necessary with bubble or elastic */
 }
 
 /* General menu styles */
