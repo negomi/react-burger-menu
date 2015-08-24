@@ -41,7 +41,7 @@
     "publish:site": "gulp publish:examples",
     "release": "gulp release",
     "start": "gulp dev",
-    "test": "mocha",
+    "test": "mocha --reporter dot",
     "tdd": "mocha --watch",
     "coverage": "./node_modules/istanbul/lib/cli.js cover _mocha -- --ui bdd -R spec -t 5000",
     "watch": "gulp watch:lib"
