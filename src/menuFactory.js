@@ -1,9 +1,16 @@
 'use strict';
 
 import React from 'react';
-import snap from 'snapsvg';
 import BurgerIcon from './BurgerIcon';
 import CrossIcon from './CrossIcon';
+
+// Snap.svg workaround for Webpack using imports-loader (https://github.com/webpack/imports-loader).
+let snap;
+try {
+  snap = require('imports?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js');
+} catch(e) {
+  snap = require('snapsvg');
+}
 
 export default (styles) => {
 
