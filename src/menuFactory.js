@@ -141,8 +141,9 @@ export default (styles) => {
       // Add animation styles to user-defined menu items.
       if (this.props.children) {
         let extraProps;
+        let multipleItems = this.props.children instanceof Array;
 
-        if (this.props.children.length) {
+        if (multipleItems) {
           items = this.props.children.map((item, index) => {
             extraProps = {
               key: index,
