@@ -18,6 +18,7 @@ var taskConfig = {
   component: {
     name: 'BurgerMenu',
     dependencies: [
+      'browserify-optional',
       'classnames',
       'react',
       'snapsvg'
