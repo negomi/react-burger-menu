@@ -310,7 +310,8 @@ exports['default'] = function (styles) {
             if (this.props.children) {
                 (function () {
                     var extraProps = undefined;
-                    if (_this2.props.children.length) {
+                    var multipleItems = _this2.props.children instanceof Array;
+                    if (multipleItems) {
                         items = _this2.props.children.map(function (item, index) {
                             extraProps = {
                                 key: index,
