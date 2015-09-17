@@ -288,22 +288,14 @@ exports['default'] = function (styles) {
             var _this2 = this;
             var items = undefined, svg = undefined;
             if (this.props.children) {
-                (function () {
-                    var extraProps = undefined;
-                    var multipleItems = _this2.props.children instanceof Array;
-                    if (multipleItems) {
-                        items = _this2.props.children.map(function (item, index) {
-                            extraProps = {
-                                key: index,
-                                style: styles.item(_this2.state.isOpen, index + 1)
-                            };
-                            return _react2['default'].cloneElement(item, extraProps);
-                        });
-                    } else {
-                        extraProps = { style: styles.item(_this2.state.isOpen, 1) };
-                        items = _react2['default'].cloneElement(_this2.props.children, extraProps);
-                    }
-                }());
+                items = _react2['default'].Children.map(this.props.children, function (item, index) {
+                    var extraProps = {
+                            key: index,
+                            ref: 'item_' + index,
+                            style: styles.item(_this2.state.isOpen, index + 1)
+                        };
+                    return _react2['default'].cloneElement(item, extraProps);
+                });
             }
             if (styles.svg) {
                 svg = _react2['default'].createElement('div', {
