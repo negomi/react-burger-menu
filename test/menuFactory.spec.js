@@ -110,18 +110,14 @@ describe('menuFactory', () => {
     });
 
     it('allows an arbitrary number of children', () => {
-      let itemList;
+      component = TestUtils.renderIntoDocument(<Menu />);
+      expect(React.Children.count(component.props.children)).to.equal(0);
 
-      itemList = component.props.children[1].props.children[1].props.children;
-      expect(itemList.props.children).to.be.undefined;
+      component = TestUtils.renderIntoDocument(<Menu><div>A child</div></Menu>);
+      expect(React.Children.count(component.props.children)).to.equal(1);
 
-      component = createShallowComponent(<Menu><div>A child</div></Menu>);
-      itemList = component.props.children[1].props.children[1].props.children;
-      expect(itemList.props.children).to.be.an.instanceof(Object);
-
-      component = createShallowComponent(<Menu><div>A child</div><div>Another child</div></Menu>);
-      itemList = component.props.children[1].props.children[1].props.children;
-      expect(itemList.props.children).to.have.length(2);
+      component = TestUtils.renderIntoDocument(<Menu><div>A child</div><div>Another child</div></Menu>);
+      expect(React.Children.count(component.props.children)).to.equal(2);
     });
 
     it('is initially closed', () => {

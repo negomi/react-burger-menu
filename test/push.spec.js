@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react/addons';
+const TestUtils = React.addons.TestUtils;
 import { expect } from 'chai';
 import createShallowComponent from './utils/createShallowComponent';
 import BurgerMenu from '../src/BurgerMenu';
@@ -8,7 +9,7 @@ const Menu = BurgerMenu.push;
 
 describe('push', () => {
 
-  let component, overlay, menuWrap, menu, itemList, item;
+  let component, overlay, menuWrap, menu;
 
   function addWrapperElementsToDOM() {
     let outerContainer = document.createElement('div');
@@ -29,8 +30,6 @@ describe('push', () => {
     overlay = component.props.children[0];
     menuWrap = component.props.children[1];
     menu = menuWrap.props.children[1];
-    itemList = menu.props.children;
-    item = itemList.props.children;
     addWrapperElementsToDOM();
   });
 
@@ -52,6 +51,7 @@ describe('push', () => {
   });
 
   it('has correct item styles', () => {
-    expect(Object.keys(item.props.style)).to.have.length(2);
+    component = TestUtils.renderIntoDocument(<Menu pageWrapId={ 'page-wrap' } outerContainerId={ 'outer-container' }><div>An item</div></Menu>);
+    expect(Object.keys(component.refs.item_0.props.style)).to.have.length(2);
   });
 });

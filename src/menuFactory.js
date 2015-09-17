@@ -138,27 +138,17 @@ export default (styles) => {
     render() {
       let items, svg;
 
-      // Add animation styles to user-defined menu items.
+      // Add styles to user-defined menu items.
       if (this.props.children) {
-        let extraProps;
-        let multipleItems = this.props.children instanceof Array;
-
-        if (multipleItems) {
-          items = this.props.children.map((item, index) => {
-            extraProps = {
-              key: index,
-              style: styles.item(this.state.isOpen, index + 1)
-            };
-
-            return React.cloneElement(item, extraProps);
-          });
-        } else {
-          extraProps = {
-            style: styles.item(this.state.isOpen, 1)
+        items = React.Children.map(this.props.children, (item, index) => {
+          let extraProps = {
+            key: index,
+            ref: `item_${index}`,
+            style: styles.item(this.state.isOpen, index + 1)
           };
 
-          items = React.cloneElement(this.props.children, extraProps);
-        }
+          return React.cloneElement(item, extraProps);
+        });
       }
 
       // Add a morph shape for animations that use SVG.

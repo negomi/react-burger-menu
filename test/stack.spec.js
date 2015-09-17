@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react/addons';
+const TestUtils = React.addons.TestUtils;
 import { expect } from 'chai';
 import createShallowComponent from './utils/createShallowComponent';
 import BurgerMenu from '../src/BurgerMenu';
@@ -8,15 +9,13 @@ const Menu = BurgerMenu.stack;
 
 describe('stack', () => {
 
-  let component, overlay, menuWrap, menu, itemList, item;
+  let component, overlay, menuWrap, menu;
 
   beforeEach(() => {
     component = createShallowComponent(<Menu><div>An item</div></Menu>);
     overlay = component.props.children[0];
     menuWrap = component.props.children[1];
     menu = menuWrap.props.children[1];
-    itemList = menu.props.children;
-    item = itemList.props.children;
   });
 
   it('has correct overlay styles', () => {
@@ -33,6 +32,7 @@ describe('stack', () => {
   });
 
   it('has correct item styles', () => {
-    expect(Object.keys(item.props.style)).to.have.length(3);
+    component = TestUtils.renderIntoDocument(<Menu pageWrapId={ 'page-wrap' } outerContainerId={ 'outer-container' }><div>An item</div></Menu>);
+    expect(Object.keys(component.refs.item_0.props.style)).to.have.length(3);
   });
 });

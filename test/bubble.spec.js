@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react/addons';
+const TestUtils = React.addons.TestUtils;
 import { expect } from 'chai';
 import createShallowComponent from './utils/createShallowComponent';
 import BurgerMenu from '../src/BurgerMenu';
@@ -8,7 +9,7 @@ const Menu = BurgerMenu.bubble;
 
 describe('bubble', () => {
 
-  let component, overlay, menuWrap, morphShape, svg, menu, itemList, item, closeButton;
+  let component, overlay, menuWrap, morphShape, svg, menu, closeButton;
 
   beforeEach(() => {
     component = createShallowComponent(<Menu><div>An item</div></Menu>);
@@ -18,8 +19,6 @@ describe('bubble', () => {
     svg = morphShape.props.children;
     menu = menuWrap.props.children[1];
     closeButton = menuWrap.props.children[2];
-    itemList = menu.props.children;
-    item = itemList.props.children;
   });
 
   it('has correct overlay styles', () => {
@@ -36,7 +35,8 @@ describe('bubble', () => {
   });
 
   it('has correct item styles', () => {
-    expect(Object.keys(item.props.style)).to.have.length(4);
+    component = TestUtils.renderIntoDocument(<Menu pageWrapId={ 'page-wrap' } outerContainerId={ 'outer-container' }><div>An item</div></Menu>);
+    expect(Object.keys(component.refs.item_0.props.style)).to.have.length(4);
   });
 
   it('has correct morph shape styles', () => {
