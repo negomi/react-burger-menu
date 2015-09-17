@@ -20,21 +20,26 @@
     "snapsvg": "^0.4.0"
   },
   "devDependencies": {
-    "babel": "^5.8.20",
-    "babel-eslint": "^3.1.9",
+    "babel": "^5.8.23",
+    "babel-eslint": "^4.1.2",
     "chai": "^3.2.0",
-    "eslint": "^0.21.2",
-    "eslint-plugin-react": "^2.3.0",
+    "eslint": "^1.4.3",
+    "eslint-plugin-react": "^3.4.1",
     "gulp": "^3.8.11",
     "imports-loader": "^0.6.4",
-    "istanbul": "^0.3.17",
-    "jsdom": "^5.6.1",
-    "mocha": "^2.2.5",
-    "react-component-gulp-tasks": "^0.7.0",
+    "istanbul": "^0.3.20",
+    "jsdom": "^6.5.0",
+    "mocha": "^2.3.2",
+    "react-component-gulp-tasks": "^0.7.1",
     "sinon": "^1.16.1"
   },
+  "peerDependencies": {
+    "react": "^0.13.3"
+  },
   "browserify": {
-    "transform": ["browserify-optional"]
+    "transform": [
+      "browserify-optional"
+    ]
   },
   "browserify-shim": {
     "react": "global:React"
