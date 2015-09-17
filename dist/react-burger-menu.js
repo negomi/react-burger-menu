@@ -1,20 +1,5 @@
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.BurgerMenu = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
-Object.defineProperty(exports, '__esModule', { value: true });
-exports['default'] = {
-    slide: require('./menus/slide'),
-    stack: require('./menus/stack'),
-    elastic: require('./menus/elastic'),
-    bubble: require('./menus/bubble'),
-    push: require('./menus/push'),
-    pushRotate: require('./menus/pushRotate'),
-    scaleDown: require('./menus/scaleDown'),
-    scaleRotate: require('./menus/scaleRotate'),
-    fallDown: require('./menus/fallDown')
-};
-module.exports = exports['default'];
-},{"./menus/bubble":7,"./menus/elastic":8,"./menus/fallDown":9,"./menus/push":10,"./menus/pushRotate":11,"./menus/scaleDown":12,"./menus/scaleRotate":13,"./menus/slide":14,"./menus/stack":15}],2:[function(require,module,exports){
-'use strict';
 
 var getVendorPropertyName = require('./getVendorPropertyName');
 
@@ -45,7 +30,7 @@ module.exports = function(target, sources) {
   return prefixed
 }
 
-},{"./getVendorPropertyName":3}],3:[function(require,module,exports){
+},{"./getVendorPropertyName":2}],2:[function(require,module,exports){
 'use strict';
 
 var div = document.createElement('div');
@@ -71,14 +56,14 @@ module.exports = function(prop) {
   }
 }
 
-},{}],4:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 (function (global){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : { 'default': obj };
 }
-var _react = typeof window !== 'undefined' ? window.React : typeof global !== 'undefined' ? global.React : null;
+var _react = typeof window !== 'undefined' ? window['React'] : typeof global !== 'undefined' ? global['React'] : null;
 var _react2 = _interopRequireDefault(_react);
 var _reactKitAppendVendorPrefix = require('react-kit/appendVendorPrefix');
 var _reactKitAppendVendorPrefix2 = _interopRequireDefault(_reactKitAppendVendorPrefix);
@@ -136,14 +121,29 @@ var BurgerIcon = _react2['default'].createClass({
 exports['default'] = BurgerIcon;
 module.exports = exports['default'];
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"react-kit/appendVendorPrefix":2}],5:[function(require,module,exports){
+},{"react-kit/appendVendorPrefix":1}],4:[function(require,module,exports){
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
+exports['default'] = {
+    slide: require('./menus/slide'),
+    stack: require('./menus/stack'),
+    elastic: require('./menus/elastic'),
+    bubble: require('./menus/bubble'),
+    push: require('./menus/push'),
+    pushRotate: require('./menus/pushRotate'),
+    scaleDown: require('./menus/scaleDown'),
+    scaleRotate: require('./menus/scaleRotate'),
+    fallDown: require('./menus/fallDown')
+};
+module.exports = exports['default'];
+},{"./menus/bubble":7,"./menus/elastic":8,"./menus/fallDown":9,"./menus/push":10,"./menus/pushRotate":11,"./menus/scaleDown":12,"./menus/scaleRotate":13,"./menus/slide":14,"./menus/stack":15}],5:[function(require,module,exports){
 (function (global){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : { 'default': obj };
 }
-var _react = typeof window !== 'undefined' ? window.React : typeof global !== 'undefined' ? global.React : null;
+var _react = typeof window !== 'undefined' ? window['React'] : typeof global !== 'undefined' ? global['React'] : null;
 var _react2 = _interopRequireDefault(_react);
 var _reactKitAppendVendorPrefix = require('react-kit/appendVendorPrefix');
 var _reactKitAppendVendorPrefix2 = _interopRequireDefault(_reactKitAppendVendorPrefix);
@@ -193,14 +193,14 @@ var CrossIcon = _react2['default'].createClass({
 exports['default'] = CrossIcon;
 module.exports = exports['default'];
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"react-kit/appendVendorPrefix":2}],6:[function(require,module,exports){
+},{"react-kit/appendVendorPrefix":1}],6:[function(require,module,exports){
 (function (global){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : { 'default': obj };
 }
-var _react = typeof window !== 'undefined' ? window.React : typeof global !== 'undefined' ? global.React : null;
+var _react = typeof window !== 'undefined' ? window['React'] : typeof global !== 'undefined' ? global['React'] : null;
 var _react2 = _interopRequireDefault(_react);
 var _BurgerIcon = require('./BurgerIcon');
 var _BurgerIcon2 = _interopRequireDefault(_BurgerIcon);
@@ -308,22 +308,14 @@ exports['default'] = function (styles) {
             var _this2 = this;
             var items = undefined, svg = undefined;
             if (this.props.children) {
-                (function () {
-                    var extraProps = undefined;
-                    var multipleItems = _this2.props.children instanceof Array;
-                    if (multipleItems) {
-                        items = _this2.props.children.map(function (item, index) {
-                            extraProps = {
-                                key: index,
-                                style: styles.item(_this2.state.isOpen, index + 1)
-                            };
-                            return _react2['default'].cloneElement(item, extraProps);
-                        });
-                    } else {
-                        extraProps = { style: styles.item(_this2.state.isOpen, 1) };
-                        items = _react2['default'].cloneElement(_this2.props.children, extraProps);
-                    }
-                }());
+                items = _react2['default'].Children.map(this.props.children, function (item, index) {
+                    var extraProps = {
+                            key: index,
+                            ref: 'item_' + index,
+                            style: styles.item(_this2.state.isOpen, index + 1)
+                        };
+                    return _react2['default'].cloneElement(item, extraProps);
+                });
             }
             if (styles.svg) {
                 svg = _react2['default'].createElement('div', {
@@ -357,7 +349,7 @@ exports['default'] = function (styles) {
 };
 module.exports = exports['default'];
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./BurgerIcon":4,"./CrossIcon":5,"snapsvg":undefined}],7:[function(require,module,exports){
+},{"./BurgerIcon":3,"./CrossIcon":5,"snapsvg":undefined}],7:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -445,7 +437,7 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":6,"react-kit/appendVendorPrefix":2}],8:[function(require,module,exports){
+},{"../menuFactory":6,"react-kit/appendVendorPrefix":1}],8:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -520,7 +512,7 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":6,"react-kit/appendVendorPrefix":2}],9:[function(require,module,exports){
+},{"../menuFactory":6,"react-kit/appendVendorPrefix":1}],9:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -578,7 +570,7 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":6,"react-kit/appendVendorPrefix":2}],10:[function(require,module,exports){
+},{"../menuFactory":6,"react-kit/appendVendorPrefix":1}],10:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -632,7 +624,7 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":6,"react-kit/appendVendorPrefix":2}],11:[function(require,module,exports){
+},{"../menuFactory":6,"react-kit/appendVendorPrefix":1}],11:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -691,7 +683,7 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":6,"react-kit/appendVendorPrefix":2}],12:[function(require,module,exports){
+},{"../menuFactory":6,"react-kit/appendVendorPrefix":1}],12:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -747,7 +739,7 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":6,"react-kit/appendVendorPrefix":2}],13:[function(require,module,exports){
+},{"../menuFactory":6,"react-kit/appendVendorPrefix":1}],13:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -806,7 +798,7 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":6,"react-kit/appendVendorPrefix":2}],14:[function(require,module,exports){
+},{"../menuFactory":6,"react-kit/appendVendorPrefix":1}],14:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -851,7 +843,7 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":6,"react-kit/appendVendorPrefix":2}],15:[function(require,module,exports){
+},{"../menuFactory":6,"react-kit/appendVendorPrefix":1}],15:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -898,5 +890,5 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":6,"react-kit/appendVendorPrefix":2}]},{},[1])(1)
+},{"../menuFactory":6,"react-kit/appendVendorPrefix":1}]},{},[4])(4)
 });
