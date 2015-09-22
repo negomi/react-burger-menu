@@ -195,6 +195,53 @@ export default styles => {
     }
 
     render() {
+      let extension;
+
+      if (this.props.extension) {
+        let extStyles = isOpen => {
+          return {
+            backgroundColor: '#dfdfdf',
+            position: 'fixed',
+            zIndex: 1,
+            width: 110,
+            height: '100%',
+            transform: isOpen
+              ? 'translate3d(300px, 0, 0)'
+              : 'translate3d(0, 0, 0)',
+            transition: 'all 0.5s',
+            paddingTop: isOpen ? 40 : 110
+          };
+        };
+
+        let iconStyles = {
+          display: 'block',
+          margin: '0 auto 30px'
+        };
+
+        extension = (
+          <div style={extStyles(this.state.isOpen)}>
+            <a href="">
+              <i className="fa fa-2x fa-fw fa-star-o" style={iconStyles} />
+            </a>
+            <a href="">
+              <i className="fa fa-2x fa-fw fa-bell-o" style={iconStyles} />
+            </a>
+            <a href="">
+              <i className="fa fa-2x fa-fw fa-envelope-o" style={iconStyles} />
+            </a>
+            <a href="">
+              <i className="fa fa-2x fa-fw fa-comment-o" style={iconStyles} />
+            </a>
+            <a href="">
+              <i className="fa fa-2x fa-fw fa-bar-chart-o" style={iconStyles} />
+            </a>
+            <a href="">
+              <i className="fa fa-2x fa-fw fa-newspaper-o" style={iconStyles} />
+            </a>
+          </div>
+        );
+      }
+
       return (
         <div>
           {!this.props.noOverlay && (
@@ -261,6 +308,7 @@ export default styles => {
               </div>
             )}
           </div>
+          {extension}
           {this.props.customBurgerIcon !== false && (
             <div style={this.getStyles('burgerIcon')}>
               <BurgerIcon
