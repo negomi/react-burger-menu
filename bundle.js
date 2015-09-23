@@ -94,8 +94,7 @@ var BurgerIcon = _react2['default'].createClass({
                     width: 60,
                     height: 54,
                     border: 'none',
-                    textIndent: 60,
-                    fontSize: 24,
+                    fontSize: 14,
                     color: 'transparent',
                     background: 'transparent',
                     outline: 'none'
@@ -270,9 +269,10 @@ exports['default'] = function (styles) {
         },
         componentDidUpdate: function componentDidUpdate() {
             var _this = this;
-            if (styles.svg) {
+            if (styles.svg && this.isMounted()) {
                 (function () {
-                    var s = snap(_react2['default'].findDOMNode(_this, '.bm-morph-shape'));
+                    var morphShape = document.getElementsByClassName('bm-morph-shape')[0];
+                    var s = snap(morphShape);
                     var path = s.select('path');
                     if (_this.state.isOpen) {
                         styles.svg.animate(path);
@@ -291,7 +291,6 @@ exports['default'] = function (styles) {
                 items = _react2['default'].Children.map(this.props.children, function (item, index) {
                     var extraProps = {
                             key: index,
-                            ref: 'item_' + index,
                             style: styles.item(_this2.state.isOpen, index + 1)
                         };
                     return _react2['default'].cloneElement(item, extraProps);
@@ -310,8 +309,7 @@ exports['default'] = function (styles) {
                 }, _react2['default'].createElement('path', { d: styles.svg.pathInitial })));
             }
             return _react2['default'].createElement('div', null, _react2['default'].createElement('div', {
-                id: 'bm-overlay',
-                ref: 'overlay',
+                className: 'bm-overlay',
                 onClick: this.toggleMenu,
                 style: styles.overlay(this.state.isOpen)
             }), _react2['default'].createElement('div', {

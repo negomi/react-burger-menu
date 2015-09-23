@@ -14,6 +14,9 @@ body {
   color: #fffce1;
   font-family: 'Raleway', Arial, sans-serif;
 }
+#app {
+  height: 100%;
+}
 a {
   color: #4e4a46;
   text-decoration: none;
