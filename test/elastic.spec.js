@@ -54,7 +54,8 @@ describe('elastic', () => {
 
   it('has correct item styles', () => {
     component = TestUtils.renderIntoDocument(<Menu pageWrapId={ 'page-wrap' } outerContainerId={ 'outer-container' }><div>An item</div></Menu>);
-    expect(Object.keys(component.refs.item_0.props.style)).to.have.length(2);
+    const firstItem = TestUtils.findRenderedDOMComponentWithClass(component, 'item_0').props.style;
+    expect(Object.keys(firstItem)).to.have.length(2);
   });
 
   it('has correct morph shape styles', () => {

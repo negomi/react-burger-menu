@@ -143,7 +143,7 @@ export default (styles) => {
         items = React.Children.map(this.props.children, (item, index) => {
           let extraProps = {
             key: index,
-            ref: `item_${index}`,
+            className: `item_${index}`,
             style: styles.item(this.state.isOpen, index + 1)
           };
 
@@ -164,7 +164,7 @@ export default (styles) => {
 
       return (
         <div>
-          <div id="bm-overlay" ref="overlay" onClick={ this.toggleMenu } style={ styles.overlay(this.state.isOpen) }></div>
+          <div className="bm-overlay" onClick={ this.toggleMenu } style={ styles.overlay(this.state.isOpen) }></div>
           <div id={ this.props.id } style={ styles.menuWrap(this.state.isOpen) }>
             { svg }
             <div className="bm-menu" style={ styles.menu(this.state.isOpen) } >

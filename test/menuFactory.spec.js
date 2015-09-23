@@ -84,7 +84,7 @@ describe('menuFactory', () => {
     it('contains an overlay', () => {
       const overlay = component.props.children[0];
       expect(component.type).to.equal('div');
-      expect(overlay.props.id).to.contain('bm-overlay');
+      expect(overlay.props.className).to.contain('bm-overlay');
     });
 
     it('contains a menuWrap element with an optional ID', () => {
@@ -134,7 +134,8 @@ describe('menuFactory', () => {
     it('closes on overlay click', () => {
       component = TestUtils.renderIntoDocument(<Menu />);
       component.setState({ isOpen: true });
-      TestUtils.Simulate.click(component.refs.overlay.getDOMNode());
+      const overlay = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-overlay');
+      TestUtils.Simulate.click(overlay);
       expect(component.state.isOpen).to.be.false;
     });
   });
