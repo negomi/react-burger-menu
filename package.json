@@ -1,6 +1,6 @@
 {
   "name": "react-burger-menu",
-  "version": "1.1.6",
+  "version": "1.2.0",
   "description": "An off-canvas sidebar component with a collection of effects and styles using CSS transitions and SVG path animations",
   "main": "lib/BurgerMenu.js",
   "author": "Imogen Wentworth",
