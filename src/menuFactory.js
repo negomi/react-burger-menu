@@ -119,8 +119,10 @@ export default (styles) => {
     },
 
     componentDidUpdate() {
-      if (styles.svg) {
-        let s = snap(React.findDOMNode(this, '.bm-morph-shape'));
+      if (styles.svg && this.isMounted()) {
+        // TODO: Should be able to use refs or ReactDOM.findDOMNode(this) here.
+        let morphShape = document.getElementsByClassName('bm-morph-shape')[0];
+        let s = snap(morphShape);
         let path = s.select('path');
 
         if (this.state.isOpen) {
@@ -143,7 +145,6 @@ export default (styles) => {
         items = React.Children.map(this.props.children, (item, index) => {
           let extraProps = {
             key: index,
-            className: `item_${index}`,
             style: styles.item(this.state.isOpen, index + 1)
           };
 
