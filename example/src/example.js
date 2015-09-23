@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import BurgerMenu from 'react-burger-menu';
 
 let Demo = React.createClass({
@@ -95,4 +96,4 @@ let menus = {
   fallDown: { buttonText: 'Fall Down', items: 2 }
 };
 
-React.render(<Demo menus={ menus }/>, document.body);
+ReactDOM.render(<Demo menus={ menus } />, document.getElementById('app'));
