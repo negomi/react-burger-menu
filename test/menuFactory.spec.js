@@ -1,7 +1,8 @@
 'use strict';
 
-import React from 'react/addons';
-const TestUtils = React.addons.TestUtils;
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TestUtils from 'react-addons-test-utils';
 import { assert, expect } from 'chai';
 import sinon from 'sinon';
 import createShallowComponent from './utils/createShallowComponent';
@@ -143,7 +144,7 @@ describe('menuFactory', () => {
   describe('when unmounted', () => {
 
     function unmountComponent() {
-      React.unmountComponentAtNode(React.findDOMNode(component).parentNode);
+      ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(component).parentNode);
     }
 
     beforeEach(() => {

@@ -1,7 +1,7 @@
 'use strict';
 
-import React from 'react/addons';
-const TestUtils = React.addons.TestUtils;
+import React from 'react';
+import TestUtils from 'react-addons-test-utils';
 import { expect } from 'chai';
 import createShallowComponent from './utils/createShallowComponent';
 import BurgerMenu from '../src/BurgerMenu';
@@ -9,7 +9,7 @@ const Menu = BurgerMenu.bubble;
 
 describe('bubble', () => {
 
-  let component, overlay, menuWrap, morphShape, svg, menu, closeButton;
+  let component, overlay, menuWrap, morphShape, svg, menu, closeButton, firstItem;
 
   beforeEach(() => {
     component = createShallowComponent(<Menu><div>An item</div></Menu>);
@@ -19,6 +19,7 @@ describe('bubble', () => {
     svg = morphShape.props.children;
     menu = menuWrap.props.children[1];
     closeButton = menuWrap.props.children[2];
+    firstItem = menu.props.children.props.children[0];
   });
 
   it('has correct overlay styles', () => {
@@ -35,9 +36,7 @@ describe('bubble', () => {
   });
 
   it('has correct item styles', () => {
-    component = TestUtils.renderIntoDocument(<Menu pageWrapId={ 'page-wrap' } outerContainerId={ 'outer-container' }><div>An item</div></Menu>);
-    const firstItem = TestUtils.findRenderedDOMComponentWithClass(component, 'item_0').props.style;
-    expect(Object.keys(firstItem)).to.have.length(4);
+    expect(Object.keys(firstItem.props.style)).to.have.length(4);
   });
 
   it('has correct morph shape styles', () => {

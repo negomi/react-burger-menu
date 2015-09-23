@@ -34,8 +34,7 @@ let BurgerIcon = React.createClass({
       width: 60,
       height: 54,
       border: 'none',
-      textIndent: 60,
-      fontSize: 24,
+      fontSize: 14,
       color: 'transparent',
       background: 'transparent',
       outline: 'none'

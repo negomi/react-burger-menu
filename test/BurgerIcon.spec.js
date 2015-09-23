@@ -1,7 +1,7 @@
 'use strict';
 
-import React from 'react/addons';
-const TestUtils = React.addons.TestUtils;
+import React from 'react';
+import TestUtils from 'react-addons-test-utils';
 import { assert, expect } from 'chai';
 import createShallowComponent from './utils/createShallowComponent';
 import BurgerIcon from '../src/BurgerIcon';
@@ -64,14 +64,14 @@ describe('BurgerIcon component', () => {
 
     it('contains descriptive text', () => {
       const button = TestUtils.findRenderedDOMComponentWithTag(component, 'button');
-      expect(button.props.children).to.equal('Open Menu');
+      expect(button.innerHTML).to.equal('Open Menu');
     });
 
     it('responds to hover events', () => {
       const button = TestUtils.findRenderedDOMComponentWithTag(component, 'button');
-      TestUtils.SimulateNative.mouseOver(button.getDOMNode());
+      TestUtils.SimulateNative.mouseOver(button);
       expect(component.state.hover).to.be.true;
-      TestUtils.SimulateNative.mouseOut(button.getDOMNode());
+      TestUtils.SimulateNative.mouseOut(button);
       expect(component.state.hover).to.be.false;
     });
 
@@ -80,13 +80,14 @@ describe('BurgerIcon component', () => {
       function handleClick() { clickHandled = true; }
       component = TestUtils.renderIntoDocument(<BurgerIcon onClick={ handleClick } />);
       const button = TestUtils.findRenderedDOMComponentWithTag(component, 'button');
-      TestUtils.Simulate.click(button.getDOMNode());
+      TestUtils.Simulate.click(button);
       expect(clickHandled).to.be.true;
     });
 
     it('has the correct styles', () => {
-      const button = TestUtils.findRenderedDOMComponentWithTag(component, 'button');
-      expect(Object.keys(button.props.style)).to.have.length(12);
+      component = createShallowComponent(<BurgerIcon />);
+      const button = component.props.children[3];
+      expect(Object.keys(button.props.style)).to.have.length(11);
     });
   });
 });

@@ -1,7 +1,7 @@
 'use strict';
 
-import React from 'react/addons';
-const TestUtils = React.addons.TestUtils;
+import React from 'react';
+import TestUtils from 'react-addons-test-utils';
 import { assert, expect } from 'chai';
 import createShallowComponent from './utils/createShallowComponent';
 import CrossIcon from '../src/CrossIcon';
@@ -58,7 +58,7 @@ describe('CrossIcon component', () => {
 
     it('contains descriptive text', () => {
       const button = TestUtils.findRenderedDOMComponentWithTag(component, 'button');
-      expect(button.props.children).to.equal('Close Menu');
+      expect(button.innerHTML).to.equal('Close Menu');
     });
 
     it('behaves correctly when clicked', () => {
@@ -66,12 +66,13 @@ describe('CrossIcon component', () => {
       function handleClick() { clickHandled = true; }
       component = TestUtils.renderIntoDocument(<CrossIcon onClick={ handleClick } />);
       const button = TestUtils.findRenderedDOMComponentWithTag(component, 'button');
-      TestUtils.Simulate.click(button.getDOMNode());
+      TestUtils.Simulate.click(button);
       expect(clickHandled).to.be.true;
     });
 
     it('has the correct styles', () => {
-      const button = TestUtils.findRenderedDOMComponentWithTag(component, 'button');
+      component = createShallowComponent(<CrossIcon />);
+      const button = component.props.children[2];
       expect(Object.keys(button.props.style)).to.have.length(14);
     });
   });

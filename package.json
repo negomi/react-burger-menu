@@ -31,6 +31,7 @@
     "istanbul": "^0.3.20",
     "jsdom": "^6.5.0",
     "mocha": "^2.3.2",
+    "react-addons-test-utils": "^0.14.0-rc1",
     "react-component-gulp-tasks": "^0.7.1",
     "sinon": "^1.16.1"
   },
