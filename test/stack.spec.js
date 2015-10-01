@@ -16,15 +16,15 @@ describe('stack', () => {
     overlay = component.props.children[0];
     menuWrap = component.props.children[1];
     menu = menuWrap.props.children[1];
-		firstItem = menu.props.children.props.children[0];
+    firstItem = menu.props.children.props.children[0];
   });
 
   it('has correct overlay styles', () => {
-    expect(Object.keys(overlay.props.style)).to.have.length(7);
+    expect(Object.keys(overlay.props.style)).to.have.length(8);
   });
 
   it('has correct menuWrap styles', () => {
-    expect(Object.keys(menuWrap.props.style)).to.have.length(5);
+    expect(Object.keys(menuWrap.props.style)).to.have.length(6);
   });
 
   it('has correct menu styles', () => {
@@ -33,6 +33,6 @@ describe('stack', () => {
   });
 
   it('has correct item styles', () => {
-    expect(Object.keys(firstItem.props.style)).to.have.length(3);
+    expect(Object.keys(firstItem.props.style)).to.have.length(4);
   });
 });
