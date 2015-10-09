@@ -33,24 +33,34 @@ module.exports = function(target, sources) {
 },{"./getVendorPropertyName":2}],2:[function(require,module,exports){
 'use strict';
 
-var div = document.createElement('div');
+var builtinStyle = document.createElement('div').style;
 var prefixes = ['Moz', 'Webkit', 'O', 'ms'];
 var domVendorPrefix;
 
 // Helper function to get the proper vendor property name. (transition => WebkitTransition)
 module.exports = function(prop) {
+  var vendorProp;
+  if (prop in builtinStyle) return prop;
+  var UpperProp = prop.charAt(0).toUpperCase() + prop.substr(1);
 
-  if (prop in div.style) return prop;
-
-  var prop = prop.charAt(0).toUpperCase() + prop.substr(1);
   if (domVendorPrefix) {
-    return domVendorPrefix + prop;
+
+    vendorProp = domVendorPrefix + UpperProp;
+    if (vendorProp in builtinStyle) {
+      return vendorProp;
+    }else{
+      return prop;
+    }
+
   } else {
+
     for (var i = 0; i < prefixes.length; ++i) {
-      var vendorProp = prefixes[i] + prop;
-      if (vendorProp in div.style) {
+      vendorProp = prefixes[i] + UpperProp;
+      if (vendorProp in builtinStyle) {
         domVendorPrefix = prefixes[i];
         return vendorProp;
+      }else {
+        return prop;
       }
     }
   }
