@@ -45,7 +45,7 @@ The easiest way to use react-burger-menu is to install it from npm and include i
 
 You can also use the standalone build by including `dist/react-burger-menu.js` in your page. If you use this, make sure you have already included React, and it is available as a global variable.
 
-If you're using React 0.14.0-rc1:
+If you're using React 0.14:
 
 ```
 npm install react-burger-menu --save
