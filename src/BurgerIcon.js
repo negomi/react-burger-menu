@@ -7,12 +7,11 @@ let BurgerIcon = React.createClass({
 
   getLineStyle(index) {
     return appendVendorPrefix({
-      position: 'fixed',
-      height: 6,
-      width: 36,
-      left: 36,
-      top: 36 + 12 * index,
-      zIndex: 1,
+      position: 'absolute',
+      height: "15%",
+      left: 0,
+      right: 0,
+      top: (33 * index) + "%",
       opacity: this.state.hover ? 0.6 : 1
     });
   },
@@ -27,12 +26,13 @@ let BurgerIcon = React.createClass({
 
   render() {
     var buttonStyle = appendVendorPrefix({
-      position: 'fixed',
-      zIndex: 1,
-      margin: 24,
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      top: 0,
+      bottom: 0,
+      margin: 0,
       padding: 0,
-      width: 60,
-      height: 54,
       border: 'none',
       fontSize: 14,
       color: 'transparent',
@@ -40,11 +40,23 @@ let BurgerIcon = React.createClass({
       outline: 'none'
     });
 
+    var containerStyle = appendVendorPrefix({
+      position: "absolute",
+      left: "10%",
+      right: "10%",
+      top: "10%",
+      bottom : "10%",
+      margin: 0,
+      padding: 0
+    });
+
     return (
-      <div>
-        <span className="bm-burger-icon" style={ this.getLineStyle(0) }></span>
-        <span className="bm-burger-icon" style={ this.getLineStyle(1) }></span>
-        <span className="bm-burger-icon" style={ this.getLineStyle(2) }></span>
+      <div className="bm-burger-button">
+        <div className="bm-burger-icon-container" style={ containerStyle }>
+          <span className="bm-burger-icon" style={ this.getLineStyle(0) }></span>
+          <span className="bm-burger-icon" style={ this.getLineStyle(1) }></span>
+          <span className="bm-burger-icon" style={ this.getLineStyle(2) }></span>
+        </div>
         <button onClick={ this.props.onClick }
           onMouseEnter={ this.handleHover }
           onMouseLeave={ this.handleHover }

@@ -155,6 +155,15 @@ All the animations are handled internally by the component. However, the visual 
 The component has the following helper classes:
 
 ``` css
+/* Position and sizing of the burger button */
+.bm-burger-button {
+  position: fixed;
+  width: 48px;
+  height: 48px;
+  left: 32px;
+  top: 32px;
+}
+
 /* Color of burger icon */
 .bm-burger-icon {
   background: #373a47;
