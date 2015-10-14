@@ -81,12 +81,11 @@ var BurgerIcon = _react2['default'].createClass({
         displayName: 'BurgerIcon',
         getLineStyle: function getLineStyle(index) {
             return (0, _reactKitAppendVendorPrefix2['default'])({
-                position: 'fixed',
-                height: 6,
-                width: 36,
-                left: 36,
-                top: 36 + 12 * index,
-                zIndex: 1,
+                position: 'absolute',
+                height: '15%',
+                left: 0,
+                right: 0,
+                top: 33 * index + '%',
                 opacity: this.state.hover ? 0.6 : 1
             });
         },
@@ -98,19 +97,32 @@ var BurgerIcon = _react2['default'].createClass({
         },
         render: function render() {
             var buttonStyle = (0, _reactKitAppendVendorPrefix2['default'])({
-                    position: 'fixed',
-                    zIndex: 1,
-                    margin: 24,
+                    position: 'absolute',
+                    left: 0,
+                    right: 0,
+                    top: 0,
+                    bottom: 0,
+                    margin: 0,
                     padding: 0,
-                    width: 60,
-                    height: 54,
                     border: 'none',
                     fontSize: 14,
                     color: 'transparent',
                     background: 'transparent',
                     outline: 'none'
                 });
-            return _react2['default'].createElement('div', null, _react2['default'].createElement('span', {
+            var containerStyle = (0, _reactKitAppendVendorPrefix2['default'])({
+                    position: 'absolute',
+                    left: '10%',
+                    right: '10%',
+                    top: '10%',
+                    bottom: '10%',
+                    margin: 0,
+                    padding: 0
+                });
+            return _react2['default'].createElement('div', { className: 'bm-burger-button' }, _react2['default'].createElement('div', {
+                className: 'bm-burger-icon-container',
+                style: containerStyle
+            }, _react2['default'].createElement('span', {
                 className: 'bm-burger-icon',
                 style: this.getLineStyle(0)
             }), _react2['default'].createElement('span', {
@@ -119,7 +131,7 @@ var BurgerIcon = _react2['default'].createClass({
             }), _react2['default'].createElement('span', {
                 className: 'bm-burger-icon',
                 style: this.getLineStyle(2)
-            }), _react2['default'].createElement('button', {
+            })), _react2['default'].createElement('button', {
                 onClick: this.props.onClick,
                 onMouseEnter: this.handleHover,
                 onMouseLeave: this.handleHover,
@@ -218,7 +230,7 @@ var _CrossIcon2 = _interopRequireDefault(_CrossIcon);
 var snap = undefined;
 try {
     snap = function () {
-        throw new Error('Cannot find module \'imports?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js\' from \'/Users/imogen/code/react-burger-menu/src\'');
+        throw new Error('Cannot find module \'imports?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js\' from \'C:\\Users\\Grant\\Documents\\Git\\react-burger-menu\\src\'');
     }();
 } catch (e) {
     snap = require('snapsvg');
