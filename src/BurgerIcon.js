@@ -8,10 +8,10 @@ let BurgerIcon = React.createClass({
   getLineStyle(index) {
     return appendVendorPrefix({
       position: 'absolute',
-      height: "15%",
+      height: "20%",
       left: 0,
       right: 0,
-      top: (33 * index) + "%",
+      top: 20 * (index * 2) + "%",
       opacity: this.state.hover ? 0.6 : 1
     });
   },
@@ -52,11 +52,9 @@ let BurgerIcon = React.createClass({
 
     return (
       <div className="bm-burger-button">
-        <div className="bm-burger-icon-container" style={ containerStyle }>
-          <span className="bm-burger-icon" style={ this.getLineStyle(0) }></span>
-          <span className="bm-burger-icon" style={ this.getLineStyle(1) }></span>
-          <span className="bm-burger-icon" style={ this.getLineStyle(2) }></span>
-        </div>
+        <span className="bm-burger-icon" style={ this.getLineStyle(0) }></span>
+        <span className="bm-burger-icon" style={ this.getLineStyle(1) }></span>
+        <span className="bm-burger-icon" style={ this.getLineStyle(2) }></span>
         <button onClick={ this.props.onClick }
           onMouseEnter={ this.handleHover }
           onMouseLeave={ this.handleHover }

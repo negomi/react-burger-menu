@@ -158,10 +158,10 @@ The component has the following helper classes:
 /* Position and sizing of the burger button */
 .bm-burger-button {
   position: fixed;
-  width: 48px;
-  height: 48px;
-  left: 32px;
-  top: 32px;
+  width: 36px;
+  height: 30px;
+  left: 36px;
+  top: 36px;
 }
 
 /* Color of burger icon */

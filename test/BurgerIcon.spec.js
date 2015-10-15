@@ -20,12 +20,16 @@ describe('BurgerIcon component', () => {
       component = createShallowComponent(<BurgerIcon />);
     });
 
-    it('contains a container for the icon span elements', () => {
-      expect(component.props.children[0].props.className).to.contain('bm-burger-icon-container');
+    it('contains three span elements', () => {
+      let spanElements = component.props.children.filter((child) => {
+        return child.type === 'span';
+      });
+
+      expect(spanElements).to.have.length(3);
     });
 
     it('contains a button element', () => {
-      expect(component.props.children[1].type).to.equal('button');
+      expect(component.props.children[3].type).to.equal('button');
     });
 
     it('has correct initial hover state', () => {
@@ -33,45 +37,21 @@ describe('BurgerIcon component', () => {
     });
   });
 
-  describe('visual icon container', () => {
-    let container;
-
-    beforeEach(() => {
-      component = createShallowComponent(<BurgerIcon />);
-      container = component.props.children[0];
-    });
-
-    it('has the correct class', () => {
-      expect(container.props.className).to.contain('bm-burger-icon-container');
-    });
-
-    it('has the correct styles', () => {
-      expect(container.props.style).to.have.property('position', 'absolute');
-      expect(container.props.style).to.have.property('left', '10%');
-      expect(container.props.style).to.have.property('right', '10%');
-      expect(container.props.style).to.have.property('top', '10%');
-      expect(container.props.style).to.have.property('bottom', '10%');
-    });
-  });
-
   describe('visual icon', () => {
-    let container;
-
     beforeEach(() => {
       component = createShallowComponent(<BurgerIcon />);
-      container = component.props.children[0];
     });
 
     it('has the correct class', () => {
-      expect(container.props.children[0].props.className).to.contain('bm-burger-icon');
-      expect(container.props.children[1].props.className).to.contain('bm-burger-icon');
-      expect(container.props.children[2].props.className).to.contain('bm-burger-icon');
+      expect(component.props.children[0].props.className).to.contain('bm-burger-icon');
+      expect(component.props.children[1].props.className).to.contain('bm-burger-icon');
+      expect(component.props.children[2].props.className).to.contain('bm-burger-icon');
     });
 
     it('has the correct styles', () => {
-      expect(Object.keys(container.props.children[0].props.style)).to.have.length(6);
-      expect(Object.keys(container.props.children[1].props.style)).to.have.length(6);
-      expect(Object.keys(container.props.children[2].props.style)).to.have.length(6);
+      expect(Object.keys(component.props.children[0].props.style)).to.have.length(6);
+      expect(Object.keys(component.props.children[1].props.style)).to.have.length(6);
+      expect(Object.keys(component.props.children[2].props.style)).to.have.length(6);
     });
   });
 
@@ -105,7 +85,7 @@ describe('BurgerIcon component', () => {
 
     it('has the correct styles', () => {
       component = createShallowComponent(<BurgerIcon />);
-      const button = component.props.children[1];
+      const button = component.props.children[3];
       expect(Object.keys(button.props.style)).to.have.length(12);
     });
   });
