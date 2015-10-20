@@ -1,6 +1,8 @@
 'use strict';
 
 import React from 'react';
+import Radium from 'radium';
+import baseStyles from './baseStyles';
 import BurgerIcon from './BurgerIcon';
 import CrossIcon from './CrossIcon';
 
@@ -14,7 +16,7 @@ try {
 
 export default (styles) => {
 
-  return React.createClass({
+  return Radium(React.createClass({
 
     propTypes: {
       id: React.PropTypes.string,
@@ -93,7 +95,7 @@ export default (styles) => {
     },
 
     componentWillMount() {
-      if (!styles || !Object.keys(styles).length) {
+      if (!styles) {
         throw new Error('No styles supplied');
       }
 
@@ -139,13 +141,29 @@ export default (styles) => {
 
     render() {
       let items, svg;
+      let menuWrapStyles = [baseStyles.menuWrap(this.state.isOpen)];
+      let menuStyles = [baseStyles.menu(this.state.isOpen)];
+
+      if (styles.menuWrap) {
+        menuWrapStyles.push(styles.menuWrap(this.state.isOpen));
+      }
+
+      if (styles.menu) {
+        menuStyles.push(styles.menu(this.state.isOpen));
+      }
 
       // Add styles to user-defined menu items.
       if (this.props.children) {
         items = React.Children.map(this.props.children, (item, index) => {
+          let itemStyles = [baseStyles.item(this.state.isOpen)];
+
+          if (styles.item) {
+            itemStyles.push(styles.item(this.state.isOpen, index + 1));
+          }
+
           let extraProps = {
             key: index,
-            style: styles.item(this.state.isOpen, index + 1)
+            style: itemStyles
           };
 
           return React.cloneElement(item, extraProps);
@@ -165,10 +183,10 @@ export default (styles) => {
 
       return (
         <div>
-          <div className="bm-overlay" onClick={ this.toggleMenu } style={ styles.overlay(this.state.isOpen) }></div>
-          <div id={ this.props.id } style={ styles.menuWrap(this.state.isOpen) }>
+          <div className="bm-overlay" onClick={ this.toggleMenu } style={ baseStyles.overlay(this.state.isOpen) }></div>
+          <div id={ this.props.id } style={ menuWrapStyles }>
             { svg }
-            <div className="bm-menu" style={ styles.menu(this.state.isOpen) } >
+            <div className="bm-menu" style={ menuStyles } >
               <nav className="bm-item-list" style={ { height: '100%' } }>
                 { items }
               </nav>
@@ -181,5 +199,5 @@ export default (styles) => {
         </div>
       );
     }
-  });
+  }));
 };

@@ -9,7 +9,7 @@ const Menu = BurgerMenu.push;
 
 describe('push', () => {
 
-  let component, overlay, menuWrap, menu, firstItem;
+  let component, menuWrap, menu, firstItem;
 
   function addWrapperElementsToDOM() {
     let outerContainer = document.createElement('div');
@@ -26,11 +26,6 @@ describe('push', () => {
   }
 
   beforeEach(() => {
-    component = createShallowComponent(<Menu pageWrapId={ 'page-wrap' } outerContainerId={ 'outer-container' }><div>An item</div></Menu>);
-    overlay = component.props.children[0];
-    menuWrap = component.props.children[1];
-    menu = menuWrap.props.children[1];
-    firstItem = menu.props.children.props.children[0];
     addWrapperElementsToDOM();
   });
 
@@ -38,20 +33,25 @@ describe('push', () => {
     removeWrapperElementsFromDOM();
   });
 
-  it('has correct overlay styles', () => {
-    expect(Object.keys(overlay.props.style)).to.have.length(8);
-  });
-
   it('has correct menuWrap styles', () => {
-    expect(Object.keys(menuWrap.props.style)).to.have.length(6);
+    component = createShallowComponent(<Menu pageWrapId={ 'page-wrap' } outerContainerId={ 'outer-container' }><div>An item</div></Menu>);
+    menuWrap = component.props.children[1];
+    expect(menuWrap.props.style.position).to.equal('fixed');
+    expect(menuWrap.props.style.zIndex).to.equal(2);
+    expect(menuWrap.props.style.width).to.equal('300px');
+    expect(menuWrap.props.style.height).to.equal('100%');
   });
 
   it('has correct menu styles', () => {
-    expect(Object.keys(menu.props.style)).to.have.length(1);
-    expect(menu.props.style.height).to.equal('100%');
+    component = TestUtils.renderIntoDocument(<Menu pageWrapId={ 'page-wrap' } outerContainerId={ 'outer-container' }><div>An item</div></Menu>);
+    menu = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-menu');
+    expect(menu.style.height).to.equal('100%');
   });
 
   it('has correct item styles', () => {
-    expect(Object.keys(firstItem.props.style)).to.have.length(2);
+    component = TestUtils.renderIntoDocument(<Menu pageWrapId={ 'page-wrap' } outerContainerId={ 'outer-container' }><div>An item</div></Menu>);
+    firstItem = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-item-list').children[0];
+    expect(firstItem.style.display).to.equal('block');
+    expect(firstItem.style.outline).to.equal('none');
   });
 });

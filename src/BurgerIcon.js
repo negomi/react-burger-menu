@@ -1,12 +1,12 @@
 'use strict';
 
 import React from 'react';
-import appendVendorPrefix from 'react-kit/appendVendorPrefix';
+import Radium from 'radium';
 
-let BurgerIcon = React.createClass({
+let BurgerIcon = Radium(React.createClass({
 
   getLineStyle(index) {
-    return appendVendorPrefix({
+    return {
       position: 'fixed',
       height: 6,
       width: 36,
@@ -14,7 +14,7 @@ let BurgerIcon = React.createClass({
       top: 36 + 12 * index,
       zIndex: 1,
       opacity: this.state.hover ? 0.6 : 1
-    });
+    };
   },
 
   handleHover() {
@@ -26,7 +26,7 @@ let BurgerIcon = React.createClass({
   },
 
   render() {
-    var buttonStyle = appendVendorPrefix({
+    var buttonStyle = {
       position: 'fixed',
       zIndex: 1,
       margin: 24,
@@ -38,7 +38,7 @@ let BurgerIcon = React.createClass({
       color: 'transparent',
       background: 'transparent',
       outline: 'none'
-    });
+    };
 
     return (
       <div>
@@ -54,6 +54,6 @@ let BurgerIcon = React.createClass({
       </div>
     );
   }
-});
+}));
 
 export default BurgerIcon;

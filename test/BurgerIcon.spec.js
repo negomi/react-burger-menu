@@ -50,9 +50,16 @@ describe('BurgerIcon component', () => {
     });
 
     it('has the correct styles', () => {
-      expect(Object.keys(component.props.children[0].props.style)).to.have.length(7);
-      expect(Object.keys(component.props.children[1].props.style)).to.have.length(7);
-      expect(Object.keys(component.props.children[2].props.style)).to.have.length(7);
+      const expected = {
+        position: 'fixed',
+        height: '6px',
+        width: '36px',
+        left: '36px',
+        top: '36px',
+        zIndex: 1,
+        opacity: 1
+      };
+      expect(component.props.children[0].props.style).to.deep.equal(expected);
     });
   });
 
@@ -87,7 +94,20 @@ describe('BurgerIcon component', () => {
     it('has the correct styles', () => {
       component = createShallowComponent(<BurgerIcon />);
       const button = component.props.children[3];
-      expect(Object.keys(button.props.style)).to.have.length(11);
+      const expected = {
+        position: 'fixed',
+        zIndex: 1,
+        margin: '24px',
+        padding: 0,
+        width: '60px',
+        height: '54px',
+        border: 'none',
+        fontSize: '14px',
+        color: 'transparent',
+        background: 'transparent',
+        outline: 'none'
+      };
+      expect(button.props.style).to.deep.equal(expected);
     });
   });
 });

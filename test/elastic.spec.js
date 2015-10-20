@@ -9,7 +9,7 @@ const Menu = BurgerMenu.elastic;
 
 describe('elastic', () => {
 
-  let component, overlay, menuWrap, morphShape, svg, menu, firstItem;
+  let component, menuWrap, morphShape, svg, menu, firstItem;
 
   function addWrapperElementsToDOM() {
     let outerContainer = document.createElement('div');
@@ -27,7 +27,6 @@ describe('elastic', () => {
 
   beforeEach(() => {
     component = createShallowComponent(<Menu pageWrapId={ 'page-wrap' } outerContainerId={ 'outer-container' }><div>An item</div></Menu>);
-    overlay = component.props.children[0];
     menuWrap = component.props.children[1];
     morphShape = menuWrap.props.children[0];
     svg = morphShape.props.children;
@@ -40,25 +39,31 @@ describe('elastic', () => {
     removeWrapperElementsFromDOM();
   });
 
-  it('has correct overlay styles', () => {
-    expect(Object.keys(overlay.props.style)).to.have.length(8);
-  });
-
   it('has correct menuWrap styles', () => {
-    expect(Object.keys(menuWrap.props.style)).to.have.length(6);
+    expect(menuWrap.props.style.position).to.equal('fixed');
+    expect(menuWrap.props.style.zIndex).to.equal(2);
+    expect(menuWrap.props.style.width).to.equal('300px');
+    expect(menuWrap.props.style.height).to.equal('100%');
   });
 
   it('has correct menu styles', () => {
-    expect(Object.keys(menu.props.style)).to.have.length(5);
     expect(menu.props.style.height).to.equal('100%');
+    expect(menu.props.style.position).to.equal('fixed');
+    expect(menu.props.style.width).to.equal('calc(100% - 120px)');
+    expect(menu.props.style.whiteSpace).to.equal('nowrap');
+    expect(menu.props.style.boxSizing).to.equal('border-box');
   });
 
   it('has correct item styles', () => {
-    expect(Object.keys(firstItem.props.style)).to.have.length(2);
+    expect(firstItem.props.style.display).to.equal('block');
+    expect(firstItem.props.style.outline).to.equal('none');
   });
 
   it('has correct morph shape styles', () => {
-    expect(Object.keys(morphShape.props.style)).to.have.length(4);
+    expect(morphShape.props.style.position).to.equal('fixed');
+    expect(morphShape.props.style.width).to.equal('120px');
+    expect(morphShape.props.style.height).to.equal('100%');
+    expect(morphShape.props.style.right).to.equal(0);
   });
 
   it('has correct initial SVG path', () => {

@@ -45,8 +45,17 @@ describe('CrossIcon component', () => {
     });
 
     it('has the correct styles', () => {
-      expect(Object.keys(component.props.children[0].props.style)).to.have.length(8);
-      expect(Object.keys(component.props.children[1].props.style)).to.have.length(8);
+      const expected = {
+        position: 'absolute',
+        width: '3px',
+        height: '14px',
+        top: '14px',
+        right: '18px',
+        cursor: 'pointer',
+        zIndex: 1
+      };
+      expect(component.props.children[0].props.style).to.deep.equal(expected);
+      expect(component.props.children[1].props.style).to.deep.equal(expected);
     });
   });
 
@@ -73,7 +82,23 @@ describe('CrossIcon component', () => {
     it('has the correct styles', () => {
       component = createShallowComponent(<CrossIcon />);
       const button = component.props.children[2];
-      expect(Object.keys(button.props.style)).to.have.length(14);
+      const expected = {
+        width: '14px',
+        height: '14px',
+        position: 'absolute',
+        right: '13px',
+        top: '14px',
+        padding: 0,
+        overflow: 'hidden',
+        textIndent: '14px',
+        fontSize: '14px',
+        border: 'none',
+        background: 'transparent',
+        color: 'transparent',
+        outline: 'none',
+        zIndex: 1
+      };
+      expect(button.props.style).to.deep.equal(expected);
     });
   });
 });

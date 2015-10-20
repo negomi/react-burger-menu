@@ -1,12 +1,12 @@
 'use strict';
 
 import React from 'react';
-import appendVendorPrefix from 'react-kit/appendVendorPrefix';
+import Radium from 'radium';
 
-let CrossIcon = React.createClass({
+let CrossIcon = Radium(React.createClass({
 
   getCrossStyle(type) {
-    return appendVendorPrefix({
+    return {
       position: 'absolute',
       width: 3,
       height: 14,
@@ -15,11 +15,11 @@ let CrossIcon = React.createClass({
       cursor: 'pointer',
       transform: type === 'before' ? 'rotate(45deg)' : 'rotate(-45deg)',
       zIndex: 1
-    });
+    };
   },
 
   render() {
-    var buttonStyle = appendVendorPrefix({
+    var buttonStyle = {
       width: 14,
       height: 14,
       position: 'absolute',
@@ -34,7 +34,7 @@ let CrossIcon = React.createClass({
       color: 'transparent',
       outline: 'none',
       zIndex: 1
-    });
+    };
 
     return (
       <div>
@@ -44,6 +44,6 @@ let CrossIcon = React.createClass({
       </div>
     );
   }
-});
+}));
 
 export default CrossIcon;

@@ -9,11 +9,10 @@ const Menu = BurgerMenu.bubble;
 
 describe('bubble', () => {
 
-  let component, overlay, menuWrap, morphShape, svg, menu, closeButton, firstItem;
+  let component, menuWrap, morphShape, svg, menu, closeButton, firstItem;
 
   beforeEach(() => {
     component = createShallowComponent(<Menu><div>An item</div></Menu>);
-    overlay = component.props.children[0];
     menuWrap = component.props.children[1];
     morphShape = menuWrap.props.children[0];
     svg = morphShape.props.children;
@@ -22,25 +21,30 @@ describe('bubble', () => {
     firstItem = menu.props.children.props.children[0];
   });
 
-  it('has correct overlay styles', () => {
-    expect(Object.keys(overlay.props.style)).to.have.length(8);
-  });
-
   it('has correct menuWrap styles', () => {
-    expect(Object.keys(menuWrap.props.style)).to.have.length(6);
+    expect(menuWrap.props.style.position).to.equal('fixed');
+    expect(menuWrap.props.style.zIndex).to.equal(2);
+    expect(menuWrap.props.style.width).to.equal('300px');
+    expect(menuWrap.props.style.height).to.equal('100%');
   });
 
   it('has correct menu styles', () => {
-    expect(Object.keys(menu.props.style)).to.have.length(5);
+    expect(menu.props.style.position).to.equal('fixed');
     expect(menu.props.style.height).to.equal('100%');
+    expect(menu.props.style.opacity).to.equal(0);
   });
 
   it('has correct item styles', () => {
-    expect(Object.keys(firstItem.props.style)).to.have.length(5);
+    expect(firstItem.props.style.display).to.equal('block');
+    expect(firstItem.props.style.outline).to.equal('none');
+    expect(firstItem.props.style.opacity).to.equal(0);
   });
 
   it('has correct morph shape styles', () => {
-    expect(Object.keys(morphShape.props.style)).to.have.length(4);
+    expect(morphShape.props.style.position).to.equal('fixed');
+    expect(morphShape.props.style.width).to.equal('100%');
+    expect(morphShape.props.style.height).to.equal('100%');
+    expect(morphShape.props.style.right).to.equal(0);
   });
 
   it('has correct initial SVG path', () => {
@@ -49,6 +53,6 @@ describe('bubble', () => {
   });
 
   it('has correct close button styles', () => {
-    expect(Object.keys(closeButton.props.style)).to.have.length(3);
+    expect(closeButton.props.style.opacity).to.equal(0);
   });
 });

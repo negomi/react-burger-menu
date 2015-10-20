@@ -18,7 +18,6 @@
     "radium": "^0.14.2",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
-    "react-kit": "^0.1.3",
     "snapsvg": "^0.4.0"
   },
   "devDependencies": {

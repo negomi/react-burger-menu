@@ -57,8 +57,6 @@ describe('menuFactory', () => {
   it('throws if not passed any styles', () => {
     Menu = menuFactory();
     assert.throw(createShallowComponent.bind(null, <Menu />), Error, /No styles supplied/);
-    Menu = menuFactory({});
-    assert.throw(createShallowComponent.bind(null, <Menu />), Error, /No styles supplied/);
   });
 
   it('warns if external wrapper IDs are required but not passed', () => {
@@ -95,10 +93,10 @@ describe('menuFactory', () => {
       expect(menuWrap.props.id).to.equal('menu-wrap');
     });
 
-    it('contains a BurgerIcon component', () => {
-      const burgerIcon = component.props.children[2];
-      expect(component.type).to.equal('div');
-      expect(burgerIcon.type.displayName).to.equal('BurgerIcon');
+    it('contains a burger icon', () => {
+      component = TestUtils.renderIntoDocument(<Menu />);
+      const burgerIconBars = TestUtils.scryRenderedDOMComponentsWithClass(component, 'bm-burger-icon');
+      expect(burgerIconBars).to.have.length(3);
     });
 
     it('contains an SVG and morph shape if required', () => {
@@ -171,31 +169,26 @@ describe('menuFactory', () => {
 
     beforeEach(() => {
       Menu = menuFactory(mockStyles.basic);
-      component = createShallowComponent(<Menu />);
-      menuWrap = component.props.children[1];
+      component = TestUtils.renderIntoDocument(<Menu />);
+      menuWrap = ReactDOM.findDOMNode(component);
     });
 
     it('has the correct number of children', () => {
-      expect(menuWrap.props.children).to.have.length.of(3);
+      expect(Object.keys(menuWrap.children)).to.have.length(3);
     });
 
     it('contains menu and item list elements with correct attributes', () => {
-      const menu = menuWrap.props.children[1];
-      const itemList = menu.props.children;
-
-      expect(menu).to.be.an.instanceof(Object);
-      expect(menu.type).to.equal('div');
-      expect(menu.props.className).to.contain('bm-menu');
-
-      expect(itemList).to.be.an.instanceof(Object);
-      expect(itemList.type).to.equal('nav');
-      expect(itemList.props.className).to.contain('bm-item-list');
-      expect(itemList.props.style).to.deep.equal({ height: '100%' });
+      const menu = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-menu');
+      const itemList = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-item-list');
+      assert.ok(menu);
+      expect(menu.style.height).to.equal('100%');
+      assert.ok(itemList);
+      expect(menu.style.height).to.equal('100%');
     });
 
-    it('contains a CrossIcon component', () => {
-      const crossIcon = menuWrap.props.children[2].props.children;
-      expect(crossIcon.type.displayName).to.equal('CrossIcon');
+    it('contains a cross icon', () => {
+      const crossIconBars = TestUtils.scryRenderedDOMComponentsWithClass(component, 'bm-cross');
+      expect(crossIconBars).to.have.length(2);
     });
   });
 
