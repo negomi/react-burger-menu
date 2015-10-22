@@ -32,6 +32,7 @@ describe('bubble', () => {
     expect(menu.props.style.position).to.equal('fixed');
     expect(menu.props.style.height).to.equal('100%');
     expect(menu.props.style.opacity).to.equal(0);
+    expect(menu.props.style.boxSizing).to.equal('border-box');
   });
 
   it('has correct item styles', () => {

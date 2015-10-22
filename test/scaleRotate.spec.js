@@ -46,6 +46,7 @@ describe('scaleRotate', () => {
     component = TestUtils.renderIntoDocument(<Menu pageWrapId={ 'page-wrap' } outerContainerId={ 'outer-container' }><div>An item</div></Menu>);
     menu = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-menu');
     expect(menu.style.height).to.equal('100%');
+    expect(menu.style.boxSizing).to.equal('border-box');
   });
 
   it('has correct item styles', () => {

@@ -28,7 +28,8 @@ let styles = {
 
   menu() {
     return {
-      height: '100%'
+      height: '100%',
+      boxSizing: 'border-box'
     };
   },
 

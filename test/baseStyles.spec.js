@@ -24,5 +24,6 @@ describe('baseStyles', () => {
   it('has correct menu styles', () => {
     const menu = baseStyles.menu(false);
     expect(menu.height).to.equal('100%');
+    expect(menu.boxSizing).to.equal('border-box');
   });
 });

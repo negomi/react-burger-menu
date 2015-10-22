@@ -6,14 +6,6 @@ import baseStyles from './baseStyles';
 import BurgerIcon from './BurgerIcon';
 import CrossIcon from './CrossIcon';
 
-// Snap.svg workaround for Webpack using imports-loader (https://github.com/webpack/imports-loader).
-let snap;
-try {
-  snap = require('imports?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js');
-} catch(e) {
-  snap = require('snapsvg');
-}
-
 export default (styles) => {
 
   return Radium(React.createClass({
@@ -122,6 +114,14 @@ export default (styles) => {
 
     componentDidUpdate() {
       if (styles.svg && this.isMounted()) {
+        // Snap.svg workaround for Webpack using imports-loader (https://github.com/webpack/imports-loader).
+        let snap;
+        try {
+          snap = require('imports?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js');
+        } catch(e) {
+          snap = require('snapsvg');
+        }
+
         // TODO: Should be able to use refs or ReactDOM.findDOMNode(this) here.
         let morphShape = document.getElementsByClassName('bm-morph-shape')[0];
         let s = snap(morphShape);

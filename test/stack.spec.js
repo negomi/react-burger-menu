@@ -27,6 +27,7 @@ describe('stack', () => {
     component = TestUtils.renderIntoDocument(<Menu><div>An item</div></Menu>);
     menu = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-menu');
     expect(menu.style.height).to.equal('100%');
+    expect(menu.style.boxSizing).to.equal('border-box');
   });
 
   it('has correct item styles', () => {
