@@ -47,15 +47,15 @@ describe('CrossIcon component', () => {
     it('has the correct styles', () => {
       const expected = {
         position: 'absolute',
-        width: '3px',
-        height: '14px',
-        top: '14px',
-        right: '18px',
+        width: 3,
+        height: 14,
+        top: 14,
+        right: 18,
+        transform: 'rotate(45deg)',
         cursor: 'pointer',
         zIndex: 1
       };
       expect(component.props.children[0].props.style).to.deep.equal(expected);
-      expect(component.props.children[1].props.style).to.deep.equal(expected);
     });
   });
 
@@ -83,15 +83,15 @@ describe('CrossIcon component', () => {
       component = createShallowComponent(<CrossIcon />);
       const button = component.props.children[2];
       const expected = {
-        width: '14px',
-        height: '14px',
+        width: 14,
+        height: 14,
         position: 'absolute',
-        right: '13px',
-        top: '14px',
+        right: 13,
+        top: 14,
         padding: 0,
         overflow: 'hidden',
-        textIndent: '14px',
-        fontSize: '14px',
+        textIndent: 14,
+        fontSize: 14,
         border: 'none',
         background: 'transparent',
         color: 'transparent',

@@ -26,6 +26,7 @@
     "chai": "^3.2.0",
     "eslint": "^1.4.3",
     "eslint-plugin-react": "^3.4.1",
+    "exenv": "^1.2.0",
     "gulp": "^3.8.11",
     "imports-loader": "^0.6.4",
     "istanbul": "^0.4.0",

@@ -42,7 +42,7 @@ describe('elastic', () => {
   it('has correct menuWrap styles', () => {
     expect(menuWrap.props.style.position).to.equal('fixed');
     expect(menuWrap.props.style.zIndex).to.equal(2);
-    expect(menuWrap.props.style.width).to.equal('300px');
+    expect(menuWrap.props.style.width).to.equal(300);
     expect(menuWrap.props.style.height).to.equal('100%');
   });
 
@@ -61,7 +61,7 @@ describe('elastic', () => {
 
   it('has correct morph shape styles', () => {
     expect(morphShape.props.style.position).to.equal('fixed');
-    expect(morphShape.props.style.width).to.equal('120px');
+    expect(morphShape.props.style.width).to.equal(120);
     expect(morphShape.props.style.height).to.equal('100%');
     expect(morphShape.props.style.right).to.equal(0);
   });

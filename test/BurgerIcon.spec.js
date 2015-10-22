@@ -52,10 +52,10 @@ describe('BurgerIcon component', () => {
     it('has the correct styles', () => {
       const expected = {
         position: 'fixed',
-        height: '6px',
-        width: '36px',
-        left: '36px',
-        top: '36px',
+        height: 6,
+        width: 36,
+        left: 36,
+        top: 36,
         zIndex: 1,
         opacity: 1
       };
@@ -97,12 +97,12 @@ describe('BurgerIcon component', () => {
       const expected = {
         position: 'fixed',
         zIndex: 1,
-        margin: '24px',
+        margin: 24,
         padding: 0,
-        width: '60px',
-        height: '54px',
+        width: 60,
+        height: 54,
         border: 'none',
-        fontSize: '14px',
+        fontSize: 14,
         color: 'transparent',
         background: 'transparent',
         outline: 'none'
