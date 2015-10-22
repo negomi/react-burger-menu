@@ -165,16 +165,18 @@ describe('menuFactory', () => {
 
   describe('menuWrap element', () => {
 
-    let menuWrap;
-
     beforeEach(() => {
       Menu = menuFactory(mockStyles.basic);
-      component = TestUtils.renderIntoDocument(<Menu />);
-      menuWrap = ReactDOM.findDOMNode(component);
+      component = TestUtils.renderIntoDocument(<Menu width={ 280 } />);
+    });
+
+    it('allows width to be set by props', () => {
+      const menuWrap = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-menu-wrap');
+      expect(menuWrap.style.width).to.equal('280px');
     });
 
     it('has the correct number of children', () => {
-      expect(Object.keys(menuWrap.children)).to.have.length(3);
+      expect(Object.keys(ReactDOM.findDOMNode(component).children)).to.have.length(3);
     });
 
     it('contains menu and item list elements with correct attributes', () => {

@@ -14,7 +14,7 @@ describe('baseStyles', () => {
   });
 
   it('has correct menuWrap styles', () => {
-    const menuWrap = baseStyles.menuWrap(false);
+    const menuWrap = baseStyles.menuWrap(false, 300);
     expect(menuWrap.position).to.equal('fixed');
     expect(menuWrap.zIndex).to.equal(2);
     expect(menuWrap.width).to.equal(300);

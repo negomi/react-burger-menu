@@ -38,31 +38,34 @@ const styles = {
 
   menuWrap(isOpen) {
     return {
-      transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-300px, 0, 0)',
+      transform: isOpen ? 'translate3d(0, 0, 0)' : `translate3d(-100%, 0, 0)`,
       transition: isOpen ? 'transform 0.4s 0s' : 'transform 0.4s'
     };
   },
 
-  menu(isOpen) {
+  menu(isOpen, width) {
+    width -= 140;
     return {
       position: 'fixed',
-      transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-160px, 0, 0)',
+      transform: isOpen ? 'translate3d(0, 0, 0)' : `translate3d(-${width}px, 0, 0)`,
       transition: isOpen ? 'opacity 0.3s 0.4s cubic-bezier(.17, .67, .1, 1.27), transform 0.3s 0.4s cubic-bezier(.17, .67, .1, 1.27)' : 'opacity 0s 0.3s cubic-bezier(.17, .67, .1, 1.27), transform 0s 0.3s cubic-bezier(.17, .67, .1, 1.27)',
       opacity: isOpen ? 1 : 0
     };
   },
 
-  item(isOpen) {
+  item(isOpen, width) {
+    width -= 140;
     return {
-      transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-160px, 0, 0)',
+      transform: isOpen ? 'translate3d(0, 0, 0)' : `translate3d(-${width}px, 0, 0)`,
       transition: isOpen ? 'opacity 0.3s 0.4s, transform 0.3s 0.4s' : 'opacity 0s 0.3s cubic-bezier(.17, .67, .1, 1.27), transform 0s 0.3s cubic-bezier(.17, .67, .1, 1.27)',
       opacity: isOpen ? 1 : 0
     };
   },
 
-  closeButton(isOpen) {
+  closeButton(isOpen, width) {
+    width -= 140;
     return {
-      transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-160px, 0, 0)',
+      transform: isOpen ? 'translate3d(0, 0, 0)' : `translate3d(-${width}px, 0, 0)`,
       transition: isOpen ? 'opacity 0.3s 0.4s cubic-bezier(.17, .67, .1, 1.27), transform 0.3s 0.4s cubic-bezier(.17, .67, .1, 1.27)' : 'opacity 0s 0.3s cubic-bezier(.17, .67, .1, 1.27), transform 0s 0.3s cubic-bezier(.17, .67, .1, 1.27)',
       opacity: isOpen ? 1 : 0
     };

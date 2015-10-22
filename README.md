@@ -1,4 +1,5 @@
-# react-burger-menu [![Build Status](https://travis-ci.org/negomi/react-burger-menu.svg?branch=master)](https://travis-ci.org/negomi/react-burger-menu)
+react-burger-menu [![Build Status](https://travis-ci.org/negomi/react-burger-menu.svg?branch=master)](https://travis-ci.org/negomi/react-burger-menu)
+=================
 
 An off-canvas sidebar React component with a collection of effects and styles using CSS transitions and SVG path animations.
 
@@ -142,6 +143,16 @@ Animation | `pageWrapId` | `outerContainerId`
 `scaleRotate` |  &#x2713;  |  &#x2713;
 `fallDown` |  &#x2713;  |  &#x2713;
 
+#### Width
+
+You can specify the width of the menu (in pixels) with the `width` prop. The default is `300`.
+
+``` javascript
+<Menu width={ 280 }/>
+```
+
+#### Custom ID
+
 There is also an optional `id` prop, which will simply add an ID to the rendered menu's outermost element. This is not required for any functionality.
 
 ``` javascript
@@ -189,7 +200,7 @@ The component has the following helper classes:
 
 ### Browser Support
 
-Because this project uses CSS3 features, it's only meant for modern browsers. It also relies on React's implementation of inline styles, which means some browsers currently fail to apply some of the animations correctly.
+Because this project uses CSS3 features, it's only meant for modern browsers. Some browsers currently fail to apply some of the animations correctly.
 
 Chrome, Firefox and IE 10+ have full support, but Safari has strange behavior for some of the menus.
 

@@ -4,9 +4,9 @@ import menuFactory from '../menuFactory';
 
 const styles = {
 
-  pageWrap(isOpen) {
+  pageWrap(isOpen, width) {
     return {
-      transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(300px, 0, 0)',
+      transform: isOpen ? 'translate3d(0, 0, 0)' : `translate3d(${width}px, 0, 0)`,
       transition: 'all 0.5s'
     };
   },

@@ -23,7 +23,7 @@ const styles = {
 
   menuWrap(isOpen) {
     return {
-      transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-300px, 0, 0)',
+      transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-100%, 0, 0)',
       transition: 'all 0.3s'
     };
   },

@@ -13,7 +13,8 @@ export default (styles) => {
     propTypes: {
       id: React.PropTypes.string,
       outerContainerId: React.PropTypes.string,
-      pageWrapId: React.PropTypes.string
+      pageWrapId: React.PropTypes.string,
+      width: React.PropTypes.number
     },
 
     toggleMenu() {
@@ -57,7 +58,7 @@ export default (styles) => {
         return;
       }
 
-      wrapperStyles = wrapperStyles(this.state.isOpen);
+      wrapperStyles = wrapperStyles(this.state.isOpen, this.props.width);
 
       for (let prop in wrapperStyles) {
         if (wrapperStyles.hasOwnProperty(prop)) {
@@ -78,7 +79,8 @@ export default (styles) => {
       return {
         id: '',
         outerContainerId: '',
-        pageWrapId: ''
+        pageWrapId: '',
+        width: 300
       };
     },
 
@@ -141,15 +143,15 @@ export default (styles) => {
 
     render() {
       let items, svg;
-      let menuWrapStyles = [baseStyles.menuWrap(this.state.isOpen)];
+      let menuWrapStyles = [baseStyles.menuWrap(this.state.isOpen, this.props.width)];
       let menuStyles = [baseStyles.menu(this.state.isOpen)];
 
       if (styles.menuWrap) {
-        menuWrapStyles.push(styles.menuWrap(this.state.isOpen));
+        menuWrapStyles.push(styles.menuWrap(this.state.isOpen, this.props.width));
       }
 
       if (styles.menu) {
-        menuStyles.push(styles.menu(this.state.isOpen));
+        menuStyles.push(styles.menu(this.state.isOpen, this.props.width));
       }
 
       // Add styles to user-defined menu items.
@@ -158,7 +160,7 @@ export default (styles) => {
           let itemStyles = [baseStyles.item(this.state.isOpen)];
 
           if (styles.item) {
-            itemStyles.push(styles.item(this.state.isOpen, index + 1));
+            itemStyles.push(styles.item(this.state.isOpen, this.props.width, index + 1));
           }
 
           let extraProps = {
@@ -184,14 +186,14 @@ export default (styles) => {
       return (
         <div>
           <div className="bm-overlay" onClick={ this.toggleMenu } style={ baseStyles.overlay(this.state.isOpen) }></div>
-          <div id={ this.props.id } style={ menuWrapStyles }>
+          <div id={ this.props.id } className={ "bm-menu-wrap" } style={ menuWrapStyles }>
             { svg }
             <div className="bm-menu" style={ menuStyles } >
               <nav className="bm-item-list" style={ { height: '100%' } }>
                 { items }
               </nav>
             </div>
-            <div style={ styles.closeButton ? styles.closeButton(this.state.isOpen) : {} }>
+            <div style={ styles.closeButton ? styles.closeButton(this.state.isOpen, this.props.width) : {} }>
               <CrossIcon onClick={ this.toggleMenu } />
             </div>
           </div>
