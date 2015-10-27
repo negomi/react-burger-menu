@@ -1928,7 +1928,10 @@ var BurgerIcon = (0, _radium2['default'])(_react2['default'].createClass({
                     background: 'transparent',
                     outline: 'none'
                 };
-            return _react2['default'].createElement('div', { className: 'bm-burger-button' }, _react2['default'].createElement('span', {
+            return _react2['default'].createElement('div', {
+                className: 'bm-burger-button',
+                style: { zIndex: 1 }
+            }, _react2['default'].createElement('span', {
                 className: 'bm-burger-bars',
                 style: this.getLineStyle(0)
             }), _react2['default'].createElement('span', {
@@ -2035,13 +2038,14 @@ var styles = {
                 transition: isOpen ? 'opacity 0.3s' : 'opacity 0.3s, transform 0s 0.3s'
             };
         },
-        menuWrap: function menuWrap(isOpen, width) {
+        menuWrap: function menuWrap(isOpen, width, right) {
             return {
                 position: 'fixed',
+                right: right ? 0 : 'inherit',
                 zIndex: 2,
                 width: width,
                 height: '100%',
-                transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-100%, 0, 0)',
+                transform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
                 transition: 'all 0.5s'
             };
         },
@@ -2050,6 +2054,9 @@ var styles = {
                 height: '100%',
                 boxSizing: 'border-box'
             };
+        },
+        itemList: function itemList() {
+            return { height: '100%' };
         },
         item: function item() {
             return {
@@ -2083,6 +2090,7 @@ exports['default'] = function (styles) {
             id: _react2['default'].PropTypes.string,
             outerContainerId: _react2['default'].PropTypes.string,
             pageWrapId: _react2['default'].PropTypes.string,
+            right: _react2['default'].PropTypes.bool,
             width: _react2['default'].PropTypes.number
         },
         toggleMenu: function toggleMenu() {
@@ -2111,7 +2119,7 @@ exports['default'] = function (styles) {
                 console.error('Element with ID \'' + id + '\' not found');
                 return;
             }
-            wrapperStyles = wrapperStyles(this.state.isOpen, this.props.width);
+            wrapperStyles = wrapperStyles(this.state.isOpen, this.props.width, this.props.right);
             for (var prop in wrapperStyles) {
                 if (wrapperStyles.hasOwnProperty(prop)) {
                     wrapper.style[prop] = set ? wrapperStyles[prop] : '';
@@ -2129,6 +2137,7 @@ exports['default'] = function (styles) {
                 id: '',
                 outerContainerId: '',
                 pageWrapId: '',
+                right: false,
                 width: 300
             };
         },
@@ -2181,19 +2190,27 @@ exports['default'] = function (styles) {
         render: function render() {
             var _this2 = this;
             var items = undefined, svg = undefined;
-            var menuWrapStyles = [_baseStyles2['default'].menuWrap(this.state.isOpen, this.props.width)];
+            var menuWrapStyles = [_baseStyles2['default'].menuWrap(this.state.isOpen, this.props.width, this.props.right)];
             var menuStyles = [_baseStyles2['default'].menu(this.state.isOpen)];
+            var itemListStyles = [_baseStyles2['default'].itemList()];
+            var closeButtonStyles = undefined;
             if (styles.menuWrap) {
-                menuWrapStyles.push(styles.menuWrap(this.state.isOpen, this.props.width));
+                menuWrapStyles.push(styles.menuWrap(this.state.isOpen, this.props.width, this.props.right));
             }
             if (styles.menu) {
-                menuStyles.push(styles.menu(this.state.isOpen, this.props.width));
+                menuStyles.push(styles.menu(this.state.isOpen, this.props.width, this.props.right));
+            }
+            if (styles.itemList) {
+                itemListStyles.push(styles.itemList(this.props.right));
+            }
+            if (styles.closeButton) {
+                closeButtonStyles = styles.closeButton(this.state.isOpen, this.props.width, this.props.right);
             }
             if (this.props.children) {
                 items = _react2['default'].Children.map(this.props.children, function (item, index) {
                     var itemStyles = [_baseStyles2['default'].item(_this2.state.isOpen)];
                     if (styles.item) {
-                        itemStyles.push(styles.item(_this2.state.isOpen, _this2.props.width, index + 1));
+                        itemStyles.push(styles.item(_this2.state.isOpen, _this2.props.width, index + 1, _this2.props.right));
                     }
                     var extraProps = {
                             key: index,
@@ -2205,7 +2222,7 @@ exports['default'] = function (styles) {
             if (styles.svg) {
                 svg = _react2['default'].createElement('div', {
                     className: 'bm-morph-shape',
-                    style: styles.morphShape()
+                    style: styles.morphShape(this.props.right)
                 }, _react2['default'].createElement('svg', {
                     xmlns: 'http://www.w3.org/2000/svg',
                     width: '100%',
@@ -2227,8 +2244,8 @@ exports['default'] = function (styles) {
                 style: menuStyles
             }, _react2['default'].createElement('nav', {
                 className: 'bm-item-list',
-                style: { height: '100%' }
-            }, items)), _react2['default'].createElement('div', { style: styles.closeButton ? styles.closeButton(this.state.isOpen, this.props.width) : {} }, _react2['default'].createElement(_CrossIcon2['default'], { onClick: this.toggleMenu }))), _react2['default'].createElement(_BurgerIcon2['default'], { onClick: this.toggleMenu }));
+                style: itemListStyles
+            }, items)), _react2['default'].createElement('div', { style: closeButtonStyles }, _react2['default'].createElement(_CrossIcon2['default'], { onClick: this.toggleMenu }))), _react2['default'].createElement(_BurgerIcon2['default'], { onClick: this.toggleMenu }));
         }
     }));
 };
@@ -2262,41 +2279,43 @@ var styles = {
                 nextStep(pos);
             }
         },
-        morphShape: function morphShape() {
+        morphShape: function morphShape(right) {
             return {
                 position: 'fixed',
                 width: '100%',
                 height: '100%',
-                right: 0
+                right: right ? 'inherit' : 0,
+                left: right ? 0 : 'inherit',
+                transform: right ? 'rotateY(180deg)' : 'rotateY(0deg)'
             };
         },
-        menuWrap: function menuWrap(isOpen) {
+        menuWrap: function menuWrap(isOpen, width, right) {
             return {
-                transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-100%, 0, 0)',
+                transform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
                 transition: isOpen ? 'transform 0.4s 0s' : 'transform 0.4s'
             };
         },
-        menu: function menu(isOpen, width) {
+        menu: function menu(isOpen, width, right) {
             width -= 140;
             return {
                 position: 'fixed',
-                transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-' + width + 'px, 0, 0)',
+                transform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(' + width + 'px, 0, 0)' : 'translate3d(-' + width + 'px, 0, 0)',
                 transition: isOpen ? 'opacity 0.3s 0.4s cubic-bezier(.17, .67, .1, 1.27), transform 0.3s 0.4s cubic-bezier(.17, .67, .1, 1.27)' : 'opacity 0s 0.3s cubic-bezier(.17, .67, .1, 1.27), transform 0s 0.3s cubic-bezier(.17, .67, .1, 1.27)',
                 opacity: isOpen ? 1 : 0
             };
         },
-        item: function item(isOpen, width) {
+        item: function item(isOpen, width, nthChild, right) {
             width -= 140;
             return {
-                transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-' + width + 'px, 0, 0)',
+                transform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(' + width + 'px, 0, 0)' : 'translate3d(-' + width + 'px, 0, 0)',
                 transition: isOpen ? 'opacity 0.3s 0.4s, transform 0.3s 0.4s' : 'opacity 0s 0.3s cubic-bezier(.17, .67, .1, 1.27), transform 0s 0.3s cubic-bezier(.17, .67, .1, 1.27)',
                 opacity: isOpen ? 1 : 0
             };
         },
-        closeButton: function closeButton(isOpen, width) {
+        closeButton: function closeButton(isOpen, width, right) {
             width -= 140;
             return {
-                transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-' + width + 'px, 0, 0)',
+                transform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(' + width + 'px, 0, 0)' : 'translate3d(-' + width + 'px, 0, 0)',
                 transition: isOpen ? 'opacity 0.3s 0.4s cubic-bezier(.17, .67, .1, 1.27), transform 0.3s 0.4s cubic-bezier(.17, .67, .1, 1.27)' : 'opacity 0s 0.3s cubic-bezier(.17, .67, .1, 1.27), transform 0s 0.3s cubic-bezier(.17, .67, .1, 1.27)',
                 opacity: isOpen ? 1 : 0
             };
@@ -2320,31 +2339,42 @@ var styles = {
                 path.animate({ path: this.pathOpen }, 400, window.mina.easeinout);
             }
         },
-        morphShape: function morphShape() {
+        morphShape: function morphShape(right) {
             return {
                 position: 'fixed',
                 width: 120,
                 height: '100%',
-                right: 0
+                right: right ? 'inherit' : 0,
+                left: right ? 0 : 'inherit',
+                transform: right ? 'rotateY(180deg)' : 'rotateY(0deg)'
             };
         },
-        menuWrap: function menuWrap(isOpen) {
+        menuWrap: function menuWrap(isOpen, width, right) {
             return {
-                transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-100%, 0, 0)',
+                transform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
                 transition: 'all 0.3s'
             };
         },
-        menu: function menu() {
+        menu: function menu(isOpen, width, right) {
             return {
                 position: 'fixed',
+                right: right ? 0 : 'inherit',
                 width: 'calc(100% - 120px)',
                 whiteSpace: 'nowrap',
                 boxSizing: 'border-box'
             };
         },
-        pageWrap: function pageWrap(isOpen) {
+        itemList: function itemList(right) {
+            if (right) {
+                return {
+                    position: 'relative',
+                    left: '-110px'
+                };
+            }
+        },
+        pageWrap: function pageWrap(isOpen, width, right) {
             return {
-                transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(100px, 0, 0)',
+                transform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(-100px, 0, 0)' : 'translate3d(100px, 0, 0)',
                 transition: isOpen ? 'all 0.3s' : 'all 0.3s 0.1s'
             };
         },
@@ -2369,9 +2399,9 @@ var styles = {
                 transition: 'all 0.5s ease-in-out'
             };
         },
-        pageWrap: function pageWrap(isOpen, width) {
+        pageWrap: function pageWrap(isOpen, width, right) {
             return {
-                transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(' + width + 'px, 0, 0)',
+                transform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(-' + width + 'px, 0, 0)' : 'translate3d(' + width + 'px, 0, 0)',
                 transition: 'all 0.5s'
             };
         },
@@ -2394,9 +2424,9 @@ function _interopRequireDefault(obj) {
 var _menuFactory = require('../menuFactory');
 var _menuFactory2 = _interopRequireDefault(_menuFactory);
 var styles = {
-        pageWrap: function pageWrap(isOpen, width) {
+        pageWrap: function pageWrap(isOpen, width, right) {
             return {
-                transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(' + width + 'px, 0, 0)',
+                transform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(-' + width + 'px, 0, 0)' : 'translate3d(' + width + 'px, 0, 0)',
                 transition: 'all 0.5s'
             };
         },
@@ -2415,10 +2445,10 @@ function _interopRequireDefault(obj) {
 var _menuFactory = require('../menuFactory');
 var _menuFactory2 = _interopRequireDefault(_menuFactory);
 var styles = {
-        pageWrap: function pageWrap(isOpen, width) {
+        pageWrap: function pageWrap(isOpen, width, right) {
             return {
-                transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(' + width + 'px, 0, 0) rotateY(-15deg)',
-                transformOrigin: '0% 50%',
+                transform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(-' + width + 'px, 0, 0) rotateY(15deg)' : 'translate3d(' + width + 'px, 0, 0) rotateY(-15deg)',
+                transformOrigin: right ? '100% 50%' : '0% 50%',
                 transformStyle: 'preserve-3d',
                 transition: 'all 0.5s'
             };
@@ -2464,9 +2494,9 @@ function _interopRequireDefault(obj) {
 var _menuFactory = require('../menuFactory');
 var _menuFactory2 = _interopRequireDefault(_menuFactory);
 var styles = {
-        pageWrap: function pageWrap(isOpen) {
+        pageWrap: function pageWrap(isOpen, width, right) {
             return {
-                transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(100px, 0, -600px) rotateY(-20deg)',
+                transform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(-100px, 0, -600px) rotateY(20deg)' : 'translate3d(100px, 0, -600px) rotateY(-20deg)',
                 transformStyle: 'preserve-3d',
                 transition: 'all 0.5s',
                 overflow: isOpen ? '' : 'hidden'
@@ -2501,10 +2531,10 @@ function _interopRequireDefault(obj) {
 var _menuFactory = require('../menuFactory');
 var _menuFactory2 = _interopRequireDefault(_menuFactory);
 var styles = {
-        menuWrap: function menuWrap(isOpen, width) {
+        menuWrap: function menuWrap(isOpen, width, right) {
             width += 20;
             return {
-                transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-' + width + 'px, 0, 0)',
+                transform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(' + width + 'px, 0, 0)' : 'translate3d(-' + width + 'px, 0, 0)',
                 transition: isOpen ? 'transform 0.8s cubic-bezier(0.7, 0, 0.3, 1)' : 'transform 0.4s cubic-bezier(0.7, 0, 0.3, 1)'
             };
         },
