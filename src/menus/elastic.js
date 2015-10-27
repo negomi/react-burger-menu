@@ -19,7 +19,7 @@ const styles = {
       height: '100%',
       right: right ? 'inherit' : 0,
       left: right ? 0 : 'inherit',
-      transform: right ? 'rotateY(180deg)' : ''
+      transform: right ? 'rotateY(180deg)' : 'rotateY(0deg)'
     };
   },
 

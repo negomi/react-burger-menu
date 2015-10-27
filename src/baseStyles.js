@@ -18,7 +18,7 @@ let styles = {
   menuWrap(isOpen, width, right) {
     return {
       position: 'fixed',
-      right: right ? 0 : '',
+      right: right ? 0 : 'inherit',
       zIndex: 2,
       width,
       height: '100%',
