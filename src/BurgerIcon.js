@@ -7,12 +7,11 @@ let BurgerIcon = Radium(React.createClass({
 
   getLineStyle(index) {
     return {
-      position: 'fixed',
-      height: 6,
-      width: 36,
-      left: 36,
-      top: 36 + 12 * index,
-      zIndex: 1,
+      position: 'absolute',
+      height: '20%',
+      left: 0,
+      right: 0,
+      top: 20 * (index * 2) + '%',
       opacity: this.state.hover ? 0.6 : 1
     };
   },
@@ -27,12 +26,13 @@ let BurgerIcon = Radium(React.createClass({
 
   render() {
     var buttonStyle = {
-      position: 'fixed',
-      zIndex: 1,
-      margin: 24,
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      top: 0,
+      bottom: 0,
+      margin: 0,
       padding: 0,
-      width: 60,
-      height: 54,
       border: 'none',
       fontSize: 14,
       color: 'transparent',
@@ -41,10 +41,10 @@ let BurgerIcon = Radium(React.createClass({
     };
 
     return (
-      <div>
-        <span className="bm-burger-icon" style={ this.getLineStyle(0) }></span>
-        <span className="bm-burger-icon" style={ this.getLineStyle(1) }></span>
-        <span className="bm-burger-icon" style={ this.getLineStyle(2) }></span>
+      <div className="bm-burger-button" style={ { zIndex: 1 } }>
+        <span className="bm-burger-bars" style={ this.getLineStyle(0) }></span>
+        <span className="bm-burger-bars" style={ this.getLineStyle(1) }></span>
+        <span className="bm-burger-bars" style={ this.getLineStyle(2) }></span>
         <button onClick={ this.props.onClick }
           onMouseEnter={ this.handleHover }
           onMouseLeave={ this.handleHover }

@@ -96,7 +96,7 @@ describe('menuFactory', () => {
 
     it('contains a burger icon', () => {
       component = TestUtils.renderIntoDocument(<Menu />);
-      const burgerIconBars = TestUtils.scryRenderedDOMComponentsWithClass(component, 'bm-burger-icon');
+      const burgerIconBars = TestUtils.scryRenderedDOMComponentsWithClass(component, 'bm-burger-bars');
       expect(burgerIconBars).to.have.length(3);
     });
 
