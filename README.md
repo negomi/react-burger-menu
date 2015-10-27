@@ -107,7 +107,7 @@ Some animations require certain other elements to be on your page:
 * **Page wrapper** - an element wrapping the rest of the content on your page, placed after the menu component
 
   ``` javascript
-  <Menu pageWrapId={ "page-wrap" }/>
+  <Menu pageWrapId={ "page-wrap" } />
   <main id="page-wrap">
     .
     .
@@ -118,7 +118,7 @@ Some animations require certain other elements to be on your page:
 * **Outer container** - an element containing everything, including the menu component
   ``` javascript
   <div id="outer-container">
-    <Menu pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }/>
+    <Menu pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } />
     <main id="page-wrap">
       .
       .
@@ -143,12 +143,20 @@ Animation | `pageWrapId` | `outerContainerId`
 `scaleRotate` |  &#x2713;  |  &#x2713;
 `fallDown` |  &#x2713;  |  &#x2713;
 
+#### Position
+
+The menu opens from the left by default. To have it open from the right, use the `right` prop. It's just a boolean so you don't need to specify a value. Then set the position of the button using CSS.
+
+``` javascript
+<Menu right />
+```
+
 #### Width
 
 You can specify the width of the menu (in pixels) with the `width` prop. The default is `300`.
 
 ``` javascript
-<Menu width={ 280 }/>
+<Menu width={ 280 } />
 ```
 
 #### Custom ID
@@ -156,7 +164,7 @@ You can specify the width of the menu (in pixels) with the `width` prop. The def
 There is also an optional `id` prop, which will simply add an ID to the rendered menu's outermost element. This is not required for any functionality.
 
 ``` javascript
-<Menu id={ "sidebar" }/>
+<Menu id={ "sidebar" } />
 ```
 
 ### Styling
