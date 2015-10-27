@@ -148,6 +148,7 @@ export default (styles) => {
       let menuWrapStyles = [baseStyles.menuWrap(this.state.isOpen, this.props.width, this.props.right)];
       let menuStyles = [baseStyles.menu(this.state.isOpen)];
       let itemListStyles = [baseStyles.itemList()];
+      let closeButtonStyles;
 
       if (styles.menuWrap) {
         menuWrapStyles.push(styles.menuWrap(this.state.isOpen, this.props.width, this.props.right));
@@ -161,13 +162,17 @@ export default (styles) => {
         itemListStyles.push(styles.itemList(this.props.right));
       }
 
+      if (styles.closeButton) {
+        closeButtonStyles = styles.closeButton(this.state.isOpen, this.props.width, this.props.right);
+      }
+
       // Add styles to user-defined menu items.
       if (this.props.children) {
         items = React.Children.map(this.props.children, (item, index) => {
           let itemStyles = [baseStyles.item(this.state.isOpen)];
 
           if (styles.item) {
-            itemStyles.push(styles.item(this.state.isOpen, this.props.width, index + 1));
+            itemStyles.push(styles.item(this.state.isOpen, this.props.width, index + 1, this.props.right));
           }
 
           let extraProps = {
@@ -200,7 +205,7 @@ export default (styles) => {
                 { items }
               </nav>
             </div>
-            <div style={ styles.closeButton ? styles.closeButton(this.state.isOpen, this.props.width) : {} }>
+            <div style={ closeButtonStyles }>
               <CrossIcon onClick={ this.toggleMenu } />
             </div>
           </div>

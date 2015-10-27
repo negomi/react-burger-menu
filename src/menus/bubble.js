@@ -55,19 +55,19 @@ const styles = {
     };
   },
 
-  item(isOpen, width) {
+  item(isOpen, width, nthChild, right) {
     width -= 140;
     return {
-      transform: isOpen ? 'translate3d(0, 0, 0)' : `translate3d(-${width}px, 0, 0)`,
-      transition: isOpen ? 'opacity 0.3s 0.5s, transform 0.3s 0.4s' : 'opacity 0s 0.3s cubic-bezier(.17, .67, .1, 1.27), transform 0s 0.3s cubic-bezier(.17, .67, .1, 1.27)',
+      transform: isOpen ? 'translate3d(0, 0, 0)' : right ? `translate3d(${width}px, 0, 0)` : `translate3d(-${width}px, 0, 0)`,
+      transition: isOpen ? 'opacity 0.3s 0.4s, transform 0.3s 0.4s' : 'opacity 0s 0.3s cubic-bezier(.17, .67, .1, 1.27), transform 0s 0.3s cubic-bezier(.17, .67, .1, 1.27)',
       opacity: isOpen ? 1 : 0
     };
   },
 
-  closeButton(isOpen, width) {
+  closeButton(isOpen, width, right) {
     width -= 140;
     return {
-      transform: isOpen ? 'translate3d(0, 0, 0)' : `translate3d(-${width}px, 0, 0)`,
+      transform: isOpen ? 'translate3d(0, 0, 0)' : right ? `translate3d(${width}px, 0, 0)` : `translate3d(-${width}px, 0, 0)`,
       transition: isOpen ? 'opacity 0.3s 0.4s cubic-bezier(.17, .67, .1, 1.27), transform 0.3s 0.4s cubic-bezier(.17, .67, .1, 1.27)' : 'opacity 0s 0.3s cubic-bezier(.17, .67, .1, 1.27), transform 0s 0.3s cubic-bezier(.17, .67, .1, 1.27)',
       opacity: isOpen ? 1 : 0
     };
