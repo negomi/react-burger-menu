@@ -9,7 +9,7 @@ const Menu = BurgerMenu.stack;
 
 describe('stack', () => {
 
-  let component, menuWrap, menu, firstItem;
+  let component, menuWrap, menu, itemList, firstItem;
 
   beforeEach(() => {
     component = createShallowComponent(<Menu><div>An item</div></Menu>);
@@ -30,10 +30,22 @@ describe('stack', () => {
     expect(menu.style.boxSizing).to.equal('border-box');
   });
 
+	it('has correct itemList styles', () => {
+    component = TestUtils.renderIntoDocument(<Menu pageWrapId={ 'page-wrap' } outerContainerId={ 'outer-container' }><div>An item</div></Menu>);
+    itemList = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-item-list');
+    expect(itemList.style.height).to.equal('100%');
+  });
+
   it('has correct item styles', () => {
     component = TestUtils.renderIntoDocument(<Menu><div>An item</div></Menu>);
     firstItem = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-item-list').children[0];
     expect(firstItem.style.display).to.equal('block');
     expect(firstItem.style.outline).to.equal('none');
+  });
+
+  it('can be positioned on the right', () => {
+    component = TestUtils.renderIntoDocument(<Menu right><div>An item</div></Menu>);
+    menuWrap = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-menu-wrap');
+    expect(menuWrap.style.right).to.equal('0px');
   });
 });

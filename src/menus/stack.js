@@ -4,10 +4,10 @@ import menuFactory from '../menuFactory';
 
 const styles = {
 
-  menuWrap(isOpen, width) {
+  menuWrap(isOpen, width, right) {
     width += 20;
     return {
-      transform: isOpen ? 'translate3d(0, 0, 0)' : `translate3d(-${width}px, 0, 0)`,
+      transform: isOpen ? 'translate3d(0, 0, 0)' : right ? `translate3d(${width}px, 0, 0)` : `translate3d(-${width}px, 0, 0)`,
       transition: isOpen ? 'transform 0.8s cubic-bezier(0.7, 0, 0.3, 1)' : 'transform 0.4s cubic-bezier(0.7, 0, 0.3, 1)'
     };
   },

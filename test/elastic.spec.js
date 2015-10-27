@@ -9,7 +9,7 @@ const Menu = BurgerMenu.elastic;
 
 describe('elastic', () => {
 
-  let component, menuWrap, morphShape, svg, menu, firstItem;
+  let component, menuWrap, morphShape, svg, menu, itemList, firstItem;
 
   function addWrapperElementsToDOM() {
     let outerContainer = document.createElement('div');
@@ -31,6 +31,7 @@ describe('elastic', () => {
     morphShape = menuWrap.props.children[0];
     svg = morphShape.props.children;
     menu = menuWrap.props.children[1];
+    itemList = menu.props.children;
     firstItem = menu.props.children.props.children[0];
     addWrapperElementsToDOM();
   });
@@ -54,6 +55,10 @@ describe('elastic', () => {
     expect(menu.props.style.boxSizing).to.equal('border-box');
   });
 
+  it('has correct itemList styles', () => {
+    expect(itemList.props.style.height).to.equal('100%');
+  });
+
   it('has correct item styles', () => {
     expect(firstItem.props.style.display).to.equal('block');
     expect(firstItem.props.style.outline).to.equal('none');
@@ -69,5 +74,20 @@ describe('elastic', () => {
   it('has correct initial SVG path', () => {
     let path = svg.props.children;
     expect(path.props.d).to.equal('M-1,0h101c0,0-97.833,153.603-97.833,396.167C2.167,627.579,100,800,100,800H-1V0z');
+  });
+
+  it('can be positioned on the right', () => {
+    component = TestUtils.renderIntoDocument(<Menu pageWrapId={ 'page-wrap' } outerContainerId={ 'outer-container' } right><div>An item</div></Menu>);
+    menuWrap = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-menu-wrap');
+    menu = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-menu');
+    morphShape = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-morph-shape');
+    itemList = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-item-list');
+    expect(menuWrap.style.right).to.equal('0px');
+    expect(morphShape.style.transform).to.equal('rotateY(180deg)');
+    expect(morphShape.style.left).to.equal('0px');
+    expect(menu.style.right).to.equal('0px');
+    expect(itemList.style.height).to.equal('100%');
+    expect(itemList.style.position).to.equal('relative');
+    expect(itemList.style.left).to.equal('-110px');
   });
 });

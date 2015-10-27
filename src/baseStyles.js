@@ -15,13 +15,14 @@ let styles = {
     };
   },
 
-  menuWrap(isOpen, width) {
+  menuWrap(isOpen, width, right) {
     return {
       position: 'fixed',
+      right: right ? 0 : '',
       zIndex: 2,
       width,
       height: '100%',
-      transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-100%, 0, 0)',
+      transform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
       transition: 'all 0.5s'
     };
   },
@@ -30,6 +31,12 @@ let styles = {
     return {
       height: '100%',
       boxSizing: 'border-box'
+    };
+  },
+
+  itemList() {
+    return {
+      height: '100%'
     };
   },
 

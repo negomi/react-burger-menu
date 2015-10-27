@@ -26,4 +26,9 @@ describe('baseStyles', () => {
     expect(menu.height).to.equal('100%');
     expect(menu.boxSizing).to.equal('border-box');
   });
+
+  it('has correct itemList styles', () => {
+    const itemList = baseStyles.itemList();
+    expect(itemList.height).to.equal('100%');
+  });
 });

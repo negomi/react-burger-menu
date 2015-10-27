@@ -9,7 +9,7 @@ const Menu = BurgerMenu.bubble;
 
 describe('bubble', () => {
 
-  let component, menuWrap, morphShape, svg, menu, closeButton, firstItem;
+  let component, menuWrap, morphShape, svg, menu, closeButton, itemList, firstItem;
 
   beforeEach(() => {
     component = createShallowComponent(<Menu><div>An item</div></Menu>);
@@ -17,6 +17,7 @@ describe('bubble', () => {
     morphShape = menuWrap.props.children[0];
     svg = morphShape.props.children;
     menu = menuWrap.props.children[1];
+    itemList = menu.props.children;
     closeButton = menuWrap.props.children[2];
     firstItem = menu.props.children.props.children[0];
   });
@@ -33,6 +34,10 @@ describe('bubble', () => {
     expect(menu.props.style.height).to.equal('100%');
     expect(menu.props.style.opacity).to.equal(0);
     expect(menu.props.style.boxSizing).to.equal('border-box');
+  });
+
+  it('has correct itemList styles', () => {
+    expect(itemList.props.style.height).to.equal('100%');
   });
 
   it('has correct item styles', () => {
@@ -55,5 +60,14 @@ describe('bubble', () => {
 
   it('has correct close button styles', () => {
     expect(closeButton.props.style.opacity).to.equal(0);
+  });
+
+  it('can be positioned on the right', () => {
+    component = TestUtils.renderIntoDocument(<Menu right><div>An item</div></Menu>);
+    menuWrap = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-menu-wrap');
+    morphShape = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-morph-shape');
+    expect(menuWrap.style.right).to.equal('0px');
+    expect(morphShape.style.transform).to.equal('rotateY(180deg)');
+    expect(morphShape.style.left).to.equal('0px');
   });
 });

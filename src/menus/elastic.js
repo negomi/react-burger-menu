@@ -12,34 +12,46 @@ const styles = {
     }
   },
 
-  morphShape() {
+  morphShape(right) {
     return {
       position: 'fixed',
       width: 120,
       height: '100%',
-      right: 0
+      right: right ? 'inherit' : 0,
+      left: right ? 0 : 'inherit',
+      transform: right ? 'rotateY(180deg)' : ''
     };
   },
 
-  menuWrap(isOpen) {
+  menuWrap(isOpen, width, right) {
     return {
-      transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-100%, 0, 0)',
+      transform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
       transition: 'all 0.3s'
     };
   },
 
-  menu() {
+  menu(isOpen, width, right) {
     return {
       position: 'fixed',
+      right: right ? 0 : 'inherit',
       width: 'calc(100% - 120px)',
       whiteSpace: 'nowrap',
       boxSizing: 'border-box'
     };
   },
 
-  pageWrap(isOpen) {
+  itemList(right) {
+    if (right) {
+      return {
+        position: 'relative',
+        left: '-110px'
+      };
+    }
+  },
+
+  pageWrap(isOpen, width, right) {
     return {
-      transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(100px, 0, 0)',
+      transform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(-100px, 0, 0)' : 'translate3d(100px, 0, 0)',
       transition: isOpen ? 'all 0.3s' : 'all 0.3s 0.1s'
     };
   },

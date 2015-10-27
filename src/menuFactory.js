@@ -14,6 +14,7 @@ export default (styles) => {
       id: React.PropTypes.string,
       outerContainerId: React.PropTypes.string,
       pageWrapId: React.PropTypes.string,
+      right: React.PropTypes.bool,
       width: React.PropTypes.number
     },
 
@@ -58,7 +59,7 @@ export default (styles) => {
         return;
       }
 
-      wrapperStyles = wrapperStyles(this.state.isOpen, this.props.width);
+      wrapperStyles = wrapperStyles(this.state.isOpen, this.props.width, this.props.right);
 
       for (let prop in wrapperStyles) {
         if (wrapperStyles.hasOwnProperty(prop)) {
@@ -80,6 +81,7 @@ export default (styles) => {
         id: '',
         outerContainerId: '',
         pageWrapId: '',
+        right: false,
         width: 300
       };
     },
@@ -143,15 +145,20 @@ export default (styles) => {
 
     render() {
       let items, svg;
-      let menuWrapStyles = [baseStyles.menuWrap(this.state.isOpen, this.props.width)];
+      let menuWrapStyles = [baseStyles.menuWrap(this.state.isOpen, this.props.width, this.props.right)];
       let menuStyles = [baseStyles.menu(this.state.isOpen)];
+      let itemListStyles = [baseStyles.itemList()];
 
       if (styles.menuWrap) {
-        menuWrapStyles.push(styles.menuWrap(this.state.isOpen, this.props.width));
+        menuWrapStyles.push(styles.menuWrap(this.state.isOpen, this.props.width, this.props.right));
       }
 
       if (styles.menu) {
-        menuStyles.push(styles.menu(this.state.isOpen, this.props.width));
+        menuStyles.push(styles.menu(this.state.isOpen, this.props.width, this.props.right));
+      }
+
+      if (styles.itemList) {
+        itemListStyles.push(styles.itemList(this.props.right));
       }
 
       // Add styles to user-defined menu items.
@@ -175,7 +182,7 @@ export default (styles) => {
       // Add a morph shape for animations that use SVG.
       if (styles.svg) {
         svg = (
-          <div className="bm-morph-shape" style={ styles.morphShape() }>
+          <div className="bm-morph-shape" style={ styles.morphShape(this.props.right) }>
             <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 800" preserveAspectRatio="none">
               <path d={ styles.svg.pathInitial }/>
             </svg>
@@ -189,7 +196,7 @@ export default (styles) => {
           <div id={ this.props.id } className={ "bm-menu-wrap" } style={ menuWrapStyles }>
             { svg }
             <div className="bm-menu" style={ menuStyles } >
-              <nav className="bm-item-list" style={ { height: '100%' } }>
+              <nav className="bm-item-list" style={ itemListStyles }>
                 { items }
               </nav>
             </div>
