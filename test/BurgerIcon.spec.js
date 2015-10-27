@@ -38,25 +38,23 @@ describe('BurgerIcon component', () => {
   });
 
   describe('visual icon', () => {
-
     beforeEach(() => {
       component = createShallowComponent(<BurgerIcon />);
     });
 
     it('has the correct class', () => {
-      expect(component.props.children[0].props.className).to.contain('bm-burger-icon');
-      expect(component.props.children[1].props.className).to.contain('bm-burger-icon');
-      expect(component.props.children[2].props.className).to.contain('bm-burger-icon');
+      expect(component.props.children[0].props.className).to.contain('bm-burger-bars');
+      expect(component.props.children[1].props.className).to.contain('bm-burger-bars');
+      expect(component.props.children[2].props.className).to.contain('bm-burger-bars');
     });
 
     it('has the correct styles', () => {
       const expected = {
-        position: 'fixed',
-        height: 6,
-        width: 36,
-        left: 36,
-        top: 36,
-        zIndex: 1,
+        position: 'absolute',
+        height: '20%',
+        top: '0%',
+        left: 0,
+        right: 0,
         opacity: 1
       };
       expect(component.props.children[0].props.style).to.deep.equal(expected);
@@ -95,12 +93,13 @@ describe('BurgerIcon component', () => {
       component = createShallowComponent(<BurgerIcon />);
       const button = component.props.children[3];
       const expected = {
-        position: 'fixed',
-        zIndex: 1,
-        margin: 24,
+        position: 'absolute',
+        bottom: 0,
+        top: 0,
+        left: 0,
+        right: 0,
+        margin: 0,
         padding: 0,
-        width: 60,
-        height: 54,
         border: 'none',
         fontSize: 14,
         color: 'transparent',

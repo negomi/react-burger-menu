@@ -166,8 +166,17 @@ All the animations are handled internally by the component. However, the visual 
 The component has the following helper classes:
 
 ``` css
-/* Color of burger icon */
-.bm-burger-icon {
+/* Position and sizing of burger button */
+.bm-burger-button {
+  position: fixed;
+  width: 36px;
+  height: 30px;
+  left: 36px;
+  top: 36px;
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
   background: #373a47;
 }
 
@@ -181,8 +190,9 @@ The component has the following helper classes:
   background: #373a47;
 }
 
+/* Morph shape necessary with bubble or elastic */
 .bm-morph-shape {
-  fill: #373a47; /* Morph shape necessary with bubble or elastic */
+  fill: #373a47;
 }
 
 /* General menu styles */
