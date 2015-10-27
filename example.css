@@ -36,16 +36,16 @@ h1 {
   font-weight: 800;
   font-size: 3.75em;
 }
-h2 {
+.description {
   max-width: 20em;
-  margin: 0 auto;
+  margin: 1.2em auto 1em;
   line-height: 1.3em;
   font-weight: 400;
 }
 .demo-buttons {
   font-size: 1em;
   max-width: 1200px;
-  margin: 4em auto 5em;
+  margin: 2em auto 3em;
   padding: 0 10em;
 }
 .demo-buttons a {
@@ -67,6 +67,30 @@ h2 {
   background: #c94e50;
   color: #fffce1;
 }
+.side-button {
+  display: inline-block;
+  width: 5em;
+  height: 2.5em;
+  line-height: 2.5em;
+  cursor: pointer;
+  background: #fffce1;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.8em;
+  font-weight: 800;
+}
+.side-button.left {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+.side-button.right {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.side-button.active {
+  background: #c94e50;
+  color: #fffce1;
+}
 @media screen and (max-width: 40em) {
   main {
     font-size: 80%;
@@ -80,7 +104,18 @@ h2 {
     padding: 0 2em;
   }
 }
-.bm-burger-icon {
+.bm-burger-button {
+  position: fixed;
+  width: 36px;
+  height: 30px;
+  left: 36px;
+  top: 36px;
+}
+.right .bm-burger-button {
+  left: initial;
+  right: 36px;
+}
+.bm-burger-bars {
   background: #373a47;
 }
 .bm-morph-shape {
@@ -143,6 +178,7 @@ h2 {
   background: #888;
 }
 .menu-4 h2 {
+  margin: 0 auto;
   padding: 2em 1em;
   color: rgba(0, 0, 0, 0.4);
   box-shadow: inset 0 -1px rgba(0, 0, 0, 0.2);
@@ -222,6 +258,7 @@ h2 {
 #scaleRotate h2,
 #pushRotate h2,
 #fallDown h2 {
+  margin: 0 auto;
   padding: 2em 1em;
   color: rgba(0, 0, 0, 0.4);
   box-shadow: inset 0 -1px rgba(0, 0, 0, 0.2);
