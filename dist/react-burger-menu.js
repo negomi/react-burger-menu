@@ -231,11 +231,24 @@ exports['default'] = function (styles) {
             id: _react2['default'].PropTypes.string,
             outerContainerId: _react2['default'].PropTypes.string,
             pageWrapId: _react2['default'].PropTypes.string,
-            isOpen: _react2['default'].PropTypes.bool
+            isOpen: _react2['default'].PropTypes.object
         },
         toggleMenu: function toggleMenu() {
             this.applyWrapperStyles();
-            this.setState({ isOpen: !this.state.isOpen });
+            this.toggleIsOpen();
+        },
+        getIsOpen: function getIsOpen() {
+            if (this.props.isOpen && typeof this.props.isOpen.value === 'boolean') {
+                return this.props.isOpen.value;
+            }
+            return this.state.isOpen;
+        },
+        toggleIsOpen: function toggleIsOpen() {
+            if (this.props.isOpen && typeof this.props.isOpen.value === 'boolean') {
+                this.props.isOpen.requestChange(!this.props.isOpen.value);
+            } else {
+                this.setState({ isOpen: !this.state.isOpen });
+            }
         },
         applyWrapperStyles: function applyWrapperStyles() {
             if (styles.pageWrap && this.props.pageWrapId) {
@@ -259,7 +272,7 @@ exports['default'] = function (styles) {
                 console.error('Element with ID \'' + id + '\' not found');
                 return;
             }
-            wrapperStyles = wrapperStyles(this.state.isOpen);
+            wrapperStyles = wrapperStyles(this.getIsOpen());
             for (var prop in wrapperStyles) {
                 if (wrapperStyles.hasOwnProperty(prop)) {
                     wrapper.style[prop] = set ? wrapperStyles[prop] : '';
@@ -268,7 +281,7 @@ exports['default'] = function (styles) {
         },
         listenForClose: function listenForClose(e) {
             e = e || window.event;
-            if (this.state.isOpen && (e.key === 'Escape' || e.keyCode === 27)) {
+            if (this.getIsOpen() && (e.key === 'Escape' || e.keyCode === 27)) {
                 this.toggleMenu();
             }
         },
@@ -276,17 +289,11 @@ exports['default'] = function (styles) {
             return {
                 id: '',
                 outerContainerId: '',
-                pageWrapId: '',
-                isOpen: false
+                pageWrapId: ''
             };
         },
         getInitialState: function getInitialState() {
-            return { isOpen: this.props.isOpen };
-        },
-        componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-            if (typeof nextProps.isOpen !== 'undefined') {
-                this.setState({ isOpen: !!nextProps.isOpen });
-            }
+            return { isOpen: false };
         },
         componentWillMount: function componentWillMount() {
             if (!styles || !Object.keys(styles).length) {
@@ -312,7 +319,7 @@ exports['default'] = function (styles) {
                 (function () {
                     var s = snap(_react2['default'].findDOMNode(_this, '.bm-morph-shape'));
                     var path = s.select('path');
-                    if (_this.state.isOpen) {
+                    if (_this.getIsOpen()) {
                         styles.svg.animate(path);
                     } else {
                         setTimeout(function () {
@@ -330,7 +337,7 @@ exports['default'] = function (styles) {
                     var extraProps = {
                             key: index,
                             ref: 'item_' + index,
-                            style: styles.item(_this2.state.isOpen, index + 1)
+                            style: styles.item(_this2.getIsOpen(), index + 1)
                         };
                     return _react2['default'].cloneElement(item, extraProps);
                 });
@@ -351,17 +358,17 @@ exports['default'] = function (styles) {
                 id: 'bm-overlay',
                 ref: 'overlay',
                 onClick: this.toggleMenu,
-                style: styles.overlay(this.state.isOpen)
+                style: styles.overlay(this.getIsOpen())
             }), _react2['default'].createElement('div', {
                 id: this.props.id,
-                style: styles.menuWrap(this.state.isOpen)
+                style: styles.menuWrap(this.getIsOpen())
             }, svg, _react2['default'].createElement('div', {
                 className: 'bm-menu',
-                style: styles.menu(this.state.isOpen)
+                style: styles.menu(this.getIsOpen())
             }, _react2['default'].createElement('nav', {
                 className: 'bm-item-list',
                 style: { height: '100%' }
-            }, items)), _react2['default'].createElement('div', { style: styles.closeButton ? styles.closeButton(this.state.isOpen) : {} }, _react2['default'].createElement(_CrossIcon2['default'], { onClick: this.toggleMenu }))), _react2['default'].createElement(_BurgerIcon2['default'], { onClick: this.toggleMenu }));
+            }, items)), _react2['default'].createElement('div', { style: styles.closeButton ? styles.closeButton(this.getIsOpen()) : {} }, _react2['default'].createElement(_CrossIcon2['default'], { onClick: this.toggleMenu }))), _react2['default'].createElement(_BurgerIcon2['default'], { onClick: this.toggleMenu }));
         }
     });
 };
