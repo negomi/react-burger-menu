@@ -33,25 +33,36 @@ module.exports = function(target, sources) {
 },{"./getVendorPropertyName":2}],2:[function(require,module,exports){
 'use strict';
 
-var div = document.createElement('div');
+var builtinStyle = document.createElement('div').style;
 var prefixes = ['Moz', 'Webkit', 'O', 'ms'];
 var domVendorPrefix;
 
 // Helper function to get the proper vendor property name. (transition => WebkitTransition)
 module.exports = function(prop) {
+  var vendorProp;
+  if (prop in builtinStyle) return prop;
+  var UpperProp = prop.charAt(0).toUpperCase() + prop.substr(1);
 
-  if (prop in div.style) return prop;
-
-  var prop = prop.charAt(0).toUpperCase() + prop.substr(1);
   if (domVendorPrefix) {
-    return domVendorPrefix + prop;
+    vendorProp = domVendorPrefix + UpperProp;
+    if (vendorProp in builtinStyle) {
+      return vendorProp;
+    }else{
+      return prop;
+    }
+
   } else {
+
     for (var i = 0; i < prefixes.length; ++i) {
-      var vendorProp = prefixes[i] + prop;
-      if (vendorProp in div.style) {
+      vendorProp = prefixes[i] + UpperProp;
+      if (vendorProp in builtinStyle) {
         domVendorPrefix = prefixes[i];
         return vendorProp;
       }
+    }
+
+    if(!domVendorPrefix) {
+      return prop;
     }
   }
 }
@@ -209,7 +220,7 @@ var _CrossIcon2 = _interopRequireDefault(_CrossIcon);
 var snap = undefined;
 try {
     snap = function () {
-        throw new Error('Cannot find module \'imports?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js\' from \'/Users/imogen/code/react-burger-menu/src\'');
+        throw new Error('Cannot find module \'imports?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js\' from \'C:\\WORK\\forks\\react-burger-menu\\src\'');
     }();
 } catch (e) {
     snap = require('snapsvg');
@@ -219,7 +230,8 @@ exports['default'] = function (styles) {
         propTypes: {
             id: _react2['default'].PropTypes.string,
             outerContainerId: _react2['default'].PropTypes.string,
-            pageWrapId: _react2['default'].PropTypes.string
+            pageWrapId: _react2['default'].PropTypes.string,
+            isOpen: _react2['default'].PropTypes.bool
         },
         toggleMenu: function toggleMenu() {
             this.applyWrapperStyles();
@@ -264,11 +276,17 @@ exports['default'] = function (styles) {
             return {
                 id: '',
                 outerContainerId: '',
-                pageWrapId: ''
+                pageWrapId: '',
+                isOpen: false
             };
         },
         getInitialState: function getInitialState() {
-            return { isOpen: false };
+            return { isOpen: this.props.isOpen };
+        },
+        componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+            if (typeof nextProps.isOpen !== 'undefined') {
+                this.setState({ isOpen: !!nextProps.isOpen });
+            }
         },
         componentWillMount: function componentWillMount() {
             if (!styles || !Object.keys(styles).length) {

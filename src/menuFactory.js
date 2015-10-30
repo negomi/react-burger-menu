@@ -19,15 +19,31 @@ export default (styles) => {
     propTypes: {
       id: React.PropTypes.string,
       outerContainerId: React.PropTypes.string,
-      pageWrapId: React.PropTypes.string
+      pageWrapId: React.PropTypes.string,
+	  isOpen: React.PropTypes.object
     },
 
     toggleMenu() {
       // Order important: handle wrappers before setting sidebar state.
       this.applyWrapperStyles();
 
-      this.setState({ isOpen: !this.state.isOpen });
+      this.toggleIsOpen();
     },
+	  
+	getIsOpen() {
+		if (this.props.isOpen && (typeof this.props.isOpen.value === 'boolean')) {
+		return this.props.isOpen.value;
+	  }
+	  return this.state.isOpen; 
+	},
+	  
+	toggleIsOpen() {
+		if (this.props.isOpen && (typeof this.props.isOpen.value === 'boolean')) {
+		this.props.isOpen.requestChange(!this.props.isOpen.value);
+	  } else {
+		this.setState({ isOpen: !this.state.isOpen });
+	  }
+	},
 
     // Applies component-specific styles to external wrapper elements.
     applyWrapperStyles() {
@@ -63,7 +79,7 @@ export default (styles) => {
         return;
       }
 
-      wrapperStyles = wrapperStyles(this.state.isOpen);
+      wrapperStyles = wrapperStyles(this.getIsOpen());
 
       for (let prop in wrapperStyles) {
         if (wrapperStyles.hasOwnProperty(prop)) {
@@ -75,7 +91,7 @@ export default (styles) => {
     listenForClose(e) {
       e = e || window.event;
 
-      if (this.state.isOpen && (e.key === 'Escape' || e.keyCode === 27)) {
+      if (this.getIsOpen() && (e.key === 'Escape' || e.keyCode === 27)) {
         this.toggleMenu();
       }
     },
@@ -90,7 +106,7 @@ export default (styles) => {
 
     getInitialState() {
       return { isOpen: false };
-    },
+    },	  
 
     componentWillMount() {
       if (!styles || !Object.keys(styles).length) {
@@ -123,7 +139,7 @@ export default (styles) => {
         let s = snap(React.findDOMNode(this, '.bm-morph-shape'));
         let path = s.select('path');
 
-        if (this.state.isOpen) {
+        if (this.getIsOpen()) {
           // Animate SVG path.
           styles.svg.animate(path);
         } else {
@@ -144,7 +160,7 @@ export default (styles) => {
           let extraProps = {
             key: index,
             ref: `item_${index}`,
-            style: styles.item(this.state.isOpen, index + 1)
+            style: styles.item(this.getIsOpen(), index + 1)
           };
 
           return React.cloneElement(item, extraProps);
@@ -164,15 +180,15 @@ export default (styles) => {
 
       return (
         <div>
-          <div id="bm-overlay" ref="overlay" onClick={ this.toggleMenu } style={ styles.overlay(this.state.isOpen) }></div>
-          <div id={ this.props.id } style={ styles.menuWrap(this.state.isOpen) }>
+          <div id="bm-overlay" ref="overlay" onClick={ this.toggleMenu } style={ styles.overlay(this.getIsOpen()) }></div>
+          <div id={ this.props.id } style={ styles.menuWrap(this.getIsOpen()) }>
             { svg }
-            <div className="bm-menu" style={ styles.menu(this.state.isOpen) } >
+            <div className="bm-menu" style={ styles.menu(this.getIsOpen()) } >
               <nav className="bm-item-list" style={ { height: '100%' } }>
                 { items }
               </nav>
             </div>
-            <div style={ styles.closeButton ? styles.closeButton(this.state.isOpen) : {} }>
+            <div style={ styles.closeButton ? styles.closeButton(this.getIsOpen()) : {} }>
               <CrossIcon onClick={ this.toggleMenu } />
             </div>
           </div>
