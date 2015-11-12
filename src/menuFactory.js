@@ -12,6 +12,7 @@ export default (styles) => {
 
     propTypes: {
       id: React.PropTypes.string,
+	  isOpen: React.PropTypes.object,
       outerContainerId: React.PropTypes.string,
       pageWrapId: React.PropTypes.string,
       right: React.PropTypes.bool,
@@ -22,8 +23,25 @@ export default (styles) => {
       // Order important: handle wrappers before setting sidebar state.
       this.applyWrapperStyles();
 
-      this.setState({ isOpen: !this.state.isOpen });
+      this.toggleIsOpen();
     },
+	  
+	toggleIsOpen() {
+	  if (this.props.isOpen && (typeof this.props.isOpen.value === 'boolean') && (typeof this.props.isOpen.requestChange === 'function')) {
+		this.props.isOpen.requestChange(!this.props.isOpen.value);
+	  } else {
+		this.setState({
+	      isOpen: !this.state.isOpen
+		});
+	  }
+	},
+	  
+	getIsOpen() {
+	  if (this.props.isOpen && (typeof this.props.isOpen.value === 'boolean')) {
+	    return this.props.isOpen.value;
+	  }
+	  return this.state.isOpen;
+	},
 
     // Applies component-specific styles to external wrapper elements.
     applyWrapperStyles() {
@@ -59,7 +77,7 @@ export default (styles) => {
         return;
       }
 
-      wrapperStyles = wrapperStyles(this.state.isOpen, this.props.width, this.props.right);
+      wrapperStyles = wrapperStyles(this.getIsOpen(), this.props.width, this.props.right);
 
       for (let prop in wrapperStyles) {
         if (wrapperStyles.hasOwnProperty(prop)) {
@@ -71,7 +89,7 @@ export default (styles) => {
     listenForClose(e) {
       e = e || window.event;
 
-      if (this.state.isOpen && (e.key === 'Escape' || e.keyCode === 27)) {
+      if (this.getIsOpen() && (e.key === 'Escape' || e.keyCode === 27)) {
         this.toggleMenu();
       }
     },
@@ -131,7 +149,7 @@ export default (styles) => {
         let s = snap(morphShape);
         let path = s.select('path');
 
-        if (this.state.isOpen) {
+        if (this.getIsOpen()) {
           // Animate SVG path.
           styles.svg.animate(path);
         } else {
@@ -145,17 +163,17 @@ export default (styles) => {
 
     render() {
       let items, svg;
-      let menuWrapStyles = [baseStyles.menuWrap(this.state.isOpen, this.props.width, this.props.right)];
-      let menuStyles = [baseStyles.menu(this.state.isOpen)];
+      let menuWrapStyles = [baseStyles.menuWrap(this.getIsOpen(), this.props.width, this.props.right)];
+      let menuStyles = [baseStyles.menu(this.getIsOpen())];
       let itemListStyles = [baseStyles.itemList()];
       let closeButtonStyles;
 
       if (styles.menuWrap) {
-        menuWrapStyles.push(styles.menuWrap(this.state.isOpen, this.props.width, this.props.right));
+        menuWrapStyles.push(styles.menuWrap(this.getIsOpen(), this.props.width, this.props.right));
       }
 
       if (styles.menu) {
-        menuStyles.push(styles.menu(this.state.isOpen, this.props.width, this.props.right));
+        menuStyles.push(styles.menu(this.getIsOpen(), this.props.width, this.props.right));
       }
 
       if (styles.itemList) {
@@ -163,16 +181,16 @@ export default (styles) => {
       }
 
       if (styles.closeButton) {
-        closeButtonStyles = styles.closeButton(this.state.isOpen, this.props.width, this.props.right);
+        closeButtonStyles = styles.closeButton(this.getIsOpen(), this.props.width, this.props.right);
       }
 
       // Add styles to user-defined menu items.
       if (this.props.children) {
         items = React.Children.map(this.props.children, (item, index) => {
-          let itemStyles = [baseStyles.item(this.state.isOpen)];
+          let itemStyles = [baseStyles.item(this.getIsOpen())];
 
           if (styles.item) {
-            itemStyles.push(styles.item(this.state.isOpen, this.props.width, index + 1, this.props.right));
+            itemStyles.push(styles.item(this.getIsOpen(), this.props.width, index + 1, this.props.right));
           }
 
           let extraProps = {
@@ -197,7 +215,7 @@ export default (styles) => {
 
       return (
         <div>
-          <div className="bm-overlay" onClick={ this.toggleMenu } style={ baseStyles.overlay(this.state.isOpen) }></div>
+          <div className="bm-overlay" onClick={ this.toggleMenu } style={ baseStyles.overlay(this.getIsOpen()) }></div>
           <div id={ this.props.id } className={ "bm-menu-wrap" } style={ menuWrapStyles }>
             { svg }
             <div className="bm-menu" style={ menuStyles } >
