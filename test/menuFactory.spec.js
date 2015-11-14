@@ -326,9 +326,9 @@ describe('menuFactory', () => {
 
     it('can be controlled externally', () => {
       let container = document.createElement('div');
-      component = React.render(<Menu />, container);
+      component = ReactDOM.render(<Menu />, container);
       expect(component.state.isOpen).to.be.false;
-      React.render(<Menu isOpen />, container);
+      ReactDOM.render(<Menu isOpen />, container);
       expect(component.state.isOpen).to.be.true;
     });
   });
