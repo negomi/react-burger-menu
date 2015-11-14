@@ -2088,6 +2088,7 @@ exports['default'] = function (styles) {
     return (0, _radium2['default'])(_react2['default'].createClass({
         propTypes: {
             id: _react2['default'].PropTypes.string,
+            isOpen: _react2['default'].PropTypes.bool,
             outerContainerId: _react2['default'].PropTypes.string,
             pageWrapId: _react2['default'].PropTypes.string,
             right: _react2['default'].PropTypes.bool,
@@ -2135,6 +2136,7 @@ exports['default'] = function (styles) {
         getDefaultProps: function getDefaultProps() {
             return {
                 id: '',
+                isOpen: false,
                 outerContainerId: '',
                 pageWrapId: '',
                 right: false,
@@ -2153,6 +2155,9 @@ exports['default'] = function (styles) {
             }
             if (styles.outerContainer && !this.props.outerContainerId) {
                 console.warn('No outerContainerId supplied');
+            }
+            if (this.props.isOpen !== this.state.isOpen) {
+                this.toggleMenu();
             }
         },
         componentDidMount: function componentDidMount() {
@@ -2185,6 +2190,11 @@ exports['default'] = function (styles) {
                         }, 300);
                     }
                 }());
+            }
+        },
+        componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+            if (nextProps.isOpen !== this.state.isOpen) {
+                this.toggleMenu();
             }
         },
         render: function render() {
