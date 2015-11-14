@@ -228,7 +228,7 @@ The component has the following helper classes:
 
 Because this project uses CSS3 features, it's only meant for modern browsers. Some browsers currently fail to apply some of the animations correctly.
 
-Chrome, Firefox and IE 10+ have full support, but Safari has strange behavior for some of the menus.
+Chrome and Firefox have full support, but Safari and IE have strange behavior for some of the menus.
 
 ### License
 
