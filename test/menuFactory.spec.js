@@ -312,4 +312,24 @@ describe('menuFactory', () => {
       expect(component.state.isOpen).to.be.false;
     });
   });
+
+  describe('open state', () => {
+
+    beforeEach(() => {
+      Menu = menuFactory(mockStyles.basic);
+    });
+
+    it('can be set externally', () => {
+      component = TestUtils.renderIntoDocument(<Menu isOpen />);
+      expect(component.state.isOpen).to.be.true;
+    });
+
+    it('can be controlled externally', () => {
+      let container = document.createElement('div');
+      component = React.render(<Menu />, container);
+      expect(component.state.isOpen).to.be.false;
+      React.render(<Menu isOpen />, container);
+      expect(component.state.isOpen).to.be.true;
+    });
+  });
 });

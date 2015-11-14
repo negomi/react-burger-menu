@@ -12,6 +12,7 @@ export default (styles) => {
 
     propTypes: {
       id: React.PropTypes.string,
+      isOpen: React.PropTypes.bool,
       outerContainerId: React.PropTypes.string,
       pageWrapId: React.PropTypes.string,
       right: React.PropTypes.bool,
@@ -79,6 +80,7 @@ export default (styles) => {
     getDefaultProps() {
       return {
         id: '',
+        isOpen: false,
         outerContainerId: '',
         pageWrapId: '',
         right: false,
@@ -103,6 +105,11 @@ export default (styles) => {
 
       if (styles.outerContainer && !this.props.outerContainerId) {
         console.warn('No outerContainerId supplied');
+      }
+
+      // Allow initial open state to be set by props.
+      if (this.props.isOpen !== this.state.isOpen) {
+        this.toggleMenu();
       }
     },
 
@@ -140,6 +147,13 @@ export default (styles) => {
             path.attr('d', styles.svg.pathInitial);
           }, 300);
         }
+      }
+    },
+
+    componentWillReceiveProps(nextProps) {
+      // Allow open state to be controlled by props.
+      if (nextProps.isOpen !== this.state.isOpen) {
+        this.toggleMenu();
       }
     },
 
