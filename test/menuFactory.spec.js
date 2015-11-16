@@ -5,7 +5,6 @@ import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 import { assert, expect } from 'chai';
 import sinon from 'sinon';
-import exenv from './utils/exenv';
 import createShallowComponent from './utils/createShallowComponent';
 import menuFactory from '../src/menuFactory';
 
