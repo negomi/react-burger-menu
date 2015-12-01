@@ -30,33 +30,77 @@ module.exports = function(target, sources) {
   return prefixed
 }
 
-},{"./getVendorPropertyName":2}],2:[function(require,module,exports){
+},{"./getVendorPropertyName":3}],2:[function(require,module,exports){
 'use strict';
 
-var div = document.createElement('div');
+module.exports = document.createElement('div').style;
+
+},{}],3:[function(require,module,exports){
+'use strict';
+
+var builtinStyle = require('./builtinStyle');
 var prefixes = ['Moz', 'Webkit', 'O', 'ms'];
 var domVendorPrefix;
 
+// 2009 spec only
+var flexbox = {
+  flex: ['WebkitFlex', 'WebkitBoxFlex'],
+  order: ['WebkitOrder','WebkitBoxOrdinalGroup'],
+  // https://github.com/postcss/autoprefixer/blob/master/lib/hacks/flex-direction.coffee
+  flexDirection: ['WebkitFlexDirection', 'WebkitBoxOrient', 'WebkitBoxDirection'],
+  // https://github.com/postcss/autoprefixer/blob/master/lib/hacks/align-items.coffee
+  alignItems: ['WebkitAlignItems', 'WebkitBoxAlign'],
+  // https://github.com/postcss/autoprefixer/blob/master/lib/hacks/justify-content.coffee
+  justifyContent: ['WebkitJustifyContent', 'WebkitBoxPack'],
+  flexWrap: ['WebkitFlexWrap'],
+  alignSelf: ['WebkitAlignSelf'],
+}
+
 // Helper function to get the proper vendor property name. (transition => WebkitTransition)
-module.exports = function(prop) {
+module.exports = function(prop, isSupportTest) {
 
-  if (prop in div.style) return prop;
+  var vendorProp;
+  if (prop in builtinStyle) return prop;
 
-  var prop = prop.charAt(0).toUpperCase() + prop.substr(1);
-  if (domVendorPrefix) {
-    return domVendorPrefix + prop;
-  } else {
-    for (var i = 0; i < prefixes.length; ++i) {
-      var vendorProp = prefixes[i] + prop;
-      if (vendorProp in div.style) {
-        domVendorPrefix = prefixes[i];
+  if(flexbox[prop]){
+    // TODO: cache the result
+    var flexProperties = flexbox[prop];
+    for (var i = 0; i < flexProperties.length; ++i) {
+      if (flexProperties[i] in builtinStyle) {
+        return flexProperties[i];
+      }
+    }
+
+  }else{
+
+    var UpperProp = prop.charAt(0).toUpperCase() + prop.substr(1);
+
+    if (domVendorPrefix) {
+
+      vendorProp = domVendorPrefix + UpperProp;
+      if (vendorProp in builtinStyle) {
         return vendorProp;
+      }
+    } else {
+
+      for (var i = 0; i < prefixes.length; ++i) {
+        vendorProp = prefixes[i] + UpperProp;
+        if (vendorProp in builtinStyle) {
+          domVendorPrefix = prefixes[i];
+          return vendorProp;
+        }
       }
     }
   }
+
+  // if support test, not fallback to origin prop name
+  if (!isSupportTest) {
+    return prop;
+  }
+
 }
 
-},{}],3:[function(require,module,exports){
+},{"./builtinStyle":2}],4:[function(require,module,exports){
 (function (global){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -121,7 +165,7 @@ var BurgerIcon = _react2['default'].createClass({
 exports['default'] = BurgerIcon;
 module.exports = exports['default'];
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"react-kit/appendVendorPrefix":1}],4:[function(require,module,exports){
+},{"react-kit/appendVendorPrefix":1}],5:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 exports['default'] = {
@@ -136,7 +180,7 @@ exports['default'] = {
     fallDown: require('./menus/fallDown')
 };
 module.exports = exports['default'];
-},{"./menus/bubble":7,"./menus/elastic":8,"./menus/fallDown":9,"./menus/push":10,"./menus/pushRotate":11,"./menus/scaleDown":12,"./menus/scaleRotate":13,"./menus/slide":14,"./menus/stack":15}],5:[function(require,module,exports){
+},{"./menus/bubble":8,"./menus/elastic":9,"./menus/fallDown":10,"./menus/push":11,"./menus/pushRotate":12,"./menus/scaleDown":13,"./menus/scaleRotate":14,"./menus/slide":15,"./menus/stack":16}],6:[function(require,module,exports){
 (function (global){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -193,7 +237,7 @@ var CrossIcon = _react2['default'].createClass({
 exports['default'] = CrossIcon;
 module.exports = exports['default'];
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"react-kit/appendVendorPrefix":1}],6:[function(require,module,exports){
+},{"react-kit/appendVendorPrefix":1}],7:[function(require,module,exports){
 (function (global){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -212,7 +256,7 @@ try {
         throw new Error('Cannot find module \'imports?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js\' from \'/Users/imogen/code/react-burger-menu/src\'');
     }();
 } catch (e) {
-    snap = require('snapsvg');
+    snap = typeof window !== 'undefined' ? window['Snap'] : typeof global !== 'undefined' ? global['Snap'] : null;
 }
 exports['default'] = function (styles) {
     return _react2['default'].createClass({
@@ -349,7 +393,7 @@ exports['default'] = function (styles) {
 };
 module.exports = exports['default'];
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./BurgerIcon":3,"./CrossIcon":5,"snapsvg":undefined}],7:[function(require,module,exports){
+},{"./BurgerIcon":4,"./CrossIcon":6}],8:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -437,7 +481,7 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":6,"react-kit/appendVendorPrefix":1}],8:[function(require,module,exports){
+},{"../menuFactory":7,"react-kit/appendVendorPrefix":1}],9:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -512,7 +556,7 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":6,"react-kit/appendVendorPrefix":1}],9:[function(require,module,exports){
+},{"../menuFactory":7,"react-kit/appendVendorPrefix":1}],10:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -570,7 +614,7 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":6,"react-kit/appendVendorPrefix":1}],10:[function(require,module,exports){
+},{"../menuFactory":7,"react-kit/appendVendorPrefix":1}],11:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -624,7 +668,7 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":6,"react-kit/appendVendorPrefix":1}],11:[function(require,module,exports){
+},{"../menuFactory":7,"react-kit/appendVendorPrefix":1}],12:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -683,7 +727,7 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":6,"react-kit/appendVendorPrefix":1}],12:[function(require,module,exports){
+},{"../menuFactory":7,"react-kit/appendVendorPrefix":1}],13:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -739,7 +783,7 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":6,"react-kit/appendVendorPrefix":1}],13:[function(require,module,exports){
+},{"../menuFactory":7,"react-kit/appendVendorPrefix":1}],14:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -798,7 +842,7 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":6,"react-kit/appendVendorPrefix":1}],14:[function(require,module,exports){
+},{"../menuFactory":7,"react-kit/appendVendorPrefix":1}],15:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -843,7 +887,7 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":6,"react-kit/appendVendorPrefix":1}],15:[function(require,module,exports){
+},{"../menuFactory":7,"react-kit/appendVendorPrefix":1}],16:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -890,5 +934,5 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":6,"react-kit/appendVendorPrefix":1}]},{},[4])(4)
+},{"../menuFactory":7,"react-kit/appendVendorPrefix":1}]},{},[5])(5)
 });

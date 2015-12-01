@@ -42,7 +42,8 @@
     ]
   },
   "browserify-shim": {
-    "react": "global:React"
+    "react": "global:React",
+    "snapsvg": "global:Snap"
   },
   "scripts": {
     "build": "gulp clean && NODE_ENV=production gulp build",
