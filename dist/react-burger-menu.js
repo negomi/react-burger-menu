@@ -202,6 +202,7 @@ exports['default'] = function (styles) {
         propTypes: {
             id: _react2['default'].PropTypes.string,
             isOpen: _react2['default'].PropTypes.bool,
+            onStateChange: _react2['default'].PropTypes.func,
             outerContainerId: _react2['default'].PropTypes.string,
             pageWrapId: _react2['default'].PropTypes.string,
             right: _react2['default'].PropTypes.bool,
@@ -209,7 +210,8 @@ exports['default'] = function (styles) {
         },
         toggleMenu: function toggleMenu() {
             this.applyWrapperStyles();
-            this.setState({ isOpen: !this.state.isOpen });
+            var newState = { isOpen: !this.state.isOpen };
+            this.setState(newState, this.props.onStateChange.bind(null, newState));
         },
         applyWrapperStyles: function applyWrapperStyles() {
             if (styles.pageWrap && this.props.pageWrapId) {
@@ -250,6 +252,8 @@ exports['default'] = function (styles) {
             return {
                 id: '',
                 isOpen: false,
+                onStateChange: function onStateChange() {
+                },
                 outerContainerId: '',
                 pageWrapId: '',
                 right: false,
