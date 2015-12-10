@@ -212,6 +212,21 @@ describe('menuFactory', () => {
       assert.ok(applyWrapperStyles.called, 'applyWrapperStyles called');
       component.applyWrapperStyles.restore();
     });
+
+    it('calls onStateChange callback', () => {
+      const callback = sinon.spy();
+      component = TestUtils.renderIntoDocument(<Menu onStateChange={ callback } />);
+      component.toggleMenu();
+      assert.ok(callback.called, 'onStateChange callback called');
+    });
+
+    it('calls onStateChange callback with current menu state', () => {
+      const callback = sinon.spy();
+      component = TestUtils.renderIntoDocument(<Menu onStateChange={ callback } />);
+      component.setState({ isOpen: false });
+      component.toggleMenu();
+      assert.ok(callback.calledWith({ isOpen: true }));
+    });
   });
 
   describe('applyWrapperStyles method', () => {

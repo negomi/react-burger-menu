@@ -167,6 +167,18 @@ You can control whether the sidebar is open or closed with the `isOpen` prop. Th
 <Menu isOpen />
 ```
 
+#### State change
+
+You can detect whether the sidebar is open or closed by passing a callback function to `onStateChange`. The callback will receive an object containing the new state as its first argument.
+
+``` javascript
+var isMenuOpen = function(state) {
+  return state.isOpen;
+};
+
+<Menu onStateChange={ isMenuOpen } />
+```
+
 #### Custom ID
 
 There is also an optional `id` prop, which will simply add an ID to the rendered menu's outermost element. This is not required for any functionality.

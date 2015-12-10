@@ -13,6 +13,7 @@ export default (styles) => {
     propTypes: {
       id: React.PropTypes.string,
       isOpen: React.PropTypes.bool,
+      onStateChange: React.PropTypes.func,
       outerContainerId: React.PropTypes.string,
       pageWrapId: React.PropTypes.string,
       right: React.PropTypes.bool,
@@ -23,7 +24,8 @@ export default (styles) => {
       // Order important: handle wrappers before setting sidebar state.
       this.applyWrapperStyles();
 
-      this.setState({ isOpen: !this.state.isOpen });
+      const newState = { isOpen: !this.state.isOpen };
+      this.setState(newState, this.props.onStateChange.bind(null, newState));
     },
 
     // Applies component-specific styles to external wrapper elements.
@@ -81,6 +83,7 @@ export default (styles) => {
       return {
         id: '',
         isOpen: false,
+        onStateChange: () => {},
         outerContainerId: '',
         pageWrapId: '',
         right: false,
