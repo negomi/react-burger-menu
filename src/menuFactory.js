@@ -55,6 +55,8 @@ export default (styles) => {
     // Throws and returns if the required external elements don't exist,
     // which means any external page animations won't be applied.
     handleExternalWrapper(id, wrapperStyles, set) {
+      let html = document.getElementsByTagName('html')[0];
+      let body = document.getElementsByTagName('body')[0];
       let wrapper = document.getElementById(id);
 
       if (!wrapper) {
@@ -69,6 +71,11 @@ export default (styles) => {
           wrapper.style[prop] = set ? wrapperStyles[prop] : '';
         }
       }
+
+      // Prevent any horizontal scroll.
+      [html, body].forEach((element) => {
+        element.style['overflow-x'] = set ? 'hidden' : '';
+      });
     },
 
     listenForClose(e) {
