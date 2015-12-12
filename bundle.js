@@ -2881,6 +2881,8 @@ exports['default'] = function (styles) {
             }
         },
         handleExternalWrapper: function handleExternalWrapper(id, wrapperStyles, set) {
+            var html = document.getElementsByTagName('html')[0];
+            var body = document.getElementsByTagName('body')[0];
             var wrapper = document.getElementById(id);
             if (!wrapper) {
                 console.error('Element with ID \'' + id + '\' not found');
@@ -2892,6 +2894,12 @@ exports['default'] = function (styles) {
                     wrapper.style[prop] = set ? wrapperStyles[prop] : '';
                 }
             }
+            [
+                html,
+                body
+            ].forEach(function (element) {
+                element.style['overflow-x'] = set ? 'hidden' : '';
+            });
         },
         listenForClose: function listenForClose(e) {
             e = e || window.event;
@@ -3053,7 +3061,7 @@ var styles = {
                     });
                     pos++;
                 };
-                nextStep(pos);
+                nextStep();
             }
         },
         morphShape: function morphShape(right) {
@@ -3077,7 +3085,7 @@ var styles = {
             return {
                 position: 'fixed',
                 transform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(' + width + 'px, 0, 0)' : 'translate3d(-' + width + 'px, 0, 0)',
-                transition: isOpen ? 'opacity 0.3s 0.4s cubic-bezier(.17, .67, .1, 1.27), transform 0.3s 0.4s cubic-bezier(.17, .67, .1, 1.27)' : 'opacity 0s 0.3s cubic-bezier(.17, .67, .1, 1.27), transform 0s 0.3s cubic-bezier(.17, .67, .1, 1.27)',
+                transition: isOpen ? 'opacity 0.1s 0.4s cubic-bezier(.17, .67, .1, 1.27), transform 0.1s 0.4s cubic-bezier(.17, .67, .1, 1.27)' : 'opacity 0s 0.3s cubic-bezier(.17, .67, .1, 1.27), transform 0s 0.3s cubic-bezier(.17, .67, .1, 1.27)',
                 opacity: isOpen ? 1 : 0
             };
         },
@@ -3123,7 +3131,7 @@ var styles = {
                 height: '100%',
                 right: right ? 'inherit' : 0,
                 left: right ? 0 : 'inherit',
-                transform: right ? 'rotateY(180deg)' : 'rotateY(0deg)'
+                transform: right ? 'rotateY(180deg)' : ''
             };
         },
         menuWrap: function menuWrap(isOpen, width, right) {
@@ -3250,7 +3258,7 @@ var _menuFactory2 = _interopRequireDefault(_menuFactory);
 var styles = {
         pageWrap: function pageWrap(isOpen, width) {
             return {
-                transform: isOpen ? 'translate3d(0, 0, 1px)' : 'translate3d(0, 0, -' + width + 'px)',
+                transform: isOpen ? 'translate3d(0, 0, -1px)' : 'translate3d(0, 0, -' + width + 'px)',
                 transformOrigin: '100%',
                 transformStyle: 'preserve-3d',
                 transition: 'all 0.5s'
