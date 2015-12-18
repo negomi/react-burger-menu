@@ -21,7 +21,6 @@
     "snapsvg": "^0.4.0"
   },
   "devDependencies": {
-    "babel": "^5.8.23",
     "babel-eslint": "^4.1.2",
     "chai": "^3.2.0",
     "eslint": "^1.4.4",
