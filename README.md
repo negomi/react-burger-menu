@@ -20,7 +20,7 @@ Then open [`localhost:8000`](http://localhost:8000) in a browser.
 
 The test suite uses [Mocha](http://mochajs.org/), [Chai](http://chaijs.com/) and [Sinon](http://sinonjs.org/), with [jsdom](https://github.com/tmpvar/jsdom).
 
-*You will need Node v4.0.0 (or [io.js](https://iojs.org/en/index.html)) to run the tests, due to jsdom depending on it.*
+*You will need at least Node v4.0.0 (or [io.js](https://iojs.org/en/index.html)) to run the tests, due to jsdom depending on it.*
 
 To run the tests once, run:
 
