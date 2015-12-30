@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var initGulpTasks = require('react-component-gulp-tasks');
+var initTestTasks = require('./tasks/test');
 
 /**
  * Tasks are added by the react-component-gulp-tasks package
@@ -20,7 +21,9 @@ var taskConfig = {
     dependencies: [
       'browserify-optional',
       'classnames',
+      'radium',
       'react',
+      'react-dom',
       'snapsvg'
     ],
     lib: 'lib',
@@ -49,4 +52,12 @@ var taskConfig = {
 
 };
 
+var testConfig = {
+  paths: {
+    src: 'src/**/*.js',
+    test: 'test/*.js'
+  }
+};
+
 initGulpTasks(gulp, taskConfig);
+initTestTasks(gulp, testConfig);
