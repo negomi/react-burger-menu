@@ -4,7 +4,7 @@ import React from 'react';
 import TestUtils from 'react-addons-test-utils';
 import { assert, expect } from 'chai';
 import createShallowComponent from './utils/createShallowComponent';
-import CrossIcon from '../src/CrossIcon';
+import CrossIcon from '../lib/CrossIcon';
 
 describe('CrossIcon component', () => {
 

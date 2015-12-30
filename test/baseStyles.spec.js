@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import baseStyles from '../src/baseStyles';
+import baseStyles from '../lib/baseStyles';
 
 describe('baseStyles', () => {
 

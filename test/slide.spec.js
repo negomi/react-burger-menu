@@ -4,7 +4,7 @@ import React from 'react';
 import TestUtils from 'react-addons-test-utils';
 import { expect } from 'chai';
 import createShallowComponent from './utils/createShallowComponent';
-import BurgerMenu from '../src/BurgerMenu';
+import BurgerMenu from '../lib/BurgerMenu';
 const Menu = BurgerMenu.slide;
 
 describe('slide', () => {

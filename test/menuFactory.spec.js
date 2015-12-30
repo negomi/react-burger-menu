@@ -6,7 +6,7 @@ import TestUtils from 'react-addons-test-utils';
 import { assert, expect } from 'chai';
 import sinon from 'sinon';
 import createShallowComponent from './utils/createShallowComponent';
-import menuFactory from '../src/menuFactory';
+import menuFactory from '../lib/menuFactory';
 
 describe('menuFactory', () => {
 
