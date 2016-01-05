@@ -311,8 +311,8 @@ describe('menuFactory', () => {
 
     it('sets styles on html and body elements', () => {
       addWrapperElementsToDOM();
-      let html = document.getElementsByTagName('html')[0];
-      let body = document.getElementsByTagName('body')[0];
+      let html = document.querySelector('html');
+      let body = document.querySelector('body');
       component.handleExternalWrapper('page-wrap', styles, true);
       expect(html.style['overflow-x']).to.equal('hidden');
       expect(body.style['overflow-x']).to.equal('hidden');
@@ -321,8 +321,8 @@ describe('menuFactory', () => {
 
     it('clears styles from html and body elements', () => {
       addWrapperElementsToDOM();
-      let html = document.getElementsByTagName('html')[0];
-      let body = document.getElementsByTagName('body')[0];
+      let html = document.querySelector('html');
+      let body = document.querySelector('body');
       component.handleExternalWrapper('page-wrap', styles, false);
       expect(html.style['overflow-x']).to.be.empty;
       expect(body.style['overflow-x']).to.be.empty;

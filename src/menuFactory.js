@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Radium from 'radium';
 import baseStyles from './baseStyles';
 import BurgerIcon from './BurgerIcon';
@@ -55,8 +56,8 @@ export default (styles) => {
     // Throws and returns if the required external elements don't exist,
     // which means any external page animations won't be applied.
     handleExternalWrapper(id, wrapperStyles, set) {
-      let html = document.getElementsByTagName('html')[0];
-      let body = document.getElementsByTagName('body')[0];
+      let html = document.querySelector('html');
+      let body = document.querySelector('body');
       let wrapper = document.getElementById(id);
 
       if (!wrapper) {
@@ -143,8 +144,7 @@ export default (styles) => {
           snap = require('snapsvg');
         }
 
-        // TODO: Should be able to use refs or ReactDOM.findDOMNode(this) here.
-        let morphShape = document.getElementsByClassName('bm-morph-shape')[0];
+        let morphShape = ReactDOM.findDOMNode(this, 'bm-morph-shape');
         let s = snap(morphShape);
         let path = s.select('path');
 
