@@ -5,6 +5,10 @@ import Radium from 'radium';
 
 let CrossIcon = Radium(React.createClass({
 
+  propTypes: {
+    styles: React.PropTypes.object
+  },
+
   getCrossStyle(type) {
     return {
       position: 'absolute',
@@ -15,6 +19,12 @@ let CrossIcon = Radium(React.createClass({
       cursor: 'pointer',
       transform: type === 'before' ? 'rotate(45deg)' : 'rotate(-45deg)',
       zIndex: 1
+    };
+  },
+
+  getDefaultProps() {
+    return {
+      styles: {}
     };
   },
 
@@ -38,8 +48,8 @@ let CrossIcon = Radium(React.createClass({
 
     return (
       <div>
-        <span className="bm-cross" style={ this.getCrossStyle('before') }></span>
-        <span className="bm-cross" style={ this.getCrossStyle('after') }></span>
+        <span className="bm-cross" style={ [this.getCrossStyle('before'), this.props.styles['bm-cross']] }></span>
+        <span className="bm-cross" style={ [this.getCrossStyle('after'), this.props.styles['bm-cross']] }></span>
         <button onClick={ this.props.onClick } style={ buttonStyle }>Close Menu</button>
       </div>
     );

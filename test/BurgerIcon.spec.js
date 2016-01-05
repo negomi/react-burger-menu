@@ -9,6 +9,14 @@ import BurgerIcon from '../lib/BurgerIcon';
 describe('BurgerIcon component', () => {
 
   let component;
+  const mockStylesProp = {
+    'bm-burger-button': {
+      width: '40px'
+    },
+    'bm-burger-bars': {
+      background: 'red'
+    }
+  };
 
   it('exists and is not undefined', () => {
     assert.isDefined(BurgerIcon, 'BurgerIcon component is defined');
@@ -37,7 +45,16 @@ describe('BurgerIcon component', () => {
     });
   });
 
+  describe('wrapper element', () => {
+
+    it('can be styled with props', () => {
+      component = createShallowComponent(<BurgerIcon styles={ mockStylesProp } />);
+      expect(component.props.style.width).to.equal('40px');
+    });
+  });
+
   describe('visual icon', () => {
+
     beforeEach(() => {
       component = createShallowComponent(<BurgerIcon />);
     });
@@ -58,6 +75,13 @@ describe('BurgerIcon component', () => {
         opacity: 1
       };
       expect(component.props.children[0].props.style).to.deep.equal(expected);
+    });
+
+    it('can be styled with props', () => {
+      component = createShallowComponent(<BurgerIcon styles={ mockStylesProp } />);
+      expect(component.props.children[0].props.style.background).to.equal('red');
+      expect(component.props.children[1].props.style.background).to.equal('red');
+      expect(component.props.children[2].props.style.background).to.equal('red');
     });
   });
 

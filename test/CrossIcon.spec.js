@@ -9,6 +9,11 @@ import CrossIcon from '../lib/CrossIcon';
 describe('CrossIcon component', () => {
 
   let component;
+  const mockStylesProp = {
+    'bm-cross': {
+      background: 'red'
+    }
+  };
 
   it('exists and is not undefined', () => {
     assert.isDefined(CrossIcon, 'CrossIcon component is defined');
@@ -56,6 +61,12 @@ describe('CrossIcon component', () => {
         zIndex: 1
       };
       expect(component.props.children[0].props.style).to.deep.equal(expected);
+    });
+
+    it('can be styled with props', () => {
+      component = createShallowComponent(<CrossIcon styles={ mockStylesProp } />);
+      expect(component.props.children[0].props.style.background).to.equal('red');
+      expect(component.props.children[1].props.style.background).to.equal('red');
     });
   });
 

@@ -189,7 +189,9 @@ There is also an optional `id` prop, which will simply add an ID to the rendered
 
 ### Styling
 
-All the animations are handled internally by the component. However, the visual styles (colors, fonts etc.) are not, and need to be included with CSS.
+All the animations are handled internally by the component. However, the visual styles (colors, fonts etc.) are not, and need to be supplied, either with CSS or with a JavaScript object passed as the `styles` prop.
+
+#### CSS
 
 The component has the following helper classes:
 
@@ -213,9 +215,11 @@ The component has the following helper classes:
   background: #bdc3c7;
 }
 
-/* Background color of sidebar */
+/* General sidebar styles */
 .bm-menu {
   background: #373a47;
+  padding: 2.5em 1.5em 0;
+  font-size: 1.15em;
 }
 
 /* Morph shape necessary with bubble or elastic */
@@ -223,17 +227,47 @@ The component has the following helper classes:
   fill: #373a47;
 }
 
-/* General menu styles */
-.bm-menu {
-  padding: 2.5em 1.5em 0;
-  font-size: 1.15em;
-}
-
 /* Wrapper for item list */
 .bm-item-list {
   color: #b8b7ad;
   padding: 0.8em;
 }
+```
+
+#### JavaScript
+
+The same styles can be written as a JavaScript object, with the class names as keys, like this:
+
+```javascript
+var styles = {
+  'bm-burger-button': {
+    position: 'fixed',
+    width: '36px',
+    height: '30px',
+    left: '36px',
+    top: '36px'
+  },
+  'bm-burger-bars': {
+    background: '#373a47'
+  },
+  'bm-cross': {
+    background: '#bdc3c7'
+  },
+  'bm-menu': {
+    background: '#373a47',
+    padding: '2.5em 1.5em 0',
+    fontSize: '1.15em'
+  },
+  'bm-morph-shape': {
+    fill: '#373a47'
+  },
+  'bm-item-list': {
+    color: '#b8b7ad',
+    padding: '0.8em'
+  }
+}
+
+<Menu styles={ styles } />
 ```
 
 ### Browser Support

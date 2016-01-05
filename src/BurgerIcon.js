@@ -5,6 +5,10 @@ import Radium from 'radium';
 
 let BurgerIcon = Radium(React.createClass({
 
+  propTypes: {
+    styles: React.PropTypes.object
+  },
+
   getLineStyle(index) {
     return {
       position: 'absolute',
@@ -24,6 +28,12 @@ let BurgerIcon = Radium(React.createClass({
     return { hover: false };
   },
 
+  getDefaultProps() {
+    return {
+      styles: {}
+    };
+  },
+
   render() {
     var buttonStyle = {
       position: 'absolute',
@@ -41,10 +51,10 @@ let BurgerIcon = Radium(React.createClass({
     };
 
     return (
-      <div className="bm-burger-button" style={ { zIndex: 1 } }>
-        <span className="bm-burger-bars" style={ this.getLineStyle(0) }></span>
-        <span className="bm-burger-bars" style={ this.getLineStyle(1) }></span>
-        <span className="bm-burger-bars" style={ this.getLineStyle(2) }></span>
+      <div className="bm-burger-button" style={ [{ zIndex: 1 }, this.props.styles['bm-burger-button']] }>
+        <span className="bm-burger-bars" style={ [this.getLineStyle(0), this.props.styles['bm-burger-bars']] }></span>
+        <span className="bm-burger-bars" style={ [this.getLineStyle(1), this.props.styles['bm-burger-bars']] }></span>
+        <span className="bm-burger-bars" style={ [this.getLineStyle(2), this.props.styles['bm-burger-bars']] }></span>
         <button onClick={ this.props.onClick }
           onMouseEnter={ this.handleHover }
           onMouseLeave={ this.handleHover }

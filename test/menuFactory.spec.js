@@ -35,6 +35,17 @@ describe('menuFactory', () => {
       svg: {}
     }
   };
+  const mockStylesProp = {
+    'bm-menu': {
+      background: 'blue'
+    },
+    'bm-morph-shape': {
+      fill: 'blue'
+    },
+    'bm-item-list': {
+      color: 'white'
+    }
+  };
 
   function addWrapperElementsToDOM() {
     let outerContainer = document.createElement('div');
@@ -194,9 +205,38 @@ describe('menuFactory', () => {
     });
   });
 
+  describe('menu element', () => {
+
+    it('can be styled with props', () => {
+      component = TestUtils.renderIntoDocument(<Menu styles={ mockStylesProp } />);
+      const menu = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-menu');
+      expect(menu.style.background).to.equal('blue');
+    });
+  });
+
+  describe('morphShape element', () => {
+
+    it('can be styled with props', () => {
+      Menu = menuFactory(mockStyles.withSvg);
+      component = TestUtils.renderIntoDocument(<Menu styles={ mockStylesProp } />);
+      const shape = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-morph-shape');
+      expect(shape.style.fill).to.equal('blue');
+    });
+  });
+
+  describe('itemList element', () => {
+
+    it('can be styled with props', () => {
+      component = TestUtils.renderIntoDocument(<Menu styles={ mockStylesProp } />);
+      const itemList = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-item-list');
+      expect(itemList.style.color).to.equal('white');
+    });
+  });
+
   describe('toggleMenu method', () => {
 
     beforeEach(() => {
+      Menu = menuFactory(mockStyles.basic);
       component = TestUtils.renderIntoDocument(<Menu />);
     });
 

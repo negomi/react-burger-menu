@@ -18,6 +18,7 @@ export default (styles) => {
       outerContainerId: React.PropTypes.string,
       pageWrapId: React.PropTypes.string,
       right: React.PropTypes.bool,
+      styles: React.PropTypes.object,
       width: React.PropTypes.number
     },
 
@@ -95,6 +96,7 @@ export default (styles) => {
         outerContainerId: '',
         pageWrapId: '',
         right: false,
+        styles: {},
         width: 300
       };
     },
@@ -211,7 +213,7 @@ export default (styles) => {
       // Add a morph shape for animations that use SVG.
       if (styles.svg) {
         svg = (
-          <div className="bm-morph-shape" style={ styles.morphShape(this.props.right) }>
+          <div className="bm-morph-shape" style={ [styles.morphShape(this.props.right), this.props.styles['bm-morph-shape']] }>
             <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 800" preserveAspectRatio="none">
               <path d={ styles.svg.pathInitial }/>
             </svg>
@@ -224,16 +226,16 @@ export default (styles) => {
           <div className="bm-overlay" onClick={ this.toggleMenu } style={ baseStyles.overlay(this.state.isOpen) }></div>
           <div id={ this.props.id } className={ "bm-menu-wrap" } style={ menuWrapStyles }>
             { svg }
-            <div className="bm-menu" style={ menuStyles } >
-              <nav className="bm-item-list" style={ itemListStyles }>
+            <div className="bm-menu" style={ menuStyles.concat(this.props.styles['bm-menu']) } >
+              <nav className="bm-item-list" style={ itemListStyles.concat(this.props.styles['bm-item-list']) }>
                 { items }
               </nav>
             </div>
             <div style={ closeButtonStyles }>
-              <CrossIcon onClick={ this.toggleMenu } />
+              <CrossIcon onClick={ this.toggleMenu } styles={ this.props.styles } />
             </div>
           </div>
-          <BurgerIcon onClick={ this.toggleMenu } />
+          <BurgerIcon onClick={ this.toggleMenu } styles={ this.props.styles } />
         </div>
       );
     }
