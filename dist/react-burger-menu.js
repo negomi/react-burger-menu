@@ -49,25 +49,25 @@ var BurgerIcon = (0, _radium2['default'])(_react2['default'].createClass({
                 className: 'bm-burger-button',
                 style: [
                     { zIndex: 1 },
-                    this.props.styles['bm-burger-button']
+                    this.props.styles.bmBurgerButton
                 ]
             }, _react2['default'].createElement('span', {
                 className: 'bm-burger-bars',
                 style: [
                     this.getLineStyle(0),
-                    this.props.styles['bm-burger-bars']
+                    this.props.styles.bmBurgerBars
                 ]
             }), _react2['default'].createElement('span', {
                 className: 'bm-burger-bars',
                 style: [
                     this.getLineStyle(1),
-                    this.props.styles['bm-burger-bars']
+                    this.props.styles.bmBurgerBars
                 ]
             }), _react2['default'].createElement('span', {
                 className: 'bm-burger-bars',
                 style: [
                     this.getLineStyle(2),
-                    this.props.styles['bm-burger-bars']
+                    this.props.styles.bmBurgerBars
                 ]
             }), _react2['default'].createElement('button', {
                 onClick: this.props.onClick,
@@ -144,13 +144,13 @@ var CrossIcon = (0, _radium2['default'])(_react2['default'].createClass({
                 className: 'bm-cross',
                 style: [
                     this.getCrossStyle('before'),
-                    this.props.styles['bm-cross']
+                    this.props.styles.bmCross
                 ]
             }), _react2['default'].createElement('span', {
                 className: 'bm-cross',
                 style: [
                     this.getCrossStyle('after'),
-                    this.props.styles['bm-cross']
+                    this.props.styles.bmCross
                 ]
             }), _react2['default'].createElement('button', {
                 onClick: this.props.onClick,
@@ -389,7 +389,7 @@ exports['default'] = function (styles) {
                     className: 'bm-morph-shape',
                     style: [
                         styles.morphShape(this.props.right),
-                        this.props.styles['bm-morph-shape']
+                        this.props.styles.bmMorphShape
                     ]
                 }, _react2['default'].createElement('svg', {
                     xmlns: 'http://www.w3.org/2000/svg',
@@ -406,13 +406,13 @@ exports['default'] = function (styles) {
             }), _react2['default'].createElement('div', {
                 id: this.props.id,
                 className: 'bm-menu-wrap',
-                style: menuWrapStyles.concat(this.props.styles['bm-menu-wrap'])
+                style: menuWrapStyles.concat(this.props.styles.bmMenuWrap)
             }, svg, _react2['default'].createElement('div', {
                 className: 'bm-menu',
-                style: menuStyles.concat(this.props.styles['bm-menu'])
+                style: menuStyles.concat(this.props.styles.bmMenu)
             }, _react2['default'].createElement('nav', {
                 className: 'bm-item-list',
-                style: itemListStyles.concat(this.props.styles['bm-item-list'])
+                style: itemListStyles.concat(this.props.styles.bmItemList)
             }, items)), _react2['default'].createElement('div', { style: closeButtonStyles }, _react2['default'].createElement(_CrossIcon2['default'], {
                 onClick: this.toggleMenu,
                 styles: this.props.styles
