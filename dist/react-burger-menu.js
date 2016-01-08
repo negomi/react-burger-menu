@@ -10,6 +10,7 @@ var _react2 = _interopRequireDefault(_react);
 var _radium = typeof window !== 'undefined' ? window['Radium'] : typeof global !== 'undefined' ? global['Radium'] : null;
 var _radium2 = _interopRequireDefault(_radium);
 var BurgerIcon = (0, _radium2['default'])(_react2['default'].createClass({
+        propTypes: { styles: _react2['default'].PropTypes.object },
         getLineStyle: function getLineStyle(index) {
             return {
                 position: 'absolute',
@@ -25,6 +26,9 @@ var BurgerIcon = (0, _radium2['default'])(_react2['default'].createClass({
         },
         getInitialState: function getInitialState() {
             return { hover: false };
+        },
+        getDefaultProps: function getDefaultProps() {
+            return { styles: {} };
         },
         render: function render() {
             var buttonStyle = {
@@ -43,16 +47,28 @@ var BurgerIcon = (0, _radium2['default'])(_react2['default'].createClass({
                 };
             return _react2['default'].createElement('div', {
                 className: 'bm-burger-button',
-                style: { zIndex: 1 }
+                style: [
+                    { zIndex: 1 },
+                    this.props.styles['bm-burger-button']
+                ]
             }, _react2['default'].createElement('span', {
                 className: 'bm-burger-bars',
-                style: this.getLineStyle(0)
+                style: [
+                    this.getLineStyle(0),
+                    this.props.styles['bm-burger-bars']
+                ]
             }), _react2['default'].createElement('span', {
                 className: 'bm-burger-bars',
-                style: this.getLineStyle(1)
+                style: [
+                    this.getLineStyle(1),
+                    this.props.styles['bm-burger-bars']
+                ]
             }), _react2['default'].createElement('span', {
                 className: 'bm-burger-bars',
-                style: this.getLineStyle(2)
+                style: [
+                    this.getLineStyle(2),
+                    this.props.styles['bm-burger-bars']
+                ]
             }), _react2['default'].createElement('button', {
                 onClick: this.props.onClick,
                 onMouseEnter: this.handleHover,
@@ -91,6 +107,7 @@ var _react2 = _interopRequireDefault(_react);
 var _radium = typeof window !== 'undefined' ? window['Radium'] : typeof global !== 'undefined' ? global['Radium'] : null;
 var _radium2 = _interopRequireDefault(_radium);
 var CrossIcon = (0, _radium2['default'])(_react2['default'].createClass({
+        propTypes: { styles: _react2['default'].PropTypes.object },
         getCrossStyle: function getCrossStyle(type) {
             return {
                 position: 'absolute',
@@ -102,6 +119,9 @@ var CrossIcon = (0, _radium2['default'])(_react2['default'].createClass({
                 transform: type === 'before' ? 'rotate(45deg)' : 'rotate(-45deg)',
                 zIndex: 1
             };
+        },
+        getDefaultProps: function getDefaultProps() {
+            return { styles: {} };
         },
         render: function render() {
             var buttonStyle = {
@@ -122,10 +142,16 @@ var CrossIcon = (0, _radium2['default'])(_react2['default'].createClass({
                 };
             return _react2['default'].createElement('div', null, _react2['default'].createElement('span', {
                 className: 'bm-cross',
-                style: this.getCrossStyle('before')
+                style: [
+                    this.getCrossStyle('before'),
+                    this.props.styles['bm-cross']
+                ]
             }), _react2['default'].createElement('span', {
                 className: 'bm-cross',
-                style: this.getCrossStyle('after')
+                style: [
+                    this.getCrossStyle('after'),
+                    this.props.styles['bm-cross']
+                ]
             }), _react2['default'].createElement('button', {
                 onClick: this.props.onClick,
                 style: buttonStyle
@@ -189,6 +215,8 @@ function _interopRequireDefault(obj) {
 }
 var _react = typeof window !== 'undefined' ? window['React'] : typeof global !== 'undefined' ? global['React'] : null;
 var _react2 = _interopRequireDefault(_react);
+var _reactDom = typeof window !== 'undefined' ? window['ReactDOM'] : typeof global !== 'undefined' ? global['ReactDOM'] : null;
+var _reactDom2 = _interopRequireDefault(_reactDom);
 var _radium = typeof window !== 'undefined' ? window['Radium'] : typeof global !== 'undefined' ? global['Radium'] : null;
 var _radium2 = _interopRequireDefault(_radium);
 var _baseStyles = require('./baseStyles');
@@ -206,6 +234,7 @@ exports['default'] = function (styles) {
             outerContainerId: _react2['default'].PropTypes.string,
             pageWrapId: _react2['default'].PropTypes.string,
             right: _react2['default'].PropTypes.bool,
+            styles: _react2['default'].PropTypes.object,
             width: _react2['default'].PropTypes.number
         },
         toggleMenu: function toggleMenu() {
@@ -230,8 +259,8 @@ exports['default'] = function (styles) {
             }
         },
         handleExternalWrapper: function handleExternalWrapper(id, wrapperStyles, set) {
-            var html = document.getElementsByTagName('html')[0];
-            var body = document.getElementsByTagName('body')[0];
+            var html = document.querySelector('html');
+            var body = document.querySelector('body');
             var wrapper = document.getElementById(id);
             if (!wrapper) {
                 console.error('Element with ID \'' + id + '\' not found');
@@ -265,6 +294,7 @@ exports['default'] = function (styles) {
                 outerContainerId: '',
                 pageWrapId: '',
                 right: false,
+                styles: {},
                 width: 300
             };
         },
@@ -304,7 +334,7 @@ exports['default'] = function (styles) {
                     } catch (e) {
                         snap = typeof window !== 'undefined' ? window['Snap'] : typeof global !== 'undefined' ? global['Snap'] : null;
                     }
-                    var morphShape = document.getElementsByClassName('bm-morph-shape')[0];
+                    var morphShape = _reactDom2['default'].findDOMNode(_this, 'bm-morph-shape');
                     var s = snap(morphShape);
                     var path = s.select('path');
                     if (_this.state.isOpen) {
@@ -357,7 +387,10 @@ exports['default'] = function (styles) {
             if (styles.svg) {
                 svg = _react2['default'].createElement('div', {
                     className: 'bm-morph-shape',
-                    style: styles.morphShape(this.props.right)
+                    style: [
+                        styles.morphShape(this.props.right),
+                        this.props.styles['bm-morph-shape']
+                    ]
                 }, _react2['default'].createElement('svg', {
                     xmlns: 'http://www.w3.org/2000/svg',
                     width: '100%',
@@ -373,14 +406,20 @@ exports['default'] = function (styles) {
             }), _react2['default'].createElement('div', {
                 id: this.props.id,
                 className: 'bm-menu-wrap',
-                style: menuWrapStyles
+                style: menuWrapStyles.concat(this.props.styles['bm-menu-wrap'])
             }, svg, _react2['default'].createElement('div', {
                 className: 'bm-menu',
-                style: menuStyles
+                style: menuStyles.concat(this.props.styles['bm-menu'])
             }, _react2['default'].createElement('nav', {
                 className: 'bm-item-list',
-                style: itemListStyles
-            }, items)), _react2['default'].createElement('div', { style: closeButtonStyles }, _react2['default'].createElement(_CrossIcon2['default'], { onClick: this.toggleMenu }))), _react2['default'].createElement(_BurgerIcon2['default'], { onClick: this.toggleMenu }));
+                style: itemListStyles.concat(this.props.styles['bm-item-list'])
+            }, items)), _react2['default'].createElement('div', { style: closeButtonStyles }, _react2['default'].createElement(_CrossIcon2['default'], {
+                onClick: this.toggleMenu,
+                styles: this.props.styles
+            }))), _react2['default'].createElement(_BurgerIcon2['default'], {
+                onClick: this.toggleMenu,
+                styles: this.props.styles
+            }));
         }
     }));
 };
