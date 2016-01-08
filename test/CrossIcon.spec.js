@@ -10,7 +10,7 @@ describe('CrossIcon component', () => {
 
   let component;
   const mockStylesProp = {
-    'bm-cross': {
+    bmCross: {
       background: 'red'
     }
   };

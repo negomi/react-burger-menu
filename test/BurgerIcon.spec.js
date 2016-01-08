@@ -10,10 +10,10 @@ describe('BurgerIcon component', () => {
 
   let component;
   const mockStylesProp = {
-    'bm-burger-button': {
+    bmBurgerButton: {
       width: '40px'
     },
-    'bm-burger-bars': {
+    bmBurgerBars: {
       background: 'red'
     }
   };

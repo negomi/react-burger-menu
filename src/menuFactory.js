@@ -213,7 +213,7 @@ export default (styles) => {
       // Add a morph shape for animations that use SVG.
       if (styles.svg) {
         svg = (
-          <div className="bm-morph-shape" style={ [styles.morphShape(this.props.right), this.props.styles['bm-morph-shape']] }>
+          <div className="bm-morph-shape" style={ [styles.morphShape(this.props.right), this.props.styles.bmMorphShape] }>
             <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 800" preserveAspectRatio="none">
               <path d={ styles.svg.pathInitial }/>
             </svg>
@@ -224,10 +224,10 @@ export default (styles) => {
       return (
         <div>
           <div className="bm-overlay" onClick={ this.toggleMenu } style={ baseStyles.overlay(this.state.isOpen) }></div>
-          <div id={ this.props.id } className={ "bm-menu-wrap" } style={ menuWrapStyles.concat(this.props.styles['bm-menu-wrap']) }>
+          <div id={ this.props.id } className={ "bm-menu-wrap" } style={ menuWrapStyles.concat(this.props.styles.bmMenuWrap) }>
             { svg }
-            <div className="bm-menu" style={ menuStyles.concat(this.props.styles['bm-menu']) } >
-              <nav className="bm-item-list" style={ itemListStyles.concat(this.props.styles['bm-item-list']) }>
+            <div className="bm-menu" style={ menuStyles.concat(this.props.styles.bmMenu) } >
+              <nav className="bm-item-list" style={ itemListStyles.concat(this.props.styles.bmItemList) }>
                 { items }
               </nav>
             </div>

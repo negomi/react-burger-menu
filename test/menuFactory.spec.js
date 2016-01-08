@@ -36,16 +36,16 @@ describe('menuFactory', () => {
     }
   };
   const mockStylesProp = {
-    'bm-menu-wrap': {
+    bmMenuWrap: {
       transition: '0.2s'
     },
-    'bm-menu': {
+    bmMenu: {
       background: 'blue'
     },
-    'bm-morph-shape': {
+    bmMorphShape: {
       fill: 'blue'
     },
-    'bm-item-list': {
+    bmItemList: {
       color: 'white'
     }
   };

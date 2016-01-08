@@ -236,32 +236,32 @@ The component has the following helper classes:
 
 #### JavaScript
 
-The same styles can be written as a JavaScript object, with the class names as keys, like this:
+The same styles can be written as a JavaScript object like this:
 
 ```javascript
 var styles = {
-  'bm-burger-button': {
+  bmBurgerButton: {
     position: 'fixed',
     width: '36px',
     height: '30px',
     left: '36px',
     top: '36px'
   },
-  'bm-burger-bars': {
+  bmBurgerBars: {
     background: '#373a47'
   },
-  'bm-cross': {
+  bmCross: {
     background: '#bdc3c7'
   },
-  'bm-menu': {
+  bmMenu: {
     background: '#373a47',
     padding: '2.5em 1.5em 0',
     fontSize: '1.15em'
   },
-  'bm-morph-shape': {
+  bmMorphShape: {
     fill: '#373a47'
   },
-  'bm-item-list': {
+  bmItemList: {
     color: '#b8b7ad',
     padding: '0.8em'
   }
