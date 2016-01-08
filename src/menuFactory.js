@@ -224,7 +224,7 @@ export default (styles) => {
       return (
         <div>
           <div className="bm-overlay" onClick={ this.toggleMenu } style={ baseStyles.overlay(this.state.isOpen) }></div>
-          <div id={ this.props.id } className={ "bm-menu-wrap" } style={ menuWrapStyles }>
+          <div id={ this.props.id } className={ "bm-menu-wrap" } style={ menuWrapStyles.concat(this.props.styles['bm-menu-wrap']) }>
             { svg }
             <div className="bm-menu" style={ menuStyles.concat(this.props.styles['bm-menu']) } >
               <nav className="bm-item-list" style={ itemListStyles.concat(this.props.styles['bm-item-list']) }>

@@ -36,6 +36,9 @@ describe('menuFactory', () => {
     }
   };
   const mockStylesProp = {
+    'bm-menu-wrap': {
+      transition: '0.2s'
+    },
     'bm-menu': {
       background: 'blue'
     },
@@ -178,12 +181,17 @@ describe('menuFactory', () => {
 
     beforeEach(() => {
       Menu = menuFactory(mockStyles.basic);
-      component = TestUtils.renderIntoDocument(<Menu width={ 280 } />);
+      component = TestUtils.renderIntoDocument(<Menu width={ 280 } styles={ mockStylesProp } />);
     });
 
     it('allows width to be set by props', () => {
       const menuWrap = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-menu-wrap');
       expect(menuWrap.style.width).to.equal('280px');
+    });
+
+    it('can be styled with props', () => {
+      const menuWrap = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-menu-wrap');
+      expect(menuWrap.style.transition).to.equal('0.2s');
     });
 
     it('has the correct number of children', () => {
