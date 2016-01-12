@@ -29,15 +29,11 @@ describe('BurgerIcon component', () => {
     });
 
     it('contains three span elements', () => {
-      let spanElements = component.props.children.filter((child) => {
-        return child.type === 'span';
-      });
-
-      expect(spanElements).to.have.length(3);
+      expect(component.props.children[0].props.children).to.have.length(3);
     });
 
     it('contains a button element', () => {
-      expect(component.props.children[3].type).to.equal('button');
+      expect(component.props.children[1].type).to.equal('button');
     });
 
     it('has correct initial hover state', () => {
@@ -60,9 +56,9 @@ describe('BurgerIcon component', () => {
     });
 
     it('has the correct class', () => {
-      expect(component.props.children[0].props.className).to.contain('bm-burger-bars');
-      expect(component.props.children[1].props.className).to.contain('bm-burger-bars');
-      expect(component.props.children[2].props.className).to.contain('bm-burger-bars');
+      expect(component.props.children[0].props.children[0].props.className).to.contain('bm-burger-bars');
+      expect(component.props.children[0].props.children[1].props.className).to.contain('bm-burger-bars');
+      expect(component.props.children[0].props.children[2].props.className).to.contain('bm-burger-bars');
     });
 
     it('has the correct styles', () => {
@@ -74,14 +70,21 @@ describe('BurgerIcon component', () => {
         right: 0,
         opacity: 1
       };
-      expect(component.props.children[0].props.style).to.deep.equal(expected);
+      expect(component.props.children[0].props.children[0].props.style).to.deep.equal(expected);
     });
 
     it('can be styled with props', () => {
       component = createShallowComponent(<BurgerIcon styles={ mockStylesProp } />);
-      expect(component.props.children[0].props.style.background).to.equal('red');
-      expect(component.props.children[1].props.style.background).to.equal('red');
-      expect(component.props.children[2].props.style.background).to.equal('red');
+      expect(component.props.children[0].props.children[0].props.style.background).to.equal('red');
+      expect(component.props.children[0].props.children[1].props.style.background).to.equal('red');
+      expect(component.props.children[0].props.children[2].props.style.background).to.equal('red');
+    });
+
+    it('can be a custom image', () => {
+      const path = 'icon.jpg';
+      component = createShallowComponent(<BurgerIcon image={ path } />);
+      expect(component.props.children[0].type).to.equal('img');
+      expect(component.props.children[0].props.src).to.equal(path);
     });
   });
 
@@ -115,7 +118,7 @@ describe('BurgerIcon component', () => {
 
     it('has the correct styles', () => {
       component = createShallowComponent(<BurgerIcon />);
-      const button = component.props.children[3];
+      const button = component.props.children[1];
       const expected = {
         position: 'absolute',
         bottom: 0,

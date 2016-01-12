@@ -6,6 +6,7 @@ import Radium from 'radium';
 let BurgerIcon = Radium(React.createClass({
 
   propTypes: {
+    image: React.PropTypes.string,
     styles: React.PropTypes.object
   },
 
@@ -30,12 +31,14 @@ let BurgerIcon = Radium(React.createClass({
 
   getDefaultProps() {
     return {
+      image: '',
       styles: {}
     };
   },
 
   render() {
-    var buttonStyle = {
+    let icon;
+    let buttonStyle = {
       position: 'absolute',
       left: 0,
       right: 0,
@@ -50,11 +53,21 @@ let BurgerIcon = Radium(React.createClass({
       outline: 'none'
     };
 
+    if (this.props.image) {
+      icon = <img src={ this.props.image } alt="Menu icon" className="bm-icon" style={ [{width: '100%', height: '100%'}, this.props.styles.bmIcon] }/>;
+    } else {
+      icon = (
+        <span>
+          <span className="bm-burger-bars" style={ [this.getLineStyle(0), this.props.styles.bmBurgerBars] }></span>
+          <span className="bm-burger-bars" style={ [this.getLineStyle(1), this.props.styles.bmBurgerBars] }></span>
+          <span className="bm-burger-bars" style={ [this.getLineStyle(2), this.props.styles.bmBurgerBars] }></span>
+        </span>
+      );
+    }
+
     return (
       <div className="bm-burger-button" style={ [{ zIndex: 1 }, this.props.styles.bmBurgerButton] }>
-        <span className="bm-burger-bars" style={ [this.getLineStyle(0), this.props.styles.bmBurgerBars] }></span>
-        <span className="bm-burger-bars" style={ [this.getLineStyle(1), this.props.styles.bmBurgerBars] }></span>
-        <span className="bm-burger-bars" style={ [this.getLineStyle(2), this.props.styles.bmBurgerBars] }></span>
+        { icon }
         <button onClick={ this.props.onClick }
           onMouseEnter={ this.handleHover }
           onMouseLeave={ this.handleHover }

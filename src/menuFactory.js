@@ -12,6 +12,7 @@ export default (styles) => {
   return Radium(React.createClass({
 
     propTypes: {
+      customIcon: React.PropTypes.string,
       id: React.PropTypes.string,
       isOpen: React.PropTypes.bool,
       onStateChange: React.PropTypes.func,
@@ -90,6 +91,7 @@ export default (styles) => {
 
     getDefaultProps() {
       return {
+        customIcon: '',
         id: '',
         isOpen: false,
         onStateChange: () => {},
@@ -235,7 +237,7 @@ export default (styles) => {
               <CrossIcon onClick={ this.toggleMenu } styles={ this.props.styles } />
             </div>
           </div>
-          <BurgerIcon onClick={ this.toggleMenu } styles={ this.props.styles } />
+          <BurgerIcon onClick={ this.toggleMenu } styles={ this.props.styles } image={ this.props.customIcon } />
         </div>
       );
     }
