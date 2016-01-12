@@ -10,7 +10,10 @@ var _react2 = _interopRequireDefault(_react);
 var _radium = typeof window !== 'undefined' ? window['Radium'] : typeof global !== 'undefined' ? global['Radium'] : null;
 var _radium2 = _interopRequireDefault(_radium);
 var BurgerIcon = (0, _radium2['default'])(_react2['default'].createClass({
-        propTypes: { styles: _react2['default'].PropTypes.object },
+        propTypes: {
+            image: _react2['default'].PropTypes.string,
+            styles: _react2['default'].PropTypes.object
+        },
         getLineStyle: function getLineStyle(index) {
             return {
                 position: 'absolute',
@@ -28,9 +31,13 @@ var BurgerIcon = (0, _radium2['default'])(_react2['default'].createClass({
             return { hover: false };
         },
         getDefaultProps: function getDefaultProps() {
-            return { styles: {} };
+            return {
+                image: '',
+                styles: {}
+            };
         },
         render: function render() {
+            var icon = undefined;
             var buttonStyle = {
                     position: 'absolute',
                     left: 0,
@@ -45,31 +52,47 @@ var BurgerIcon = (0, _radium2['default'])(_react2['default'].createClass({
                     background: 'transparent',
                     outline: 'none'
                 };
+            if (this.props.image) {
+                icon = _react2['default'].createElement('img', {
+                    src: this.props.image,
+                    alt: 'Menu icon',
+                    className: 'bm-icon',
+                    style: [
+                        {
+                            width: '100%',
+                            height: '100%'
+                        },
+                        this.props.styles.bmIcon
+                    ]
+                });
+            } else {
+                icon = _react2['default'].createElement('span', null, _react2['default'].createElement('span', {
+                    className: 'bm-burger-bars',
+                    style: [
+                        this.getLineStyle(0),
+                        this.props.styles.bmBurgerBars
+                    ]
+                }), _react2['default'].createElement('span', {
+                    className: 'bm-burger-bars',
+                    style: [
+                        this.getLineStyle(1),
+                        this.props.styles.bmBurgerBars
+                    ]
+                }), _react2['default'].createElement('span', {
+                    className: 'bm-burger-bars',
+                    style: [
+                        this.getLineStyle(2),
+                        this.props.styles.bmBurgerBars
+                    ]
+                }));
+            }
             return _react2['default'].createElement('div', {
                 className: 'bm-burger-button',
                 style: [
                     { zIndex: 1 },
                     this.props.styles.bmBurgerButton
                 ]
-            }, _react2['default'].createElement('span', {
-                className: 'bm-burger-bars',
-                style: [
-                    this.getLineStyle(0),
-                    this.props.styles.bmBurgerBars
-                ]
-            }), _react2['default'].createElement('span', {
-                className: 'bm-burger-bars',
-                style: [
-                    this.getLineStyle(1),
-                    this.props.styles.bmBurgerBars
-                ]
-            }), _react2['default'].createElement('span', {
-                className: 'bm-burger-bars',
-                style: [
-                    this.getLineStyle(2),
-                    this.props.styles.bmBurgerBars
-                ]
-            }), _react2['default'].createElement('button', {
+            }, icon, _react2['default'].createElement('button', {
                 onClick: this.props.onClick,
                 onMouseEnter: this.handleHover,
                 onMouseLeave: this.handleHover,
@@ -228,6 +251,7 @@ var _CrossIcon2 = _interopRequireDefault(_CrossIcon);
 exports['default'] = function (styles) {
     return (0, _radium2['default'])(_react2['default'].createClass({
         propTypes: {
+            customIcon: _react2['default'].PropTypes.string,
             id: _react2['default'].PropTypes.string,
             isOpen: _react2['default'].PropTypes.bool,
             onStateChange: _react2['default'].PropTypes.func,
@@ -287,6 +311,7 @@ exports['default'] = function (styles) {
         },
         getDefaultProps: function getDefaultProps() {
             return {
+                customIcon: '',
                 id: '',
                 isOpen: false,
                 onStateChange: function onStateChange() {
@@ -418,7 +443,8 @@ exports['default'] = function (styles) {
                 styles: this.props.styles
             }))), _react2['default'].createElement(_BurgerIcon2['default'], {
                 onClick: this.toggleMenu,
-                styles: this.props.styles
+                styles: this.props.styles,
+                image: this.props.customIcon
             }));
         }
     }));
