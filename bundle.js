@@ -177,7 +177,7 @@ var styles = {
                 height: '100%',
                 background: 'rgba(0, 0, 0, 0.3)',
                 opacity: isOpen ? 1 : 0,
-                transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(-100%, 0, 0)',
+                transform: isOpen ? '' : 'translate3d(-100%, 0, 0)',
                 transition: isOpen ? 'opacity 0.3s' : 'opacity 0.3s, transform 0s 0.3s'
             };
         },
@@ -188,7 +188,7 @@ var styles = {
                 zIndex: 2,
                 width: width,
                 height: '100%',
-                transform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
+                transform: isOpen ? '' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
                 transition: 'all 0.5s'
             };
         },
@@ -478,7 +478,7 @@ var styles = {
             width -= 140;
             return {
                 position: 'fixed',
-                transform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(' + width + 'px, 0, 0)' : 'translate3d(-' + width + 'px, 0, 0)',
+                transform: isOpen ? '' : right ? 'translate3d(' + width + 'px, 0, 0)' : 'translate3d(-' + width + 'px, 0, 0)',
                 transition: isOpen ? 'opacity 0.1s 0.4s cubic-bezier(.17, .67, .1, 1.27), transform 0.1s 0.4s cubic-bezier(.17, .67, .1, 1.27)' : 'opacity 0s 0.3s cubic-bezier(.17, .67, .1, 1.27), transform 0s 0.3s cubic-bezier(.17, .67, .1, 1.27)',
                 opacity: isOpen ? 1 : 0
             };
@@ -553,7 +553,7 @@ var styles = {
         },
         pageWrap: function pageWrap(isOpen, width, right) {
             return {
-                transform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(-100px, 0, 0)' : 'translate3d(100px, 0, 0)',
+                transform: isOpen ? '' : right ? 'translate3d(-100px, 0, 0)' : 'translate3d(100px, 0, 0)',
                 transition: isOpen ? 'all 0.3s' : 'all 0.3s 0.1s'
             };
         },
@@ -574,13 +574,13 @@ var _menuFactory2 = _interopRequireDefault(_menuFactory);
 var styles = {
         menuWrap: function menuWrap(isOpen) {
             return {
-                transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(0, -100%, 0)',
+                transform: isOpen ? '' : 'translate3d(0, -100%, 0)',
                 transition: 'all 0.5s ease-in-out'
             };
         },
         pageWrap: function pageWrap(isOpen, width, right) {
             return {
-                transform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(-' + width + 'px, 0, 0)' : 'translate3d(' + width + 'px, 0, 0)',
+                transform: isOpen ? '' : right ? 'translate3d(-' + width + 'px, 0, 0)' : 'translate3d(' + width + 'px, 0, 0)',
                 transition: 'all 0.5s'
             };
         },
@@ -605,7 +605,7 @@ var _menuFactory2 = _interopRequireDefault(_menuFactory);
 var styles = {
         pageWrap: function pageWrap(isOpen, width, right) {
             return {
-                transform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(-' + width + 'px, 0, 0)' : 'translate3d(' + width + 'px, 0, 0)',
+                transform: isOpen ? '' : right ? 'translate3d(-' + width + 'px, 0, 0)' : 'translate3d(' + width + 'px, 0, 0)',
                 transition: 'all 0.5s'
             };
         },
@@ -626,7 +626,7 @@ var _menuFactory2 = _interopRequireDefault(_menuFactory);
 var styles = {
         pageWrap: function pageWrap(isOpen, width, right) {
             return {
-                transform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(-' + width + 'px, 0, 0) rotateY(15deg)' : 'translate3d(' + width + 'px, 0, 0) rotateY(-15deg)',
+                transform: isOpen ? '' : right ? 'translate3d(-' + width + 'px, 0, 0) rotateY(15deg)' : 'translate3d(' + width + 'px, 0, 0) rotateY(-15deg)',
                 transformOrigin: right ? '100% 50%' : '0% 50%',
                 transformStyle: 'preserve-3d',
                 transition: 'all 0.5s'
@@ -652,7 +652,7 @@ var _menuFactory2 = _interopRequireDefault(_menuFactory);
 var styles = {
         pageWrap: function pageWrap(isOpen, width) {
             return {
-                transform: isOpen ? 'translate3d(0, 0, -1px)' : 'translate3d(0, 0, -' + width + 'px)',
+                transform: isOpen ? '' : 'translate3d(0, 0, -' + width + 'px)',
                 transformOrigin: '100%',
                 transformStyle: 'preserve-3d',
                 transition: 'all 0.5s'
@@ -675,7 +675,7 @@ var _menuFactory2 = _interopRequireDefault(_menuFactory);
 var styles = {
         pageWrap: function pageWrap(isOpen, width, right) {
             return {
-                transform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(-100px, 0, -600px) rotateY(20deg)' : 'translate3d(100px, 0, -600px) rotateY(-20deg)',
+                transform: isOpen ? '' : right ? 'translate3d(-100px, 0, -600px) rotateY(20deg)' : 'translate3d(100px, 0, -600px) rotateY(-20deg)',
                 transformStyle: 'preserve-3d',
                 transition: 'all 0.5s',
                 overflow: isOpen ? '' : 'hidden'
@@ -713,13 +713,13 @@ var styles = {
         menuWrap: function menuWrap(isOpen, width, right) {
             width += 20;
             return {
-                transform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(' + width + 'px, 0, 0)' : 'translate3d(-' + width + 'px, 0, 0)',
+                transform: isOpen ? '' : right ? 'translate3d(' + width + 'px, 0, 0)' : 'translate3d(-' + width + 'px, 0, 0)',
                 transition: isOpen ? 'transform 0.8s cubic-bezier(0.7, 0, 0.3, 1)' : 'transform 0.4s cubic-bezier(0.7, 0, 0.3, 1)'
             };
         },
         item: function item(isOpen, width, nthChild) {
             return {
-                transform: isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(0, ' + nthChild * 500 + 'px, 0)',
+                transform: isOpen ? '' : 'translate3d(0, ' + nthChild * 500 + 'px, 0)',
                 transition: isOpen ? 'transform 0.8s cubic-bezier(0.7, 0, 0.3, 1)' : 'transform 0s 0.2s cubic-bezier(0.7, 0, 0.3, 1)'
             };
         }
