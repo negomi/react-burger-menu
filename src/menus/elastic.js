@@ -51,7 +51,7 @@ const styles = {
 
   pageWrap(isOpen, width, right) {
     return {
-      transform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(-100px, 0, 0)' : 'translate3d(100px, 0, 0)',
+      transform: isOpen ? '' : right ? 'translate3d(-100px, 0, 0)' : 'translate3d(100px, 0, 0)',
       transition: isOpen ? 'all 0.3s' : 'all 0.3s 0.1s'
     };
   },
