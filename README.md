@@ -44,7 +44,7 @@ npm run coverage
 
 The easiest way to use react-burger-menu is to install it from npm and include it in your own React build process (using [Browserify](http://browserify.org), [Webpack](http://webpack.github.io/), etc).
 
-*If you're using Webpack, you'll need to add `imports-loader` to your devDependencies.*
+*If you're using Webpack, you'll need to add `imports-loader` to your dependencies.*
 
 You can also use the standalone build by including `dist/react-burger-menu.js` in your page. If you use this, make sure you have already included React, and it is available as a global variable.
 
