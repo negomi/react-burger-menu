@@ -12,7 +12,7 @@ const styles = {
     }
   },
 
-  morphShape(right) {
+  morphShape(isOpen, width, right) {
     return {
       position: 'fixed',
       width: 120,
@@ -40,7 +40,7 @@ const styles = {
     };
   },
 
-  itemList(right) {
+  itemList(isOpen, width, right) {
     if (right) {
       return {
         position: 'relative',

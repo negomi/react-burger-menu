@@ -81,6 +81,26 @@ export default (styles) => {
       });
     },
 
+    // Builds styles incrementally for a given element.
+    getStyles(el, index) {
+      let propName = 'bm' + el.replace(el.charAt(0), el.charAt(0).toUpperCase());
+
+      // Set base styles.
+      let output = baseStyles[el] ? [baseStyles[el](this.state.isOpen, this.props.width, this.props.right)] : [];
+
+      // Add animation-specific styles.
+      if (styles[el]) {
+        output.push(styles[el](this.state.isOpen, this.props.width, this.props.right, index + 1));
+      }
+
+      // Add custom styles.
+      if (this.props.styles[propName]) {
+        output.push(this.props.styles[propName]);
+      }
+
+      return output;
+    },
+
     listenForClose(e) {
       e = e || window.event;
 
@@ -173,39 +193,13 @@ export default (styles) => {
 
     render() {
       let items, svg;
-      let menuWrapStyles = [baseStyles.menuWrap(this.state.isOpen, this.props.width, this.props.right)];
-      let menuStyles = [baseStyles.menu(this.state.isOpen)];
-      let itemListStyles = [baseStyles.itemList()];
-      let closeButtonStyles;
-
-      if (styles.menuWrap) {
-        menuWrapStyles.push(styles.menuWrap(this.state.isOpen, this.props.width, this.props.right));
-      }
-
-      if (styles.menu) {
-        menuStyles.push(styles.menu(this.state.isOpen, this.props.width, this.props.right));
-      }
-
-      if (styles.itemList) {
-        itemListStyles.push(styles.itemList(this.props.right));
-      }
-
-      if (styles.closeButton) {
-        closeButtonStyles = styles.closeButton(this.state.isOpen, this.props.width, this.props.right);
-      }
 
       // Add styles to user-defined menu items.
       if (this.props.children) {
         items = React.Children.map(this.props.children, (item, index) => {
-          let itemStyles = [baseStyles.item(this.state.isOpen)];
-
-          if (styles.item) {
-            itemStyles.push(styles.item(this.state.isOpen, this.props.width, index + 1, this.props.right));
-          }
-
           let extraProps = {
             key: index,
-            style: itemStyles
+            style: this.getStyles('item', index)
           };
 
           return React.cloneElement(item, extraProps);
@@ -215,7 +209,7 @@ export default (styles) => {
       // Add a morph shape for animations that use SVG.
       if (styles.svg) {
         svg = (
-          <div className="bm-morph-shape" style={ [styles.morphShape(this.props.right), this.props.styles.bmMorphShape] }>
+          <div className="bm-morph-shape" style={ this.getStyles('morphShape') }>
             <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 800" preserveAspectRatio="none">
               <path d={ styles.svg.pathInitial }/>
             </svg>
@@ -226,14 +220,14 @@ export default (styles) => {
       return (
         <div>
           <div className="bm-overlay" onClick={ this.toggleMenu } style={ baseStyles.overlay(this.state.isOpen) }></div>
-          <div id={ this.props.id } className={ "bm-menu-wrap" } style={ menuWrapStyles.concat(this.props.styles.bmMenuWrap) }>
+          <div id={ this.props.id } className={ "bm-menu-wrap" } style={ this.getStyles('menuWrap') }>
             { svg }
-            <div className="bm-menu" style={ menuStyles.concat(this.props.styles.bmMenu) } >
-              <nav className="bm-item-list" style={ itemListStyles.concat(this.props.styles.bmItemList) }>
+            <div className="bm-menu" style={ this.getStyles('menu') } >
+              <nav className="bm-item-list" style={ this.getStyles('itemList') }>
                 { items }
               </nav>
             </div>
-            <div style={ closeButtonStyles }>
+            <div style={ this.getStyles('closeButton') }>
               <CrossIcon onClick={ this.toggleMenu } styles={ this.props.styles } />
             </div>
           </div>

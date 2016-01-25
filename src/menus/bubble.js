@@ -27,7 +27,7 @@ const styles = {
     }
   },
 
-  morphShape(right) {
+  morphShape(isOpen, width, right) {
     return {
       position: 'fixed',
       width: '100%',
@@ -55,7 +55,7 @@ const styles = {
     };
   },
 
-  item(isOpen, width, nthChild, right) {
+  item(isOpen, width, right, nthChild) {
     width -= 140;
     return {
       transform: isOpen ? 'translate3d(0, 0, 0)' : right ? `translate3d(${width}px, 0, 0)` : `translate3d(-${width}px, 0, 0)`,
