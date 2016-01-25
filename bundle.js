@@ -283,6 +283,17 @@ exports['default'] = function (styles) {
                 element.style['overflow-x'] = set ? 'hidden' : '';
             });
         },
+        getStyles: function getStyles(el, index) {
+            var propName = 'bm' + el.replace(el.charAt(0), el.charAt(0).toUpperCase());
+            var output = _baseStyles2['default'][el] ? [_baseStyles2['default'][el](this.state.isOpen, this.props.width, this.props.right)] : [];
+            if (styles[el]) {
+                output.push(styles[el](this.state.isOpen, this.props.width, this.props.right, index + 1));
+            }
+            if (this.props.styles[propName]) {
+                output.push(this.props.styles[propName]);
+            }
+            return output;
+        },
         listenForClose: function listenForClose(e) {
             e = e || window.event;
             if (this.state.isOpen && (e.key === 'Escape' || e.keyCode === 27)) {
@@ -360,31 +371,11 @@ exports['default'] = function (styles) {
         render: function render() {
             var _this2 = this;
             var items = undefined, svg = undefined;
-            var menuWrapStyles = [_baseStyles2['default'].menuWrap(this.state.isOpen, this.props.width, this.props.right)];
-            var menuStyles = [_baseStyles2['default'].menu(this.state.isOpen)];
-            var itemListStyles = [_baseStyles2['default'].itemList()];
-            var closeButtonStyles = undefined;
-            if (styles.menuWrap) {
-                menuWrapStyles.push(styles.menuWrap(this.state.isOpen, this.props.width, this.props.right));
-            }
-            if (styles.menu) {
-                menuStyles.push(styles.menu(this.state.isOpen, this.props.width, this.props.right));
-            }
-            if (styles.itemList) {
-                itemListStyles.push(styles.itemList(this.props.right));
-            }
-            if (styles.closeButton) {
-                closeButtonStyles = styles.closeButton(this.state.isOpen, this.props.width, this.props.right);
-            }
             if (this.props.children) {
                 items = _react2['default'].Children.map(this.props.children, function (item, index) {
-                    var itemStyles = [_baseStyles2['default'].item(_this2.state.isOpen)];
-                    if (styles.item) {
-                        itemStyles.push(styles.item(_this2.state.isOpen, _this2.props.width, index + 1, _this2.props.right));
-                    }
                     var extraProps = {
                             key: index,
-                            style: itemStyles
+                            style: _this2.getStyles('item', index)
                         };
                     return _react2['default'].cloneElement(item, extraProps);
                 });
@@ -392,10 +383,7 @@ exports['default'] = function (styles) {
             if (styles.svg) {
                 svg = _react2['default'].createElement('div', {
                     className: 'bm-morph-shape',
-                    style: [
-                        styles.morphShape(this.props.right),
-                        this.props.styles.bmMorphShape
-                    ]
+                    style: this.getStyles('morphShape')
                 }, _react2['default'].createElement('svg', {
                     xmlns: 'http://www.w3.org/2000/svg',
                     width: '100%',
@@ -411,14 +399,14 @@ exports['default'] = function (styles) {
             }), _react2['default'].createElement('div', {
                 id: this.props.id,
                 className: 'bm-menu-wrap',
-                style: menuWrapStyles.concat(this.props.styles.bmMenuWrap)
+                style: this.getStyles('menuWrap')
             }, svg, _react2['default'].createElement('div', {
                 className: 'bm-menu',
-                style: menuStyles.concat(this.props.styles.bmMenu)
+                style: this.getStyles('menu')
             }, _react2['default'].createElement('nav', {
                 className: 'bm-item-list',
-                style: itemListStyles.concat(this.props.styles.bmItemList)
-            }, items)), _react2['default'].createElement('div', { style: closeButtonStyles }, _react2['default'].createElement(_CrossIcon2['default'], {
+                style: this.getStyles('itemList')
+            }, items)), _react2['default'].createElement('div', { style: this.getStyles('closeButton') }, _react2['default'].createElement(_CrossIcon2['default'], {
                 onClick: this.toggleMenu,
                 styles: this.props.styles
             }))), _react2['default'].createElement(_BurgerIcon2['default'], {
@@ -458,7 +446,7 @@ var styles = {
                 nextStep();
             }
         },
-        morphShape: function morphShape(right) {
+        morphShape: function morphShape(isOpen, width, right) {
             return {
                 position: 'fixed',
                 width: '100%',
@@ -483,7 +471,7 @@ var styles = {
                 opacity: isOpen ? 1 : 0
             };
         },
-        item: function item(isOpen, width, nthChild, right) {
+        item: function item(isOpen, width, right, nthChild) {
             width -= 140;
             return {
                 transform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(' + width + 'px, 0, 0)' : 'translate3d(-' + width + 'px, 0, 0)',
@@ -518,7 +506,7 @@ var styles = {
                 path.animate({ path: this.pathOpen }, 400, window.mina.easeinout);
             }
         },
-        morphShape: function morphShape(right) {
+        morphShape: function morphShape(isOpen, width, right) {
             return {
                 position: 'fixed',
                 width: 120,
@@ -543,7 +531,7 @@ var styles = {
                 boxSizing: 'border-box'
             };
         },
-        itemList: function itemList(right) {
+        itemList: function itemList(isOpen, width, right) {
             if (right) {
                 return {
                     position: 'relative',
@@ -717,7 +705,7 @@ var styles = {
                 transition: isOpen ? 'transform 0.8s cubic-bezier(0.7, 0, 0.3, 1)' : 'transform 0.4s cubic-bezier(0.7, 0, 0.3, 1)'
             };
         },
-        item: function item(isOpen, width, nthChild) {
+        item: function item(isOpen, width, right, nthChild) {
             return {
                 transform: isOpen ? '' : 'translate3d(0, ' + nthChild * 500 + 'px, 0)',
                 transition: isOpen ? 'transform 0.8s cubic-bezier(0.7, 0, 0.3, 1)' : 'transform 0s 0.2s cubic-bezier(0.7, 0, 0.3, 1)'
