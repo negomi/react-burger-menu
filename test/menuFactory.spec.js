@@ -413,5 +413,30 @@ describe('menuFactory', () => {
       ReactDOM.render(<Menu isOpen />, container);
       expect(component.state.isOpen).to.be.true;
     });
+
+    it('will not change when isOpen prop was not changed', () => {
+      let container = document.createElement('div');
+      let ParentComponent = React.createClass({
+        getInitialState() {
+          return { collapsed: true };
+        },
+        changeProps() {
+          this.setState({
+            collapsed: !this.state.collapsed
+          });
+        },
+        render() {
+          return (
+            <Menu ref="menu" {...this.state} />
+          );
+        }
+      });
+
+      component = ReactDOM.render(<ParentComponent />, container);
+      const menu = component.refs.menu;
+      menu.setState({isOpen: true});
+      component.changeProps();
+      expect(menu.state.isOpen).to.be.true;
+    });
   });
 });
