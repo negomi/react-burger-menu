@@ -32,7 +32,7 @@
     "eslint-plugin-react": "^3.4.1",
     "gulp": "^3.8.11",
     "gulp-mocha": "^2.2.0",
-    "jsdom": "^7.0.1",
+    "jsdom": "^8.0.2",
     "mocha": "^2.3.4",
     "react-addons-test-utils": "^0.14.0",
     "react-component-gulp-tasks": "^0.7.1",
