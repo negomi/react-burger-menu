@@ -214,7 +214,13 @@ The component has the following helper classes:
   background: #373a47;
 }
 
-/* Color of close button cross */
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 24px;
+  width: 24px;
+}
+
+/* Color/shape of close button cross */
 .bm-cross {
   background: #bdc3c7;
 }
@@ -253,6 +259,10 @@ var styles = {
   },
   bmBurgerBars: {
     background: '#373a47'
+  },
+  bmCrossButton: {
+    height: '24px',
+    width: '24px'
   },
   bmCross: {
     background: '#bdc3c7'

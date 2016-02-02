@@ -12,6 +12,9 @@ describe('CrossIcon component', () => {
   const mockStylesProp = {
     bmCross: {
       background: 'red'
+    },
+    bmCrossButton: {
+      height: '30px'
     }
   };
 
@@ -76,6 +79,12 @@ describe('CrossIcon component', () => {
       component = TestUtils.renderIntoDocument(<CrossIcon />);
     });
 
+    it('has the correct class', () => {
+      component = createShallowComponent(<CrossIcon />);
+      const button = component.props.children[2];
+      expect(button.props.className).to.contain('bm-cross-button');
+    });
+
     it('contains descriptive text', () => {
       const button = TestUtils.findRenderedDOMComponentWithTag(component, 'button');
       expect(button.innerHTML).to.equal('Close Menu');
@@ -94,11 +103,11 @@ describe('CrossIcon component', () => {
       component = createShallowComponent(<CrossIcon />);
       const button = component.props.children[2];
       const expected = {
-        width: 14,
-        height: 14,
+        width: 24,
+        height: 24,
         position: 'absolute',
-        right: 13,
-        top: 14,
+        right: 8,
+        top: 8,
         padding: 0,
         overflow: 'hidden',
         textIndent: 14,
@@ -110,6 +119,12 @@ describe('CrossIcon component', () => {
         zIndex: 1
       };
       expect(button.props.style).to.deep.equal(expected);
+    });
+
+    it('can be styled with props', () => {
+      component = createShallowComponent(<CrossIcon styles={ mockStylesProp } />);
+      const button = component.props.children[2];
+      expect(button.props.style.height).to.equal('30px');
     });
   });
 });

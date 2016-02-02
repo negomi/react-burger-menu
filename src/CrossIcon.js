@@ -30,11 +30,11 @@ let CrossIcon = Radium(React.createClass({
 
   render() {
     var buttonStyle = {
-      width: 14,
-      height: 14,
+      width: 24,
+      height: 24,
       position: 'absolute',
-      right: 13,
-      top: 14,
+      right: 8,
+      top: 8,
       padding: 0,
       overflow: 'hidden',
       textIndent: 14,
@@ -50,7 +50,7 @@ let CrossIcon = Radium(React.createClass({
       <div>
         <span className="bm-cross" style={ [this.getCrossStyle('before'), this.props.styles.bmCross] }></span>
         <span className="bm-cross" style={ [this.getCrossStyle('after'), this.props.styles.bmCross] }></span>
-        <button onClick={ this.props.onClick } style={ buttonStyle }>Close Menu</button>
+        <button className="bm-cross-button" onClick={ this.props.onClick } style={ [buttonStyle, this.props.styles.bmCrossButton] }>Close Menu</button>
       </div>
     );
   }
