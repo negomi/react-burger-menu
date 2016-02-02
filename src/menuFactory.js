@@ -186,7 +186,7 @@ export default (styles) => {
 
     componentWillReceiveProps(nextProps) {
       // Allow open state to be controlled by props.
-      if (nextProps.isOpen !== this.state.isOpen) {
+      if (nextProps.isOpen !== this.props.isOpen && nextProps.isOpen !== this.state.isOpen) {
         this.toggleMenu();
       }
     },
