@@ -130,11 +130,11 @@ var CrossIcon = (0, _radium2['default'])(_react2['default'].createClass({
         },
         render: function render() {
             var buttonStyle = {
-                    width: 14,
-                    height: 14,
+                    width: 24,
+                    height: 24,
                     position: 'absolute',
-                    right: 13,
-                    top: 14,
+                    right: 8,
+                    top: 8,
                     padding: 0,
                     overflow: 'hidden',
                     textIndent: 14,
@@ -158,8 +158,12 @@ var CrossIcon = (0, _radium2['default'])(_react2['default'].createClass({
                     this.props.styles.bmCross
                 ]
             }), _react2['default'].createElement('button', {
+                className: 'bm-cross-button',
                 onClick: this.props.onClick,
-                style: buttonStyle
+                style: [
+                    buttonStyle,
+                    this.props.styles.bmCrossButton
+                ]
             }, 'Close Menu'));
         }
     }));
@@ -364,7 +368,7 @@ exports['default'] = function (styles) {
             }
         },
         componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-            if (nextProps.isOpen !== this.state.isOpen) {
+            if (nextProps.isOpen !== this.props.isOpen && nextProps.isOpen !== this.state.isOpen) {
                 this.toggleMenu();
             }
         },
