@@ -427,7 +427,7 @@ describe('menuFactory', () => {
         },
         render() {
           return (
-            <Menu ref="menu" {...this.state} />
+            <Menu ref="menu" />
           );
         }
       });
