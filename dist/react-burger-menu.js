@@ -419,7 +419,7 @@ exports['default'] = function (styles) {
             return _react2['default'].createElement('div', null, _react2['default'].createElement('div', {
                 className: 'bm-overlay',
                 onClick: this.toggleMenu,
-                style: _baseStyles2['default'].overlay(this.state.isOpen)
+                style: this.getStyles('overlay')
             }), _react2['default'].createElement('div', {
                 id: this.props.id,
                 className: 'bm-menu-wrap',
