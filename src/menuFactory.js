@@ -219,7 +219,7 @@ export default (styles) => {
 
       return (
         <div>
-          <div className="bm-overlay" onClick={ this.toggleMenu } style={ baseStyles.overlay(this.state.isOpen) }></div>
+          <div className="bm-overlay" onClick={ this.toggleMenu } style={ this.getStyles('overlay') }></div>
           <div id={ this.props.id } className={ "bm-menu-wrap" } style={ this.getStyles('menuWrap') }>
             { svg }
             <div className="bm-menu" style={ this.getStyles('menu') } >

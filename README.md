@@ -242,6 +242,11 @@ The component has the following helper classes:
   color: #b8b7ad;
   padding: 0.8em;
 }
+
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.3);
+}
 ```
 
 #### JavaScript
@@ -278,6 +283,9 @@ var styles = {
   bmItemList: {
     color: '#b8b7ad',
     padding: '0.8em'
+  },
+  bmOverlay: {
+    background: 'rgba(0, 0, 0, 0.3)'
   }
 }
 

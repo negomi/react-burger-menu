@@ -47,6 +47,9 @@ describe('menuFactory', () => {
     },
     bmItemList: {
       color: 'white'
+    },
+    bmOverlay: {
+      background: 'rgba(0, 0, 0, 0.5)'
     }
   };
 
@@ -238,6 +241,15 @@ describe('menuFactory', () => {
       component = TestUtils.renderIntoDocument(<Menu styles={ mockStylesProp } />);
       const itemList = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-item-list');
       expect(itemList.style.color).to.equal('white');
+    });
+  });
+
+  describe('overlay', () => {
+
+    it('can be styled with props', () => {
+      component = TestUtils.renderIntoDocument(<Menu styles={ mockStylesProp } />);
+      const overlay = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-overlay');
+      expect(overlay.style.background).to.equal('rgba(0, 0, 0, 0.5)');
     });
   });
 
