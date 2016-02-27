@@ -112,58 +112,90 @@ var _react2 = _interopRequireDefault(_react);
 var _radium = require('radium');
 var _radium2 = _interopRequireDefault(_radium);
 var CrossIcon = (0, _radium2['default'])(_react2['default'].createClass({
-        propTypes: { styles: _react2['default'].PropTypes.object },
+        propTypes: {
+            image: _react2['default'].PropTypes.string,
+            styles: _react2['default'].PropTypes.object
+        },
         getCrossStyle: function getCrossStyle(type) {
             return {
                 position: 'absolute',
                 width: 3,
                 height: 14,
-                top: 14,
-                right: 18,
-                cursor: 'pointer',
-                transform: type === 'before' ? 'rotate(45deg)' : 'rotate(-45deg)',
-                zIndex: 1
+                transform: type === 'before' ? 'rotate(45deg)' : 'rotate(-45deg)'
             };
         },
         getDefaultProps: function getDefaultProps() {
-            return { styles: {} };
+            return {
+                image: '',
+                styles: {}
+            };
         },
         render: function render() {
-            var buttonStyle = {
+            var icon;
+            var buttonWrapperStyle = {
+                    position: 'absolute',
                     width: 24,
                     height: 24,
-                    position: 'absolute',
                     right: 8,
-                    top: 8,
-                    padding: 0,
-                    overflow: 'hidden',
-                    textIndent: 14,
-                    fontSize: 14,
-                    border: 'none',
-                    background: 'transparent',
-                    color: 'transparent',
-                    outline: 'none',
-                    zIndex: 1
+                    top: 8
                 };
-            return _react2['default'].createElement('div', null, _react2['default'].createElement('span', {
-                className: 'bm-cross',
-                style: [
-                    this.getCrossStyle('before'),
-                    this.props.styles.bmCross
-                ]
-            }), _react2['default'].createElement('span', {
-                className: 'bm-cross',
-                style: [
-                    this.getCrossStyle('after'),
-                    this.props.styles.bmCross
-                ]
-            }), _react2['default'].createElement('button', {
+            var buttonStyle = {
+                    position: 'absolute',
+                    left: 0,
+                    right: 0,
+                    top: 0,
+                    bottom: 0,
+                    margin: 0,
+                    padding: 0,
+                    border: 'none',
+                    fontSize: 8,
+                    color: 'transparent',
+                    background: 'transparent',
+                    outline: 'none'
+                };
+            if (this.props.image) {
+                icon = _react2['default'].createElement('img', {
+                    src: this.props.image,
+                    alt: 'Cross icon',
+                    className: 'bm-cross',
+                    style: [
+                        {
+                            width: '100%',
+                            height: '100%'
+                        },
+                        this.props.styles.bmCross
+                    ]
+                });
+            } else {
+                icon = _react2['default'].createElement('span', {
+                    style: [{
+                            position: 'absolute',
+                            top: '6px',
+                            right: '14px'
+                        }]
+                }, _react2['default'].createElement('span', {
+                    className: 'bm-cross',
+                    style: [
+                        this.getCrossStyle('before'),
+                        this.props.styles.bmCross
+                    ]
+                }), _react2['default'].createElement('span', {
+                    className: 'bm-cross',
+                    style: [
+                        this.getCrossStyle('after'),
+                        this.props.styles.bmCross
+                    ]
+                }));
+            }
+            return _react2['default'].createElement('div', {
                 className: 'bm-cross-button',
-                onClick: this.props.onClick,
                 style: [
-                    buttonStyle,
+                    buttonWrapperStyle,
                     this.props.styles.bmCrossButton
                 ]
+            }, icon, _react2['default'].createElement('button', {
+                onClick: this.props.onClick,
+                style: buttonStyle
             }, 'Close Menu'));
         }
     }));
@@ -235,7 +267,8 @@ var _CrossIcon2 = _interopRequireDefault(_CrossIcon);
 exports['default'] = function (styles) {
     return (0, _radium2['default'])(_react2['default'].createClass({
         propTypes: {
-            customIcon: _react2['default'].PropTypes.string,
+            customBurgerIcon: _react2['default'].PropTypes.string,
+            customCrossIcon: _react2['default'].PropTypes.string,
             id: _react2['default'].PropTypes.string,
             isOpen: _react2['default'].PropTypes.bool,
             onStateChange: _react2['default'].PropTypes.func,
@@ -306,7 +339,8 @@ exports['default'] = function (styles) {
         },
         getDefaultProps: function getDefaultProps() {
             return {
-                customIcon: '',
+                customBurgerIcon: '',
+                customCrossIcon: '',
                 id: '',
                 isOpen: false,
                 onStateChange: function onStateChange() {
@@ -412,11 +446,12 @@ exports['default'] = function (styles) {
                 style: this.getStyles('itemList')
             }, items)), _react2['default'].createElement('div', { style: this.getStyles('closeButton') }, _react2['default'].createElement(_CrossIcon2['default'], {
                 onClick: this.toggleMenu,
-                styles: this.props.styles
+                styles: this.props.styles,
+                image: this.props.customCrossIcon
             }))), _react2['default'].createElement(_BurgerIcon2['default'], {
                 onClick: this.toggleMenu,
                 styles: this.props.styles,
-                image: this.props.customIcon
+                image: this.props.customBurgerIcon
             }));
         }
     }));
