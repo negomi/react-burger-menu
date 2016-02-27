@@ -29,27 +29,39 @@ describe('CrossIcon component', () => {
     });
 
     it('contains two span elements', () => {
-      let spanElements = component.props.children.filter((child) => {
-        return child.type === 'span';
-      });
-
-      expect(spanElements).to.have.length(2);
+      expect(component.props.children[0].props.children).to.have.length(2);
     });
 
     it('contains a button element', () => {
-      expect(component.props.children[2].type).to.equal('button');
+      expect(component.props.children[1].type).to.equal('button');
+    });
+  });
+
+  describe('wrapper element', () => {
+
+    it('has the correct class', () => {
+      component = createShallowComponent(<CrossIcon />);
+      expect(component.props.className).to.contain('bm-cross-button');
+    });
+
+    it('can be styled with props', () => {
+      component = createShallowComponent(<CrossIcon styles={ mockStylesProp } />);
+      expect(component.props.style.height).to.equal('30px');
     });
   });
 
   describe('visual icon', () => {
 
+    let icon;
+
     beforeEach(() => {
       component = createShallowComponent(<CrossIcon />);
+      icon = component.props.children[0];
     });
 
     it('has the correct class', () => {
-      expect(component.props.children[0].props.className).to.contain('bm-cross');
-      expect(component.props.children[1].props.className).to.contain('bm-cross');
+      expect(icon.props.children[0].props.className).to.contain('bm-cross');
+      expect(icon.props.children[1].props.className).to.contain('bm-cross');
     });
 
     it('has the correct styles', () => {
@@ -57,19 +69,23 @@ describe('CrossIcon component', () => {
         position: 'absolute',
         width: 3,
         height: 14,
-        top: 14,
-        right: 18,
-        transform: 'rotate(45deg)',
-        cursor: 'pointer',
-        zIndex: 1
+        transform: 'rotate(45deg)'
       };
-      expect(component.props.children[0].props.style).to.deep.equal(expected);
+      expect(icon.props.children[0].props.style).to.deep.equal(expected);
     });
 
     it('can be styled with props', () => {
       component = createShallowComponent(<CrossIcon styles={ mockStylesProp } />);
-      expect(component.props.children[0].props.style.background).to.equal('red');
-      expect(component.props.children[1].props.style.background).to.equal('red');
+      icon = component.props.children[0];
+      expect(icon.props.children[0].props.style.background).to.equal('red');
+      expect(icon.props.children[1].props.style.background).to.equal('red');
+    });
+
+    it('can be a custom image', () => {
+      const path = 'icon.jpg';
+      component = createShallowComponent(<CrossIcon image={ path } />);
+      expect(component.props.children[0].type).to.equal('img');
+      expect(component.props.children[0].props.src).to.equal(path);
     });
   });
 
@@ -77,12 +93,6 @@ describe('CrossIcon component', () => {
 
     beforeEach(() => {
       component = TestUtils.renderIntoDocument(<CrossIcon />);
-    });
-
-    it('has the correct class', () => {
-      component = createShallowComponent(<CrossIcon />);
-      const button = component.props.children[2];
-      expect(button.props.className).to.contain('bm-cross-button');
     });
 
     it('contains descriptive text', () => {
@@ -101,30 +111,22 @@ describe('CrossIcon component', () => {
 
     it('has the correct styles', () => {
       component = createShallowComponent(<CrossIcon />);
-      const button = component.props.children[2];
+      const button = component.props.children[1];
       const expected = {
-        width: 24,
-        height: 24,
         position: 'absolute',
-        right: 8,
-        top: 8,
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0,
+        margin: 0,
         padding: 0,
-        overflow: 'hidden',
-        textIndent: 14,
-        fontSize: 14,
         border: 'none',
-        background: 'transparent',
+        fontSize: 8,
         color: 'transparent',
-        outline: 'none',
-        zIndex: 1
+        background: 'transparent',
+        outline: 'none'
       };
       expect(button.props.style).to.deep.equal(expected);
-    });
-
-    it('can be styled with props', () => {
-      component = createShallowComponent(<CrossIcon styles={ mockStylesProp } />);
-      const button = component.props.children[2];
-      expect(button.props.style.height).to.equal('30px');
     });
   });
 });

@@ -173,15 +173,16 @@ var isMenuOpen = function(state) {
 <Menu onStateChange={ isMenuOpen } />
 ```
 
-#### Custom icon
+#### Custom icons
 
-You can replace the default bars that make up the 'burger' icon with an image. Pass its path as the `customIcon` prop.
+You can replace the default bars that make up the burger and cross icons with images. Pass the image paths as the `customBurgerIcon` and `customCrossIcon` props respectively.
 
 ```javascript
-<Menu customIcon={ 'img/icon.svg' } />
+<Menu customBurgerIcon={ 'img/icon.svg' } />
+<Menu customCrossIcon={ 'img/cross.svg' } />
 ```
 
-You should adjust the size using the `.bm-burger-button` element, but the image itself will have the class `.bm-icon` if you need to access it directly.
+You should adjust their size using the `.bm-burger-button` and `.bm-cross-button` classes, but the image itself will have the class `.bm-icon` or `.bm-cross` if you need to access it directly.
 
 #### Custom ID
 

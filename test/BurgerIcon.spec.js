@@ -43,6 +43,11 @@ describe('BurgerIcon component', () => {
 
   describe('wrapper element', () => {
 
+    it('has the correct class', () => {
+      component = createShallowComponent(<BurgerIcon />);
+      expect(component.props.className).to.contain('bm-burger-button');
+    });
+
     it('can be styled with props', () => {
       component = createShallowComponent(<BurgerIcon styles={ mockStylesProp } />);
       expect(component.props.style.width).to.equal('40px');
@@ -51,14 +56,17 @@ describe('BurgerIcon component', () => {
 
   describe('visual icon', () => {
 
+    let icon;
+
     beforeEach(() => {
       component = createShallowComponent(<BurgerIcon />);
+      icon = component.props.children[0];
     });
 
     it('has the correct class', () => {
-      expect(component.props.children[0].props.children[0].props.className).to.contain('bm-burger-bars');
-      expect(component.props.children[0].props.children[1].props.className).to.contain('bm-burger-bars');
-      expect(component.props.children[0].props.children[2].props.className).to.contain('bm-burger-bars');
+      expect(icon.props.children[0].props.className).to.contain('bm-burger-bars');
+      expect(icon.props.children[1].props.className).to.contain('bm-burger-bars');
+      expect(icon.props.children[2].props.className).to.contain('bm-burger-bars');
     });
 
     it('has the correct styles', () => {
@@ -70,14 +78,15 @@ describe('BurgerIcon component', () => {
         right: 0,
         opacity: 1
       };
-      expect(component.props.children[0].props.children[0].props.style).to.deep.equal(expected);
+      expect(icon.props.children[0].props.style).to.deep.equal(expected);
     });
 
     it('can be styled with props', () => {
       component = createShallowComponent(<BurgerIcon styles={ mockStylesProp } />);
-      expect(component.props.children[0].props.children[0].props.style.background).to.equal('red');
-      expect(component.props.children[0].props.children[1].props.style.background).to.equal('red');
-      expect(component.props.children[0].props.children[2].props.style.background).to.equal('red');
+      icon = component.props.children[0];
+      expect(icon.props.children[0].props.style.background).to.equal('red');
+      expect(icon.props.children[1].props.style.background).to.equal('red');
+      expect(icon.props.children[2].props.style.background).to.equal('red');
     });
 
     it('can be a custom image', () => {
