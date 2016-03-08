@@ -25,13 +25,11 @@ export default (styles) => {
     },
 
     toggleMenu(isOpenVal) {
-      // Disregard arg if not a boolean.
-      isOpenVal = typeof isOpenVal === 'boolean' ? isOpenVal : undefined;
-
       // Order important: handle wrappers before setting sidebar state.
       this.applyWrapperStyles();
 
-      const newState = { isOpen: isOpenVal ? isOpenVal : !this.state.isOpen };
+      // Disregard isOpenVal if not a boolean.
+      const newState = { isOpen: typeof isOpenVal === 'boolean' ? isOpenVal : !this.state.isOpen };
       this.setState(newState, this.props.onStateChange.bind(null, newState));
     },
 
