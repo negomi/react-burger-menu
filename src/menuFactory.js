@@ -24,11 +24,14 @@ export default (styles) => {
       width: React.PropTypes.number
     },
 
-    toggleMenu() {
+    toggleMenu(isOpenVal) {
+      // Disregard arg if not a boolean.
+      isOpenVal = typeof isOpenVal === 'boolean' ? isOpenVal : undefined;
+
       // Order important: handle wrappers before setting sidebar state.
       this.applyWrapperStyles();
 
-      const newState = { isOpen: !this.state.isOpen };
+      const newState = { isOpen: isOpenVal ? isOpenVal : !this.state.isOpen };
       this.setState(newState, this.props.onStateChange.bind(null, newState));
     },
 
@@ -115,11 +118,9 @@ export default (styles) => {
         customBurgerIcon: '',
         customCrossIcon: '',
         id: '',
-        isOpen: false,
         onStateChange: () => {},
         outerContainerId: '',
         pageWrapId: '',
-        right: false,
         styles: {},
         width: 300
       };
@@ -145,7 +146,7 @@ export default (styles) => {
       }
 
       // Allow initial open state to be set by props.
-      if (this.props.isOpen !== this.state.isOpen) {
+      if (this.props.isOpen) {
         this.toggleMenu();
       }
     },
@@ -188,8 +189,8 @@ export default (styles) => {
 
     componentWillReceiveProps(nextProps) {
       // Allow open state to be controlled by props.
-      if (nextProps.isOpen !== this.props.isOpen && nextProps.isOpen !== this.state.isOpen) {
-        this.toggleMenu();
+      if (typeof nextProps.isOpen === 'boolean') {
+        this.toggleMenu(nextProps.isOpen);
       }
     },
 
