@@ -299,9 +299,8 @@ exports['default'] = function (styles) {
             width: _react2['default'].PropTypes.number
         },
         toggleMenu: function toggleMenu(isOpenVal) {
-            isOpenVal = typeof isOpenVal === 'boolean' ? isOpenVal : undefined;
             this.applyWrapperStyles();
-            var newState = { isOpen: isOpenVal ? isOpenVal : !this.state.isOpen };
+            var newState = { isOpen: typeof isOpenVal === 'boolean' ? isOpenVal : !this.state.isOpen };
             this.setState(newState, this.props.onStateChange.bind(null, newState));
         },
         applyWrapperStyles: function applyWrapperStyles() {
