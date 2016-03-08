@@ -298,9 +298,10 @@ exports['default'] = function (styles) {
             styles: _react2['default'].PropTypes.object,
             width: _react2['default'].PropTypes.number
         },
-        toggleMenu: function toggleMenu() {
+        toggleMenu: function toggleMenu(isOpenVal) {
+            isOpenVal = typeof isOpenVal === 'boolean' ? isOpenVal : undefined;
             this.applyWrapperStyles();
-            var newState = { isOpen: !this.state.isOpen };
+            var newState = { isOpen: isOpenVal ? isOpenVal : !this.state.isOpen };
             this.setState(newState, this.props.onStateChange.bind(null, newState));
         },
         applyWrapperStyles: function applyWrapperStyles() {
@@ -362,12 +363,10 @@ exports['default'] = function (styles) {
                 customBurgerIcon: '',
                 customCrossIcon: '',
                 id: '',
-                isOpen: false,
                 onStateChange: function onStateChange() {
                 },
                 outerContainerId: '',
                 pageWrapId: '',
-                right: false,
                 styles: {},
                 width: 300
             };
@@ -385,7 +384,7 @@ exports['default'] = function (styles) {
             if (styles.outerContainer && !this.props.outerContainerId) {
                 console.warn('No outerContainerId supplied');
             }
-            if (this.props.isOpen !== this.state.isOpen) {
+            if (this.props.isOpen) {
                 this.toggleMenu();
             }
         },
@@ -422,8 +421,8 @@ exports['default'] = function (styles) {
             }
         },
         componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-            if (nextProps.isOpen !== this.props.isOpen && nextProps.isOpen !== this.state.isOpen) {
-                this.toggleMenu();
+            if (typeof nextProps.isOpen === 'boolean') {
+                this.toggleMenu(nextProps.isOpen);
             }
         },
         render: function render() {
