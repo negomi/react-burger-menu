@@ -271,6 +271,7 @@ exports['default'] = function (styles) {
             customCrossIcon: _react2['default'].PropTypes.string,
             id: _react2['default'].PropTypes.string,
             isOpen: _react2['default'].PropTypes.bool,
+            noOverlay: _react2['default'].PropTypes.bool,
             onStateChange: _react2['default'].PropTypes.func,
             outerContainerId: _react2['default'].PropTypes.string,
             pageWrapId: _react2['default'].PropTypes.string,
@@ -342,6 +343,7 @@ exports['default'] = function (styles) {
                 customBurgerIcon: '',
                 customCrossIcon: '',
                 id: '',
+                noOverlay: false,
                 onStateChange: function onStateChange() {
                 },
                 outerContainerId: '',
@@ -406,7 +408,7 @@ exports['default'] = function (styles) {
         },
         render: function render() {
             var _this2 = this;
-            var items = undefined, svg = undefined;
+            var items = undefined, svg = undefined, overlay = undefined;
             if (this.props.children) {
                 items = _react2['default'].Children.map(this.props.children, function (item, index) {
                     var extraProps = {
@@ -428,11 +430,14 @@ exports['default'] = function (styles) {
                     preserveAspectRatio: 'none'
                 }, _react2['default'].createElement('path', { d: styles.svg.pathInitial })));
             }
-            return _react2['default'].createElement('div', null, _react2['default'].createElement('div', {
-                className: 'bm-overlay',
-                onClick: this.toggleMenu,
-                style: this.getStyles('overlay')
-            }), _react2['default'].createElement('div', {
+            if (!this.props.noOverlay) {
+                overlay = _react2['default'].createElement('div', {
+                    className: 'bm-overlay',
+                    onClick: this.toggleMenu,
+                    style: this.getStyles('overlay')
+                });
+            }
+            return _react2['default'].createElement('div', null, overlay, _react2['default'].createElement('div', {
                 id: this.props.id,
                 className: 'bm-menu-wrap',
                 style: this.getStyles('menuWrap')
