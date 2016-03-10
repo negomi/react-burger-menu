@@ -173,6 +173,14 @@ var isMenuOpen = function(state) {
 <Menu onStateChange={ isMenuOpen } />
 ```
 
+#### Overlay
+
+You can turn off the default overlay with `noOverlay`.
+
+``` javascript
+<Menu noOverlay />
+```
+
 #### Custom icons
 
 You can replace the default bars that make up the burger and cross icons with images. Pass the image paths as the `customBurgerIcon` and `customCrossIcon` props respectively.

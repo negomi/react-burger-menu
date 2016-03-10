@@ -251,6 +251,11 @@ describe('menuFactory', () => {
       const overlay = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-overlay');
       expect(overlay.style.background).to.equal('rgba(0, 0, 0, 0.5)');
     });
+
+    it('can be disabled', function () {
+      component = TestUtils.renderIntoDocument(<Menu styles={ mockStylesProp } noOverlay />);
+      assert.throw(TestUtils.findRenderedDOMComponentWithClass.bind(null, component, 'bm-overlay'), Error);
+    });
   });
 
   describe('toggleMenu method', () => {

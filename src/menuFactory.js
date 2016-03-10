@@ -16,6 +16,7 @@ export default (styles) => {
       customCrossIcon: React.PropTypes.string,
       id: React.PropTypes.string,
       isOpen: React.PropTypes.bool,
+      noOverlay: React.PropTypes.bool,
       onStateChange: React.PropTypes.func,
       outerContainerId: React.PropTypes.string,
       pageWrapId: React.PropTypes.string,
@@ -116,6 +117,7 @@ export default (styles) => {
         customBurgerIcon: '',
         customCrossIcon: '',
         id: '',
+        noOverlay: false,
         onStateChange: () => {},
         outerContainerId: '',
         pageWrapId: '',
@@ -193,7 +195,7 @@ export default (styles) => {
     },
 
     render() {
-      let items, svg;
+      let items, svg, overlay;
 
       // Add styles to user-defined menu items.
       if (this.props.children) {
@@ -218,9 +220,13 @@ export default (styles) => {
         );
       }
 
+      if (!this.props.noOverlay) {
+        overlay = <div className="bm-overlay" onClick={ this.toggleMenu } style={ this.getStyles('overlay') }></div>;
+      }
+
       return (
         <div>
-          <div className="bm-overlay" onClick={ this.toggleMenu } style={ this.getStyles('overlay') }></div>
+          { overlay }
           <div id={ this.props.id } className={ "bm-menu-wrap" } style={ this.getStyles('menuWrap') }>
             { svg }
             <div className="bm-menu" style={ this.getStyles('menu') } >
