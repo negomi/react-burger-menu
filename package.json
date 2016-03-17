@@ -38,10 +38,6 @@
     "react-component-gulp-tasks": "^0.7.1",
     "sinon": "^1.16.1"
   },
-  "peerDependencies": {
-    "react": "^0.14.0",
-    "react-dom": "^0.14.0"
-  },
   "browserify": {
     "transform": [
       "browserify-optional"
