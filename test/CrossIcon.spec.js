@@ -71,7 +71,7 @@ describe('CrossIcon component', () => {
         height: 14,
         transform: 'rotate(45deg)'
       };
-      expect(icon.props.children[0].props.style).to.deep.equal(expected);
+      expect(icon.props.children[0].props.style).to.contain(expected);
     });
 
     it('can be styled with props', () => {

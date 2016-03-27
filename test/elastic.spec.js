@@ -50,7 +50,7 @@ describe('elastic', () => {
   it('has correct menu styles', () => {
     expect(menu.props.style.height).to.equal('100%');
     expect(menu.props.style.position).to.equal('fixed');
-    expect(menu.props.style.width).to.equal('calc(100% - 120px)');
+    expect(menu.props.style.width).to.contain('calc(100% - 120px)');
     expect(menu.props.style.whiteSpace).to.equal('nowrap');
     expect(menu.props.style.boxSizing).to.equal('border-box');
   });
