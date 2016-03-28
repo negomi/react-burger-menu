@@ -183,14 +183,14 @@ You can turn off the default overlay with `noOverlay`.
 
 #### Custom icons
 
-You can replace the default bars that make up the burger and cross icons with images. Pass the image paths as the `customBurgerIcon` and `customCrossIcon` props respectively.
+You can replace the default bars that make up the burger and cross icons with custom `ReactElement`s. Pass them as the `customBurgerIcon` and `customCrossIcon` props respectively.
 
 ```javascript
-<Menu customBurgerIcon={ 'img/icon.svg' } />
-<Menu customCrossIcon={ 'img/cross.svg' } />
+<Menu customBurgerIcon={ <img src="img/icon.svg" /> } />
+<Menu customCrossIcon={ <img src="img/cross.svg" /> } />
 ```
 
-You should adjust their size using the `.bm-burger-button` and `.bm-cross-button` classes, but the image itself will have the class `.bm-icon` or `.bm-cross` if you need to access it directly.
+You should adjust their size using the `.bm-burger-button` and `.bm-cross-button` classes, but the element itself will have the class `.bm-icon` or `.bm-cross` if you need to access it directly.
 
 #### Custom ID
 

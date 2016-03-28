@@ -12,8 +12,8 @@ export default (styles) => {
   return Radium(React.createClass({
 
     propTypes: {
-      customBurgerIcon: React.PropTypes.string,
-      customCrossIcon: React.PropTypes.string,
+      customBurgerIcon: React.PropTypes.element,
+      customCrossIcon: React.PropTypes.element,
       id: React.PropTypes.string,
       isOpen: React.PropTypes.bool,
       noOverlay: React.PropTypes.bool,
@@ -114,8 +114,6 @@ export default (styles) => {
 
     getDefaultProps() {
       return {
-        customBurgerIcon: '',
-        customCrossIcon: '',
         id: '',
         noOverlay: false,
         onStateChange: () => {},
@@ -204,7 +202,6 @@ export default (styles) => {
             key: index,
             style: this.getStyles('item', index)
           };
-
           return React.cloneElement(item, extraProps);
         });
       }
@@ -235,10 +232,10 @@ export default (styles) => {
               </nav>
             </div>
             <div style={ this.getStyles('closeButton') }>
-              <CrossIcon onClick={ this.toggleMenu } styles={ this.props.styles } image={ this.props.customCrossIcon } />
+              <CrossIcon onClick={ this.toggleMenu } styles={ this.props.styles } customIcon={ this.props.customCrossIcon } />
             </div>
           </div>
-          <BurgerIcon onClick={ this.toggleMenu } styles={ this.props.styles } image={ this.props.customBurgerIcon } />
+          <BurgerIcon onClick={ this.toggleMenu } styles={ this.props.styles } customIcon={ this.props.customBurgerIcon } />
         </div>
       );
     }

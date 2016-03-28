@@ -6,7 +6,7 @@ import Radium from 'radium';
 let BurgerIcon = Radium(React.createClass({
 
   propTypes: {
-    image: React.PropTypes.string,
+    customIcon: React.PropTypes.element,
     styles: React.PropTypes.object
   },
 
@@ -31,7 +31,6 @@ let BurgerIcon = Radium(React.createClass({
 
   getDefaultProps() {
     return {
-      image: '',
       styles: {}
     };
   },
@@ -47,14 +46,18 @@ let BurgerIcon = Radium(React.createClass({
       margin: 0,
       padding: 0,
       border: 'none',
-      fontSize: 14,
+      fontSize: 12,
       color: 'transparent',
       background: 'transparent',
       outline: 'none'
     };
 
-    if (this.props.image) {
-      icon = <img src={ this.props.image } alt="Menu icon" className="bm-icon" style={ [{width: '100%', height: '100%'}, this.props.styles.bmIcon] }/>;
+    if (this.props.customIcon) {
+      let extraProps = {
+        className: 'bm-icon',
+        style: [{width: '100%', height: '100%'}, this.props.styles.bmIcon]
+      };
+      icon = React.cloneElement(this.props.customIcon, extraProps);
     } else {
       icon = (
         <span>

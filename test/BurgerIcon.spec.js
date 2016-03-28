@@ -89,11 +89,11 @@ describe('BurgerIcon component', () => {
       expect(icon.props.children[2].props.style.background).to.equal('red');
     });
 
-    it('can be a custom image', () => {
-      const path = 'icon.jpg';
-      component = createShallowComponent(<BurgerIcon image={ path } />);
+    it('can be a custom element', () => {
+      const element = <img src="icon.jpg" />;
+      component = createShallowComponent(<BurgerIcon customIcon={ element } />);
       expect(component.props.children[0].type).to.equal('img');
-      expect(component.props.children[0].props.src).to.equal(path);
+      expect(component.props.children[0].props.src).to.equal('icon.jpg');
     });
   });
 
@@ -137,7 +137,7 @@ describe('BurgerIcon component', () => {
         margin: 0,
         padding: 0,
         border: 'none',
-        fontSize: 14,
+        fontSize: 12,
         color: 'transparent',
         background: 'transparent',
         outline: 'none'
