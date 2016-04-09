@@ -412,7 +412,7 @@ exports['default'] = function (styles) {
             }
         },
         componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-            if (typeof nextProps.isOpen === 'boolean') {
+            if (typeof nextProps.isOpen === 'boolean' && nextProps.isOpen !== this.props.isOpen) {
                 this.toggleMenu(nextProps.isOpen);
             }
         },
