@@ -29,7 +29,7 @@
     "babel-register": "^6.3.13",
     "chai": "^3.2.0",
     "eslint": "^2.1.0",
-    "eslint-plugin-react": "^4.2.0",
+    "eslint-plugin-react": "^5.0.1",
     "gulp": "^3.8.11",
     "gulp-mocha": "^2.2.0",
     "jsdom": "^8.0.2",
