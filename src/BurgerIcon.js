@@ -1,9 +1,9 @@
 'use strict';
 
 import React from 'react';
-import Radium from 'radium';
+import ConfiguredRadium from './ConfiguredRadium.js';
 
-let BurgerIcon = Radium(React.createClass({
+const BurgerIcon = ConfiguredRadium(React.createClass({
 
   propTypes: {
     customIcon: React.PropTypes.element,

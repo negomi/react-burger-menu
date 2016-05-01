@@ -1,9 +1,9 @@
 'use strict';
 
 import React from 'react';
-import Radium from 'radium';
+import ConfiguredRadium from './ConfiguredRadium.js';
 
-let CrossIcon = Radium(React.createClass({
+const CrossIcon = ConfiguredRadium(React.createClass({
 
   propTypes: {
     customIcon: React.PropTypes.element,

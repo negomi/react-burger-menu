@@ -2,14 +2,14 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Radium from 'radium';
+import ConfiguredRadium from './ConfiguredRadium.js';
 import baseStyles from './baseStyles';
 import BurgerIcon from './BurgerIcon';
 import CrossIcon from './CrossIcon';
 
 export default (styles) => {
 
-  return Radium(React.createClass({
+  return ConfiguredRadium(React.createClass({
 
     propTypes: {
       customBurgerIcon: React.PropTypes.element,
