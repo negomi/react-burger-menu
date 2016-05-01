@@ -61,20 +61,20 @@ export default (styles) => {
     // Throws and returns if the required external elements don't exist,
     // which means any external page animations won't be applied.
     handleExternalWrapper(id, wrapperStyles, set) {
-      let html = document.querySelector('html');
-      let body = document.querySelector('body');
-      let wrapper = document.getElementById(id);
+      const html = document.querySelector('html');
+      const body = document.querySelector('body');
+      const wrapper = document.getElementById(id);
 
       if (!wrapper) {
         console.error("Element with ID '" + id + "' not found");
         return;
       }
 
-      wrapperStyles = wrapperStyles(this.state.isOpen, this.props.width, this.props.right);
+      const builtStyles = wrapperStyles(this.state.isOpen, this.props.width, this.props.right);
 
-      for (let prop in wrapperStyles) {
-        if (wrapperStyles.hasOwnProperty(prop)) {
-          wrapper.style[prop] = set ? wrapperStyles[prop] : '';
+      for (const prop in builtStyles) {
+        if (builtStyles.hasOwnProperty(prop)) {
+          wrapper.style[prop] = set ? builtStyles[prop] : '';
         }
       }
 
@@ -86,7 +86,7 @@ export default (styles) => {
 
     // Builds styles incrementally for a given element.
     getStyles(el, index) {
-      let propName = 'bm' + el.replace(el.charAt(0), el.charAt(0).toUpperCase());
+      const propName = 'bm' + el.replace(el.charAt(0), el.charAt(0).toUpperCase());
 
       // Set base styles.
       let output = baseStyles[el] ? [baseStyles[el](this.state.isOpen, this.props.width, this.props.right)] : [];
@@ -199,7 +199,7 @@ export default (styles) => {
       // Add styles to user-defined menu items.
       if (this.props.children) {
         items = React.Children.map(this.props.children, (item, index) => {
-          let extraProps = {
+          const extraProps = {
             key: index,
             style: this.getStyles('item', index)
           };
