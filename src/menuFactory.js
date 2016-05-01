@@ -161,17 +161,18 @@ export default (styles) => {
 
     componentDidUpdate() {
       if (styles.svg && this.isMounted()) {
-        // Snap.svg workaround for Webpack using imports-loader (https://github.com/webpack/imports-loader).
-        let snap;
-        try {
-          snap = require('imports?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js');
-        } catch(e) {
-          snap = require('snapsvg');
-        }
+        const morphShape = ReactDOM.findDOMNode(this, 'bm-morph-shape');
+        const Snap = require('snapsvg');
+        const s = Snap(morphShape);
+        let path;
 
-        let morphShape = ReactDOM.findDOMNode(this, 'bm-morph-shape');
-        let s = snap(morphShape);
-        let path = s.select('path');
+        try {
+          // This will throw with Webpack.
+          path = s.select('path');
+        } catch (e) {
+          console.warn('Looks like you might be using Webpack. Unfortunately, Elastic and Bubble are not currently supported with Webpack builds due to their Snap.svg dependency. See https://github.com/adobe-webplatform/Snap.svg/issues/341 for more info.');
+          return;
+        }
 
         if (this.state.isOpen) {
           // Animate SVG path.

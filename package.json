@@ -15,7 +15,6 @@
   "dependencies": {
     "browserify-optional": "^1.0.0",
     "classnames": "^2.1.1",
-    "imports-loader": "^0.6.4",
     "radium": "^0.17.0",
     "react": "^15.0.0",
     "react-dom": "^15.0.0",
