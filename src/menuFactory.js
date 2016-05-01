@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ConfiguredRadium from './ConfiguredRadium.js';
+import ConfiguredRadium from './ConfiguredRadium';
 import baseStyles from './baseStyles';
 import BurgerIcon from './BurgerIcon';
 import CrossIcon from './CrossIcon';

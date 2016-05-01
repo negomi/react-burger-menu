@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import ConfiguredRadium from './ConfiguredRadium.js';
+import ConfiguredRadium from './ConfiguredRadium';
 
 const BurgerIcon = ConfiguredRadium(React.createClass({
 
