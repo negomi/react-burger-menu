@@ -300,10 +300,10 @@ exports['default'] = function (styles) {
                 console.error('Element with ID \'' + id + '\' not found');
                 return;
             }
-            wrapperStyles = wrapperStyles(this.state.isOpen, this.props.width, this.props.right);
-            for (var prop in wrapperStyles) {
-                if (wrapperStyles.hasOwnProperty(prop)) {
-                    wrapper.style[prop] = set ? wrapperStyles[prop] : '';
+            var builtStyles = wrapperStyles(this.state.isOpen, this.props.width, this.props.right);
+            for (var prop in builtStyles) {
+                if (builtStyles.hasOwnProperty(prop)) {
+                    wrapper.style[prop] = set ? builtStyles[prop] : '';
                 }
             }
             [
@@ -369,26 +369,27 @@ exports['default'] = function (styles) {
         componentDidUpdate: function componentDidUpdate() {
             var _this = this;
             if (styles.svg && this.isMounted()) {
-                (function () {
-                    var snap = undefined;
-                    try {
-                        snap = function () {
-                            throw new Error('Cannot find module \'imports?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js\' from \'/Users/imogen/code/react-burger-menu/src\'');
-                        }();
-                    } catch (e) {
-                        snap = require('snapsvg');
-                    }
-                    var morphShape = _reactDom2['default'].findDOMNode(_this, 'bm-morph-shape');
-                    var s = snap(morphShape);
-                    var path = s.select('path');
-                    if (_this.state.isOpen) {
-                        styles.svg.animate(path);
-                    } else {
-                        setTimeout(function () {
-                            path.attr('d', styles.svg.pathInitial);
-                        }, 300);
-                    }
-                }());
+                var _ret = function () {
+                        var morphShape = _reactDom2['default'].findDOMNode(_this, 'bm-morph-shape');
+                        var Snap = require('snapsvg');
+                        var s = Snap(morphShape);
+                        var path = undefined;
+                        try {
+                            path = s.select('path');
+                        } catch (e) {
+                            console.warn('Looks like you might be using Webpack. Unfortunately, Elastic and Bubble are not currently supported with Webpack builds due to their Snap.svg dependency. See https://github.com/adobe-webplatform/Snap.svg/issues/341 for more info.');
+                            return { v: undefined };
+                        }
+                        if (_this.state.isOpen) {
+                            styles.svg.animate(path);
+                        } else {
+                            setTimeout(function () {
+                                path.attr('d', styles.svg.pathInitial);
+                            }, 300);
+                        }
+                    }();
+                if (typeof _ret === 'object')
+                    return _ret.v;
             }
         },
         componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
