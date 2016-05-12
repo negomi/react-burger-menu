@@ -196,7 +196,6 @@ export default (styles) => {
     },
 
     render() {
-      debugger;
       const crossButton = (!this.props.noCrossButton) ? (
           <div style={ this.getStyles('closeButton') }>
               <CrossIcon onClick={ this.toggleMenu }
