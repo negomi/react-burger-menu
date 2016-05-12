@@ -12,6 +12,7 @@ export default (styles) => {
   return ConfiguredRadium(React.createClass({
 
     propTypes: {
+      additionalToggleMenuActions: React.PropTypes.func,
       customBurgerIcon: React.PropTypes.element,
       customCrossIcon: React.PropTypes.element,
       externalControl: React.PropTypes.bool,
@@ -34,6 +35,12 @@ export default (styles) => {
       // Disregard isOpenVal if not a boolean.
       const newState = { isOpen: typeof isOpenVal === 'boolean' ? isOpenVal : !this.state.isOpen };
       this.setState(newState, this.props.onStateChange.bind(null, newState));
+
+      //adtional actions when menu toggle, sync with external control for example
+      if(this.props.additionalToggleMenuActions)
+      {
+        this.props.additionalToggleMenuActions(newSate);
+      }
     },
 
     // Applies component-specific styles to external wrapper elements.
