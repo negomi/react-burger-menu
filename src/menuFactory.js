@@ -39,7 +39,7 @@ export default (styles) => {
       //adtional actions when menu toggle, sync with external control for example
       if(this.props.additionalToggleMenuActions)
       {
-        this.props.additionalToggleMenuActions(newSate);
+        this.props.additionalToggleMenuActions(newState);
       }
     },
 
