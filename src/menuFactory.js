@@ -25,12 +25,11 @@ export default (styles) => {
       width: React.PropTypes.number
     },
 
-    toggleMenu(isOpenVal) {
+    toggleMenu() {
       // Order important: handle wrappers before setting sidebar state.
       this.applyWrapperStyles();
 
-      // Disregard isOpenVal if not a boolean.
-      const newState = { isOpen: typeof isOpenVal === 'boolean' ? isOpenVal : !this.state.isOpen };
+      const newState = { isOpen: !this.state.isOpen };
       this.setState(newState, this.props.onStateChange.bind(null, newState));
     },
 
@@ -187,9 +186,11 @@ export default (styles) => {
     },
 
     componentWillReceiveProps(nextProps) {
-      // Allow open state to be controlled by props.
-      if (typeof nextProps.isOpen !== 'undefined') {
-        this.toggleMenu(nextProps.isOpen);
+      const propDiff = nextProps.isOpen !== this.props.isOpen;
+      const stateDiff = nextProps.isOpen !== this.state.isOpen;
+
+      if (typeof nextProps.isOpen !== 'undefined' && (propDiff || stateDiff)) {
+        this.toggleMenu();
       }
     },
 
