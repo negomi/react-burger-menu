@@ -434,14 +434,10 @@ describe('menuFactory', () => {
             return { example: true };
           },
           triggerStateChange() {
-            this.setState({
-              example: !this.state.example
-            });
+            this.setState({ example: !this.state.example });
           },
           render() {
-            return (
-              <Menu ref="menu" />
-            );
+            return <Menu ref="menu" />;
           }
         });
 
@@ -458,14 +454,10 @@ describe('menuFactory', () => {
             return { example: true };
           },
           triggerRender() {
-            this.setState({
-              example: !this.state.example
-            });
+            this.setState({ example: !this.state.example });
           },
           render() {
-            return (
-              <Menu ref="menu" isOpen />
-            );
+            return <Menu ref="menu" isOpen />;
           }
         });
 
@@ -482,14 +474,10 @@ describe('menuFactory', () => {
             return { example: true };
           },
           changeOtherProps() {
-            this.setState({
-              example: !this.state.example
-            });
+            this.setState({ example: !this.state.example });
           },
           render() {
-            return (
-              <Menu ref="menu" right={ this.state.example } />
-            );
+            return <Menu ref="menu" right={ this.state.example } />;
           }
         });
 
@@ -508,19 +496,16 @@ describe('menuFactory', () => {
             return { example: true };
           },
           triggerRender() {
-            this.setState({
-              example: !this.state.example
-            });
+            this.setState({ example: !this.state.example });
           },
           render() {
-            return (
-              <Menu ref="menu" isOpen />
-            );
+            return <Menu ref="menu" isOpen />;
           }
         });
 
         const parent = TestUtils.renderIntoDocument(<ParentComponent />, container);
         const menu = parent.refs.menu;
+        menu.setState({isOpen: false});
         parent.triggerRender();
         expect(applyWrapperStyles.called).to.be.false;
         component.applyWrapperStyles.restore();
@@ -532,14 +517,10 @@ describe('menuFactory', () => {
             return { example: true };
           },
           triggerRender() {
-            this.setState({
-              example: !this.state.example
-            });
+            this.setState({ example: !this.state.example });
           },
           render() {
-            return (
-              <Menu ref="menu" isOpen={ false } />
-            );
+            return <Menu ref="menu" isOpen={ false } />;
           }
         });
 
@@ -551,28 +532,31 @@ describe('menuFactory', () => {
       });
 
       it('should only trigger onStateChange callback if state actually changes', () => {
+        let isOpen = true;
         let called = false;
-        const callback = () => called = true;
 
+        const callback = () => {
+          isOpen = false;
+          called = true;
+        };
         const ParentComponent = React.createClass({
           getInitialState() {
             return { example: true };
           },
           triggerRender() {
-            this.setState({
-              example: !this.state.example
-            });
+            this.setState({ example: !this.state.example });
           },
           render() {
-            return (
-              <Menu ref="menu" onStateChange={ callback } isOpen={ false } />
-            );
+            return <Menu ref="menu" onStateChange={ callback } isOpen={ isOpen } />;
           }
         });
 
         const parent = TestUtils.renderIntoDocument(<ParentComponent />, container);
         const menu = parent.refs.menu;
+        menu.setState({isOpen: false});
+        called = false; // reset called
         parent.triggerRender();
+        expect(menu.state.isOpen).to.be.false;
         expect(called).to.be.false;
       });
     });
