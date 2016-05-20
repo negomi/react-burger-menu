@@ -186,10 +186,7 @@ export default (styles) => {
     },
 
     componentWillReceiveProps(nextProps) {
-      const propDiff = nextProps.isOpen !== this.props.isOpen;
-      const stateDiff = nextProps.isOpen !== this.state.isOpen;
-
-      if (typeof nextProps.isOpen !== 'undefined' && (propDiff || stateDiff)) {
+      if (typeof nextProps.isOpen !== 'undefined' && nextProps.isOpen !== this.state.isOpen) {
         this.toggleMenu();
       }
     },
