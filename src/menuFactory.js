@@ -12,10 +12,13 @@ export default (styles) => {
   return ConfiguredRadium(React.createClass({
 
     propTypes: {
+      additionalToggleMenuActions: React.PropTypes.func,
       customBurgerIcon: React.PropTypes.element,
       customCrossIcon: React.PropTypes.element,
+      externalControl: React.PropTypes.bool,
       id: React.PropTypes.string,
       isOpen: React.PropTypes.bool,
+      noCrossButton: React.PropTypes.bool,
       noOverlay: React.PropTypes.bool,
       onStateChange: React.PropTypes.func,
       outerContainerId: React.PropTypes.string,
@@ -31,6 +34,12 @@ export default (styles) => {
 
       const newState = { isOpen: !this.state.isOpen };
       this.setState(newState, this.props.onStateChange.bind(null, newState));
+
+      //adtional actions when menu toggle, sync with external control for example
+      if(this.props.additionalToggleMenuActions)
+      {
+        this.props.additionalToggleMenuActions(newState);
+      }
     },
 
     // Applies component-specific styles to external wrapper elements.
@@ -192,33 +201,42 @@ export default (styles) => {
     },
 
     render() {
-      let items, svg, overlay;
+      const crossButton = (!this.props.noCrossButton) ? (
+          <div style={ this.getStyles('closeButton') }>
+              <CrossIcon onClick={ this.toggleMenu }
+                         styles={ this.props.styles }
+                         customIcon={ this.props.customCrossIcon }
+              />
+          </div>) : null;
 
-      // Add styles to user-defined menu items.
-      if (this.props.children) {
-        items = React.Children.map(this.props.children, (item, index) => {
-          const extraProps = {
-            key: index,
-            style: this.getStyles('item', index)
-          };
-          return React.cloneElement(item, extraProps);
-        });
-      }
+      const burgerButton = (!this.props.externalControl) ? (
+          <BurgerIcon onClick={ this.toggleMenu }
+                      styles={ this.props.styles }
+                      customIcon={ this.props.customBurgerIcon } />
+          ) : null;
 
       // Add a morph shape for animations that use SVG.
-      if (styles.svg) {
-        svg = (
+      const svg =  (styles.svg) ? (
           <div className="bm-morph-shape" style={ this.getStyles('morphShape') }>
             <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 800" preserveAspectRatio="none">
               <path d={ styles.svg.pathInitial }/>
             </svg>
           </div>
-        );
-      }
+        ) : null;
 
-      if (!this.props.noOverlay) {
-        overlay = <div className="bm-overlay" onClick={ this.toggleMenu } style={ this.getStyles('overlay') }></div>;
-      }
+      // Add styles to user-defined menu items.
+      const items = (this.props.children) ? React.Children.map(
+        this.props.children, (item, index) => {
+          const extraProps = {
+            key: index,
+            style: this.getStyles('item', index)
+          };
+          return React.cloneElement(item, extraProps);
+        }) : null;
+
+      const overlay =  (!this.props.noOverlay) ? (<div className="bm-overlay"
+        onClick={ this.toggleMenu }
+        style={ this.getStyles('overlay') }></div>) : null;
 
       return (
         <div>
@@ -230,11 +248,9 @@ export default (styles) => {
                 { items }
               </nav>
             </div>
-            <div style={ this.getStyles('closeButton') }>
-              <CrossIcon onClick={ this.toggleMenu } styles={ this.props.styles } customIcon={ this.props.customCrossIcon } />
-            </div>
+            { crossButton }
           </div>
-          <BurgerIcon onClick={ this.toggleMenu } styles={ this.props.styles } customIcon={ this.props.customBurgerIcon } />
+          { burgerButton }
         </div>
       );
     }
