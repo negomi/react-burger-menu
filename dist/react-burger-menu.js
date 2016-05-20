@@ -1644,9 +1644,9 @@ exports['default'] = function (styles) {
             styles: _react2['default'].PropTypes.object,
             width: _react2['default'].PropTypes.number
         },
-        toggleMenu: function toggleMenu(isOpenVal) {
+        toggleMenu: function toggleMenu() {
             this.applyWrapperStyles();
-            var newState = { isOpen: typeof isOpenVal === 'boolean' ? isOpenVal : !this.state.isOpen };
+            var newState = { isOpen: !this.state.isOpen };
             this.setState(newState, this.props.onStateChange.bind(null, newState));
         },
         applyWrapperStyles: function applyWrapperStyles() {
@@ -1766,8 +1766,8 @@ exports['default'] = function (styles) {
             }
         },
         componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-            if (typeof nextProps.isOpen !== 'undefined') {
-                this.toggleMenu(nextProps.isOpen);
+            if (typeof nextProps.isOpen !== 'undefined' && nextProps.isOpen !== this.state.isOpen) {
+                this.toggleMenu();
             }
         },
         render: function render() {
