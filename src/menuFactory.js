@@ -12,14 +12,8 @@ export default (styles) => {
   return ConfiguredRadium(React.createClass({
 
     propTypes: {
-      customBurgerIcon: React.PropTypes.oneOfType([
-        React.PropTypes.element,
-        React.PropTypes.oneOf([false])
-      ]),
-      customCrossIcon: React.PropTypes.oneOfType([
-        React.PropTypes.element,
-        React.PropTypes.oneOf([false])
-      ]),
+      customBurgerIcon: React.PropTypes.oneOfType([React.PropTypes.element, React.PropTypes.oneOf([false])]),
+      customCrossIcon: React.PropTypes.oneOfType([React.PropTypes.element, React.PropTypes.oneOf([false])]),
       id: React.PropTypes.string,
       isOpen: React.PropTypes.bool,
       noOverlay: React.PropTypes.bool,
