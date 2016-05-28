@@ -188,36 +188,17 @@ export default (styles) => {
     },
 
     render() {
-      let svg, overlay, burgerIcon, crossIcon;
-
-      // Add a morph shape for animations that use SVG.
-      if (styles.svg) {
-        svg = (
-          <div className="bm-morph-shape" style={this.getStyles('morphShape')}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 800" preserveAspectRatio="none">
-              <path d={styles.svg.pathInitial}/>
-            </svg>
-          </div>
-        );
-      }
-
-      if (!this.props.noOverlay) {
-        overlay = <div className="bm-overlay" onClick={this.toggleMenu} style={this.getStyles('overlay')}></div>;
-      }
-
-      if (this.props.customBurgerIcon) {
-        burgerIcon = this.props.customBurgerIcon;
-      }
-
-      if (this.props.customCrossIcon) {
-        crossIcon = this.props.customCrossIcon;
-      }
-
       return (
         <div>
-          {overlay}
+          {!this.props.noOverlay ? <div className="bm-overlay" onClick={this.toggleMenu} style={this.getStyles('overlay')}></div> : null}
           <div id={this.props.id} className={"bm-menu-wrap"} style={this.getStyles('menuWrap')}>
-            {svg}
+            {styles.svg ? (
+              <div className="bm-morph-shape" style={this.getStyles('morphShape')}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 800" preserveAspectRatio="none">
+                  <path d={styles.svg.pathInitial}/>
+                </svg>
+              </div>
+            ) : null}
             <div className="bm-menu" style={this.getStyles('menu')} >
               <nav className="bm-item-list" style={this.getStyles('itemList')}>
                 {React.Children.map(this.props.children, (item, index) => {
@@ -230,10 +211,10 @@ export default (styles) => {
               </nav>
             </div>
             <div style={this.getStyles('closeButton')}>
-              <CrossIcon onClick={this.toggleMenu} styles={this.props.styles} customIcon={crossIcon} />
+              <CrossIcon onClick={this.toggleMenu} styles={this.props.styles} customIcon={this.props.customCrossIcon ? this.props.customCrossIcon : null} />
             </div>
           </div>
-          <BurgerIcon onClick={this.toggleMenu} styles={this.props.styles} customIcon={burgerIcon} />
+          <BurgerIcon onClick={this.toggleMenu} styles={this.props.styles} customIcon={this.props.customBurgerIcon ? this.props.customBurgerIcon : null} />
         </div>
       );
     }
