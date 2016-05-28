@@ -194,6 +194,15 @@ You can replace the default bars that make up the burger and cross icons with cu
 
 You should adjust their size using the `.bm-burger-button` and `.bm-cross-button` classes, but the element itself will have the class `.bm-icon` or `.bm-cross` if you need to access it directly.
 
+You can also disable the icon elements so they won't be included at all, by passing `false` to these props.
+
+```javascript
+<Menu customBurgerIcon={ false } />
+<Menu customCrossIcon={ false } />
+```
+
+This can be useful if you want exclusive external control of the menu, using the `isOpen` prop.
+
 #### Custom ID
 
 There is also an optional `id` prop, which will simply add an ID to the rendered menu's outermost element. This is not required for any functionality.

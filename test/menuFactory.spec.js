@@ -258,6 +258,22 @@ describe('menuFactory', () => {
     });
   });
 
+  describe('burger icon', () => {
+
+    it('can be disabled', () => {
+      component = TestUtils.renderIntoDocument(<Menu styles={ mockStylesProp } customBurgerIcon={ false } />);
+      assert.throw(TestUtils.findRenderedDOMComponentWithClass.bind(null, component, 'bm-icon'), Error);
+    });
+  });
+
+  describe('cross icon', () => {
+
+    it('can be disabled', () => {
+      component = TestUtils.renderIntoDocument(<Menu styles={ mockStylesProp } customCrossIcon={ false } />);
+      assert.throw(TestUtils.findRenderedDOMComponentWithClass.bind(null, component, 'bm-cross'), Error);
+    });
+  });
+
   describe('toggleMenu method', () => {
 
     beforeEach(() => {

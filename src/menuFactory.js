@@ -12,8 +12,14 @@ export default (styles) => {
   return ConfiguredRadium(React.createClass({
 
     propTypes: {
-      customBurgerIcon: React.PropTypes.element,
-      customCrossIcon: React.PropTypes.element,
+      customBurgerIcon: React.PropTypes.oneOfType([
+        React.PropTypes.element,
+        React.PropTypes.oneOf([false])
+      ]),
+      customCrossIcon: React.PropTypes.oneOfType([
+        React.PropTypes.element,
+        React.PropTypes.oneOf([false])
+      ]),
       id: React.PropTypes.string,
       isOpen: React.PropTypes.bool,
       noOverlay: React.PropTypes.bool,
@@ -192,7 +198,7 @@ export default (styles) => {
     },
 
     render() {
-      let svg, overlay;
+      let svg, overlay, burgerIcon, crossIcon;
 
       // Add a morph shape for animations that use SVG.
       if (styles.svg) {
@@ -207,6 +213,14 @@ export default (styles) => {
 
       if (!this.props.noOverlay) {
         overlay = <div className="bm-overlay" onClick={this.toggleMenu} style={this.getStyles('overlay')}></div>;
+      }
+
+      if (this.props.customBurgerIcon) {
+        burgerIcon = this.props.customBurgerIcon;
+      }
+
+      if (this.props.customCrossIcon) {
+        crossIcon = this.props.customCrossIcon;
       }
 
       return (
@@ -226,10 +240,10 @@ export default (styles) => {
               </nav>
             </div>
             <div style={this.getStyles('closeButton')}>
-              <CrossIcon onClick={this.toggleMenu} styles={this.props.styles} customIcon={this.props.customCrossIcon} />
+              <CrossIcon onClick={this.toggleMenu} styles={this.props.styles} customIcon={crossIcon} />
             </div>
           </div>
-          <BurgerIcon onClick={this.toggleMenu} styles={this.props.styles} customIcon={this.props.customBurgerIcon} />
+          <BurgerIcon onClick={this.toggleMenu} styles={this.props.styles} customIcon={burgerIcon} />
         </div>
       );
     }
