@@ -24,8 +24,8 @@ export default (styles) => {
       isOpen: React.PropTypes.bool,
       noOverlay: React.PropTypes.bool,
       onStateChange: React.PropTypes.func,
-      outerContainerId: React.PropTypes.string,
-      pageWrapId: React.PropTypes.string,
+      outerContainerId: styles && styles.outerContainer ? React.PropTypes.string.isRequired : React.PropTypes.string,
+      pageWrapId: styles && styles.pageWrap ? React.PropTypes.string.isRequired : React.PropTypes.string,
       right: React.PropTypes.bool,
       styles: React.PropTypes.object,
       width: React.PropTypes.number
@@ -136,16 +136,6 @@ export default (styles) => {
     componentWillMount() {
       if (!styles) {
         throw new Error('No styles supplied');
-      }
-
-      // Warn if the selected menu requires external wrapper elements
-      // but none were supplied.
-      if (styles.pageWrap && !this.props.pageWrapId) {
-        console.warn('No pageWrapId supplied');
-      }
-
-      if (styles.outerContainer && !this.props.outerContainerId) {
-        console.warn('No outerContainerId supplied');
       }
 
       // Allow initial open state to be set by props.

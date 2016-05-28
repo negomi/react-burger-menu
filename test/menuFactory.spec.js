@@ -76,15 +76,6 @@ describe('menuFactory', () => {
     assert.throw(createShallowComponent.bind(null, <Menu />), Error, /No styles supplied/);
   });
 
-  it('warns if external wrapper IDs are required but not passed', () => {
-    const warn = sinon.stub(console, 'warn');
-    Menu = menuFactory(mockStyles.full);
-    component = TestUtils.renderIntoDocument(<Menu />);
-    assert.ok(warn.calledWith('No pageWrapId supplied'));
-    assert.ok(warn.calledWith('No outerContainerId supplied'));
-    console.warn.restore();
-  });
-
   describe('when rendered successfully', () => {
 
     beforeEach(() => {
