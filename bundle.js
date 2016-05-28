@@ -1610,14 +1610,20 @@ var _CrossIcon2 = _interopRequireDefault(_CrossIcon);
 exports['default'] = function (styles) {
     return (0, _ConfiguredRadium2['default'])(_react2['default'].createClass({
         propTypes: {
-            customBurgerIcon: _react2['default'].PropTypes.element,
-            customCrossIcon: _react2['default'].PropTypes.element,
+            customBurgerIcon: _react2['default'].PropTypes.oneOfType([
+                _react2['default'].PropTypes.element,
+                _react2['default'].PropTypes.oneOf([false])
+            ]),
+            customCrossIcon: _react2['default'].PropTypes.oneOfType([
+                _react2['default'].PropTypes.element,
+                _react2['default'].PropTypes.oneOf([false])
+            ]),
             id: _react2['default'].PropTypes.string,
             isOpen: _react2['default'].PropTypes.bool,
             noOverlay: _react2['default'].PropTypes.bool,
             onStateChange: _react2['default'].PropTypes.func,
-            outerContainerId: _react2['default'].PropTypes.string,
-            pageWrapId: _react2['default'].PropTypes.string,
+            outerContainerId: styles && styles.outerContainer ? _react2['default'].PropTypes.string.isRequired : _react2['default'].PropTypes.string,
+            pageWrapId: styles && styles.pageWrap ? _react2['default'].PropTypes.string.isRequired : _react2['default'].PropTypes.string,
             right: _react2['default'].PropTypes.bool,
             styles: _react2['default'].PropTypes.object,
             width: _react2['default'].PropTypes.number
@@ -1700,12 +1706,6 @@ exports['default'] = function (styles) {
             if (!styles) {
                 throw new Error('No styles supplied');
             }
-            if (styles.pageWrap && !this.props.pageWrapId) {
-                console.warn('No pageWrapId supplied');
-            }
-            if (styles.outerContainer && !this.props.outerContainerId) {
-                console.warn('No outerContainerId supplied');
-            }
             if (this.props.isOpen) {
                 this.toggleMenu();
             }
@@ -1750,53 +1750,43 @@ exports['default'] = function (styles) {
         },
         render: function render() {
             var _this2 = this;
-            var items = undefined, svg = undefined, overlay = undefined;
-            if (this.props.children) {
-                items = _react2['default'].Children.map(this.props.children, function (item, index) {
-                    var extraProps = {
-                            key: index,
-                            style: _this2.getStyles('item', index)
-                        };
-                    return _react2['default'].cloneElement(item, extraProps);
-                });
-            }
-            if (styles.svg) {
-                svg = _react2['default'].createElement('div', {
-                    className: 'bm-morph-shape',
-                    style: this.getStyles('morphShape')
-                }, _react2['default'].createElement('svg', {
-                    xmlns: 'http://www.w3.org/2000/svg',
-                    width: '100%',
-                    height: '100%',
-                    viewBox: '0 0 100 800',
-                    preserveAspectRatio: 'none'
-                }, _react2['default'].createElement('path', { d: styles.svg.pathInitial })));
-            }
-            if (!this.props.noOverlay) {
-                overlay = _react2['default'].createElement('div', {
-                    className: 'bm-overlay',
-                    onClick: this.toggleMenu,
-                    style: this.getStyles('overlay')
-                });
-            }
-            return _react2['default'].createElement('div', null, overlay, _react2['default'].createElement('div', {
+            return _react2['default'].createElement('div', null, !this.props.noOverlay ? _react2['default'].createElement('div', {
+                className: 'bm-overlay',
+                onClick: this.toggleMenu,
+                style: this.getStyles('overlay')
+            }) : null, _react2['default'].createElement('div', {
                 id: this.props.id,
                 className: 'bm-menu-wrap',
                 style: this.getStyles('menuWrap')
-            }, svg, _react2['default'].createElement('div', {
+            }, styles.svg ? _react2['default'].createElement('div', {
+                className: 'bm-morph-shape',
+                style: this.getStyles('morphShape')
+            }, _react2['default'].createElement('svg', {
+                xmlns: 'http://www.w3.org/2000/svg',
+                width: '100%',
+                height: '100%',
+                viewBox: '0 0 100 800',
+                preserveAspectRatio: 'none'
+            }, _react2['default'].createElement('path', { d: styles.svg.pathInitial }))) : null, _react2['default'].createElement('div', {
                 className: 'bm-menu',
                 style: this.getStyles('menu')
             }, _react2['default'].createElement('nav', {
                 className: 'bm-item-list',
                 style: this.getStyles('itemList')
-            }, items)), _react2['default'].createElement('div', { style: this.getStyles('closeButton') }, _react2['default'].createElement(_CrossIcon2['default'], {
+            }, _react2['default'].Children.map(this.props.children, function (item, index) {
+                var extraProps = {
+                        key: index,
+                        style: _this2.getStyles('item', index)
+                    };
+                return _react2['default'].cloneElement(item, extraProps);
+            }))), _react2['default'].createElement('div', { style: this.getStyles('closeButton') }, _react2['default'].createElement(_CrossIcon2['default'], {
                 onClick: this.toggleMenu,
                 styles: this.props.styles,
-                customIcon: this.props.customCrossIcon
+                customIcon: this.props.customCrossIcon ? this.props.customCrossIcon : null
             }))), _react2['default'].createElement(_BurgerIcon2['default'], {
                 onClick: this.toggleMenu,
                 styles: this.props.styles,
-                customIcon: this.props.customBurgerIcon
+                customIcon: this.props.customBurgerIcon ? this.props.customBurgerIcon : null
             }));
         }
     }));
