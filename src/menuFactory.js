@@ -192,49 +192,44 @@ export default (styles) => {
     },
 
     render() {
-      let items, svg, overlay;
-
-      // Add styles to user-defined menu items.
-      if (this.props.children) {
-        items = React.Children.map(this.props.children, (item, index) => {
-          const extraProps = {
-            key: index,
-            style: this.getStyles('item', index)
-          };
-          return React.cloneElement(item, extraProps);
-        });
-      }
+      let svg, overlay;
 
       // Add a morph shape for animations that use SVG.
       if (styles.svg) {
         svg = (
-          <div className="bm-morph-shape" style={ this.getStyles('morphShape') }>
+          <div className="bm-morph-shape" style={this.getStyles('morphShape')}>
             <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 800" preserveAspectRatio="none">
-              <path d={ styles.svg.pathInitial }/>
+              <path d={styles.svg.pathInitial}/>
             </svg>
           </div>
         );
       }
 
       if (!this.props.noOverlay) {
-        overlay = <div className="bm-overlay" onClick={ this.toggleMenu } style={ this.getStyles('overlay') }></div>;
+        overlay = <div className="bm-overlay" onClick={this.toggleMenu} style={this.getStyles('overlay')}></div>;
       }
 
       return (
         <div>
-          { overlay }
-          <div id={ this.props.id } className={ "bm-menu-wrap" } style={ this.getStyles('menuWrap') }>
-            { svg }
-            <div className="bm-menu" style={ this.getStyles('menu') } >
-              <nav className="bm-item-list" style={ this.getStyles('itemList') }>
-                { items }
+          {overlay}
+          <div id={this.props.id} className={"bm-menu-wrap"} style={this.getStyles('menuWrap')}>
+            {svg}
+            <div className="bm-menu" style={this.getStyles('menu')} >
+              <nav className="bm-item-list" style={this.getStyles('itemList')}>
+                {React.Children.map(this.props.children, (item, index) => {
+                  const extraProps = {
+                    key: index,
+                    style: this.getStyles('item', index)
+                  };
+                  return React.cloneElement(item, extraProps);
+                })}
               </nav>
             </div>
-            <div style={ this.getStyles('closeButton') }>
-              <CrossIcon onClick={ this.toggleMenu } styles={ this.props.styles } customIcon={ this.props.customCrossIcon } />
+            <div style={this.getStyles('closeButton')}>
+              <CrossIcon onClick={this.toggleMenu} styles={this.props.styles} customIcon={this.props.customCrossIcon} />
             </div>
           </div>
-          <BurgerIcon onClick={ this.toggleMenu } styles={ this.props.styles } customIcon={ this.props.customBurgerIcon } />
+          <BurgerIcon onClick={this.toggleMenu} styles={this.props.styles} customIcon={this.props.customBurgerIcon} />
         </div>
       );
     }
