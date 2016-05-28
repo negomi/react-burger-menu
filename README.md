@@ -3,7 +3,7 @@ react-burger-menu [![Build Status](https://travis-ci.org/negomi/react-burger-men
 
 An off-canvas sidebar React component with a collection of effects and styles using CSS transitions and SVG path animations.
 
-## Demo & Examples
+## Demo & examples
 
 Live demo: [negomi.github.io/react-burger-menu](http://negomi.github.io/react-burger-menu/)
 
@@ -312,7 +312,17 @@ var styles = {
 <Menu styles={ styles } />
 ```
 
-### Browser Support
+### Server-side rendering
+
+This component uses [Radium](https://github.com/FormidableLabs/radium) to manage its internal styles, which also handles vendor prefixing. In universal/isomorphic applications, you need to pass the user agent to the component via the [`radiumConfig`](https://github.com/FormidableLabs/radium/tree/master/docs/api#configuseragent) prop so Radium knows which prefixes to apply.
+
+This is an example of how that would look using Express:
+
+```javascript
+<Menu radiumConfig={{userAgent: req.headers['user-agent']}} />
+```
+
+### Browser support
 
 Because this project uses CSS3 features, it's only meant for modern browsers. Some browsers currently fail to apply some of the animations correctly.
 
