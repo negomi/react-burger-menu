@@ -22,7 +22,8 @@ export default (styles) => {
       pageWrapId: styles && styles.pageWrap ? React.PropTypes.string.isRequired : React.PropTypes.string,
       right: React.PropTypes.bool,
       styles: React.PropTypes.object,
-      width: React.PropTypes.number
+      width: React.PropTypes.number,
+	  breakpoint: React.PropTypes.number
     },
 
     toggleMenu() {
@@ -69,7 +70,7 @@ export default (styles) => {
         return;
       }
 
-      const builtStyles = wrapperStyles(this.state.isOpen, this.props.width, this.props.right);
+      const builtStyles = wrapperStyles(this.state.isOpen, this.props.width, this.props.right, this.props.breakpoint);
 
       for (const prop in builtStyles) {
         if (builtStyles.hasOwnProperty(prop)) {
@@ -119,7 +120,8 @@ export default (styles) => {
         outerContainerId: '',
         pageWrapId: '',
         styles: {},
-        width: 300
+        width: 300,
+		breakpoint: 960
       };
     },
 

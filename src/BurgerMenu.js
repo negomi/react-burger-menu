@@ -4,6 +4,7 @@ export default {
   elastic: require('./menus/elastic'),
   bubble: require('./menus/bubble'),
   push: require('./menus/push'),
+  squeeze: require('./menus/squeeze'),
   pushRotate: require('./menus/pushRotate'),
   scaleDown: require('./menus/scaleDown'),
   scaleRotate: require('./menus/scaleRotate'),

@@ -138,7 +138,7 @@ describe('BurgerIcon component', () => {
         padding: 0,
         border: 'none',
         fontSize: 12,
-        color: 'transparent',
+        textIndent: '-9999px',
         background: 'transparent',
         outline: 'none'
       };

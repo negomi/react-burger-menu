@@ -47,7 +47,7 @@ const BurgerIcon = Radium(React.createClass({
       padding: 0,
       border: 'none',
       fontSize: 12,
-      color: 'transparent',
+	  textIndent: '-9999px',
       background: 'transparent',
       outline: 'none'
     };
@@ -71,7 +71,8 @@ const BurgerIcon = Radium(React.createClass({
     return (
       <div className="bm-burger-button" style={ [{ zIndex: 1 }, this.props.styles.bmBurgerButton] }>
         { icon }
-        <button onClick={ this.props.onClick }
+        <button className="bm-burger-button__button" 
+		  onClick={ this.props.onClick }
           onMouseEnter={ this.handleHover }
           onMouseLeave={ this.handleHover }
           style={ buttonStyle }>
