@@ -348,7 +348,7 @@ var baseMenu = function baseMenu(styles) {
             this.clearWrapperStyles();
         },
         componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-            if (typeof nextProps.isOpen === 'boolean' && nextProps.isOpen !== this.props.isOpen) {
+            if (typeof nextProps.isOpen !== 'undefined' && nextProps.isOpen !== this.state.isOpen) {
                 this.toggleMenu(nextProps.isOpen);
             }
         },
