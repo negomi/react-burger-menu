@@ -114,7 +114,7 @@ exports['default'] = {
     fallDown: require('./menus/fallDown')
 };
 module.exports = exports['default'];
-},{"./menus/bubble":6,"./menus/elastic":7,"./menus/fallDown":8,"./menus/push":9,"./menus/pushRotate":10,"./menus/scaleDown":11,"./menus/scaleRotate":12,"./menus/slide":13,"./menus/stack":14}],3:[function(require,module,exports){
+},{"./menus/bubble":8,"./menus/elastic":9,"./menus/fallDown":10,"./menus/push":11,"./menus/pushRotate":12,"./menus/scaleDown":13,"./menus/scaleRotate":14,"./menus/slide":15,"./menus/stack":16}],3:[function(require,module,exports){
 (function (global){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -213,51 +213,6 @@ exports['default'] = CrossIcon;
 module.exports = exports['default'];
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}],4:[function(require,module,exports){
-'use strict';
-Object.defineProperty(exports, '__esModule', { value: true });
-var styles = {
-        overlay: function overlay(isOpen) {
-            return {
-                position: 'fixed',
-                zIndex: 1,
-                width: '100%',
-                height: '100%',
-                background: 'rgba(0, 0, 0, 0.3)',
-                opacity: isOpen ? 1 : 0,
-                transform: isOpen ? '' : 'translate3d(-100%, 0, 0)',
-                transition: isOpen ? 'opacity 0.3s' : 'opacity 0.3s, transform 0s 0.3s'
-            };
-        },
-        menuWrap: function menuWrap(isOpen, width, right) {
-            return {
-                position: 'fixed',
-                right: right ? 0 : 'inherit',
-                zIndex: 2,
-                width: width,
-                height: '100%',
-                transform: isOpen ? '' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
-                transition: 'all 0.5s'
-            };
-        },
-        menu: function menu() {
-            return {
-                height: '100%',
-                boxSizing: 'border-box'
-            };
-        },
-        itemList: function itemList() {
-            return { height: '100%' };
-        },
-        item: function item() {
-            return {
-                display: 'block',
-                outline: 'none'
-            };
-        }
-    };
-exports['default'] = styles;
-module.exports = exports['default'];
-},{}],5:[function(require,module,exports){
 (function (global){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -266,18 +221,16 @@ function _interopRequireDefault(obj) {
 }
 var _react = typeof window !== 'undefined' ? window['React'] : typeof global !== 'undefined' ? global['React'] : null;
 var _react2 = _interopRequireDefault(_react);
-var _reactDom = typeof window !== 'undefined' ? window['ReactDOM'] : typeof global !== 'undefined' ? global['ReactDOM'] : null;
-var _reactDom2 = _interopRequireDefault(_reactDom);
 var _radium = typeof window !== 'undefined' ? window['Radium'] : typeof global !== 'undefined' ? global['Radium'] : null;
 var _radium2 = _interopRequireDefault(_radium);
-var _baseStyles = require('./baseStyles');
-var _baseStyles2 = _interopRequireDefault(_baseStyles);
 var _BurgerIcon = require('./BurgerIcon');
 var _BurgerIcon2 = _interopRequireDefault(_BurgerIcon);
 var _CrossIcon = require('./CrossIcon');
 var _CrossIcon2 = _interopRequireDefault(_CrossIcon);
-exports['default'] = function (styles) {
-    return (0, _radium2['default'])(_react2['default'].createClass({
+var _baseStyles = require('./baseStyles');
+var _baseStyles2 = _interopRequireDefault(_baseStyles);
+var baseMenu = function baseMenu(styles) {
+    return {
         propTypes: {
             customBurgerIcon: _react2['default'].PropTypes.element,
             customCrossIcon: _react2['default'].PropTypes.element,
@@ -298,21 +251,21 @@ exports['default'] = function (styles) {
         },
         applyWrapperStyles: function applyWrapperStyles() {
             if (styles.pageWrap && this.props.pageWrapId) {
-                this.handleExternalWrapper(this.props.pageWrapId, styles.pageWrap, true);
+                this.handleExternalWrapper('pageWrap', this.props.pageWrapId, styles.pageWrap, true);
             }
             if (styles.outerContainer && this.props.outerContainerId) {
-                this.handleExternalWrapper(this.props.outerContainerId, styles.outerContainer, true);
+                this.handleExternalWrapper('outerContainer', this.props.outerContainerId, styles.outerContainer, true);
             }
         },
         clearWrapperStyles: function clearWrapperStyles() {
             if (styles.pageWrap && this.props.pageWrapId) {
-                this.handleExternalWrapper(this.props.pageWrapId, styles.pageWrap, false);
+                this.handleExternalWrapper('pageWrap', this.props.pageWrapId, styles.pageWrap, false);
             }
             if (styles.outerContainer && this.props.outerContainerId) {
-                this.handleExternalWrapper(this.props.outerContainerId, styles.outerContainer, false);
+                this.handleExternalWrapper('outerContainer', this.props.outerContainerId, styles.outerContainer, false);
             }
         },
-        handleExternalWrapper: function handleExternalWrapper(id, wrapperStyles, set) {
+        handleExternalWrapper: function handleExternalWrapper(el, id, wrapperStyles, set) {
             var html = document.querySelector('html');
             var body = document.querySelector('body');
             var wrapper = document.getElementById(id);
@@ -321,6 +274,14 @@ exports['default'] = function (styles) {
                 return;
             }
             wrapperStyles = wrapperStyles(this.state.isOpen, this.props.width, this.props.right);
+            var customStyles = this.getStyles(el);
+            customStyles.forEach(function (styles) {
+                for (var prop in styles) {
+                    if (styles.hasOwnProperty(prop)) {
+                        wrapperStyles[prop] = styles[prop];
+                    }
+                }
+            });
             for (var prop in wrapperStyles) {
                 if (wrapperStyles.hasOwnProperty(prop)) {
                     wrapper.style[prop] = set ? wrapperStyles[prop] : '';
@@ -386,44 +347,19 @@ exports['default'] = function (styles) {
             window.onkeydown = null;
             this.clearWrapperStyles();
         },
-        componentDidUpdate: function componentDidUpdate() {
-            var _this = this;
-            if (styles.svg && this.isMounted()) {
-                (function () {
-                    var snap = undefined;
-                    try {
-                        snap = function () {
-                            throw new Error('Cannot find module \'imports?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js\' from \'/Users/imogen/code/react-burger-menu/src\'');
-                        }();
-                    } catch (e) {
-                        snap = typeof window !== 'undefined' ? window['Snap'] : typeof global !== 'undefined' ? global['Snap'] : null;
-                    }
-                    var morphShape = _reactDom2['default'].findDOMNode(_this, 'bm-morph-shape');
-                    var s = snap(morphShape);
-                    var path = s.select('path');
-                    if (_this.state.isOpen) {
-                        styles.svg.animate(path);
-                    } else {
-                        setTimeout(function () {
-                            path.attr('d', styles.svg.pathInitial);
-                        }, 300);
-                    }
-                }());
-            }
-        },
         componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
-            if (typeof nextProps.isOpen === 'boolean') {
+            if (typeof nextProps.isOpen === 'boolean' && nextProps.isOpen !== this.props.isOpen) {
                 this.toggleMenu(nextProps.isOpen);
             }
         },
         render: function render() {
-            var _this2 = this;
+            var _this = this;
             var items = undefined, svg = undefined, overlay = undefined;
             if (this.props.children) {
                 items = _react2['default'].Children.map(this.props.children, function (item, index) {
                     var extraProps = {
                             key: index,
-                            style: _this2.getStyles('item', index)
+                            style: _this.getStyles('item', index)
                         };
                     return _react2['default'].cloneElement(item, extraProps);
                 });
@@ -467,11 +403,93 @@ exports['default'] = function (styles) {
                 customIcon: this.props.customBurgerIcon
             }));
         }
-    }));
+    };
+};
+exports['default'] = baseMenu;
+module.exports = exports['default'];
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./BurgerIcon":1,"./CrossIcon":3,"./baseStyles":6}],5:[function(require,module,exports){
+(function (global){
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
+function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : { 'default': obj };
+}
+var _react = typeof window !== 'undefined' ? window['React'] : typeof global !== 'undefined' ? global['React'] : null;
+var _react2 = _interopRequireDefault(_react);
+var _radium = typeof window !== 'undefined' ? window['Radium'] : typeof global !== 'undefined' ? global['Radium'] : null;
+var _radium2 = _interopRequireDefault(_radium);
+var _baseMenu = require('./baseMenu');
+var _baseMenu2 = _interopRequireDefault(_baseMenu);
+exports['default'] = function (styles) {
+    return (0, _radium2['default'])(_react2['default'].createClass((0, _baseMenu2['default'])(styles)));
 };
 module.exports = exports['default'];
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./BurgerIcon":1,"./CrossIcon":3,"./baseStyles":4}],6:[function(require,module,exports){
+},{"./baseMenu":4}],6:[function(require,module,exports){
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
+var styles = {
+        overlay: function overlay(isOpen) {
+            return {
+                position: 'fixed',
+                zIndex: 1,
+                width: '100%',
+                height: '100%',
+                background: 'rgba(0, 0, 0, 0.3)',
+                opacity: isOpen ? 1 : 0,
+                transform: isOpen ? '' : 'translate3d(-100%, 0, 0)',
+                transition: isOpen ? 'opacity 0.3s' : 'opacity 0.3s, transform 0s 0.3s'
+            };
+        },
+        menuWrap: function menuWrap(isOpen, width, right) {
+            return {
+                position: 'fixed',
+                right: right ? 0 : 'inherit',
+                zIndex: 2,
+                width: width,
+                height: '100%',
+                transform: isOpen ? '' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
+                transition: 'all 0.5s'
+            };
+        },
+        menu: function menu() {
+            return {
+                height: '100%',
+                boxSizing: 'border-box'
+            };
+        },
+        itemList: function itemList() {
+            return { height: '100%' };
+        },
+        item: function item() {
+            return {
+                display: 'block',
+                outline: 'none'
+            };
+        }
+    };
+exports['default'] = styles;
+module.exports = exports['default'];
+},{}],7:[function(require,module,exports){
+(function (global){
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
+function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : { 'default': obj };
+}
+var _react = typeof window !== 'undefined' ? window['React'] : typeof global !== 'undefined' ? global['React'] : null;
+var _react2 = _interopRequireDefault(_react);
+var _radium = typeof window !== 'undefined' ? window['Radium'] : typeof global !== 'undefined' ? global['Radium'] : null;
+var _radium2 = _interopRequireDefault(_radium);
+var _svgAnimateMenu = require('./svgAnimateMenu');
+var _svgAnimateMenu2 = _interopRequireDefault(_svgAnimateMenu);
+exports['default'] = function (styles) {
+    return (0, _radium2['default'])(_react2['default'].createClass((0, _svgAnimateMenu2['default'])(styles)));
+};
+module.exports = exports['default'];
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./svgAnimateMenu":17}],8:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -543,7 +561,7 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":5}],7:[function(require,module,exports){
+},{"../menuFactory":7}],9:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -604,7 +622,7 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":5}],8:[function(require,module,exports){
+},{"../menuFactory":7}],10:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -635,14 +653,14 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":5}],9:[function(require,module,exports){
+},{"../menuFactory":7}],11:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : { 'default': obj };
 }
-var _menuFactory = require('../menuFactory');
-var _menuFactory2 = _interopRequireDefault(_menuFactory);
+var _baseMenuFactory = require('../baseMenuFactory');
+var _baseMenuFactory2 = _interopRequireDefault(_baseMenuFactory);
 var styles = {
         pageWrap: function pageWrap(isOpen, width, right) {
             return {
@@ -654,9 +672,9 @@ var styles = {
             return { overflow: isOpen ? '' : 'hidden' };
         }
     };
-exports['default'] = (0, _menuFactory2['default'])(styles);
+exports['default'] = (0, _baseMenuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":5}],10:[function(require,module,exports){
+},{"../baseMenuFactory":5}],12:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -682,7 +700,7 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":5}],11:[function(require,module,exports){
+},{"../menuFactory":7}],13:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -705,7 +723,7 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":5}],12:[function(require,module,exports){
+},{"../menuFactory":7}],14:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -731,18 +749,18 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":5}],13:[function(require,module,exports){
+},{"../menuFactory":7}],15:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : { 'default': obj };
 }
-var _menuFactory = require('../menuFactory');
-var _menuFactory2 = _interopRequireDefault(_menuFactory);
+var _baseMenuFactory = require('../baseMenuFactory');
+var _baseMenuFactory2 = _interopRequireDefault(_baseMenuFactory);
 var styles = {};
-exports['default'] = (0, _menuFactory2['default'])(styles);
+exports['default'] = (0, _baseMenuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":5}],14:[function(require,module,exports){
+},{"../baseMenuFactory":5}],16:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -767,5 +785,48 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":5}]},{},[2])(2)
+},{"../menuFactory":7}],17:[function(require,module,exports){
+(function (global){
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
+function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : { 'default': obj };
+}
+var _reactDom = typeof window !== 'undefined' ? window['ReactDOM'] : typeof global !== 'undefined' ? global['ReactDOM'] : null;
+var _reactDom2 = _interopRequireDefault(_reactDom);
+var _baseMenu = require('./baseMenu');
+var _baseMenu2 = _interopRequireDefault(_baseMenu);
+var svgAnimateMenu = function svgAnimateMenu(styles) {
+    var menu = (0, _baseMenu2['default'])(styles);
+    menu.componentDidUpdate = function () {
+        var _this = this;
+        if (styles.svg && this.isMounted()) {
+            (function () {
+                var snap = undefined;
+                try {
+                    snap = function () {
+                        throw new Error('Cannot find module \'imports?this=>window,fix=>module.exports=0!snapsvg/dist/snap.svg.js\' from \'/Users/mikek/development/react-burger-menu/src\'');
+                    }();
+                } catch (e) {
+                    snap = typeof window !== 'undefined' ? window['Snap'] : typeof global !== 'undefined' ? global['Snap'] : null;
+                }
+                var morphShape = _reactDom2['default'].findDOMNode(_this, 'bm-morph-shape');
+                var s = snap(morphShape);
+                var path = s.select('path');
+                if (_this.state.isOpen) {
+                    styles.svg.animate(path);
+                } else {
+                    setTimeout(function () {
+                        path.attr('d', styles.svg.pathInitial);
+                    }, 300);
+                }
+            }());
+        }
+    };
+    return menu;
+};
+exports['default'] = svgAnimateMenu;
+module.exports = exports['default'];
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./baseMenu":4}]},{},[2])(2)
 });

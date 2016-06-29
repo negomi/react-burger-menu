@@ -1,7 +1,7 @@
 'use strict';
 
-import menuFactory from '../menuFactory';
+import baseMenuFactory from '../baseMenuFactory';
 
 const styles = {};
 
-export default menuFactory(styles);
+export default baseMenuFactory(styles);
