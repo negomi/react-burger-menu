@@ -328,6 +328,10 @@ Because this project uses CSS3 features, it's only meant for modern browsers. So
 
 Chrome and Firefox have full support, but Safari and IE have strange behavior for some of the menus.
 
+### Help
+
+Check the FAQ (https://github.com/negomi/react-burger-menu/wiki/FAQ) to see if your question has been answered already, or [open a new issue](https://github.com/negomi/react-burger-menu/issues).
+
 ### License
 
 MIT
