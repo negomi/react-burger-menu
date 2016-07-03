@@ -389,10 +389,9 @@ exports['default'] = function (styles) {
             if (styles.svg && this.isMounted()) {
                 var _ret = function () {
                         var morphShape = _reactDom2['default'].findDOMNode(_this, 'bm-morph-shape');
-                        var Snap = undefined, s = undefined, path = undefined;
+                        var s = undefined, path = undefined;
                         try {
-                            Snap = typeof window !== 'undefined' ? window['Snap'] : typeof global !== 'undefined' ? global['Snap'] : null;
-                            s = Snap(morphShape);
+                            s = styles.svg.lib(morphShape);
                             path = s.select('path');
                         } catch (e) {
                             console.warn('It looks like you might be using Webpack. Unfortunately, Elastic and Bubble are not currently supported with Webpack builds due to their Snap.svg dependency. See https://github.com/adobe-webplatform/Snap.svg/issues/341 for more info.');
@@ -460,15 +459,19 @@ exports['default'] = function (styles) {
 module.exports = exports['default'];
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"./BurgerIcon":1,"./CrossIcon":3,"./baseStyles":4}],6:[function(require,module,exports){
+(function (global){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : { 'default': obj };
 }
+var _snapsvg = typeof window !== 'undefined' ? window['Snap'] : typeof global !== 'undefined' ? global['Snap'] : null;
+var _snapsvg2 = _interopRequireDefault(_snapsvg);
 var _menuFactory = require('../menuFactory');
 var _menuFactory2 = _interopRequireDefault(_menuFactory);
 var styles = {
         svg: {
+            lib: _snapsvg2['default'],
             pathInitial: 'M-7.312,0H0c0,0,0,113.839,0,400c0,264.506,0,400,0,400h-7.312V0z',
             pathOpen: 'M-7.312,0H15c0,0,66,113.339,66,399.5C81,664.006,15,800,15,800H-7.312V0z;M-7.312,0H100c0,0,0,113.839,0,400c0,264.506,0,400,0,400H-7.312V0z',
             animate: function animate(path) {
@@ -531,16 +534,21 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"../menuFactory":5}],7:[function(require,module,exports){
+(function (global){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : { 'default': obj };
 }
+var _snapsvg = typeof window !== 'undefined' ? window['Snap'] : typeof global !== 'undefined' ? global['Snap'] : null;
+var _snapsvg2 = _interopRequireDefault(_snapsvg);
 var _menuFactory = require('../menuFactory');
 var _menuFactory2 = _interopRequireDefault(_menuFactory);
 var styles = {
         svg: {
+            lib: _snapsvg2['default'],
             pathInitial: 'M-1,0h101c0,0-97.833,153.603-97.833,396.167C2.167,627.579,100,800,100,800H-1V0z',
             pathOpen: 'M-1,0h101c0,0,0-1,0,395c0,404,0,405,0,405H-1V0z',
             animate: function animate(path) {
@@ -592,6 +600,7 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"../menuFactory":5}],8:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
