@@ -343,7 +343,8 @@ exports['default'] = function (styles) {
             };
         },
         getInitialState: function getInitialState() {
-            return { isOpen: false };
+            var initialIsOpenProp = this.props && typeof this.props.isOpen !== 'undefined';
+            return { isOpen: initialIsOpenProp ? this.props.isOpen : false };
         },
         componentWillMount: function componentWillMount() {
             if (!styles) {
@@ -355,6 +356,9 @@ exports['default'] = function (styles) {
         },
         componentDidMount: function componentDidMount() {
             window.onkeydown = this.listenForClose;
+            if (this.props.isOpen) {
+                this.toggleMenu();
+            }
         },
         componentWillUnmount: function componentWillUnmount() {
             window.onkeydown = null;
@@ -405,7 +409,6 @@ exports['default'] = function (styles) {
                 className: 'bm-morph-shape',
                 style: this.getStyles('morphShape')
             }, _react2['default'].createElement('svg', {
-                xmlns: 'http://www.w3.org/2000/svg',
                 width: '100%',
                 height: '100%',
                 viewBox: '0 0 100 800',
