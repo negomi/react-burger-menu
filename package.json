@@ -57,7 +57,7 @@
     "publish:site": "gulp publish:examples",
     "release": "gulp release",
     "start": "gulp dev",
-    "test": "gulp test --reporter dot",
+    "test": "gulp test --reporter dot --run-once",
     "tdd": "gulp watch:tests --reporter spec",
     "watch": "gulp watch:lib"
   },
