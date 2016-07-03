@@ -1,10 +1,12 @@
 'use strict';
 
+import Snap from 'snapsvg';
 import menuFactory from '../menuFactory';
 
 const styles = {
 
   svg: {
+    lib: Snap,
     pathInitial: 'M-1,0h101c0,0-97.833,153.603-97.833,396.167C2.167,627.579,100,800,100,800H-1V0z',
     pathOpen: 'M-1,0h101c0,0,0-1,0,395c0,404,0,405,0,405H-1V0z',
     animate(path) {

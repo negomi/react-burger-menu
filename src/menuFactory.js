@@ -157,12 +157,11 @@ export default (styles) => {
     componentDidUpdate() {
       if (styles.svg && this.isMounted()) {
         const morphShape = ReactDOM.findDOMNode(this, 'bm-morph-shape');
-        let Snap, s, path;
+        let s, path;
 
         try {
           // This will throw with Webpack.
-          Snap = require('snapsvg');
-          s = Snap(morphShape);
+          s = styles.svg.lib(morphShape);
           path = s.select('path');
         } catch (e) {
           console.warn('It looks like you might be using Webpack. Unfortunately, Elastic and Bubble are not currently supported with Webpack builds due to their Snap.svg dependency. See https://github.com/adobe-webplatform/Snap.svg/issues/341 for more info.');
