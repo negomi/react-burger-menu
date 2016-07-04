@@ -35,7 +35,9 @@ const CrossIcon = Radium(React.createClass({
       top: 8
     };
     var buttonStyle = {
-      position: 'relative',
+      position: 'absolute',
+      left: 0,
+      top: 0,
       width: '100%',
       height: '100%',
       margin: 0,
