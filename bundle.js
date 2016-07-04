@@ -35,7 +35,9 @@ var BurgerIcon = (0, _radium2['default'])(_react2['default'].createClass({
         render: function render() {
             var icon = undefined;
             var buttonStyle = {
-                    position: 'relative',
+                    position: 'absolute',
+                    left: 0,
+                    top: 0,
                     width: '100%',
                     height: '100%',
                     margin: 0,
@@ -130,7 +132,9 @@ var CrossIcon = (0, _radium2['default'])(_react2['default'].createClass({
                     top: 8
                 };
             var buttonStyle = {
-                    position: 'relative',
+                    position: 'absolute',
+                    left: 0,
+                    top: 0,
                     width: '100%',
                     height: '100%',
                     margin: 0,
@@ -367,16 +371,13 @@ exports['default'] = function (styles) {
         componentDidUpdate: function componentDidUpdate() {
             var _this = this;
             if (styles.svg && this.isMounted()) {
-                var _ret = function () {
+                if (!styles.svg.lib) {
+                    console.warn('It looks like you might be using Webpack. Unfortunately, Elastic and Bubble are not currently supported with Webpack builds due to their Snap.svg dependency. See https://github.com/adobe-webplatform/Snap.svg/issues/341 for more info.');
+                } else {
+                    (function () {
                         var morphShape = _reactDom2['default'].findDOMNode(_this, 'bm-morph-shape');
-                        var s = undefined, path = undefined;
-                        try {
-                            s = styles.svg.lib(morphShape);
-                            path = s.select('path');
-                        } catch (e) {
-                            console.warn('It looks like you might be using Webpack. Unfortunately, Elastic and Bubble are not currently supported with Webpack builds due to their Snap.svg dependency. See https://github.com/adobe-webplatform/Snap.svg/issues/341 for more info.');
-                            return { v: undefined };
-                        }
+                        var s = styles.svg.lib(morphShape);
+                        var path = s.select('path');
                         if (_this.state.isOpen) {
                             styles.svg.animate(path);
                         } else {
@@ -384,9 +385,8 @@ exports['default'] = function (styles) {
                                 path.attr('d', styles.svg.pathInitial);
                             }, 300);
                         }
-                    }();
-                if (typeof _ret === 'object')
-                    return _ret.v;
+                    }());
+                }
             }
         },
         componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
@@ -443,13 +443,13 @@ Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : { 'default': obj };
 }
-var _snapsvg = require('snapsvg');
-var _snapsvg2 = _interopRequireDefault(_snapsvg);
+var _snapsvgImporter = require('../snapsvgImporter');
+var _snapsvgImporter2 = _interopRequireDefault(_snapsvgImporter);
 var _menuFactory = require('../menuFactory');
 var _menuFactory2 = _interopRequireDefault(_menuFactory);
 var styles = {
         svg: {
-            lib: _snapsvg2['default'],
+            lib: _snapsvgImporter2['default'],
             pathInitial: 'M-7.312,0H0c0,0,0,113.839,0,400c0,264.506,0,400,0,400h-7.312V0z',
             pathOpen: 'M-7.312,0H15c0,0,66,113.339,66,399.5C81,664.006,15,800,15,800H-7.312V0z;M-7.312,0H100c0,0,0,113.839,0,400c0,264.506,0,400,0,400H-7.312V0z',
             animate: function animate(path) {
@@ -512,19 +512,19 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":4,"snapsvg":undefined}],6:[function(require,module,exports){
+},{"../menuFactory":4,"../snapsvgImporter":14}],6:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : { 'default': obj };
 }
-var _snapsvg = require('snapsvg');
-var _snapsvg2 = _interopRequireDefault(_snapsvg);
+var _snapsvgImporter = require('../snapsvgImporter');
+var _snapsvgImporter2 = _interopRequireDefault(_snapsvgImporter);
 var _menuFactory = require('../menuFactory');
 var _menuFactory2 = _interopRequireDefault(_menuFactory);
 var styles = {
         svg: {
-            lib: _snapsvg2['default'],
+            lib: _snapsvgImporter2['default'],
             pathInitial: 'M-1,0h101c0,0-97.833,153.603-97.833,396.167C2.167,627.579,100,800,100,800H-1V0z',
             pathOpen: 'M-1,0h101c0,0,0-1,0,395c0,404,0,405,0,405H-1V0z',
             animate: function animate(path) {
@@ -576,7 +576,7 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":4,"snapsvg":undefined}],7:[function(require,module,exports){
+},{"../menuFactory":4,"../snapsvgImporter":14}],7:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -739,7 +739,19 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":4}],"react-burger-menu":[function(require,module,exports){
+},{"../menuFactory":4}],14:[function(require,module,exports){
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
+exports['default'] = function () {
+    var Snap = undefined;
+    try {
+        Snap = require('snapsvg');
+    } finally {
+        return Snap;
+    }
+};
+module.exports = exports['default'];
+},{"snapsvg":undefined}],"react-burger-menu":[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 exports['default'] = {
