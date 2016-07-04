@@ -129,7 +129,9 @@ describe('BurgerIcon component', () => {
       component = createShallowComponent(<BurgerIcon />);
       const button = component.props.children[1];
       const expected = {
-        position: 'relative',
+        position: 'absolute',
+        left: 0,
+        top: 0,
         width: '100%',
         height: '100%',
         margin: 0,
