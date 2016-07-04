@@ -1,6 +1,6 @@
 'use strict';
 
-import Snap from 'snapsvg';
+import Snap from '../snapsvgImporter';
 import menuFactory from '../menuFactory';
 
 const styles = {
