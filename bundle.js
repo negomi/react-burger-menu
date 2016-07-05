@@ -372,18 +372,13 @@ exports['default'] = function (styles) {
             var _this = this;
             if (styles.svg && this.isMounted()) {
                 var _ret = function () {
-                        var webpackMessage = 'It looks like you might be using Webpack. Unfortunately, Elastic and Bubble are not currently supported with Webpack builds due to their Snap.svg dependency. See https://github.com/adobe-webplatform/Snap.svg/issues/341 for more info.';
                         var morphShape = _reactDom2['default'].findDOMNode(_this, 'bm-morph-shape');
                         var s = undefined, path = undefined;
-                        if (!styles.svg.lib) {
-                            console.warn(webpackMessage);
-                            return { v: undefined };
-                        }
                         try {
                             s = styles.svg.lib(morphShape);
                             path = s.select('path');
                         } catch (e) {
-                            console.warn(webpackMessage);
+                            console.warn('It looks like you might be using Webpack. Unfortunately, Elastic and Bubble are not currently supported with Webpack builds due to their Snap.svg dependency. See https://github.com/adobe-webplatform/Snap.svg/issues/341 for more info.');
                             return { v: undefined };
                         }
                         if (_this.state.isOpen) {
