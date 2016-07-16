@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var initGulpTasks = require('react-component-gulp-tasks');
 var initTestTasks = require('./tasks/test');
+var initReleaseTasks = require('./tasks/release');
 
 /**
  * Tasks are added by the react-component-gulp-tasks package
@@ -59,5 +60,17 @@ var testConfig = {
   }
 };
 
+var releaseConfig = {
+  files: [
+    'dist',
+    'lib',
+    'examples',
+    'package.json',
+    'bower.json'
+  ],
+  version: pkg.version
+};
+
 initGulpTasks(gulp, taskConfig);
 initTestTasks(gulp, testConfig);
+initReleaseTasks(gulp, releaseConfig);
