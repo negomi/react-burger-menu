@@ -253,7 +253,7 @@ describe('menuFactory', () => {
 
     it('can be disabled', () => {
       component = TestUtils.renderIntoDocument(<Menu styles={ mockStylesProp } customBurgerIcon={ false } />);
-      assert.throw(TestUtils.findRenderedDOMComponentWithClass.bind(null, component, 'bm-icon'), Error);
+      assert.throw(TestUtils.findRenderedDOMComponentWithClass.bind(null, component, 'bm-burger-button'), Error);
     });
   });
 
@@ -261,7 +261,7 @@ describe('menuFactory', () => {
 
     it('can be disabled', () => {
       component = TestUtils.renderIntoDocument(<Menu styles={ mockStylesProp } customCrossIcon={ false } />);
-      assert.throw(TestUtils.findRenderedDOMComponentWithClass.bind(null, component, 'bm-cross'), Error);
+      assert.throw(TestUtils.findRenderedDOMComponentWithClass.bind(null, component, 'bm-cross-button'), Error);
     });
   });
 

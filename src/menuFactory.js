@@ -209,11 +209,15 @@ export default (styles) => {
                 })}
               </nav>
             </div>
-            <div style={this.getStyles('closeButton')}>
-              <CrossIcon onClick={this.toggleMenu} styles={this.props.styles} customIcon={this.props.customCrossIcon ? this.props.customCrossIcon : null} />
-            </div>
+            {this.props.customCrossIcon !== false ? (
+              <div style={this.getStyles('closeButton')}>
+                <CrossIcon onClick={this.toggleMenu} styles={this.props.styles} customIcon={this.props.customCrossIcon} />
+              </div>
+            ) : null}
           </div>
-          <BurgerIcon onClick={this.toggleMenu} styles={this.props.styles} customIcon={this.props.customBurgerIcon ? this.props.customBurgerIcon : null} />
+          {this.props.customBurgerIcon !== false ? (
+            <BurgerIcon onClick={this.toggleMenu} styles={this.props.styles} customIcon={this.props.customBurgerIcon} />
+          ) : null}
         </div>
       );
     }
