@@ -428,15 +428,15 @@ exports['default'] = function (styles) {
                         style: _this2.getStyles('item', index)
                     };
                 return _react2['default'].cloneElement(item, extraProps);
-            }))), _react2['default'].createElement('div', { style: this.getStyles('closeButton') }, _react2['default'].createElement(_CrossIcon2['default'], {
+            }))), this.props.customCrossIcon !== false ? _react2['default'].createElement('div', { style: this.getStyles('closeButton') }, _react2['default'].createElement(_CrossIcon2['default'], {
                 onClick: this.toggleMenu,
                 styles: this.props.styles,
-                customIcon: this.props.customCrossIcon ? this.props.customCrossIcon : null
-            }))), _react2['default'].createElement(_BurgerIcon2['default'], {
+                customIcon: this.props.customCrossIcon
+            })) : null), this.props.customBurgerIcon !== false ? _react2['default'].createElement(_BurgerIcon2['default'], {
                 onClick: this.toggleMenu,
                 styles: this.props.styles,
-                customIcon: this.props.customBurgerIcon ? this.props.customBurgerIcon : null
-            }));
+                customIcon: this.props.customBurgerIcon
+            }) : null);
         }
     }));
 };
