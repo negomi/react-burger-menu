@@ -56,17 +56,17 @@ const CrossIcon = Radium(React.createClass({
       icon = React.cloneElement(this.props.customIcon, extraProps);
     } else {
       icon = (
-        <span style={ [{position: 'absolute', top: '6px', right: '14px'}] }>
-          <span className="bm-cross" style={ [this.getCrossStyle('before'), this.props.styles.bmCross] }></span>
-          <span className="bm-cross" style={ [this.getCrossStyle('after'), this.props.styles.bmCross] }></span>
+        <span style={[{position: 'absolute', top: '6px', right: '14px'}]}>
+          <span className="bm-cross" style={[this.getCrossStyle('before'), this.props.styles.bmCross]}></span>
+          <span className="bm-cross" style={[this.getCrossStyle('after'), this.props.styles.bmCross]}></span>
         </span>
       );
     }
 
     return (
-      <div className="bm-cross-button" style={ [buttonWrapperStyle, this.props.styles.bmCrossButton] }>
-        { icon }
-        <button onClick={ this.props.onClick } style={ buttonStyle }>Close Menu</button>
+      <div className="bm-cross-button" style={[buttonWrapperStyle, this.props.styles.bmCrossButton]}>
+        {icon}
+        <button onClick={this.props.onClick} style={buttonStyle}>Close Menu</button>
       </div>
     );
   }

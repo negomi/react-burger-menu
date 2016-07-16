@@ -6,14 +6,14 @@ import classNames from 'classnames';
 let MenuWrap = React.createClass({
 
   getInitialState() {
-    return { hidden : false };
+    return {hidden : false};
   },
 
   componentWillReceiveProps(nextProps) {
     const sideChanged = this.props.children.props.right !== nextProps.children.props.right;
 
     if (sideChanged) {
-      this.setState({ hidden : true });
+      this.setState({hidden : true});
 
       setTimeout(() => {
         this.show();
@@ -22,19 +22,19 @@ let MenuWrap = React.createClass({
   },
 
   show() {
-    this.setState({ hidden : false });
+    this.setState({hidden : false});
   },
 
   render() {
     let style;
 
     if (this.state.hidden) {
-      style = { display: 'none' };
+      style = {display: 'none'};
     }
 
     return (
-      <div style={ style } className={ this.props.side }>
-        { this.props.children }
+      <div style={style} className={this.props.side}>
+        {this.props.children}
       </div>
     );
   }
@@ -43,11 +43,11 @@ let MenuWrap = React.createClass({
 let Demo = React.createClass({
 
   changeMenu(menu) {
-    this.setState({ currentMenu: menu });
+    this.setState({currentMenu: menu});
   },
 
   changeSide(side) {
-    this.setState({ side });
+    this.setState({side});
   },
 
   getItems() {
@@ -95,17 +95,17 @@ let Demo = React.createClass({
 
     if (this.state.side === 'right') {
       jsx = (
-        <MenuWrap wait={ 20 } side={ this.state.side }>
-          <Menu id={ this.state.currentMenu } pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } right>
-            { items }
+        <MenuWrap wait={20} side={this.state.side}>
+          <Menu id={this.state.currentMenu} pageWrapId={"page-wrap"} outerContainerId={"outer-container"} right>
+            {items}
           </Menu>
         </MenuWrap>
       );
     } else {
       jsx = (
-        <MenuWrap wait={ 20 }>
-          <Menu id={ this.state.currentMenu } pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" }>
-            { items }
+        <MenuWrap wait={20}>
+          <Menu id={this.state.currentMenu} pageWrapId={"page-wrap"} outerContainerId={"outer-container"}>
+            {items}
           </Menu>
         </MenuWrap>
       );
@@ -124,24 +124,24 @@ let Demo = React.createClass({
   render() {
     const buttons = Object.keys(this.props.menus).map((menu) => {
       return (
-        <a key={ menu }
-          className={ classNames({'current-demo': menu === this.state.currentMenu}) }
-          onClick={ this.changeMenu.bind(this, menu) }>
-          { this.props.menus[menu].buttonText }
+        <a key={menu}
+          className={classNames({'current-demo': menu === this.state.currentMenu})}
+          onClick={this.changeMenu.bind(this, menu)}>
+          {this.props.menus[menu].buttonText}
         </a>
       );
     });
 
     return (
-      <div id="outer-container" style={ { height: '100%' } }>
-        { this.getMenu() }
+      <div id="outer-container" style={{height: '100%'}}>
+        {this.getMenu()}
         <main id="page-wrap">
           <h1><a href="https://github.com/negomi/react-burger-menu">react-burger-menu</a></h1>
-          <a className={ classNames({'side-button': true, 'left': true, 'active': this.state.side === 'left'}) } onClick={ this.changeSide.bind(this, 'left') }>Left</a>
-          <a className={ classNames({'side-button': true, 'right': true, 'active': this.state.side === 'right'}) } onClick={ this.changeSide.bind(this, 'right') }>Right</a>
+          <a className={classNames({'side-button': true, 'left': true, 'active': this.state.side === 'left'})} onClick={this.changeSide.bind(this, 'left')}>Left</a>
+          <a className={classNames({'side-button': true, 'right': true, 'active': this.state.side === 'right'})} onClick={this.changeSide.bind(this, 'right')}>Right</a>
           <h2 className="description">An off-canvas sidebar React component with a collection of effects and styles using CSS transitions and SVG path animations.</h2>
           <nav className="demo-buttons">
-            { buttons }
+            {buttons}
           </nav>
           Inspired by <a href="https://github.com/codrops/OffCanvasMenuEffects">Off-Canvas Menu Effects</a> and <a href="https://github.com/codrops/SidebarTransitions">Sidebar Transitions</a> by Codrops
         </main>
@@ -151,15 +151,15 @@ let Demo = React.createClass({
 });
 
 const menus = {
-  slide: { buttonText: 'Slide', items: 1 },
-  stack: { buttonText: 'Stack', items: 1 },
-  elastic: { buttonText: 'Elastic', items: 1 },
-  bubble: { buttonText: 'Bubble', items: 1 },
-  push: { buttonText: 'Push', items: 1 },
-  pushRotate: { buttonText: 'Push Rotate', items: 2 },
-  scaleDown: { buttonText: 'Scale Down', items: 2 },
-  scaleRotate: { buttonText: 'Scale Rotate', items: 2 },
-  fallDown: { buttonText: 'Fall Down', items: 2 }
+  slide: {buttonText: 'Slide', items: 1},
+  stack: {buttonText: 'Stack', items: 1},
+  elastic: {buttonText: 'Elastic', items: 1},
+  bubble: {buttonText: 'Bubble', items: 1},
+  push: {buttonText: 'Push', items: 1},
+  pushRotate: {buttonText: 'Push Rotate', items: 2},
+  scaleDown: {buttonText: 'Scale Down', items: 2},
+  scaleRotate: {buttonText: 'Scale Rotate', items: 2},
+  fallDown: {buttonText: 'Fall Down', items: 2}
 };
 
-ReactDOM.render(<Demo menus={ menus } />, document.getElementById('app'));
+ReactDOM.render(<Demo menus={menus} />, document.getElementById('app'));
