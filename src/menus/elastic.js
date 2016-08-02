@@ -15,19 +15,23 @@ const styles = {
   },
 
   morphShape(isOpen, width, right) {
+    var transform = right ? 'rotateY(180deg)' : '';
     return {
       position: 'fixed',
       width: 120,
       height: '100%',
       right: right ? 'inherit' : 0,
       left: right ? 0 : 'inherit',
-      transform: right ? 'rotateY(180deg)' : ''
+      transform: transform,
+      WebkitTransform: transform,
     };
   },
 
   menuWrap(isOpen, width, right) {
+    var transform = isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)';
     return {
-      transform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
+      transform: transform,
+      WebkitTransform: transform,
       transition: 'all 0.3s'
     };
   },
@@ -52,8 +56,10 @@ const styles = {
   },
 
   pageWrap(isOpen, width, right) {
+    var transform = isOpen ? '' : right ? 'translate3d(-100px, 0, 0)' : 'translate3d(100px, 0, 0)';
     return {
-      transform: isOpen ? '' : right ? 'translate3d(-100px, 0, 0)' : 'translate3d(100px, 0, 0)',
+      transform: transform,
+      WebkitTransform: transform,
       transition: isOpen ? 'all 0.3s' : 'all 0.3s 0.1s'
     };
   },
