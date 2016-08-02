@@ -69,7 +69,8 @@ describe('CrossIcon component', () => {
         position: 'absolute',
         width: 3,
         height: 14,
-        transform: 'rotate(45deg)'
+        transform: 'rotate(45deg)',
+        WebkitTransform: 'rotate(45deg)',
       };
       expect(icon.props.children[0].props.style).to.contain(expected);
     });

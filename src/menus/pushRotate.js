@@ -5,8 +5,10 @@ import menuFactory from '../menuFactory';
 const styles = {
 
   pageWrap(isOpen, width, right) {
+    var transform = isOpen ? '' : right ? `translate3d(-${width}px, 0, 0) rotateY(15deg)` : `translate3d(${width}px, 0, 0) rotateY(-15deg)`;
     return {
-      transform: isOpen ? '' : right ? `translate3d(-${width}px, 0, 0) rotateY(15deg)` : `translate3d(${width}px, 0, 0) rotateY(-15deg)`,
+      transform: transform,
+      WebkitTransform: transform,
       transformOrigin: right ? '100% 50%' : '0% 50%',
       transformStyle: 'preserve-3d',
       transition: 'all 0.5s'

@@ -11,11 +11,13 @@ const CrossIcon = Radium(React.createClass({
   },
 
   getCrossStyle(type) {
+    var transform = type === 'before' ? 'rotate(45deg)' : 'rotate(-45deg)';
     return {
       position: 'absolute',
       width: 3,
       height: 14,
-      transform: type === 'before' ? 'rotate(45deg)' : 'rotate(-45deg)'
+      transform: transform,
+      WebkitTransform: transform,
     };
   },
 
