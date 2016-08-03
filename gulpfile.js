@@ -25,7 +25,7 @@ var taskConfig = {
       'radium',
       'react',
       'react-dom',
-      'snapsvg'
+      'snapsvg-cjs'
     ],
     lib: 'lib',
     file: 'BurgerMenu.js',
