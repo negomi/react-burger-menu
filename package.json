@@ -15,6 +15,7 @@
   "dependencies": {
     "browserify-optional": "^1.0.0",
     "classnames": "^2.1.1",
+    "eve": "~0.4.2",
     "radium": "^0.18.0",
     "snapsvg-cjs": "0.0.4"
   },
@@ -26,12 +27,12 @@
     "babel-register": "^6.3.13",
     "chai": "^3.2.0",
     "eslint": "^3.0.0",
-    "eslint-plugin-react": "^5.0.1",
+    "eslint-plugin-react": "^6.0.0",
     "gulp": "^3.8.11",
     "gulp-git": "^1.8.0",
-    "gulp-mocha": "^2.2.0",
+    "gulp-mocha": "^3.0.0",
     "jsdom": "^9.0.0",
-    "mocha": "^2.3.4",
+    "mocha": "^3.0.0",
     "react-addons-test-utils": "^15.0.0",
     "react-component-gulp-tasks": "^0.7.1",
     "sinon": "^1.16.1"

@@ -22,6 +22,7 @@ var taskConfig = {
     dependencies: [
       'browserify-optional',
       'classnames',
+      'eve',
       'radium',
       'react',
       'react-dom',
