@@ -391,26 +391,17 @@ exports['default'] = function (styles) {
         componentDidUpdate: function componentDidUpdate() {
             var _this = this;
             if (styles.svg && this.isMounted()) {
-                var _ret = function () {
-                        var morphShape = _reactDom2['default'].findDOMNode(_this, 'bm-morph-shape');
-                        var s = undefined, path = undefined;
-                        try {
-                            s = styles.svg.lib(morphShape);
-                            path = s.select('path');
-                        } catch (e) {
-                            console.warn('It looks like you might be using Webpack. Unfortunately, Elastic and Bubble are not currently supported with Webpack builds due to their Snap.svg dependency. See https://github.com/adobe-webplatform/Snap.svg/issues/341 for more info.');
-                            return { v: undefined };
-                        }
-                        if (_this.state.isOpen) {
-                            styles.svg.animate(path);
-                        } else {
-                            setTimeout(function () {
-                                path.attr('d', styles.svg.pathInitial);
-                            }, 300);
-                        }
-                    }();
-                if (typeof _ret === 'object')
-                    return _ret.v;
+                (function () {
+                    var morphShape = _reactDom2['default'].findDOMNode(_this, 'bm-morph-shape');
+                    var path = styles.svg.lib(morphShape).select('path');
+                    if (_this.state.isOpen) {
+                        styles.svg.animate(path);
+                    } else {
+                        setTimeout(function () {
+                            path.attr('d', styles.svg.pathInitial);
+                        }, 300);
+                    }
+                }());
             }
         },
         componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
@@ -765,18 +756,16 @@ var styles = {
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
 },{"../menuFactory":5}],15:[function(require,module,exports){
-(function (global){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 exports['default'] = function () {
     var Snap = undefined;
     try {
-        Snap = typeof window !== 'undefined' ? window['Snap'] : typeof global !== 'undefined' ? global['Snap'] : null;
+        Snap = require('snapsvg-cjs');
     } finally {
         return Snap;
     }
 };
 module.exports = exports['default'];
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}]},{},[2])(2)
+},{"snapsvg-cjs":undefined}]},{},[2])(2)
 });
