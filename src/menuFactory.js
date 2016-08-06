@@ -180,7 +180,7 @@ export default (styles) => {
     render() {
       return (
         <div>
-          {!this.props.noOverlay ? <div className="bm-overlay" onClick={this.toggleMenu} style={this.getStyles('overlay')}></div> : null}
+          {!this.props.noOverlay ? <div className="bm-overlay" onClick={this.toggleMenu} style={this.getStyles('overlay')} /> : null}
           <div id={this.props.id} className={"bm-menu-wrap"} style={this.getStyles('menuWrap')}>
             {styles.svg ? (
               <div className="bm-morph-shape" style={this.getStyles('morphShape')}>
