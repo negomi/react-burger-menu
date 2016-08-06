@@ -4,7 +4,8 @@ require('../test/utils/dom.js');
 
 module.exports = function(gulp, config) {
   gulp.task('test', ['build:lib'], function() {
-    var reporter = process.argv[process.argv.indexOf('--reporter') + 1];
+    var reporterPos = process.argv.indexOf('--reporter');
+    var reporter = reporterPos > -1 ? process.argv[reporterPos + 1] : null;
 
     return gulp.src(config.paths.test, {read: false})
       .pipe(mocha({reporter: reporter}))
