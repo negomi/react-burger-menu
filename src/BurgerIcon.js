@@ -46,7 +46,7 @@ const BurgerIcon = Radium(React.createClass({
       margin: 0,
       padding: 0,
       border: 'none',
-      textIndent: -9999,
+      opacity: 0,
       background: 'transparent',
       outline: 'none'
     };
