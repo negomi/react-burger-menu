@@ -202,7 +202,7 @@ var styles = {
                 height: '100%',
                 background: 'rgba(0, 0, 0, 0.3)',
                 opacity: isOpen ? 1 : 0,
-                transform: isOpen ? '' : 'translate3d(-100%, 0, 0)',
+                transform: isOpen ? '' : 'translate3d(100%, 0, 0)',
                 transition: isOpen ? 'opacity 0.3s' : 'opacity 0.3s, transform 0s 0.3s'
             };
         },
@@ -220,7 +220,8 @@ var styles = {
         menu: function menu() {
             return {
                 height: '100%',
-                boxSizing: 'border-box'
+                boxSizing: 'border-box',
+                overflow: 'auto'
             };
         },
         itemList: function itemList() {
