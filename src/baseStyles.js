@@ -30,7 +30,8 @@ let styles = {
   menu() {
     return {
       height: '100%',
-      boxSizing: 'border-box'
+      boxSizing: 'border-box',
+      overflow: 'auto'
     };
   },
 
