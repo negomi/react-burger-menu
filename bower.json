@@ -1,6 +1,6 @@
 {
   "name": "react-burger-menu",
-  "version": "1.10.2",
+  "version": "1.10.3",
   "description": "An off-canvas sidebar component with a collection of effects and styles using CSS transitions and SVG path animations",
   "main": "dist/react-burger-menu.min.js",
   "homepage": "https://github.com/negomi/react-burger-menu",
