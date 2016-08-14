@@ -71,6 +71,9 @@
   },
   "readmeFilename": "README.md",
   "keywords": [
+    "component",
+    "hamburger",
+    "menu",
     "react",
     "react-component"
   ],
