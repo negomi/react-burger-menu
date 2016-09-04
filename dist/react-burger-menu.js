@@ -259,6 +259,17 @@ module.exports = exports['default'];
 (function (global){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
+var _extends = Object.assign || function (target) {
+        for (var i = 1; i < arguments.length; i++) {
+            var source = arguments[i];
+            for (var key in source) {
+                if (Object.prototype.hasOwnProperty.call(source, key)) {
+                    target[key] = source[key];
+                }
+            }
+        }
+        return target;
+    };
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : { 'default': obj };
 }
@@ -436,7 +447,7 @@ exports['default'] = function (styles) {
             }, _react2['default'].Children.map(this.props.children, function (item, index) {
                 var extraProps = {
                         key: index,
-                        style: _this2.getStyles('item', index)
+                        style: _extends(item.props.style || {}, _this2.getStyles('item', index))
                     };
                 return _react2['default'].cloneElement(item, extraProps);
             }))), this.props.customCrossIcon !== false ? _react2['default'].createElement('div', { style: this.getStyles('closeButton') }, _react2['default'].createElement(_CrossIcon2['default'], {

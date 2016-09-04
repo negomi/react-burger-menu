@@ -194,7 +194,7 @@ export default (styles) => {
                 {React.Children.map(this.props.children, (item, index) => {
                   const extraProps = {
                     key: index,
-                    style: this.getStyles('item', index)
+                    style: Object.assign(item.props.style || {}, this.getStyles('item', index))
                   };
                   return React.cloneElement(item, extraProps);
                 })}
