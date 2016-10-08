@@ -317,8 +317,6 @@ exports['default'] = function (styles) {
             }
         },
         handleExternalWrapper: function handleExternalWrapper(id, wrapperStyles, set) {
-            var html = document.querySelector('html');
-            var body = document.querySelector('body');
             var wrapper = document.getElementById(id);
             if (!wrapper) {
                 console.error('Element with ID \'' + id + '\' not found');
@@ -330,12 +328,6 @@ exports['default'] = function (styles) {
                     wrapper.style[prop] = set ? builtStyles[prop] : '';
                 }
             }
-            [
-                html,
-                body
-            ].forEach(function (element) {
-                element.style['overflow-x'] = set ? 'hidden' : '';
-            });
         },
         getStyles: function getStyles(el, index) {
             var propName = 'bm' + el.replace(el.charAt(0), el.charAt(0).toUpperCase());
