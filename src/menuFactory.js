@@ -77,7 +77,7 @@ export default (styles) => {
     },
 
     // Builds styles incrementally for a given element.
-    getStyles(el, index) {
+    getStyles(el, index, inline) {
       const propName = 'bm' + el.replace(el.charAt(0), el.charAt(0).toUpperCase());
 
       // Set base styles.
@@ -91,6 +91,11 @@ export default (styles) => {
       // Add custom styles.
       if (this.props.styles[propName]) {
         output.push(this.props.styles[propName]);
+      }
+
+      // Add element inline styles.
+      if (inline) {
+        output.push(inline);
       }
 
       return output;
@@ -187,7 +192,7 @@ export default (styles) => {
                 {React.Children.map(this.props.children, (item, index) => {
                   const extraProps = {
                     key: index,
-                    style: this.getStyles('item', index)
+                    style: this.getStyles('item', index, item.props.style)
                   };
                   return React.cloneElement(item, extraProps);
                 })}
