@@ -57,8 +57,8 @@ const CrossIcon = Radium(React.createClass({
     } else {
       icon = (
         <span style={[{position: 'absolute', top: '6px', right: '14px'}]}>
-          <span className="bm-cross" style={[this.getCrossStyle('before'), this.props.styles.bmCross]}></span>
-          <span className="bm-cross" style={[this.getCrossStyle('after'), this.props.styles.bmCross]}></span>
+          <span className="bm-cross" style={[this.getCrossStyle('before'), this.props.styles.bmCross]} />
+          <span className="bm-cross" style={[this.getCrossStyle('after'), this.props.styles.bmCross]} />
         </span>
       );
     }

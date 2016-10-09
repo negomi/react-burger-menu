@@ -59,9 +59,9 @@ const BurgerIcon = Radium(React.createClass({
     } else {
       icon = (
         <span>
-          <span className="bm-burger-bars" style={[this.getLineStyle(0), this.props.styles.bmBurgerBars]}></span>
-          <span className="bm-burger-bars" style={[this.getLineStyle(1), this.props.styles.bmBurgerBars]}></span>
-          <span className="bm-burger-bars" style={[this.getLineStyle(2), this.props.styles.bmBurgerBars]}></span>
+          <span className="bm-burger-bars" style={[this.getLineStyle(0), this.props.styles.bmBurgerBars]} />
+          <span className="bm-burger-bars" style={[this.getLineStyle(1), this.props.styles.bmBurgerBars]} />
+          <span className="bm-burger-bars" style={[this.getLineStyle(2), this.props.styles.bmBurgerBars]} />
         </span>
       );
     }
