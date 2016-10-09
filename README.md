@@ -160,7 +160,12 @@ You can specify the width of the menu (in pixels) with the `width` prop. The def
 You can control whether the sidebar is open or closed with the `isOpen` prop. This is useful if you need to close the menu after a user clicks on an item in it, for example, or if you want to open the menu from some other button in addition to the standard burger icon. The default value is `false`.
 
 ``` javascript
+// To render the menu open
 <Menu isOpen />
+<Menu isOpen={ true } />
+
+// To render the menu closed
+<Menu isOpen={ false } />
 ```
 
 #### State change
