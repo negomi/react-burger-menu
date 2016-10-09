@@ -179,7 +179,7 @@ export default (styles) => {
       return (
         <div>
           {!this.props.noOverlay ? <div className="bm-overlay" onClick={this.toggleMenu} style={this.getStyles('overlay')} /> : null}
-          <div id={this.props.id} className={"bm-menu-wrap"} style={this.getStyles('menuWrap')}>
+          <div id={this.props.id} className="bm-menu-wrap" style={this.getStyles('menuWrap')}>
             {styles.svg ? (
               <div className="bm-morph-shape" style={this.getStyles('morphShape')}>
                 <svg width="100%" height="100%" viewBox="0 0 100 800" preserveAspectRatio="none">
@@ -190,11 +190,13 @@ export default (styles) => {
             <div className="bm-menu" style={this.getStyles('menu')} >
               <nav className="bm-item-list" style={this.getStyles('itemList')}>
                 {React.Children.map(this.props.children, (item, index) => {
-                  const extraProps = {
-                    key: index,
-                    style: this.getStyles('item', index, item.props.style)
-                  };
-                  return React.cloneElement(item, extraProps);
+                  if (item) {
+                    const extraProps = {
+                      key: index,
+                      style: this.getStyles('item', index, item.props.style)
+                    };
+                    return React.cloneElement(item, extraProps);
+                  }
                 })}
               </nav>
             </div>
