@@ -309,7 +309,7 @@ exports['default'] = function (styles) {
                 }
             }
         },
-        getStyles: function getStyles(el, index) {
+        getStyles: function getStyles(el, index, inline) {
             var propName = 'bm' + el.replace(el.charAt(0), el.charAt(0).toUpperCase());
             var output = _baseStyles2['default'][el] ? [_baseStyles2['default'][el](this.state.isOpen, this.props.width, this.props.right)] : [];
             if (styles[el]) {
@@ -317,6 +317,9 @@ exports['default'] = function (styles) {
             }
             if (this.props.styles[propName]) {
                 output.push(this.props.styles[propName]);
+            }
+            if (inline) {
+                output.push(inline);
             }
             return output;
         },
@@ -406,11 +409,13 @@ exports['default'] = function (styles) {
                 className: 'bm-item-list',
                 style: this.getStyles('itemList')
             }, _react2['default'].Children.map(this.props.children, function (item, index) {
-                var extraProps = {
-                        key: index,
-                        style: _this2.getStyles('item', index)
-                    };
-                return _react2['default'].cloneElement(item, extraProps);
+                if (item) {
+                    var extraProps = {
+                            key: index,
+                            style: _this2.getStyles('item', index, item.props.style)
+                        };
+                    return _react2['default'].cloneElement(item, extraProps);
+                }
             }))), this.props.customCrossIcon !== false ? _react2['default'].createElement('div', { style: this.getStyles('closeButton') }, _react2['default'].createElement(_CrossIcon2['default'], {
                 onClick: this.toggleMenu,
                 styles: this.props.styles,
