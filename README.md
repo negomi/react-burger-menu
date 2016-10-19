@@ -327,6 +327,12 @@ This is an example of how that would look using Express:
 <Menu radiumConfig={{userAgent: req.headers['user-agent']}} />
 ```
 
+If you're not terribly concerned with memory/data usage and for some reason can't provide the user agent (for example, your application sits behind a CDN or other proxy), you can specify the user agent `'all'` to use all vendor prefixes.
+
+```javascript
+<Menu radiumConfig={{ userAgent: 'all' }} />
+```
+
 ### Browser support
 
 Because this project uses CSS3 features, it's only meant for modern browsers. Some browsers currently fail to apply some of the animations correctly.
