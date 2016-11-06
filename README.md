@@ -326,7 +326,7 @@ This component uses [Radium](https://github.com/FormidableLabs/radium) to manage
 This is an example of how that would look using Express:
 
 ```javascript
-<Menu radiumConfig={{userAgent: req.headers['user-agent']}} />
+<Menu radiumConfig={{ userAgent: req.headers['user-agent'] }} />
 ```
 
 If you're not terribly concerned with memory/data usage and for some reason can't provide the user agent (for example, your application sits behind a CDN or other proxy), you can specify the user agent `'all'` to use all vendor prefixes.
