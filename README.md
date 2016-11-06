@@ -58,7 +58,7 @@ npm install react-burger-menu@1.1.6 --save
 
 Items for the sidebar should be passed as child elements of the component using JSX.
 
-*If you're using this component with react-router, check out [this info](https://github.com/negomi/react-burger-menu/wiki/FAQ#why-doesnt-the-link-component-from-react-router-work) in the wiki.*
+*If you're using this component with react-router, or want to include other custom components inside the menu, check out [this](https://github.com/negomi/react-burger-menu/wiki/FAQ#why-doesnt-the-link-component-from-react-router-work) and [this](https://github.com/negomi/react-burger-menu/wiki/FAQ#i-want-to-use-custom-components-inside-my-menu-but-this-breaks-firefox) in the wiki.*
 
 ``` javascript
 var Menu = require('react-burger-menu').nameOfAnimation;
