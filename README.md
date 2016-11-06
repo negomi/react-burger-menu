@@ -168,6 +168,8 @@ You can control whether the sidebar is open or closed with the `isOpen` prop. Th
 <Menu isOpen={ false } />
 ```
 
+*If you want to render the menu open initially, you will need to set this property in your parent component's `componentDidMount()` function.*
+
 #### State change
 
 You can detect whether the sidebar is open or closed by passing a callback function to `onStateChange`. The callback will receive an object containing the new state as its first argument.
