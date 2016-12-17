@@ -26,11 +26,20 @@ export default (styles) => {
     },
 
     toggleMenu() {
-      // Order important: handle wrappers before setting sidebar state.
+      const newState = { isOpen: !this.state.isOpen };
+
       this.applyWrapperStyles();
 
-      const newState = { isOpen: !this.state.isOpen };
-      this.setState(newState, this.props.onStateChange.bind(null, newState));
+      this.setState(newState, () => {
+        this.props.onStateChange(newState);
+
+        // Timeout ensures wrappers are cleared after animation finishes.
+        setTimeout(() => {
+          if (!newState.isOpen) {
+            this.clearWrapperStyles();
+          }
+        }, 500);
+      });
     },
 
     // Applies component-specific styles to external wrapper elements.
