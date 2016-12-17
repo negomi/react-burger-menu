@@ -38,7 +38,8 @@ const styles = {
       right: right ? 0 : 'inherit',
       width: 'calc(100% - 120px)',
       whiteSpace: 'nowrap',
-      boxSizing: 'border-box'
+      boxSizing: 'border-box',
+      overflow: 'visible'
     };
   },
 
@@ -46,7 +47,9 @@ const styles = {
     if (right) {
       return {
         position: 'relative',
-        left: '-110px'
+        left: '-110px',
+        width: '170%',
+        overflow: 'auto'
       };
     }
   },
