@@ -10,6 +10,7 @@ module.exports = function(gulp, config) {
     return gulp.src(config.paths.test, {read: false})
       .pipe(mocha({reporter: reporter}))
       .on('error', function(err) {
+        console.error(err);
         this.emit('end');
       });
   });
