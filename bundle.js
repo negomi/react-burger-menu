@@ -276,9 +276,17 @@ exports['default'] = function (styles) {
             width: _react2['default'].PropTypes.number
         },
         toggleMenu: function toggleMenu() {
-            this.applyWrapperStyles();
+            var _this = this;
             var newState = { isOpen: !this.state.isOpen };
-            this.setState(newState, this.props.onStateChange.bind(null, newState));
+            this.applyWrapperStyles();
+            this.setState(newState, function () {
+                _this.props.onStateChange(newState);
+                setTimeout(function () {
+                    if (!newState.isOpen) {
+                        _this.clearWrapperStyles();
+                    }
+                }, 500);
+            });
         },
         applyWrapperStyles: function applyWrapperStyles() {
             if (styles.pageWrap && this.props.pageWrapId) {
@@ -297,6 +305,8 @@ exports['default'] = function (styles) {
             }
         },
         handleExternalWrapper: function handleExternalWrapper(id, wrapperStyles, set) {
+            var html = document.querySelector('html');
+            var body = document.querySelector('body');
             var wrapper = document.getElementById(id);
             if (!wrapper) {
                 console.error('Element with ID \'' + id + '\' not found');
@@ -308,6 +318,12 @@ exports['default'] = function (styles) {
                     wrapper.style[prop] = set ? builtStyles[prop] : '';
                 }
             }
+            [
+                html,
+                body
+            ].forEach(function (element) {
+                element.style['overflow-x'] = set ? 'hidden' : '';
+            });
         },
         getStyles: function getStyles(el, index, inline) {
             var propName = 'bm' + el.replace(el.charAt(0), el.charAt(0).toUpperCase());
@@ -364,12 +380,12 @@ exports['default'] = function (styles) {
             this.clearWrapperStyles();
         },
         componentDidUpdate: function componentDidUpdate() {
-            var _this = this;
+            var _this2 = this;
             if (styles.svg && this.isMounted()) {
                 (function () {
-                    var morphShape = _reactDom2['default'].findDOMNode(_this, 'bm-morph-shape');
+                    var morphShape = _reactDom2['default'].findDOMNode(_this2, 'bm-morph-shape');
                     var path = styles.svg.lib(morphShape).select('path');
-                    if (_this.state.isOpen) {
+                    if (_this2.state.isOpen) {
                         styles.svg.animate(path);
                     } else {
                         setTimeout(function () {
@@ -385,7 +401,7 @@ exports['default'] = function (styles) {
             }
         },
         render: function render() {
-            var _this2 = this;
+            var _this3 = this;
             return _react2['default'].createElement('div', null, !this.props.noOverlay ? _react2['default'].createElement('div', {
                 className: 'bm-overlay',
                 onClick: this.toggleMenu,
@@ -412,7 +428,7 @@ exports['default'] = function (styles) {
                 if (item) {
                     var extraProps = {
                             key: index,
-                            style: _this2.getStyles('item', index, item.props.style)
+                            style: _this3.getStyles('item', index, item.props.style)
                         };
                     return _react2['default'].cloneElement(item, extraProps);
                 }
@@ -545,14 +561,17 @@ var styles = {
                 right: right ? 0 : 'inherit',
                 width: 'calc(100% - 120px)',
                 whiteSpace: 'nowrap',
-                boxSizing: 'border-box'
+                boxSizing: 'border-box',
+                overflow: 'visible'
             };
         },
         itemList: function itemList(isOpen, width, right) {
             if (right) {
                 return {
                     position: 'relative',
-                    left: '-110px'
+                    left: '-110px',
+                    width: '170%',
+                    overflow: 'auto'
                 };
             }
         },
