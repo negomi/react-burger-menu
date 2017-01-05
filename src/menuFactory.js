@@ -16,6 +16,7 @@ export default (styles) => {
       customCrossIcon: React.PropTypes.oneOfType([React.PropTypes.element, React.PropTypes.oneOf([false])]),
       id: React.PropTypes.string,
       isOpen: React.PropTypes.bool,
+      mouseEvents: React.PropTypes.bool,
       noOverlay: React.PropTypes.bool,
       onStateChange: React.PropTypes.func,
       outerContainerId: styles && styles.outerContainer ? React.PropTypes.string.isRequired : React.PropTypes.string,
@@ -128,6 +129,7 @@ export default (styles) => {
     getDefaultProps() {
       return {
         id: '',
+        mouseEvents: false,
         noOverlay: false,
         onStateChange: () => {},
         outerContainerId: '',
@@ -192,10 +194,19 @@ export default (styles) => {
     },
 
     render() {
+      let menuWrapProps = {};
+      if (this.props.mouseEvents) {
+        menuWrapProps = {
+          onMouseEnter: this.toggleMenu,
+          onMouseLeave: this.toggleMenu
+        };
+      };
+      let menuState = this.state.isOpen ? 'open' : 'close';
+      let menuWrapClassNames = `bm-menu-wrap bm-menu-state-${menuState}`;
       return (
         <div>
           {!this.props.noOverlay ? <div className="bm-overlay" onClick={this.toggleMenu} style={this.getStyles('overlay')} /> : null}
-          <div id={this.props.id} className="bm-menu-wrap" style={this.getStyles('menuWrap')}>
+          <div id={this.props.id} className={menuWrapClassNames} style={this.getStyles('menuWrap')} {...menuWrapProps}>
             {styles.svg ? (
               <div className="bm-morph-shape" style={this.getStyles('morphShape')}>
                 <svg width="100%" height="100%" viewBox="0 0 100 800" preserveAspectRatio="none">

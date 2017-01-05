@@ -88,15 +88,40 @@ let Demo = React.createClass({
     return items;
   },
 
+  getCustomMinMaxMenu(menuFactory) {
+    const styles = {
+      menuWrap(isOpen, width, right) {
+        width += 20;
+        let styles = {
+          width: 'inherit',
+          transform: isOpen ? '' : right ? 'translate3d(10%, 0, 0)' : 'translate3d(-10%, 0, 0)'
+        };
+        return styles;
+      }
+    };
+    return menuFactory(styles);
+  },
+
   getMenu() {
-    const Menu = BurgerMenu[this.state.currentMenu];
+    let Menu = BurgerMenu[this.state.currentMenu];
+    let customProps = {};
+    if (this.state.currentMenu === 'menuFactory') {
+      Menu = this.getCustomMinMaxMenu(Menu);
+      customProps = {
+        mouseEvents : true,
+        noOverlay: true,
+        customBurgerIcon: false,
+        customCrossIcon: false
+      };
+    }
+
     const items = this.getItems();
     let jsx;
 
     if (this.state.side === 'right') {
       jsx = (
         <MenuWrap wait={20} side={this.state.side}>
-          <Menu id={this.state.currentMenu} pageWrapId={'page-wrap'} outerContainerId={'outer-container'} right>
+          <Menu id={this.state.currentMenu} pageWrapId={'page-wrap'} outerContainerId={'outer-container'} {...customProps} right>
             {items}
           </Menu>
         </MenuWrap>
@@ -104,7 +129,7 @@ let Demo = React.createClass({
     } else {
       jsx = (
         <MenuWrap wait={20}>
-          <Menu id={this.state.currentMenu} pageWrapId={'page-wrap'} outerContainerId={'outer-container'}>
+          <Menu id={this.state.currentMenu} pageWrapId={'page-wrap'} outerContainerId={'outer-container'} {...customProps}>
             {items}
           </Menu>
         </MenuWrap>
@@ -159,7 +184,8 @@ const menus = {
   pushRotate: {buttonText: 'Push Rotate', items: 2},
   scaleDown: {buttonText: 'Scale Down', items: 2},
   scaleRotate: {buttonText: 'Scale Rotate', items: 2},
-  fallDown: {buttonText: 'Fall Down', items: 2}
+  fallDown: {buttonText: 'Fall Down', items: 2},
+  menuFactory: {buttonText: 'custom (min Max)', items: 1},
 };
 
 ReactDOM.render(<Demo menus={menus} />, document.getElementById('app'));
