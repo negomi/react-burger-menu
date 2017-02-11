@@ -94,11 +94,16 @@ describe('menuFactory', () => {
       expect(overlay.props.className).to.contain('bm-overlay');
     });
 
-    it('contains a menuWrap element with an optional ID', () => {
+    it('accepts an optional ID', () => {
       component = createShallowComponent(<Menu id={ 'menu-wrap' } />);
       const menuWrap = component.props.children[1];
-      expect(component.type).to.equal('div');
       expect(menuWrap.props.id).to.equal('menu-wrap');
+    });
+
+    it('accepts an optional className', () => {
+      component = createShallowComponent(<Menu className={ 'custom-class' } />);
+      const menuWrap = component.props.children[1];
+      expect(menuWrap.props.className).to.contain('custom-class');
     });
 
     it('contains a burger icon', () => {

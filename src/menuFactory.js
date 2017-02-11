@@ -12,6 +12,7 @@ export default (styles) => {
   return Radium(React.createClass({
 
     propTypes: {
+      className: React.PropTypes.string,
       customBurgerIcon: React.PropTypes.oneOfType([React.PropTypes.element, React.PropTypes.oneOf([false])]),
       customCrossIcon: React.PropTypes.oneOfType([React.PropTypes.element, React.PropTypes.oneOf([false])]),
       id: React.PropTypes.string,
@@ -197,7 +198,7 @@ export default (styles) => {
       return (
         <div>
           {!this.props.noOverlay ? <div className="bm-overlay" onClick={this.toggleMenu} style={this.getStyles('overlay')} /> : null}
-          <div id={this.props.id} className="bm-menu-wrap" style={this.getStyles('menuWrap')}>
+          <div id={this.props.id} className={`bm-menu-wrap ${this.props.className}`} style={this.getStyles('menuWrap')}>
             {styles.svg ? (
               <div className="bm-morph-shape" style={this.getStyles('morphShape')}>
                 <svg width="100%" height="100%" viewBox="0 0 100 800" preserveAspectRatio="none">

@@ -210,12 +210,12 @@ You can also disable the icon elements so they won't be included at all, by pass
 
 This can be useful if you want exclusive external control of the menu, using the `isOpen` prop.
 
-#### Custom ID
+#### Custom ID and/or className
 
-There is also an optional `id` prop, which will simply add an ID to the rendered menu's outermost element. This is not required for any functionality.
+There are optional `id` and `className` props, which will simply add an ID or custom className to the rendered menu's outermost element. This is not required for any functionality, but could be useful for things like styling with CSS modules.
 
 ``` javascript
-<Menu id={ "sidebar" } />
+<Menu id={ "sidebar" } className={ "my-menu" } />
 ```
 
 ### Styling
