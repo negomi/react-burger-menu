@@ -34,7 +34,9 @@ export default (styles) => {
         this.props.onStateChange(newState);
 
         // Timeout ensures wrappers are cleared after animation finishes.
-        setTimeout(() => {
+        this.timeoutId && clearTimeout(this.timeoutId);
+        this.timeoutId = setTimeout(() => {
+          this.timeoutId = null;
           if (!newState.isOpen) {
             this.clearWrapperStyles();
           }
