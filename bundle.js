@@ -257,6 +257,7 @@ var _CrossIcon2 = _interopRequireDefault(_CrossIcon);
 exports['default'] = function (styles) {
     return (0, _radium2['default'])(_react2['default'].createClass({
         propTypes: {
+            className: _react2['default'].PropTypes.string,
             customBurgerIcon: _react2['default'].PropTypes.oneOfType([
                 _react2['default'].PropTypes.element,
                 _react2['default'].PropTypes.oneOf([false])
@@ -281,7 +282,9 @@ exports['default'] = function (styles) {
             this.applyWrapperStyles();
             this.setState(newState, function () {
                 _this.props.onStateChange(newState);
-                setTimeout(function () {
+                _this.timeoutId && clearTimeout(_this.timeoutId);
+                _this.timeoutId = setTimeout(function () {
+                    _this.timeoutId = null;
                     if (!newState.isOpen) {
                         _this.clearWrapperStyles();
                     }
@@ -408,7 +411,7 @@ exports['default'] = function (styles) {
                 style: this.getStyles('overlay')
             }) : null, _react2['default'].createElement('div', {
                 id: this.props.id,
-                className: 'bm-menu-wrap',
+                className: 'bm-menu-wrap ' + this.props.className,
                 style: this.getStyles('menuWrap')
             }, styles.svg ? _react2['default'].createElement('div', {
                 className: 'bm-morph-shape',
