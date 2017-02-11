@@ -301,9 +301,7 @@ exports['default'] = function (styles) {
             this.applyWrapperStyles();
             this.setState(newState, function () {
                 _this.props.onStateChange(newState);
-                _this.timerId && clearTimeout(_this.timerId);
-                _this.timerId = setTimeout(function () {
-                    _this.timerId = null;
+                setTimeout(function () {
                     if (!newState.isOpen) {
                         _this.clearWrapperStyles();
                     }
