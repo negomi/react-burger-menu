@@ -23,7 +23,10 @@ export default (styles) => {
       pageWrapId: styles && styles.pageWrap ? React.PropTypes.string.isRequired : React.PropTypes.string,
       right: React.PropTypes.bool,
       styles: React.PropTypes.object,
-      width: React.PropTypes.number
+      width: React.PropTypes.oneOfType([
+	      React.PropTypes.string,
+	      React.PropTypes.number
+	    ])
     },
 
     toggleMenu() {
