@@ -65,9 +65,9 @@
     "test": "gulp test --reporter list",
     "tdd": "gulp watch:tests --reporter min",
     "watch": "gulp watch:lib",
-    "release": "npm run build && gulp bump && npm run publish:version && gulp release",
-    "release:minor": "npm run build && gulp bump:minor && npm run publish:version && gulp release",
-    "release:major": "npm run build && gulp bump:major && npm run publish:version && gulp release"
+    "release": "npm run build && gulp bump && gulp release && npm run publish:version",
+    "release:minor": "npm run build && gulp bump:minor && gulp release",
+    "release:major": "npm run build && gulp bump:major && gulp release"
   },
   "engines": {
     "node": ">=4.0.0"
