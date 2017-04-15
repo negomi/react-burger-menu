@@ -50,7 +50,7 @@ describe('elastic', () => {
   it('has correct menu styles', () => {
     expect(menu.props.style.height).to.equal('100%');
     expect(menu.props.style.position).to.equal('fixed');
-    expect(menu.props.style.width).to.contain('calc(100% - 120px)');
+    expect(menu.props.style.width).to.equal(180);
     expect(menu.props.style.whiteSpace).to.equal('nowrap');
     expect(menu.props.style.boxSizing).to.equal('border-box');
   });
@@ -65,7 +65,7 @@ describe('elastic', () => {
   });
 
   it('has correct morph shape styles', () => {
-    expect(morphShape.props.style.position).to.equal('fixed');
+    expect(morphShape.props.style.position).to.equal('absolute');
     expect(morphShape.props.style.width).to.equal(120);
     expect(morphShape.props.style.height).to.equal('100%');
     expect(morphShape.props.style.right).to.equal(0);

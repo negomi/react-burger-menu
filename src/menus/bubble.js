@@ -31,7 +31,7 @@ const styles = {
 
   morphShape(isOpen, width, right) {
     return {
-      position: 'fixed',
+      position: 'absolute',
       width: '100%',
       height: '100%',
       right: right ? 'inherit' : 0,

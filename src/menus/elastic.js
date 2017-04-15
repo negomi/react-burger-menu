@@ -16,7 +16,7 @@ const styles = {
 
   morphShape(isOpen, width, right) {
     return {
-      position: 'fixed',
+      position: 'absolute',
       width: 120,
       height: '100%',
       right: right ? 'inherit' : 0,
@@ -36,7 +36,7 @@ const styles = {
     return {
       position: 'fixed',
       right: right ? 0 : 'inherit',
-      width: 'calc(100% - 120px)',
+      width: 180,
       whiteSpace: 'nowrap',
       boxSizing: 'border-box',
       overflow: 'visible'

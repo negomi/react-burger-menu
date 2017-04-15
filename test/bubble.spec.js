@@ -47,7 +47,7 @@ describe('bubble', () => {
   });
 
   it('has correct morph shape styles', () => {
-    expect(morphShape.props.style.position).to.equal('fixed');
+    expect(morphShape.props.style.position).to.equal('absolute');
     expect(morphShape.props.style.width).to.equal('100%');
     expect(morphShape.props.style.height).to.equal('100%');
     expect(morphShape.props.style.right).to.equal(0);
