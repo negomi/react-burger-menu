@@ -1,16 +1,10 @@
 'use strict';
 
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Radium from 'radium';
 
-const CrossIcon = Radium(React.createClass({
-
-  propTypes: {
-    customIcon: PropTypes.element,
-    styles: PropTypes.object
-  },
-
+class CrossIcon extends Component {
   getCrossStyle(type) {
     return {
       position: 'absolute',
@@ -18,13 +12,7 @@ const CrossIcon = Radium(React.createClass({
       height: 14,
       transform: type === 'before' ? 'rotate(45deg)' : 'rotate(-45deg)'
     };
-  },
-
-  getDefaultProps() {
-    return {
-      styles: {}
-    };
-  },
+  }
 
   render() {
     var icon;
@@ -71,6 +59,15 @@ const CrossIcon = Radium(React.createClass({
       </div>
     );
   }
-}));
+}
 
-export default CrossIcon;
+CrossIcon.propTypes = {
+  customIcon: PropTypes.element,
+  styles: PropTypes.object
+};
+
+CrossIcon.defaultProps = {
+  styles: {}
+};
+
+export default Radium(CrossIcon);

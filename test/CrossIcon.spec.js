@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import TestUtils from 'react-addons-test-utils';
+import TestUtils from 'react-dom/test-utils';
 import { assert, expect } from 'chai';
 import createShallowComponent from './utils/createShallowComponent';
 import CrossIcon from '../lib/CrossIcon';

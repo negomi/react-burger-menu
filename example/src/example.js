@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import BurgerMenu from 'react-burger-menu';
 import classNames from 'classnames';
 
-let MenuWrap = React.createClass({
-
-  getInitialState() {
-    return {hidden : false};
-  },
+class MenuWrap extends Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      hidden: false
+    };
+  }
 
   componentWillReceiveProps(nextProps) {
     const sideChanged = this.props.children.props.right !== nextProps.children.props.right;
@@ -19,11 +21,11 @@ let MenuWrap = React.createClass({
         this.show();
       }, this.props.wait);
     }
-  },
+  }
 
   show() {
     this.setState({hidden : false});
-  },
+  }
 
   render() {
     let style;
@@ -38,17 +40,24 @@ let MenuWrap = React.createClass({
       </div>
     );
   }
-});
+}
 
-let Demo = React.createClass({
+class Demo extends Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      currentMenu: 'slide',
+      side: 'left'
+    };
+  }
 
   changeMenu(menu) {
     this.setState({currentMenu: menu});
-  },
+  }
 
   changeSide(side) {
     this.setState({side});
-  },
+  }
 
   getItems() {
     let items;
@@ -86,7 +95,7 @@ let Demo = React.createClass({
     }
 
     return items;
-  },
+  }
 
   getMenu() {
     const Menu = BurgerMenu[this.state.currentMenu];
@@ -112,14 +121,7 @@ let Demo = React.createClass({
     }
 
     return jsx;
-  },
-
-  getInitialState() {
-    return {
-      currentMenu: 'slide',
-      side: 'left'
-    };
-  },
+  }
 
   render() {
     const buttons = Object.keys(this.props.menus).map((menu) => {
@@ -148,7 +150,7 @@ let Demo = React.createClass({
       </div>
     );
   }
-});
+}
 
 const menus = {
   slide: {buttonText: 'Slide', items: 1},

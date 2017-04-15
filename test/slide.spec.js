@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import TestUtils from 'react-addons-test-utils';
+import TestUtils from 'react-dom/test-utils';
 import { expect } from 'chai';
 import createShallowComponent from './utils/createShallowComponent';
 import BurgerMenu from '../lib/BurgerMenu';
@@ -12,7 +12,11 @@ describe('slide', () => {
   let component;
 
   beforeEach(() => {
-    component = TestUtils.renderIntoDocument(<Menu><div>An item</div></Menu>);
+    component = TestUtils.renderIntoDocument(
+      <Menu pageWrapId={ 'page-wrap' } outerContainerId={ 'outer-container' }>
+        <div>An item</div>
+      </Menu>
+    );
   });
 
   it('has correct menuWrap styles', () => {

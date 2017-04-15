@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import TestUtils from 'react-addons-test-utils';
+import TestUtils from 'react-dom/test-utils';
 import { assert, expect } from 'chai';
 import createShallowComponent from './utils/createShallowComponent';
 import BurgerIcon from '../lib/BurgerIcon';
@@ -34,10 +34,6 @@ describe('BurgerIcon component', () => {
 
     it('contains a button element', () => {
       expect(component.props.children[1].type).to.equal('button');
-    });
-
-    it('has correct initial hover state', () => {
-      expect(BurgerIcon.prototype.getInitialState().hover).to.be.false;
     });
   });
 

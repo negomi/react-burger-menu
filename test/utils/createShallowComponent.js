@@ -1,10 +1,10 @@
 import React from 'react';
-import TestUtils from 'react-addons-test-utils';
-
-export default createComponent;
+import ReactShallowRenderer from 'react-test-renderer/shallow';
 
 function createComponent(jsx) {
-  const shallowRenderer = TestUtils.createRenderer();
-  shallowRenderer.render(jsx);
-  return shallowRenderer.getRenderOutput();
+  const renderer = new ReactShallowRenderer();
+  renderer.render(jsx);
+  return renderer.getRenderOutput();
 }
+
+export default createComponent;
