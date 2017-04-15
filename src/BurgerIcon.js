@@ -1,13 +1,14 @@
 'use strict';
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import Radium from 'radium';
 
 const BurgerIcon = Radium(React.createClass({
 
   propTypes: {
-    customIcon: React.PropTypes.element,
-    styles: React.PropTypes.object
+    customIcon: PropTypes.element,
+    styles: PropTypes.object
   },
 
   getLineStyle(index) {

@@ -1,13 +1,14 @@
 'use strict';
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import Radium from 'radium';
 
 const CrossIcon = Radium(React.createClass({
 
   propTypes: {
-    customIcon: React.PropTypes.element,
-    styles: React.PropTypes.object
+    customIcon: PropTypes.element,
+    styles: PropTypes.object
   },
 
   getCrossStyle(type) {
