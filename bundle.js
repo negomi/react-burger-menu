@@ -1002,6 +1002,17 @@ module.exports = ReactPropTypesSecret;
 },{}],10:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
+var _extends = Object.assign || function (target) {
+        for (var i = 1; i < arguments.length; i++) {
+            var source = arguments[i];
+            for (var key in source) {
+                if (Object.prototype.hasOwnProperty.call(source, key)) {
+                    target[key] = source[key];
+                }
+            }
+        }
+        return target;
+    };
 var _createClass = function () {
         function defineProperties(target, props) {
             for (var i = 0; i < props.length; i++) {
@@ -1080,8 +1091,6 @@ var _react = require('react');
 var _react2 = _interopRequireDefault(_react);
 var _propTypes = require('prop-types');
 var _propTypes2 = _interopRequireDefault(_propTypes);
-var _radium = require('radium');
-var _radium2 = _interopRequireDefault(_radium);
 var BurgerIcon = function (_Component) {
         _inherits(BurgerIcon, _Component);
         function BurgerIcon(props) {
@@ -1129,42 +1138,27 @@ var BurgerIcon = function (_Component) {
                     if (this.props.customIcon) {
                         var extraProps = {
                                 className: 'bm-icon',
-                                style: [
-                                    {
-                                        width: '100%',
-                                        height: '100%'
-                                    },
-                                    this.props.styles.bmIcon
-                                ]
+                                style: _extends({
+                                    width: '100%',
+                                    height: '100%'
+                                }, this.props.styles.bmIcon)
                             };
                         icon = _react2['default'].cloneElement(this.props.customIcon, extraProps);
                     } else {
                         icon = _react2['default'].createElement('span', null, _react2['default'].createElement('span', {
                             className: 'bm-burger-bars',
-                            style: [
-                                this.getLineStyle(0),
-                                this.props.styles.bmBurgerBars
-                            ]
+                            style: _extends({}, this.getLineStyle(0), this.props.styles.bmBurgerBars)
                         }), _react2['default'].createElement('span', {
                             className: 'bm-burger-bars',
-                            style: [
-                                this.getLineStyle(1),
-                                this.props.styles.bmBurgerBars
-                            ]
+                            style: _extends({}, this.getLineStyle(1), this.props.styles.bmBurgerBars)
                         }), _react2['default'].createElement('span', {
                             className: 'bm-burger-bars',
-                            style: [
-                                this.getLineStyle(2),
-                                this.props.styles.bmBurgerBars
-                            ]
+                            style: _extends({}, this.getLineStyle(2), this.props.styles.bmBurgerBars)
                         }));
                     }
                     return _react2['default'].createElement('div', {
                         className: 'bm-burger-button',
-                        style: [
-                            { zIndex: 1 },
-                            this.props.styles.bmBurgerButton
-                        ]
+                        style: _extends({ zIndex: 1 }, this.props.styles.bmBurgerButton)
                     }, icon, _react2['default'].createElement('button', {
                         onClick: this.props.onClick,
                         onMouseEnter: function () {
@@ -1180,16 +1174,27 @@ var BurgerIcon = function (_Component) {
         ]);
         return BurgerIcon;
     }(_react.Component);
+exports['default'] = BurgerIcon;
 BurgerIcon.propTypes = {
     customIcon: _propTypes2['default'].element,
     styles: _propTypes2['default'].object
 };
 BurgerIcon.defaultProps = { styles: {} };
-exports['default'] = (0, _radium2['default'])(BurgerIcon);
 module.exports = exports['default'];
-},{"prop-types":8,"radium":undefined,"react":undefined}],11:[function(require,module,exports){
+},{"prop-types":8,"react":undefined}],11:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
+var _extends = Object.assign || function (target) {
+        for (var i = 1; i < arguments.length; i++) {
+            var source = arguments[i];
+            for (var key in source) {
+                if (Object.prototype.hasOwnProperty.call(source, key)) {
+                    target[key] = source[key];
+                }
+            }
+        }
+        return target;
+    };
 var _createClass = function () {
         function defineProperties(target, props) {
             for (var i = 0; i < props.length; i++) {
@@ -1268,8 +1273,6 @@ var _react = require('react');
 var _react2 = _interopRequireDefault(_react);
 var _propTypes = require('prop-types');
 var _propTypes2 = _interopRequireDefault(_propTypes);
-var _radium = require('radium');
-var _radium2 = _interopRequireDefault(_radium);
 var CrossIcon = function (_Component) {
         _inherits(CrossIcon, _Component);
         function CrossIcon() {
@@ -1315,42 +1318,30 @@ var CrossIcon = function (_Component) {
                     if (this.props.customIcon) {
                         var extraProps = {
                                 className: 'bm-cross',
-                                style: [
-                                    {
-                                        width: '100%',
-                                        height: '100%'
-                                    },
-                                    this.props.styles.bmCross
-                                ]
+                                style: _extends({
+                                    width: '100%',
+                                    height: '100%'
+                                }, this.props.styles.bmCross)
                             };
                         icon = _react2['default'].cloneElement(this.props.customIcon, extraProps);
                     } else {
                         icon = _react2['default'].createElement('span', {
-                            style: [{
-                                    position: 'absolute',
-                                    top: '6px',
-                                    right: '14px'
-                                }]
+                            style: {
+                                position: 'absolute',
+                                top: '6px',
+                                right: '14px'
+                            }
                         }, _react2['default'].createElement('span', {
                             className: 'bm-cross',
-                            style: [
-                                this.getCrossStyle('before'),
-                                this.props.styles.bmCross
-                            ]
+                            style: _extends({}, this.getCrossStyle('before'), this.props.styles.bmCross)
                         }), _react2['default'].createElement('span', {
                             className: 'bm-cross',
-                            style: [
-                                this.getCrossStyle('after'),
-                                this.props.styles.bmCross
-                            ]
+                            style: _extends({}, this.getCrossStyle('after'), this.props.styles.bmCross)
                         }));
                     }
                     return _react2['default'].createElement('div', {
                         className: 'bm-cross-button',
-                        style: [
-                            buttonWrapperStyle,
-                            this.props.styles.bmCrossButton
-                        ]
+                        style: _extends({}, buttonWrapperStyle, this.props.styles.bmCrossButton)
                     }, icon, _react2['default'].createElement('button', {
                         onClick: this.props.onClick,
                         style: buttonStyle
@@ -1360,14 +1351,14 @@ var CrossIcon = function (_Component) {
         ]);
         return CrossIcon;
     }(_react.Component);
+exports['default'] = CrossIcon;
 CrossIcon.propTypes = {
     customIcon: _propTypes2['default'].element,
     styles: _propTypes2['default'].object
 };
 CrossIcon.defaultProps = { styles: {} };
-exports['default'] = (0, _radium2['default'])(CrossIcon);
 module.exports = exports['default'];
-},{"prop-types":8,"radium":undefined,"react":undefined}],12:[function(require,module,exports){
+},{"prop-types":8,"react":undefined}],12:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 var styles = {
@@ -1379,11 +1370,11 @@ var styles = {
                 height: '100%',
                 background: 'rgba(0, 0, 0, 0.3)',
                 opacity: isOpen ? 1 : 0,
-                transform: isOpen ? '' : 'translate3d(100%, 0, 0)',
                 MozTransform: isOpen ? '' : 'translate3d(100%, 0, 0)',
                 MsTransform: isOpen ? '' : 'translate3d(100%, 0, 0)',
                 OTransform: isOpen ? '' : 'translate3d(100%, 0, 0)',
                 WebkitTransform: isOpen ? '' : 'translate3d(100%, 0, 0)',
+                transform: isOpen ? '' : 'translate3d(100%, 0, 0)',
                 transition: isOpen ? 'opacity 0.3s' : 'opacity 0.3s, transform 0s 0.3s'
             };
         },
@@ -1394,11 +1385,11 @@ var styles = {
                 zIndex: 2,
                 width: width,
                 height: '100%',
-                transform: isOpen ? '' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
                 MozTransform: isOpen ? '' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
                 MsTransform: isOpen ? '' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
                 OTransform: isOpen ? '' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
                 WebkitTransform: isOpen ? '' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
+                transform: isOpen ? '' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
                 transition: 'all 0.5s'
             };
         },
@@ -1424,6 +1415,17 @@ module.exports = exports['default'];
 },{}],13:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
+var _extends = Object.assign || function (target) {
+        for (var i = 1; i < arguments.length; i++) {
+            var source = arguments[i];
+            for (var key in source) {
+                if (Object.prototype.hasOwnProperty.call(source, key)) {
+                    target[key] = source[key];
+                }
+            }
+        }
+        return target;
+    };
 var _createClass = function () {
         function defineProperties(target, props) {
             for (var i = 0; i < props.length; i++) {
@@ -1500,12 +1502,10 @@ function _inherits(subClass, superClass) {
 }
 var _react = require('react');
 var _react2 = _interopRequireDefault(_react);
-var _propTypes = require('prop-types');
-var _propTypes2 = _interopRequireDefault(_propTypes);
 var _reactDom = require('react-dom');
 var _reactDom2 = _interopRequireDefault(_reactDom);
-var _radium = require('radium');
-var _radium2 = _interopRequireDefault(_radium);
+var _propTypes = require('prop-types');
+var _propTypes2 = _interopRequireDefault(_propTypes);
 var _baseStyles = require('./baseStyles');
 var _baseStyles2 = _interopRequireDefault(_baseStyles);
 var _BurgerIcon = require('./BurgerIcon');
@@ -1589,15 +1589,15 @@ exports['default'] = function (styles) {
                     key: 'getStyles',
                     value: function getStyles(el, index, inline) {
                         var propName = 'bm' + el.replace(el.charAt(0), el.charAt(0).toUpperCase());
-                        var output = _baseStyles2['default'][el] ? [_baseStyles2['default'][el](this.state.isOpen, this.props.width, this.props.right)] : [];
+                        var output = _baseStyles2['default'][el] ? _baseStyles2['default'][el](this.state.isOpen, this.props.width, this.props.right) : {};
                         if (styles[el]) {
-                            output.push(styles[el](this.state.isOpen, this.props.width, this.props.right, index + 1));
+                            output = _extends({}, output, styles[el](this.state.isOpen, this.props.width, this.props.right, index + 1));
                         }
                         if (this.props.styles[propName]) {
-                            output.push(this.props.styles[propName]);
+                            output = _extends({}, output, this.props.styles[propName]);
                         }
                         if (inline) {
-                            output.push(inline);
+                            output = _extends({}, output, inline);
                         }
                         return output;
                     }
@@ -1749,10 +1749,10 @@ exports['default'] = function (styles) {
         styles: {},
         width: 300
     };
-    return (0, _radium2['default'])(Menu);
+    return Menu;
 };
 module.exports = exports['default'];
-},{"./BurgerIcon":10,"./CrossIcon":11,"./baseStyles":12,"prop-types":8,"radium":undefined,"react":undefined,"react-dom":undefined}],14:[function(require,module,exports){
+},{"./BurgerIcon":10,"./CrossIcon":11,"./baseStyles":12,"prop-types":8,"react":undefined,"react-dom":undefined}],14:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -1790,11 +1790,19 @@ var styles = {
                 height: '100%',
                 right: right ? 'inherit' : 0,
                 left: right ? 0 : 'inherit',
+                MozTransform: right ? 'rotateY(180deg)' : 'rotateY(0deg)',
+                MsTransform: right ? 'rotateY(180deg)' : 'rotateY(0deg)',
+                OTransform: right ? 'rotateY(180deg)' : 'rotateY(0deg)',
+                WebkitTransform: right ? 'rotateY(180deg)' : 'rotateY(0deg)',
                 transform: right ? 'rotateY(180deg)' : 'rotateY(0deg)'
             };
         },
         menuWrap: function menuWrap(isOpen, width, right) {
             return {
+                MozTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
+                MsTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
+                OTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
+                WebkitTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
                 transform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
                 transition: isOpen ? 'transform 0.4s 0s' : 'transform 0.4s'
             };
@@ -1803,6 +1811,10 @@ var styles = {
             width -= 140;
             return {
                 position: 'fixed',
+                MozTransform: isOpen ? '' : right ? 'translate3d(' + width + 'px, 0, 0)' : 'translate3d(-' + width + 'px, 0, 0)',
+                MsTransform: isOpen ? '' : right ? 'translate3d(' + width + 'px, 0, 0)' : 'translate3d(-' + width + 'px, 0, 0)',
+                OTransform: isOpen ? '' : right ? 'translate3d(' + width + 'px, 0, 0)' : 'translate3d(-' + width + 'px, 0, 0)',
+                WebkitTransform: isOpen ? '' : right ? 'translate3d(' + width + 'px, 0, 0)' : 'translate3d(-' + width + 'px, 0, 0)',
                 transform: isOpen ? '' : right ? 'translate3d(' + width + 'px, 0, 0)' : 'translate3d(-' + width + 'px, 0, 0)',
                 transition: isOpen ? 'opacity 0.1s 0.4s cubic-bezier(.17, .67, .1, 1.27), transform 0.1s 0.4s cubic-bezier(.17, .67, .1, 1.27)' : 'opacity 0s 0.3s cubic-bezier(.17, .67, .1, 1.27), transform 0s 0.3s cubic-bezier(.17, .67, .1, 1.27)',
                 opacity: isOpen ? 1 : 0
@@ -1811,6 +1823,10 @@ var styles = {
         item: function item(isOpen, width, right, nthChild) {
             width -= 140;
             return {
+                MozTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(' + width + 'px, 0, 0)' : 'translate3d(-' + width + 'px, 0, 0)',
+                MsTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(' + width + 'px, 0, 0)' : 'translate3d(-' + width + 'px, 0, 0)',
+                OTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(' + width + 'px, 0, 0)' : 'translate3d(-' + width + 'px, 0, 0)',
+                WebkitTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(' + width + 'px, 0, 0)' : 'translate3d(-' + width + 'px, 0, 0)',
                 transform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(' + width + 'px, 0, 0)' : 'translate3d(-' + width + 'px, 0, 0)',
                 transition: isOpen ? 'opacity 0.3s 0.4s, transform 0.3s 0.4s' : 'opacity 0s 0.3s cubic-bezier(.17, .67, .1, 1.27), transform 0s 0.3s cubic-bezier(.17, .67, .1, 1.27)',
                 opacity: isOpen ? 1 : 0
@@ -1819,6 +1835,10 @@ var styles = {
         closeButton: function closeButton(isOpen, width, right) {
             width -= 140;
             return {
+                MozTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(' + width + 'px, 0, 0)' : 'translate3d(-' + width + 'px, 0, 0)',
+                MsTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(' + width + 'px, 0, 0)' : 'translate3d(-' + width + 'px, 0, 0)',
+                OTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(' + width + 'px, 0, 0)' : 'translate3d(-' + width + 'px, 0, 0)',
+                WebkitTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(' + width + 'px, 0, 0)' : 'translate3d(-' + width + 'px, 0, 0)',
                 transform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(' + width + 'px, 0, 0)' : 'translate3d(-' + width + 'px, 0, 0)',
                 transition: isOpen ? 'opacity 0.3s 0.4s cubic-bezier(.17, .67, .1, 1.27), transform 0.3s 0.4s cubic-bezier(.17, .67, .1, 1.27)' : 'opacity 0s 0.3s cubic-bezier(.17, .67, .1, 1.27), transform 0s 0.3s cubic-bezier(.17, .67, .1, 1.27)',
                 opacity: isOpen ? 1 : 0
@@ -1853,11 +1873,19 @@ var styles = {
                 height: '100%',
                 right: right ? 'inherit' : 0,
                 left: right ? 0 : 'inherit',
+                MozTransform: right ? 'rotateY(180deg)' : '',
+                MsTransform: right ? 'rotateY(180deg)' : '',
+                OTransform: right ? 'rotateY(180deg)' : '',
+                WebkitTransform: right ? 'rotateY(180deg)' : '',
                 transform: right ? 'rotateY(180deg)' : ''
             };
         },
         menuWrap: function menuWrap(isOpen, width, right) {
             return {
+                MozTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
+                MsTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
+                OTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
+                WebkitTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
                 transform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
                 transition: 'all 0.3s'
             };
@@ -1884,6 +1912,10 @@ var styles = {
         },
         pageWrap: function pageWrap(isOpen, width, right) {
             return {
+                MozTransform: isOpen ? '' : right ? 'translate3d(-100px, 0, 0)' : 'translate3d(100px, 0, 0)',
+                MsTransform: isOpen ? '' : right ? 'translate3d(-100px, 0, 0)' : 'translate3d(100px, 0, 0)',
+                OTransform: isOpen ? '' : right ? 'translate3d(-100px, 0, 0)' : 'translate3d(100px, 0, 0)',
+                WebkitTransform: isOpen ? '' : right ? 'translate3d(-100px, 0, 0)' : 'translate3d(100px, 0, 0)',
                 transform: isOpen ? '' : right ? 'translate3d(-100px, 0, 0)' : 'translate3d(100px, 0, 0)',
                 transition: isOpen ? 'all 0.3s' : 'all 0.3s 0.1s'
             };
@@ -1905,12 +1937,20 @@ var _menuFactory2 = _interopRequireDefault(_menuFactory);
 var styles = {
         menuWrap: function menuWrap(isOpen) {
             return {
+                MozTransform: isOpen ? '' : 'translate3d(0, -100%, 0)',
+                MsTransform: isOpen ? '' : 'translate3d(0, -100%, 0)',
+                OTransform: isOpen ? '' : 'translate3d(0, -100%, 0)',
+                WebkitTransform: isOpen ? '' : 'translate3d(0, -100%, 0)',
                 transform: isOpen ? '' : 'translate3d(0, -100%, 0)',
                 transition: 'all 0.5s ease-in-out'
             };
         },
         pageWrap: function pageWrap(isOpen, width, right) {
             return {
+                MozTransform: isOpen ? '' : right ? 'translate3d(-' + width + 'px, 0, 0)' : 'translate3d(' + width + 'px, 0, 0)',
+                MsTransform: isOpen ? '' : right ? 'translate3d(-' + width + 'px, 0, 0)' : 'translate3d(' + width + 'px, 0, 0)',
+                OTransform: isOpen ? '' : right ? 'translate3d(-' + width + 'px, 0, 0)' : 'translate3d(' + width + 'px, 0, 0)',
+                WebkitTransform: isOpen ? '' : right ? 'translate3d(-' + width + 'px, 0, 0)' : 'translate3d(' + width + 'px, 0, 0)',
                 transform: isOpen ? '' : right ? 'translate3d(-' + width + 'px, 0, 0)' : 'translate3d(' + width + 'px, 0, 0)',
                 transition: 'all 0.5s'
             };
@@ -1936,6 +1976,10 @@ var _menuFactory2 = _interopRequireDefault(_menuFactory);
 var styles = {
         pageWrap: function pageWrap(isOpen, width, right) {
             return {
+                MozTransform: isOpen ? '' : right ? 'translate3d(-' + width + 'px, 0, 0)' : 'translate3d(' + width + 'px, 0, 0)',
+                MsTransform: isOpen ? '' : right ? 'translate3d(-' + width + 'px, 0, 0)' : 'translate3d(' + width + 'px, 0, 0)',
+                OTransform: isOpen ? '' : right ? 'translate3d(-' + width + 'px, 0, 0)' : 'translate3d(' + width + 'px, 0, 0)',
+                WebkitTransform: isOpen ? '' : right ? 'translate3d(-' + width + 'px, 0, 0)' : 'translate3d(' + width + 'px, 0, 0)',
                 transform: isOpen ? '' : right ? 'translate3d(-' + width + 'px, 0, 0)' : 'translate3d(' + width + 'px, 0, 0)',
                 transition: 'all 0.5s'
             };
@@ -1957,6 +2001,10 @@ var _menuFactory2 = _interopRequireDefault(_menuFactory);
 var styles = {
         pageWrap: function pageWrap(isOpen, width, right) {
             return {
+                MozTransform: isOpen ? '' : right ? 'translate3d(-' + width + 'px, 0, 0) rotateY(15deg)' : 'translate3d(' + width + 'px, 0, 0) rotateY(-15deg)',
+                MsTransform: isOpen ? '' : right ? 'translate3d(-' + width + 'px, 0, 0) rotateY(15deg)' : 'translate3d(' + width + 'px, 0, 0) rotateY(-15deg)',
+                OTransform: isOpen ? '' : right ? 'translate3d(-' + width + 'px, 0, 0) rotateY(15deg)' : 'translate3d(' + width + 'px, 0, 0) rotateY(-15deg)',
+                WebkitTransform: isOpen ? '' : right ? 'translate3d(-' + width + 'px, 0, 0) rotateY(15deg)' : 'translate3d(' + width + 'px, 0, 0) rotateY(-15deg)',
                 transform: isOpen ? '' : right ? 'translate3d(-' + width + 'px, 0, 0) rotateY(15deg)' : 'translate3d(' + width + 'px, 0, 0) rotateY(-15deg)',
                 transformOrigin: right ? '100% 50%' : '0% 50%',
                 transformStyle: 'preserve-3d',
@@ -1983,6 +2031,10 @@ var _menuFactory2 = _interopRequireDefault(_menuFactory);
 var styles = {
         pageWrap: function pageWrap(isOpen, width) {
             return {
+                MozTransform: isOpen ? '' : 'translate3d(0, 0, -' + width + 'px)',
+                MsTransform: isOpen ? '' : 'translate3d(0, 0, -' + width + 'px)',
+                OTransform: isOpen ? '' : 'translate3d(0, 0, -' + width + 'px)',
+                WebkitTransform: isOpen ? '' : 'translate3d(0, 0, -' + width + 'px)',
                 transform: isOpen ? '' : 'translate3d(0, 0, -' + width + 'px)',
                 transformOrigin: '100%',
                 transformStyle: 'preserve-3d',
@@ -2006,6 +2058,10 @@ var _menuFactory2 = _interopRequireDefault(_menuFactory);
 var styles = {
         pageWrap: function pageWrap(isOpen, width, right) {
             return {
+                MozTransform: isOpen ? '' : right ? 'translate3d(-100px, 0, -600px) rotateY(20deg)' : 'translate3d(100px, 0, -600px) rotateY(-20deg)',
+                MsTransform: isOpen ? '' : right ? 'translate3d(-100px, 0, -600px) rotateY(20deg)' : 'translate3d(100px, 0, -600px) rotateY(-20deg)',
+                OTransform: isOpen ? '' : right ? 'translate3d(-100px, 0, -600px) rotateY(20deg)' : 'translate3d(100px, 0, -600px) rotateY(-20deg)',
+                WebkitTransform: isOpen ? '' : right ? 'translate3d(-100px, 0, -600px) rotateY(20deg)' : 'translate3d(100px, 0, -600px) rotateY(-20deg)',
                 transform: isOpen ? '' : right ? 'translate3d(-100px, 0, -600px) rotateY(20deg)' : 'translate3d(100px, 0, -600px) rotateY(-20deg)',
                 transformStyle: 'preserve-3d',
                 transition: 'all 0.5s',
@@ -2044,12 +2100,20 @@ var styles = {
         menuWrap: function menuWrap(isOpen, width, right) {
             width += 20;
             return {
+                MozTransform: isOpen ? '' : right ? 'translate3d(' + width + 'px, 0, 0)' : 'translate3d(-' + width + 'px, 0, 0)',
+                MsTransform: isOpen ? '' : right ? 'translate3d(' + width + 'px, 0, 0)' : 'translate3d(-' + width + 'px, 0, 0)',
+                OTransform: isOpen ? '' : right ? 'translate3d(' + width + 'px, 0, 0)' : 'translate3d(-' + width + 'px, 0, 0)',
+                WebkitTransform: isOpen ? '' : right ? 'translate3d(' + width + 'px, 0, 0)' : 'translate3d(-' + width + 'px, 0, 0)',
                 transform: isOpen ? '' : right ? 'translate3d(' + width + 'px, 0, 0)' : 'translate3d(-' + width + 'px, 0, 0)',
                 transition: isOpen ? 'transform 0.8s cubic-bezier(0.7, 0, 0.3, 1)' : 'transform 0.4s cubic-bezier(0.7, 0, 0.3, 1)'
             };
         },
         item: function item(isOpen, width, right, nthChild) {
             return {
+                MozTransform: isOpen ? '' : 'translate3d(0, ' + nthChild * 500 + 'px, 0)',
+                MsTransform: isOpen ? '' : 'translate3d(0, ' + nthChild * 500 + 'px, 0)',
+                OTransform: isOpen ? '' : 'translate3d(0, ' + nthChild * 500 + 'px, 0)',
+                WebkitTransform: isOpen ? '' : 'translate3d(0, ' + nthChild * 500 + 'px, 0)',
                 transform: isOpen ? '' : 'translate3d(0, ' + nthChild * 500 + 'px, 0)',
                 transition: isOpen ? 'transform 0.8s cubic-bezier(0.7, 0, 0.3, 1)' : 'transform 0s 0.2s cubic-bezier(0.7, 0, 0.3, 1)'
             };
