@@ -58,19 +58,18 @@ npm install react-burger-menu@1.1.6 --save
 
 Items for the sidebar should be passed as child elements of the component using JSX.
 
-*If you're using this component with react-router, or want to include other custom components inside the menu, check out [this](https://github.com/negomi/react-burger-menu/wiki/FAQ#why-doesnt-the-link-component-from-react-router-work) and [this](https://github.com/negomi/react-burger-menu/wiki/FAQ#i-want-to-use-custom-components-inside-my-menu-but-this-breaks-firefox) in the wiki.*
-
 ``` javascript
-var Menu = require('react-burger-menu').nameOfAnimation;
+import { nameOfAnimation as Menu } from 'react-burger-menu'
 
-var Example = React.createClass({
-  showSettings: function(event) {
+class Example extends React.Component {
+  showSettings (event) {
     event.preventDefault();
     .
     .
     .
-  },
-  render: function() {
+  }
+
+  render () {
     return (
       <Menu>
         <a id="home" className="menu-item" href="/">Home</a>
@@ -80,8 +79,7 @@ var Example = React.createClass({
       </Menu>
     );
   }
-});
-
+}
 ```
 
 ### Animations
@@ -317,22 +315,6 @@ var styles = {
 }
 
 <Menu styles={ styles } />
-```
-
-### Server-side rendering
-
-This component uses [Radium](https://github.com/FormidableLabs/radium) to manage its internal styles, which also handles vendor prefixing. In universal/isomorphic applications, you need to pass the user agent to the component via the [`radiumConfig`](https://github.com/FormidableLabs/radium/tree/master/docs/api#configuseragent) prop so Radium knows which prefixes to apply.
-
-This is an example of how that would look using Express:
-
-```javascript
-<Menu radiumConfig={{ userAgent: req.headers['user-agent'] }} />
-```
-
-If you're not terribly concerned with memory/data usage and for some reason can't provide the user agent (for example, your application sits behind a CDN or other proxy), you can specify the user agent `'all'` to use all vendor prefixes.
-
-```javascript
-<Menu radiumConfig={{ userAgent: 'all' }} />
 ```
 
 ### Browser support
