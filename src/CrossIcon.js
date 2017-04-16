@@ -2,9 +2,8 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Radium from 'radium';
 
-class CrossIcon extends Component {
+export default class CrossIcon extends Component {
   getCrossStyle(type) {
     return {
       position: 'absolute',
@@ -40,20 +39,20 @@ class CrossIcon extends Component {
     if (this.props.customIcon) {
       let extraProps = {
         className: 'bm-cross',
-        style: [{width: '100%', height: '100%'}, this.props.styles.bmCross]
+        style: {...{width: '100%', height: '100%'}, ...this.props.styles.bmCross}
       };
       icon = React.cloneElement(this.props.customIcon, extraProps);
     } else {
       icon = (
-        <span style={[{position: 'absolute', top: '6px', right: '14px'}]}>
-          <span className="bm-cross" style={[this.getCrossStyle('before'), this.props.styles.bmCross]} />
-          <span className="bm-cross" style={[this.getCrossStyle('after'), this.props.styles.bmCross]} />
+        <span style={{position: 'absolute', top: '6px', right: '14px'}}>
+          <span className="bm-cross" style={{...this.getCrossStyle('before'), ...this.props.styles.bmCross}} />
+          <span className="bm-cross" style={{...this.getCrossStyle('after'), ...this.props.styles.bmCross}} />
         </span>
       );
     }
 
     return (
-      <div className="bm-cross-button" style={[buttonWrapperStyle, this.props.styles.bmCrossButton]}>
+      <div className="bm-cross-button" style={{...buttonWrapperStyle, ...this.props.styles.bmCrossButton}}>
         {icon}
         <button onClick={this.props.onClick} style={buttonStyle}>Close Menu</button>
       </div>
@@ -69,5 +68,3 @@ CrossIcon.propTypes = {
 CrossIcon.defaultProps = {
   styles: {}
 };
-
-export default Radium(CrossIcon);

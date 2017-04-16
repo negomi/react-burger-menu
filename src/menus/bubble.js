@@ -36,12 +36,20 @@ const styles = {
       height: '100%',
       right: right ? 'inherit' : 0,
       left: right ? 0 : 'inherit',
+      MozTransform: right ? 'rotateY(180deg)' : 'rotateY(0deg)',
+      MsTransform: right ? 'rotateY(180deg)' : 'rotateY(0deg)',
+      OTransform: right ? 'rotateY(180deg)' : 'rotateY(0deg)',
+      WebkitTransform: right ? 'rotateY(180deg)' : 'rotateY(0deg)',
       transform: right ? 'rotateY(180deg)' : 'rotateY(0deg)'
     };
   },
 
   menuWrap(isOpen, width, right) {
     return {
+      MozTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
+      MsTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
+      OTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
+      WebkitTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
       transform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
       transition: isOpen ? 'transform 0.4s 0s' : 'transform 0.4s'
     };
@@ -51,6 +59,10 @@ const styles = {
     width -= 140;
     return {
       position: 'fixed',
+      MozTransform: isOpen ? '' : right ? `translate3d(${width}px, 0, 0)` : `translate3d(-${width}px, 0, 0)`,
+      MsTransform: isOpen ? '' : right ? `translate3d(${width}px, 0, 0)` : `translate3d(-${width}px, 0, 0)`,
+      OTransform: isOpen ? '' : right ? `translate3d(${width}px, 0, 0)` : `translate3d(-${width}px, 0, 0)`,
+      WebkitTransform: isOpen ? '' : right ? `translate3d(${width}px, 0, 0)` : `translate3d(-${width}px, 0, 0)`,
       transform: isOpen ? '' : right ? `translate3d(${width}px, 0, 0)` : `translate3d(-${width}px, 0, 0)`,
       transition: isOpen ? 'opacity 0.1s 0.4s cubic-bezier(.17, .67, .1, 1.27), transform 0.1s 0.4s cubic-bezier(.17, .67, .1, 1.27)' : 'opacity 0s 0.3s cubic-bezier(.17, .67, .1, 1.27), transform 0s 0.3s cubic-bezier(.17, .67, .1, 1.27)',
       opacity: isOpen ? 1 : 0
@@ -60,6 +72,10 @@ const styles = {
   item(isOpen, width, right, nthChild) {
     width -= 140;
     return {
+      MozTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? `translate3d(${width}px, 0, 0)` : `translate3d(-${width}px, 0, 0)`,
+      MsTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? `translate3d(${width}px, 0, 0)` : `translate3d(-${width}px, 0, 0)`,
+      OTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? `translate3d(${width}px, 0, 0)` : `translate3d(-${width}px, 0, 0)`,
+      WebkitTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? `translate3d(${width}px, 0, 0)` : `translate3d(-${width}px, 0, 0)`,
       transform: isOpen ? 'translate3d(0, 0, 0)' : right ? `translate3d(${width}px, 0, 0)` : `translate3d(-${width}px, 0, 0)`,
       transition: isOpen ? 'opacity 0.3s 0.4s, transform 0.3s 0.4s' : 'opacity 0s 0.3s cubic-bezier(.17, .67, .1, 1.27), transform 0s 0.3s cubic-bezier(.17, .67, .1, 1.27)',
       opacity: isOpen ? 1 : 0
@@ -69,6 +85,10 @@ const styles = {
   closeButton(isOpen, width, right) {
     width -= 140;
     return {
+      MozTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? `translate3d(${width}px, 0, 0)` : `translate3d(-${width}px, 0, 0)`,
+      MsTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? `translate3d(${width}px, 0, 0)` : `translate3d(-${width}px, 0, 0)`,
+      OTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? `translate3d(${width}px, 0, 0)` : `translate3d(-${width}px, 0, 0)`,
+      WebkitTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? `translate3d(${width}px, 0, 0)` : `translate3d(-${width}px, 0, 0)`,
       transform: isOpen ? 'translate3d(0, 0, 0)' : right ? `translate3d(${width}px, 0, 0)` : `translate3d(-${width}px, 0, 0)`,
       transition: isOpen ? 'opacity 0.3s 0.4s cubic-bezier(.17, .67, .1, 1.27), transform 0.3s 0.4s cubic-bezier(.17, .67, .1, 1.27)' : 'opacity 0s 0.3s cubic-bezier(.17, .67, .1, 1.27), transform 0s 0.3s cubic-bezier(.17, .67, .1, 1.27)',
       opacity: isOpen ? 1 : 0

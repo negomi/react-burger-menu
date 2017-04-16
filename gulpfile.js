@@ -23,7 +23,6 @@ var taskConfig = {
       'browserify-optional',
       'classnames',
       'eve',
-      'radium',
       'react',
       'react-dom',
       'snapsvg-cjs'

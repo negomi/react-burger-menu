@@ -17,7 +17,6 @@
     "classnames": "^2.1.1",
     "eve": "~0.4.2",
     "prop-types": "^15.5.8",
-    "radium": "0.18.1",
     "snapsvg-cjs": "0.0.4"
   },
   "devDependencies": {
@@ -52,7 +51,6 @@
   "browserify-shim": {
     "react": "global:React",
     "react-dom": "global:ReactDOM",
-    "radium": "global:Radium",
     "snapsvg": "global:Snap"
   },
   "scripts": {

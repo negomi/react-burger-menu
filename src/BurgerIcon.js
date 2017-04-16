@@ -2,9 +2,8 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Radium from 'radium';
 
-class BurgerIcon extends Component {
+export default class BurgerIcon extends Component {
   constructor (props) {
     super(props);
     this.state = {
@@ -45,21 +44,21 @@ class BurgerIcon extends Component {
     if (this.props.customIcon) {
       let extraProps = {
         className: 'bm-icon',
-        style: [{width: '100%', height: '100%'}, this.props.styles.bmIcon]
+        style: {...{width: '100%', height: '100%'}, ...this.props.styles.bmIcon}
       };
       icon = React.cloneElement(this.props.customIcon, extraProps);
     } else {
       icon = (
         <span>
-          <span className="bm-burger-bars" style={[this.getLineStyle(0), this.props.styles.bmBurgerBars]} />
-          <span className="bm-burger-bars" style={[this.getLineStyle(1), this.props.styles.bmBurgerBars]} />
-          <span className="bm-burger-bars" style={[this.getLineStyle(2), this.props.styles.bmBurgerBars]} />
+          <span className="bm-burger-bars" style={{...this.getLineStyle(0), ...this.props.styles.bmBurgerBars}} />
+          <span className="bm-burger-bars" style={{...this.getLineStyle(1), ...this.props.styles.bmBurgerBars}} />
+          <span className="bm-burger-bars" style={{...this.getLineStyle(2), ...this.props.styles.bmBurgerBars}} />
         </span>
       );
     }
 
     return (
-      <div className="bm-burger-button" style={[{zIndex: 1}, this.props.styles.bmBurgerButton]}>
+      <div className="bm-burger-button" style={{...{zIndex: 1}, ...this.props.styles.bmBurgerButton}}>
         {icon}
         <button onClick={this.props.onClick}
           onMouseEnter={() => this.handleHover()}
@@ -80,5 +79,3 @@ BurgerIcon.propTypes = {
 BurgerIcon.defaultProps = {
   styles: {}
 };
-
-export default Radium(BurgerIcon);

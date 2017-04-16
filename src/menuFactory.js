@@ -1,9 +1,8 @@
 'use strict';
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import Radium from 'radium';
+import PropTypes from 'prop-types';
 import baseStyles from './baseStyles';
 import BurgerIcon from './BurgerIcon';
 import CrossIcon from './CrossIcon';
@@ -91,21 +90,30 @@ export default (styles) => {
       const propName = 'bm' + el.replace(el.charAt(0), el.charAt(0).toUpperCase());
 
       // Set base styles.
-      let output = baseStyles[el] ? [baseStyles[el](this.state.isOpen, this.props.width, this.props.right)] : [];
+      let output = baseStyles[el] ? baseStyles[el](this.state.isOpen, this.props.width, this.props.right) : {};
 
       // Add animation-specific styles.
       if (styles[el]) {
-        output.push(styles[el](this.state.isOpen, this.props.width, this.props.right, index + 1));
+        output = {
+          ...output,
+          ...styles[el](this.state.isOpen, this.props.width, this.props.right, index + 1)
+        };
       }
 
       // Add custom styles.
       if (this.props.styles[propName]) {
-        output.push(this.props.styles[propName]);
+        output = {
+          ...output,
+          ...this.props.styles[propName]
+        };
       }
 
       // Add element inline styles.
       if (inline) {
-        output.push(inline);
+        output = {
+          ...output,
+          ...inline
+        };
       }
 
       return output;
@@ -232,5 +240,5 @@ export default (styles) => {
     width: 300
   };
 
-  return Radium(Menu);
+  return Menu;
 };
