@@ -1753,7 +1753,10 @@ exports['default'] = function (styles) {
         pageWrapId: styles && styles.pageWrap ? _propTypes2['default'].string.isRequired : _propTypes2['default'].string,
         right: _propTypes2['default'].bool,
         styles: _propTypes2['default'].object,
-        width: _propTypes2['default'].number
+        width: _propTypes2['default'].oneOfType([
+            _propTypes2['default'].number,
+            _propTypes2['default'].string
+        ])
     };
     Menu.defaultProps = {
         id: '',
