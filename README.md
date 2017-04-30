@@ -147,10 +147,12 @@ The menu opens from the left by default. To have it open from the right, use the
 
 #### Width
 
-You can specify the width of the menu (in pixels) with the `width` prop. The default is `300`.
+You can specify the width of the menu with the `width` prop. The default is `300`.
 
 ``` javascript
 <Menu width={ 280 } />
+<Menu width={ '280px' } />
+<Menu width={ '20%' } />
 ```
 
 #### Open state

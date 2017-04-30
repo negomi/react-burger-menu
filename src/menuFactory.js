@@ -227,7 +227,7 @@ export default (styles) => {
     pageWrapId: styles && styles.pageWrap ? PropTypes.string.isRequired : PropTypes.string,
     right: PropTypes.bool,
     styles: PropTypes.object,
-    width: PropTypes.number
+    width: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
   };
 
   Menu.defaultProps = {
