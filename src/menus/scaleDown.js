@@ -6,11 +6,11 @@ const styles = {
 
   pageWrap(isOpen, width) {
     return {
-      MozTransform: isOpen ? '' : `translate3d(0, 0, -${width}px)`,
-      MsTransform: isOpen ? '' : `translate3d(0, 0, -${width}px)`,
-      OTransform: isOpen ? '' : `translate3d(0, 0, -${width}px)`,
-      WebkitTransform: isOpen ? '' : `translate3d(0, 0, -${width}px)`,
-      transform: isOpen ? '' : `translate3d(0, 0, -${width}px)`,
+      MozTransform: isOpen ? '' : `translate3d(0, 0, -${width})`,
+      MsTransform: isOpen ? '' : `translate3d(0, 0, -${width})`,
+      OTransform: isOpen ? '' : `translate3d(0, 0, -${width})`,
+      WebkitTransform: isOpen ? '' : `translate3d(0, 0, -${width})`,
+      transform: isOpen ? '' : `translate3d(0, 0, -${width})`,
       transformOrigin: '100%',
       transformStyle: 'preserve-3d',
       transition: 'all 0.5s'
