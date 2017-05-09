@@ -71,7 +71,7 @@ export default (styles) => {
         return;
       }
 
-      const builtStyles = wrapperStyles(this.state.isOpen, this.props.width, this.props.right);
+      const builtStyles = this.getStyle(wrapperStyles);
 
       for (const prop in builtStyles) {
         if (builtStyles.hasOwnProperty(prop)) {
@@ -90,13 +90,13 @@ export default (styles) => {
       const propName = 'bm' + el.replace(el.charAt(0), el.charAt(0).toUpperCase());
 
       // Set base styles.
-      let output = baseStyles[el] ? baseStyles[el](this.state.isOpen, this.props.width, this.props.right) : {};
+      let output = baseStyles[el] ? this.getStyle(baseStyles[el]) : {};
 
       // Add animation-specific styles.
       if (styles[el]) {
         output = {
           ...output,
-          ...styles[el](this.state.isOpen, this.props.width, this.props.right, index + 1)
+          ...this.getStyle(styles[el], index + 1)
         };
       }
 
@@ -117,6 +117,13 @@ export default (styles) => {
       }
 
       return output;
+    }
+
+    getStyle(style, index) {
+      let width = this.props.width;
+      if (typeof width !== 'string') width = `${width}px`;
+
+      return style(this.state.isOpen, width, this.props.right, index);
     }
 
     listenForClose(e) {
