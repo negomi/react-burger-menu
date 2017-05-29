@@ -231,7 +231,7 @@ export default (styles) => {
     noOverlay: PropTypes.bool,
     onStateChange: PropTypes.func,
     outerContainerId: styles && styles.outerContainer ? PropTypes.string.isRequired : PropTypes.string,
-		overlayClassName: PropTypes.string,
+    overlayClassName: PropTypes.string,
     pageWrapId: styles && styles.pageWrap ? PropTypes.string.isRequired : PropTypes.string,
     right: PropTypes.bool,
     styles: PropTypes.object,
@@ -243,7 +243,7 @@ export default (styles) => {
     noOverlay: false,
     onStateChange: () => {},
     outerContainerId: '',
-		overlayClassName: 'bm-overlay',
+    overlayClassName: 'bm-overlay',
     pageWrapId: '',
     styles: {},
     width: 300
