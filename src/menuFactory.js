@@ -233,6 +233,8 @@ export default (styles) => {
               onClick={() => this.toggleMenu()}
               styles={this.props.styles}
               customIcon={this.props.customBurgerIcon}
+              className={this.props.burgerButtonClassName}
+              barClassName={this.props.burgerBarClassName}
             />
           )}
         </div>
@@ -241,7 +243,8 @@ export default (styles) => {
   }
 
   Menu.propTypes = {
-    className: PropTypes.string,
+    burgerBarClassName: PropTypes.string,
+    burgerButtonClassName: PropTypes.string,
     customBurgerIcon: PropTypes.oneOfType([PropTypes.element, PropTypes.oneOf([false])]),
     customCrossIcon: PropTypes.oneOfType([PropTypes.element, PropTypes.oneOf([false])]),
     id: PropTypes.string,
@@ -257,6 +260,8 @@ export default (styles) => {
   };
 
   Menu.defaultProps = {
+    burgerBarClassName: '',
+    burgerButtonClassName: '',
     className: '',
     id: '',
     noOverlay: false,

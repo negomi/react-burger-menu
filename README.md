@@ -221,7 +221,9 @@ There are optional `id` and `className` props, which will simply add an ID or cu
 You can also pass custom classNames to the other elements:
 
 ``` javascript
-<Menu overlayClassName={ "my-overlay" } />
+<Menu burgerButtonClassName={ "my-class" } />
+<Menu burgerBarClassName={ "my-class" } />
+<Menu overlayClassName={ "my-class" } />
 ```
 
 ### Styling

@@ -48,6 +48,11 @@ describe('BurgerIcon component', () => {
       component = createShallowComponent(<BurgerIcon styles={ mockStylesProp } />);
       expect(component.props.style.width).to.equal('40px');
     });
+
+    it('accepts an optional className', () => {
+      component = createShallowComponent(<BurgerIcon className={ 'custom-class' } />);
+      expect(component.props.className).to.contain('custom-class');
+    });
   });
 
   describe('visual icon', () => {
@@ -63,6 +68,12 @@ describe('BurgerIcon component', () => {
       expect(icon.props.children[0].props.className).to.contain('bm-burger-bars');
       expect(icon.props.children[1].props.className).to.contain('bm-burger-bars');
       expect(icon.props.children[2].props.className).to.contain('bm-burger-bars');
+    });
+
+    it('accepts an optional barClassName', () => {
+      component = createShallowComponent(<BurgerIcon barClassName={ 'custom-class' } />);
+      icon = component.props.children[0];
+      expect(icon.props.children[0].props.className).to.contain('custom-class');
     });
 
     it('has the correct styles', () => {

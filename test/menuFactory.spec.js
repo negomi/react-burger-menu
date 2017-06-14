@@ -250,7 +250,7 @@ describe('menuFactory', () => {
     });
 
     it('accepts an optional overlayClassName', () => {
-      component = createShallowComponent(<Menu overlayClassName={'custom-class'} />);
+      component = createShallowComponent(<Menu overlayClassName={ 'custom-class' } />);
       const overlay = component.props.children[0];
       expect(overlay.props.className).to.contain('custom-class');
     });
@@ -261,6 +261,18 @@ describe('menuFactory', () => {
     it('can be disabled', () => {
       component = TestUtils.renderIntoDocument(<Menu styles={ mockStylesProp } customBurgerIcon={ false } />);
       assert.throw(TestUtils.findRenderedDOMComponentWithClass.bind(null, component, 'bm-burger-button'), Error);
+    });
+
+    it('accepts an optional burgerButtonClassName', () => {
+      component = TestUtils.renderIntoDocument(<Menu burgerButtonClassName={ 'custom-class' } />);
+      const button = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-burger-button');
+      expect(button.classList.toString()).to.contain('custom-class');
+    });
+
+    it('accepts an optional burgerBarClassName', () => {
+      component = TestUtils.renderIntoDocument(<Menu burgerBarClassName={ 'custom-class' } />);
+      const bars = TestUtils.scryRenderedDOMComponentsWithClass(component, 'bm-burger-bars');
+      expect(bars[0].classList.toString()).to.contain('custom-class');
     });
   });
 

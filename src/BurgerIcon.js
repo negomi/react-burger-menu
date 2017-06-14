@@ -50,20 +50,29 @@ export default class BurgerIcon extends Component {
     } else {
       icon = (
         <span>
-          <span className="bm-burger-bars" style={{...this.getLineStyle(0), ...this.props.styles.bmBurgerBars}} />
-          <span className="bm-burger-bars" style={{...this.getLineStyle(1), ...this.props.styles.bmBurgerBars}} />
-          <span className="bm-burger-bars" style={{...this.getLineStyle(2), ...this.props.styles.bmBurgerBars}} />
+          {[0, 1, 2].map((bar) => (
+            <span
+              key={bar}
+              className={`bm-burger-bars ${this.props.barClassName}`}
+              style={{...this.getLineStyle(bar), ...this.props.styles.bmBurgerBars}}
+            />
+          ))}
         </span>
       );
     }
 
     return (
-      <div className="bm-burger-button" style={{...{zIndex: 1}, ...this.props.styles.bmBurgerButton}}>
+      <div
+        className={`bm-burger-button ${this.props.className}`}
+        style={{...{zIndex: 1}, ...this.props.styles.bmBurgerButton}}
+      >
         {icon}
-        <button onClick={this.props.onClick}
+        <button
+          onClick={this.props.onClick}
           onMouseEnter={() => this.handleHover()}
           onMouseLeave={() => this.handleHover()}
-          style={buttonStyle}>
+          style={buttonStyle}
+        >
           Open Menu
         </button>
       </div>
@@ -72,10 +81,13 @@ export default class BurgerIcon extends Component {
 }
 
 BurgerIcon.propTypes = {
+  barClassName: PropTypes.string,
   customIcon: PropTypes.element,
   styles: PropTypes.object
 };
 
 BurgerIcon.defaultProps = {
+  barClassName: '',
+  className: '',
   styles: {}
 };
