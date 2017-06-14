@@ -45,26 +45,39 @@ export default class CrossIcon extends Component {
     } else {
       icon = (
         <span style={{position: 'absolute', top: '6px', right: '14px'}}>
-          <span className="bm-cross" style={{...this.getCrossStyle('before'), ...this.props.styles.bmCross}} />
-          <span className="bm-cross" style={{...this.getCrossStyle('after'), ...this.props.styles.bmCross}} />
+          {['before', 'after'].map((type, i) => (
+            <span
+              key={i}
+              className={`bm-cross ${this.props.crossClassName}`}
+              style={{...this.getCrossStyle(type), ...this.props.styles.bmCross}}
+            />
+          ))}
         </span>
       );
     }
 
     return (
-      <div className="bm-cross-button" style={{...buttonWrapperStyle, ...this.props.styles.bmCrossButton}}>
+      <div
+        className={`bm-cross-button ${this.props.className}`}
+        style={{...buttonWrapperStyle, ...this.props.styles.bmCrossButton}}
+      >
         {icon}
-        <button onClick={this.props.onClick} style={buttonStyle}>Close Menu</button>
+        <button onClick={this.props.onClick} style={buttonStyle}>
+          Close Menu
+        </button>
       </div>
     );
   }
 }
 
 CrossIcon.propTypes = {
+  crossClassName: PropTypes.string,
   customIcon: PropTypes.element,
   styles: PropTypes.object
 };
 
 CrossIcon.defaultProps = {
+  crossClassName: '',
+  className: '',
   styles: {}
 };

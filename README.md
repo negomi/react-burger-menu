@@ -223,6 +223,8 @@ You can also pass custom classNames to the other elements:
 ``` javascript
 <Menu burgerButtonClassName={ "my-class" } />
 <Menu burgerBarClassName={ "my-class" } />
+<Menu crossButtonClassName={ "my-class" } />
+<Menu crossClassName={ "my-class" } />
 <Menu overlayClassName={ "my-class" } />
 ```
 

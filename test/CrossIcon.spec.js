@@ -48,6 +48,11 @@ describe('CrossIcon component', () => {
       component = createShallowComponent(<CrossIcon styles={ mockStylesProp } />);
       expect(component.props.style.height).to.equal('30px');
     });
+
+    it('accepts an optional className', () => {
+      component = createShallowComponent(<CrossIcon className={ 'custom-class' } />);
+      expect(component.props.className).to.contain('custom-class');
+    });
   });
 
   describe('visual icon', () => {
@@ -86,6 +91,12 @@ describe('CrossIcon component', () => {
       component = createShallowComponent(<CrossIcon customIcon={ element } />);
       expect(component.props.children[0].type).to.equal('img');
       expect(component.props.children[0].props.src).to.equal('icon.jpg');
+    });
+
+    it('accepts an optional crossClassName', () => {
+      component = createShallowComponent(<CrossIcon crossClassName={ 'custom-class' } />);
+      icon = component.props.children[0];
+      expect(icon.props.children[0].props.className).to.contain('custom-class');
     });
   });
 

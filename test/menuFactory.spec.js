@@ -282,6 +282,18 @@ describe('menuFactory', () => {
       component = TestUtils.renderIntoDocument(<Menu styles={ mockStylesProp } customCrossIcon={ false } />);
       assert.throw(TestUtils.findRenderedDOMComponentWithClass.bind(null, component, 'bm-cross-button'), Error);
     });
+
+    it('accepts an optional crossButtonClassName', () => {
+      component = TestUtils.renderIntoDocument(<Menu crossButtonClassName={ 'custom-class' } />);
+      const button = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-cross-button');
+      expect(button.classList.toString()).to.contain('custom-class');
+    });
+
+    it('accepts an optional crossClassName', () => {
+      component = TestUtils.renderIntoDocument(<Menu crossClassName={ 'custom-class' } />);
+      const bars = TestUtils.scryRenderedDOMComponentsWithClass(component, 'bm-cross');
+      expect(bars[0].classList.toString()).to.contain('custom-class');
+    });
   });
 
   describe('toggleMenu method', () => {
