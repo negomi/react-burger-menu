@@ -186,8 +186,8 @@ export default (styles) => {
     render() {
       return (
         <div>
-          {!this.props.noOverlay ? <div className="bm-overlay" onClick={() => this.toggleMenu()} style={this.getStyles('overlay')} /> : null}
-          <div id={this.props.id} className={`bm-menu-wrap ${this.props.className || ''}`} style={this.getStyles('menuWrap')}>
+          {!this.props.noOverlay ? <div className={`bm-overlay ${this.props.overlayClassName}`} onClick={() => this.toggleMenu()} style={this.getStyles('overlay')} /> : null}
+          <div id={this.props.id} className={`bm-menu-wrap ${this.props.className}`} style={this.getStyles('menuWrap')}>
             {styles.svg ? (
               <div className="bm-morph-shape" style={this.getStyles('morphShape')}>
                 <svg width="100%" height="100%" viewBox="0 0 100 800" preserveAspectRatio="none">
@@ -231,6 +231,7 @@ export default (styles) => {
     noOverlay: PropTypes.bool,
     onStateChange: PropTypes.func,
     outerContainerId: styles && styles.outerContainer ? PropTypes.string.isRequired : PropTypes.string,
+    overlayClassName: PropTypes.string,
     pageWrapId: styles && styles.pageWrap ? PropTypes.string.isRequired : PropTypes.string,
     right: PropTypes.bool,
     styles: PropTypes.object,
@@ -238,10 +239,12 @@ export default (styles) => {
   };
 
   Menu.defaultProps = {
+    className: '',
     id: '',
     noOverlay: false,
     onStateChange: () => {},
     outerContainerId: '',
+    overlayClassName: '',
     pageWrapId: '',
     styles: {},
     width: 300

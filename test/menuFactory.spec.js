@@ -248,6 +248,12 @@ describe('menuFactory', () => {
       component = TestUtils.renderIntoDocument(<Menu styles={ mockStylesProp } noOverlay />);
       assert.throw(TestUtils.findRenderedDOMComponentWithClass.bind(null, component, 'bm-overlay'), Error);
     });
+
+    it('accepts an optional overlayClassName', () => {
+      component = createShallowComponent(<Menu overlayClassName={'custom-class'} />);
+      const overlay = component.props.children[0];
+      expect(overlay.props.className).to.contain('custom-class');
+    });
   });
 
   describe('burger icon', () => {
