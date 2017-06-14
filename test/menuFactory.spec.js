@@ -246,6 +246,12 @@ describe('menuFactory', () => {
       const itemList = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-item-list');
       expect(itemList.style.color).to.equal('white');
     });
+
+    it('accepts an optional itemListClassName', () => {
+      component = TestUtils.renderIntoDocument(<Menu itemListClassName={ 'custom-class' } />);
+      const itemList = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-item-list');
+      expect(itemList.classList.toString()).to.contain('custom-class');
+    });
   });
 
   describe('overlay', () => {

@@ -206,7 +206,7 @@ export default (styles) => {
               </div>
             )}
             <div className={`bm-menu ${this.props.menuClassName}`} style={this.getStyles('menu')} >
-              <nav className="bm-item-list" style={this.getStyles('itemList')}>
+              <nav className={`bm-item-list ${this.props.itemListClassName}`} style={this.getStyles('itemList')}>
                 {React.Children.map(this.props.children, (item, index) => {
                   if (item) {
                     const extraProps = {
@@ -253,6 +253,7 @@ export default (styles) => {
     customCrossIcon: PropTypes.oneOfType([PropTypes.element, PropTypes.oneOf([false])]),
     id: PropTypes.string,
     isOpen: PropTypes.bool,
+    itemListClassName: PropTypes.string,
     menuClassName: PropTypes.string,
     morphShapeClassName: PropTypes.string,
     noOverlay: PropTypes.bool,
@@ -272,6 +273,7 @@ export default (styles) => {
     crossButtonClassName: '',
     crossClassName: '',
     id: '',
+    itemListClassName: '',
     menuClassName: '',
     morphShapeClassName: '',
     noOverlay: false,
