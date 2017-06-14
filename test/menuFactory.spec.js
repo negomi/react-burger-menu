@@ -215,6 +215,12 @@ describe('menuFactory', () => {
       const menu = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-menu');
       expect(menu.style.background).to.equal('blue');
     });
+
+    it('accepts an optional menuClassName', () => {
+      component = TestUtils.renderIntoDocument(<Menu menuClassName={ 'custom-class' } />);
+      const menu = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-menu');
+      expect(menu.classList.toString()).to.contain('custom-class');
+    });
   });
 
   describe('morphShape element', () => {

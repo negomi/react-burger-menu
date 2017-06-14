@@ -205,7 +205,7 @@ export default (styles) => {
                 </svg>
               </div>
             )}
-            <div className="bm-menu" style={this.getStyles('menu')} >
+            <div className={`bm-menu ${this.props.menuClassName}`} style={this.getStyles('menu')} >
               <nav className="bm-item-list" style={this.getStyles('itemList')}>
                 {React.Children.map(this.props.children, (item, index) => {
                   if (item) {
@@ -253,6 +253,7 @@ export default (styles) => {
     customCrossIcon: PropTypes.oneOfType([PropTypes.element, PropTypes.oneOf([false])]),
     id: PropTypes.string,
     isOpen: PropTypes.bool,
+    menuClassName: PropTypes.string,
     noOverlay: PropTypes.bool,
     onStateChange: PropTypes.func,
     outerContainerId: styles && styles.outerContainer ? PropTypes.string.isRequired : PropTypes.string,
@@ -270,6 +271,7 @@ export default (styles) => {
     crossButtonClassName: '',
     crossClassName: '',
     id: '',
+    menuClassName: '',
     noOverlay: false,
     onStateChange: () => {},
     outerContainerId: '',

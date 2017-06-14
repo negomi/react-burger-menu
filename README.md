@@ -225,6 +225,7 @@ You can also pass custom classNames to the other elements:
 <Menu burgerBarClassName={ "my-class" } />
 <Menu crossButtonClassName={ "my-class" } />
 <Menu crossClassName={ "my-class" } />
+<Menu menuClassName={ "my-class" } />
 <Menu overlayClassName={ "my-class" } />
 ```
 
