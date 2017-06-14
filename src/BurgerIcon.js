@@ -22,10 +22,6 @@ export default class BurgerIcon extends Component {
     };
   }
 
-  handleHover() {
-    this.setState({hover: !this.state.hover});
-  }
-
   render() {
     let icon;
     let buttonStyle = {
@@ -69,8 +65,8 @@ export default class BurgerIcon extends Component {
         {icon}
         <button
           onClick={this.props.onClick}
-          onMouseEnter={() => this.handleHover()}
-          onMouseLeave={() => this.handleHover()}
+          onMouseOver={() => this.setState({hover: true})}
+          onMouseOut={() => this.setState({hover: false})}
           style={buttonStyle}
         >
           Open Menu
