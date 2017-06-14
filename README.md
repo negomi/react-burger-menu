@@ -226,6 +226,7 @@ You can also pass custom classNames to the other elements:
 <Menu crossButtonClassName={ "my-class" } />
 <Menu crossClassName={ "my-class" } />
 <Menu menuClassName={ "my-class" } />
+<Menu morphShapeClassName={ "my-class" } />
 <Menu overlayClassName={ "my-class" } />
 ```
 

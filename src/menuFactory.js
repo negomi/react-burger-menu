@@ -199,7 +199,7 @@ export default (styles) => {
             style={this.getStyles('menuWrap')}
           >
             {styles.svg && (
-              <div className="bm-morph-shape" style={this.getStyles('morphShape')}>
+              <div className={`bm-morph-shape ${this.props.morphShapeClassName}`} style={this.getStyles('morphShape')}>
                 <svg width="100%" height="100%" viewBox="0 0 100 800" preserveAspectRatio="none">
                   <path d={styles.svg.pathInitial}/>
                 </svg>
@@ -254,6 +254,7 @@ export default (styles) => {
     id: PropTypes.string,
     isOpen: PropTypes.bool,
     menuClassName: PropTypes.string,
+    morphShapeClassName: PropTypes.string,
     noOverlay: PropTypes.bool,
     onStateChange: PropTypes.func,
     outerContainerId: styles && styles.outerContainer ? PropTypes.string.isRequired : PropTypes.string,
@@ -272,6 +273,7 @@ export default (styles) => {
     crossClassName: '',
     id: '',
     menuClassName: '',
+    morphShapeClassName: '',
     noOverlay: false,
     onStateChange: () => {},
     outerContainerId: '',

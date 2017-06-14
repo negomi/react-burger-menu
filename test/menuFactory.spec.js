@@ -231,6 +231,12 @@ describe('menuFactory', () => {
       const shape = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-morph-shape');
       expect(shape.style.fill).to.equal('blue');
     });
+
+    it('accepts an optional morphShapeClassName', () => {
+      component = TestUtils.renderIntoDocument(<Menu morphShapeClassName={ 'custom-class' } />);
+      const shape = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-morph-shape');
+      expect(shape.classList.toString()).to.contain('custom-class');
+    });
   });
 
   describe('itemList element', () => {
