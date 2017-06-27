@@ -83,6 +83,14 @@ export default (styles) => {
       [html, body].forEach((element) => {
         element.style['overflow-x'] = set ? 'hidden' : '';
       });
+
+      if (this.props.bodyClassName) {
+        if (set) {
+          body.classList.add(this.props.bodyClassName);
+        } else {
+          body.classList.remove(this.props.bodyClassName);
+        }
+      }
     }
 
     // Builds styles incrementally for a given element.
@@ -245,6 +253,7 @@ export default (styles) => {
   }
 
   Menu.propTypes = {
+    bodyClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOfType(PropTypes.string)]),
     burgerBarClassName: PropTypes.string,
     burgerButtonClassName: PropTypes.string,
     crossButtonClassName: PropTypes.string,
@@ -267,6 +276,7 @@ export default (styles) => {
   };
 
   Menu.defaultProps = {
+    bodyClassName: '',
     burgerBarClassName: '',
     burgerButtonClassName: '',
     className: '',

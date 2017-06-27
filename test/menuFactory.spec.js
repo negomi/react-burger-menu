@@ -272,6 +272,12 @@ describe('menuFactory', () => {
       const overlay = component.props.children[0];
       expect(overlay.props.className).to.contain('custom-class');
     });
+
+    it('accepts an optional bodyClassName', () => {
+      component = TestUtils.renderIntoDocument(<Menu bodyClassName={ 'custom-class' } />);
+      const body = TestUtils.findRenderedComponentWithType(component, 'body');
+      expect(body.classList.toString()).to.contain('custom-class');
+    });
   });
 
   describe('burger icon', () => {
