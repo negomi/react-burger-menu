@@ -231,6 +231,11 @@ You can also pass custom classNames to the other elements:
 <Menu overlayClassName={ "my-class" } />
 ```
 
+And to the `body` element (applied when the menu is open):
+```javascript
+<Menu bodyClassName={ "my-class" } />
+```
+
 ### Styling
 
 All the animations are handled internally by the component. However, the visual styles (colors, fonts etc.) are not, and need to be supplied, either with CSS or with a JavaScript object passed as the `styles` prop.
