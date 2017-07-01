@@ -1631,6 +1631,13 @@ exports['default'] = function (styles) {
                         ].forEach(function (element) {
                             element.style['overflow-x'] = set ? 'hidden' : '';
                         });
+                        if (this.props.bodyClassName) {
+                            if (set) {
+                                body.classList.add(this.props.bodyClassName);
+                            } else {
+                                body.classList.remove(this.props.bodyClassName);
+                            }
+                        }
                     }
                 },
                 {
@@ -1781,6 +1788,10 @@ exports['default'] = function (styles) {
             return Menu;
         }(_react.Component);
     Menu.propTypes = {
+        bodyClassName: _propTypes2['default'].oneOfType([
+            _propTypes2['default'].string,
+            _propTypes2['default'].oneOfType(_propTypes2['default'].string)
+        ]),
         burgerBarClassName: _propTypes2['default'].string,
         burgerButtonClassName: _propTypes2['default'].string,
         crossButtonClassName: _propTypes2['default'].string,
@@ -1811,6 +1822,7 @@ exports['default'] = function (styles) {
         ])
     };
     Menu.defaultProps = {
+        bodyClassName: '',
         burgerBarClassName: '',
         burgerButtonClassName: '',
         className: '',
