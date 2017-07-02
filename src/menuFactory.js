@@ -253,7 +253,7 @@ export default (styles) => {
   }
 
   Menu.propTypes = {
-    bodyClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOfType(PropTypes.string)]),
+    bodyClassName: PropTypes.string,
     burgerBarClassName: PropTypes.string,
     burgerButtonClassName: PropTypes.string,
     crossButtonClassName: PropTypes.string,
