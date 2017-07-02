@@ -1616,10 +1616,7 @@ exports['default'] = function (styles) {
             return Menu;
         }(_react.Component);
     Menu.propTypes = {
-        bodyClassName: _propTypes2['default'].oneOfType([
-            _propTypes2['default'].string,
-            _propTypes2['default'].oneOfType(_propTypes2['default'].string)
-        ]),
+        bodyClassName: _propTypes2['default'].string,
         burgerBarClassName: _propTypes2['default'].string,
         burgerButtonClassName: _propTypes2['default'].string,
         crossButtonClassName: _propTypes2['default'].string,
