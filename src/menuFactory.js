@@ -29,31 +29,25 @@ export default (styles) => {
         this.timeoutId = setTimeout(() => {
           this.timeoutId = null;
           if (!newState.isOpen) {
-            this.clearWrapperStyles();
+            this.applyWrapperStyles(false);
           }
         }, 500);
       });
     }
 
     // Applies component-specific styles to external wrapper elements.
-    applyWrapperStyles() {
+    applyWrapperStyles(set = true) {
+      if (this.props.bodyClassName) {
+        const body = document.querySelector('body');
+        body.classList[set ? 'add' : 'remove'](this.props.bodyClassName);
+      }
+
       if (styles.pageWrap && this.props.pageWrapId) {
-        this.handleExternalWrapper(this.props.pageWrapId, styles.pageWrap, true);
+        this.handleExternalWrapper(this.props.pageWrapId, styles.pageWrap, set);
       }
 
       if (styles.outerContainer && this.props.outerContainerId) {
-        this.handleExternalWrapper(this.props.outerContainerId, styles.outerContainer, true);
-      }
-    }
-
-    // Removes component-specific styles applied to external wrapper elements.
-    clearWrapperStyles() {
-      if (styles.pageWrap && this.props.pageWrapId) {
-        this.handleExternalWrapper(this.props.pageWrapId, styles.pageWrap, false);
-      }
-
-      if (styles.outerContainer && this.props.outerContainerId) {
-        this.handleExternalWrapper(this.props.outerContainerId, styles.outerContainer, false);
+        this.handleExternalWrapper(this.props.outerContainerId, styles.outerContainer, set);
       }
     }
 
@@ -83,14 +77,6 @@ export default (styles) => {
       [html, body].forEach((element) => {
         element.style['overflow-x'] = set ? 'hidden' : '';
       });
-
-      if (this.props.bodyClassName) {
-        if (set) {
-          body.classList.add(this.props.bodyClassName);
-        } else {
-          body.classList.remove(this.props.bodyClassName);
-        }
-      }
     }
 
     // Builds styles incrementally for a given element.
@@ -165,7 +151,7 @@ export default (styles) => {
     componentWillUnmount() {
       window.onkeydown = null;
 
-      this.clearWrapperStyles();
+      this.applyWrapperStyles(false);
     }
 
     componentDidUpdate() {

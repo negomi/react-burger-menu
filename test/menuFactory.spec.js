@@ -106,6 +106,14 @@ describe('menuFactory', () => {
       expect(menuWrap.props.className).to.contain('custom-class');
     });
 
+    it('accepts an optional bodyClassName, applied only when menu is open', () => {
+      component = TestUtils.renderIntoDocument(<Menu bodyClassName={ 'custom-class' } />);
+      const body = document.querySelector('body');
+      expect(body.classList.contains('custom-class')).to.be.false;
+      component.toggleMenu();
+      expect(body.classList.contains('custom-class')).to.be.true;
+    });
+
     it('contains a burger icon', () => {
       component = TestUtils.renderIntoDocument(<Menu />);
       const burgerIconBars = TestUtils.scryRenderedDOMComponentsWithClass(component, 'bm-burger-bars');
@@ -165,10 +173,10 @@ describe('menuFactory', () => {
     });
 
     it('clears wrapper styles', () => {
-      const clearWrapperStyles = sinon.spy(component, 'clearWrapperStyles');
+      const applyWrapperStyles = sinon.spy(component, 'applyWrapperStyles');
       unmountComponent();
-      assert.ok(clearWrapperStyles.called);
-      component.clearWrapperStyles.restore();
+      assert.ok(applyWrapperStyles.calledWith(false));
+      component.applyWrapperStyles.restore();
     });
   });
 
@@ -272,12 +280,6 @@ describe('menuFactory', () => {
       const overlay = component.props.children[0];
       expect(overlay.props.className).to.contain('custom-class');
     });
-
-    it('accepts an optional bodyClassName', () => {
-      component = TestUtils.renderIntoDocument(<Menu bodyClassName={ 'custom-class' } />);
-      const body = TestUtils.findRenderedComponentWithType(component, 'body');
-      expect(body.classList.toString()).to.contain('custom-class');
-    });
   });
 
   describe('burger icon', () => {
@@ -368,30 +370,17 @@ describe('menuFactory', () => {
       removeWrapperElementsFromDOM();
     });
 
-    it('calls handleExternalWrapper with the correct params', () => {
+    it('calls handleExternalWrapper with the correct params to set', () => {
       const handleExternalWrapper = sinon.spy(component, 'handleExternalWrapper');
       component.applyWrapperStyles();
       assert.ok(handleExternalWrapper.calledWithExactly('page-wrap', mockStyles.full.pageWrap, true));
       assert.ok(handleExternalWrapper.calledWithExactly('outer-container', mockStyles.full.outerContainer, true));
       component.handleExternalWrapper.restore();
     });
-  });
 
-  describe('clearWrapperStyles method', () => {
-
-    beforeEach(() => {
-      Menu = menuFactory(mockStyles.full);
-      component = TestUtils.renderIntoDocument(<Menu pageWrapId={ 'page-wrap' } outerContainerId={ 'outer-container' } />);
-      addWrapperElementsToDOM();
-    });
-
-    afterEach(() => {
-      removeWrapperElementsFromDOM();
-    });
-
-    it('calls handleExternalWrapper with the correct params', () => {
+    it('calls handleExternalWrapper with the correct params to unset', () => {
       const handleExternalWrapper = sinon.spy(component, 'handleExternalWrapper');
-      component.clearWrapperStyles();
+      component.applyWrapperStyles(false);
       assert.ok(handleExternalWrapper.calledWithExactly('page-wrap', mockStyles.full.pageWrap, false));
       assert.ok(handleExternalWrapper.calledWithExactly('outer-container', mockStyles.full.outerContainer, false));
       component.handleExternalWrapper.restore();
