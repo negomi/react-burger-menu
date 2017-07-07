@@ -1493,11 +1493,11 @@ var _createClass = function () {
             return Constructor;
         };
     }();
-var _get = function get(_x, _x2, _x3) {
+var _get = function get(_x2, _x3, _x4) {
     var _again = true;
     _function:
         while (_again) {
-            var object = _x, property = _x2, receiver = _x3;
+            var object = _x2, property = _x3, receiver = _x4;
             _again = false;
             if (object === null)
                 object = Function.prototype;
@@ -1507,9 +1507,9 @@ var _get = function get(_x, _x2, _x3) {
                 if (parent === null) {
                     return undefined;
                 } else {
-                    _x = parent;
-                    _x2 = property;
-                    _x3 = receiver;
+                    _x2 = parent;
+                    _x3 = property;
+                    _x4 = receiver;
                     _again = true;
                     desc = parent = undefined;
                     continue _function;
@@ -1581,7 +1581,7 @@ exports['default'] = function (styles) {
                             _this.timeoutId = setTimeout(function () {
                                 _this.timeoutId = null;
                                 if (!newState.isOpen) {
-                                    _this.clearWrapperStyles();
+                                    _this.applyWrapperStyles(false);
                                 }
                             }, 500);
                         });
@@ -1590,22 +1590,16 @@ exports['default'] = function (styles) {
                 {
                     key: 'applyWrapperStyles',
                     value: function applyWrapperStyles() {
+                        var set = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
+                        if (this.props.bodyClassName) {
+                            var body = document.querySelector('body');
+                            body.classList[set ? 'add' : 'remove'](this.props.bodyClassName);
+                        }
                         if (styles.pageWrap && this.props.pageWrapId) {
-                            this.handleExternalWrapper(this.props.pageWrapId, styles.pageWrap, true);
+                            this.handleExternalWrapper(this.props.pageWrapId, styles.pageWrap, set);
                         }
                         if (styles.outerContainer && this.props.outerContainerId) {
-                            this.handleExternalWrapper(this.props.outerContainerId, styles.outerContainer, true);
-                        }
-                    }
-                },
-                {
-                    key: 'clearWrapperStyles',
-                    value: function clearWrapperStyles() {
-                        if (styles.pageWrap && this.props.pageWrapId) {
-                            this.handleExternalWrapper(this.props.pageWrapId, styles.pageWrap, false);
-                        }
-                        if (styles.outerContainer && this.props.outerContainerId) {
-                            this.handleExternalWrapper(this.props.outerContainerId, styles.outerContainer, false);
+                            this.handleExternalWrapper(this.props.outerContainerId, styles.outerContainer, set);
                         }
                     }
                 },
@@ -1631,13 +1625,6 @@ exports['default'] = function (styles) {
                         ].forEach(function (element) {
                             element.style['overflow-x'] = set ? 'hidden' : '';
                         });
-                        if (this.props.bodyClassName) {
-                            if (set) {
-                                body.classList.add(this.props.bodyClassName);
-                            } else {
-                                body.classList.remove(this.props.bodyClassName);
-                            }
-                        }
                     }
                 },
                 {
@@ -1699,7 +1686,7 @@ exports['default'] = function (styles) {
                     key: 'componentWillUnmount',
                     value: function componentWillUnmount() {
                         window.onkeydown = null;
-                        this.clearWrapperStyles();
+                        this.applyWrapperStyles(false);
                     }
                 },
                 {
