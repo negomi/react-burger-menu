@@ -59,7 +59,7 @@ npm install react-burger-menu@1.1.6 --save
 Items for the sidebar should be passed as child elements of the component using JSX.
 
 ``` javascript
-import { nameOfAnimation as Menu } from 'react-burger-menu'
+import { slide as Menu } from 'react-burger-menu'
 
 class Example extends React.Component {
   showSettings (event) {
@@ -83,6 +83,8 @@ class Example extends React.Component {
 ```
 
 ### Animations
+
+The example above imported `slide` which renders a menu that slides in on the page when the burger icon is clicked. To use a different animation you can substitute `slide` with any of the following (check out the [demo](http://negomi.github.io/react-burger-menu/) to see the animations in action):
 
 * `slide`
 * `stack`
