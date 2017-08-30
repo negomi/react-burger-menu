@@ -34,7 +34,8 @@ export default class BurgerIcon extends Component {
       padding: 0,
       border: 'none',
       opacity: 0,
-      fontSize: 8
+      fontSize: 8,
+      cursor: 'pointer'
     };
 
     if (this.props.customIcon) {

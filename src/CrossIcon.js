@@ -33,7 +33,8 @@ export default class CrossIcon extends Component {
       border: 'none',
       textIndent: -9999,
       background: 'transparent',
-      outline: 'none'
+      outline: 'none',
+      cursor: 'pointer'
     };
 
     if (this.props.customIcon) {

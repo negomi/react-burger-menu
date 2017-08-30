@@ -134,7 +134,8 @@ describe('CrossIcon component', () => {
         border: 'none',
         textIndent: -9999,
         background: 'transparent',
-        outline: 'none'
+        outline: 'none',
+        cursor: 'pointer'
       };
       expect(button.props.style).to.deep.equal(expected);
     });
