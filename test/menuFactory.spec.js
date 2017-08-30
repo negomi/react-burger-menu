@@ -112,6 +112,7 @@ describe('menuFactory', () => {
       expect(body.classList.contains('custom-class')).to.be.false;
       component.toggleMenu();
       expect(body.classList.contains('custom-class')).to.be.true;
+      component.toggleMenu();
     });
 
     it('contains a burger icon', () => {
@@ -153,6 +154,14 @@ describe('menuFactory', () => {
       const overlay = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-overlay');
       TestUtils.Simulate.click(overlay);
       expect(component.state.isOpen).to.be.false;
+    });
+
+    it('does not close on overlay click if disableOverlayClick prop passed', () => {
+      component = TestUtils.renderIntoDocument(<Menu disableOverlayClick />);
+      component.setState({ isOpen: true });
+      const overlay = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-overlay');
+      TestUtils.Simulate.click(overlay);
+      expect(component.state.isOpen).to.be.true;
     });
   });
 

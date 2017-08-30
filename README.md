@@ -192,6 +192,12 @@ You can turn off the default overlay with `noOverlay`.
 <Menu noOverlay />
 ```
 
+You can disable the overlay click event (i.e. prevent overlay clicks from closing the menu) with `disableOverlayClick`.
+
+``` javascript
+<Menu disableOverlayClick />
+```
+
 #### Custom icons
 
 You can replace the default bars that make up the burger and cross icons with custom `ReactElement`s. Pass them as the `customBurgerIcon` and `customCrossIcon` props respectively.

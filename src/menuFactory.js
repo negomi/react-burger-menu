@@ -183,7 +183,7 @@ export default (styles) => {
           {!this.props.noOverlay && (
             <div
               className={`bm-overlay ${this.props.overlayClassName}`}
-              onClick={() => this.toggleMenu()}
+              onClick={() => !this.props.disableOverlayClick && this.toggleMenu()}
               style={this.getStyles('overlay')}
             />
           )}
@@ -246,6 +246,7 @@ export default (styles) => {
     crossClassName: PropTypes.string,
     customBurgerIcon: PropTypes.oneOfType([PropTypes.element, PropTypes.oneOf([false])]),
     customCrossIcon: PropTypes.oneOfType([PropTypes.element, PropTypes.oneOf([false])]),
+    disableOverlayClick: PropTypes.bool,
     id: PropTypes.string,
     isOpen: PropTypes.bool,
     itemListClassName: PropTypes.string,
