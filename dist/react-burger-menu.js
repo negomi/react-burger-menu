@@ -975,7 +975,8 @@ var BurgerIcon = function (_Component) {
                             padding: 0,
                             border: 'none',
                             opacity: 0,
-                            fontSize: 8
+                            fontSize: 8,
+                            cursor: 'pointer'
                         };
                     if (this.props.customIcon) {
                         var extraProps = {
@@ -1179,7 +1180,8 @@ var CrossIcon = function (_Component) {
                             border: 'none',
                             textIndent: -9999,
                             background: 'transparent',
-                            outline: 'none'
+                            outline: 'none',
+                            cursor: 'pointer'
                         };
                     if (this.props.customIcon) {
                         var extraProps = {
@@ -1551,7 +1553,7 @@ exports['default'] = function (styles) {
                         return _react2['default'].createElement('div', null, !this.props.noOverlay && _react2['default'].createElement('div', {
                             className: 'bm-overlay ' + this.props.overlayClassName,
                             onClick: function () {
-                                return _this3.toggleMenu();
+                                return !_this3.props.disableOverlayClick && _this3.toggleMenu();
                             },
                             style: this.getStyles('overlay')
                         }), _react2['default'].createElement('div', {
@@ -1616,6 +1618,7 @@ exports['default'] = function (styles) {
             _propTypes2['default'].element,
             _propTypes2['default'].oneOf([false])
         ]),
+        disableOverlayClick: _propTypes2['default'].bool,
         id: _propTypes2['default'].string,
         isOpen: _propTypes2['default'].bool,
         itemListClassName: _propTypes2['default'].string,
