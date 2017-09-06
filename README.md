@@ -95,6 +95,7 @@ The example above imported `slide` which renders a menu that slides in on the pa
 * `scaleDown`
 * `scaleRotate`
 * `fallDown`
+* `reveal`
 
 ### Properties
 
