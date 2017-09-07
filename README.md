@@ -139,6 +139,7 @@ Animation | `pageWrapId` | `outerContainerId`
 `scaleDown` |  &#x2713;  |  &#x2713;
 `scaleRotate` |  &#x2713;  |  &#x2713;
 `fallDown` |  &#x2713;  |  &#x2713;
+`reveal` |  &#x2713;  |  &#x2713;
 
 #### Position
 
