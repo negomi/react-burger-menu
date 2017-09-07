@@ -333,6 +333,10 @@ var menus = {
         fallDown: {
             buttonText: 'Fall Down',
             items: 2
+        },
+        reveal: {
+            buttonText: 'Reveal',
+            items: 1
         }
     };
 _reactDom2['default'].render(_react2['default'].createElement(Demo, { menus: menus }), document.getElementById('app'));

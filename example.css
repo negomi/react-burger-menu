@@ -207,11 +207,13 @@ h1 {
   color: #b8b7ad;
 }
 #slide .bm-cross,
-#stack .bm-cross {
+#stack .bm-cross,
+#reveal .bm-cross {
   background: #bdc3c7;
 }
 #slide .bm-menu,
-#stack .bm-menu {
+#stack .bm-menu,
+#reveal .bm-menu {
   padding: 2.5em 1.5em 0;
   font-size: 1.15em;
 }
