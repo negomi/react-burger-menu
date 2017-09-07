@@ -118,45 +118,43 @@ var emptyFunction = require('./emptyFunction');
 var warning = emptyFunction;
 
 if ("production" !== 'production') {
-  (function () {
-    var printWarning = function printWarning(format) {
-      for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-        args[_key - 1] = arguments[_key];
+  var printWarning = function printWarning(format) {
+    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
+    }
+
+    var argIndex = 0;
+    var message = 'Warning: ' + format.replace(/%s/g, function () {
+      return args[argIndex++];
+    });
+    if (typeof console !== 'undefined') {
+      console.error(message);
+    }
+    try {
+      // --- Welcome to debugging React ---
+      // This error was thrown as a convenience so that you can use this stack
+      // to find the callsite that caused this warning to fire.
+      throw new Error(message);
+    } catch (x) {}
+  };
+
+  warning = function warning(condition, format) {
+    if (format === undefined) {
+      throw new Error('`warning(condition, format, ...args)` requires a warning ' + 'message argument');
+    }
+
+    if (format.indexOf('Failed Composite propType: ') === 0) {
+      return; // Ignore CompositeComponent proptype check.
+    }
+
+    if (!condition) {
+      for (var _len2 = arguments.length, args = Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
+        args[_key2 - 2] = arguments[_key2];
       }
 
-      var argIndex = 0;
-      var message = 'Warning: ' + format.replace(/%s/g, function () {
-        return args[argIndex++];
-      });
-      if (typeof console !== 'undefined') {
-        console.error(message);
-      }
-      try {
-        // --- Welcome to debugging React ---
-        // This error was thrown as a convenience so that you can use this stack
-        // to find the callsite that caused this warning to fire.
-        throw new Error(message);
-      } catch (x) {}
-    };
-
-    warning = function warning(condition, format) {
-      if (format === undefined) {
-        throw new Error('`warning(condition, format, ...args)` requires a warning ' + 'message argument');
-      }
-
-      if (format.indexOf('Failed Composite propType: ') === 0) {
-        return; // Ignore CompositeComponent proptype check.
-      }
-
-      if (!condition) {
-        for (var _len2 = arguments.length, args = Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
-          args[_key2 - 2] = arguments[_key2];
-        }
-
-        printWarning.apply(undefined, [format].concat(args));
-      }
-    };
-  })();
+      printWarning.apply(undefined, [format].concat(args));
+    }
+  };
 }
 
 module.exports = warning;
@@ -1043,10 +1041,11 @@ exports['default'] = {
     pushRotate: require('./menus/pushRotate'),
     scaleDown: require('./menus/scaleDown'),
     scaleRotate: require('./menus/scaleRotate'),
-    fallDown: require('./menus/fallDown')
+    fallDown: require('./menus/fallDown'),
+    reveal: require('./menus/reveal')
 };
 module.exports = exports['default'];
-},{"./menus/bubble":14,"./menus/elastic":15,"./menus/fallDown":16,"./menus/push":17,"./menus/pushRotate":18,"./menus/scaleDown":19,"./menus/scaleRotate":20,"./menus/slide":21,"./menus/stack":22}],11:[function(require,module,exports){
+},{"./menus/bubble":14,"./menus/elastic":15,"./menus/fallDown":16,"./menus/push":17,"./menus/pushRotate":18,"./menus/reveal":19,"./menus/scaleDown":20,"./menus/scaleRotate":21,"./menus/slide":22,"./menus/stack":23}],11:[function(require,module,exports){
 (function (global){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -1285,6 +1284,9 @@ var styles = {
                 display: 'block',
                 outline: 'none'
             };
+        },
+        burgerIcon: function burgerIcon(isOpen, width, right) {
+            return {};
         }
     };
 exports['default'] = styles;
@@ -1590,7 +1592,7 @@ exports['default'] = function (styles) {
                             customIcon: this.props.customCrossIcon,
                             className: this.props.crossButtonClassName,
                             crossClassName: this.props.crossClassName
-                        }))), this.props.customBurgerIcon !== false && _react2['default'].createElement(_BurgerIcon2['default'], {
+                        }))), this.props.customBurgerIcon !== false && _react2['default'].createElement('div', { style: this.getStyles('burgerIcon') }, _react2['default'].createElement(_BurgerIcon2['default'], {
                             onClick: function () {
                                 return _this3.toggleMenu();
                             },
@@ -1598,7 +1600,7 @@ exports['default'] = function (styles) {
                             customIcon: this.props.customBurgerIcon,
                             className: this.props.burgerButtonClassName,
                             barClassName: this.props.burgerBarClassName
-                        }));
+                        })));
                     }
                 }
             ]);
@@ -1755,7 +1757,7 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":13,"../snapsvgImporter":23}],15:[function(require,module,exports){
+},{"../menuFactory":13,"../snapsvgImporter":24}],15:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -1834,7 +1836,7 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":13,"../snapsvgImporter":23}],16:[function(require,module,exports){
+},{"../menuFactory":13,"../snapsvgImporter":24}],16:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -1937,6 +1939,68 @@ function _interopRequireDefault(obj) {
 var _menuFactory = require('../menuFactory');
 var _menuFactory2 = _interopRequireDefault(_menuFactory);
 var styles = {
+        menuWrap: function menuWrap(isOpen, width, right) {
+            return {
+                visibility: isOpen ? 'visible' : 'hidden',
+                MozTransform: 'translate3d(0, 0, 0)',
+                MsTransform: 'translate3d(0, 0, 0)',
+                OTransform: 'translate3d(0, 0, 0)',
+                WebkitTransform: 'translate3d(0, 0, 0)',
+                transform: 'translate3d(0, 0, 0)',
+                zIndex: 1
+            };
+        },
+        overlay: function overlay(isOpen, width, right) {
+            return {
+                zIndex: 4,
+                MozTransform: isOpen ? right ? 'translate3d(-' + width + ', 0, 0)' : 'translate3d(' + width + ', 0, 0)' : 'translate3d(0, 0, 0)',
+                MsTransform: isOpen ? right ? 'translate3d(-' + width + ', 0, 0)' : 'translate3d(' + width + ', 0, 0)' : 'translate3d(0, 0, 0)',
+                OTransform: isOpen ? right ? 'translate3d(-' + width + ', 0, 0)' : 'translate3d(' + width + ', 0, 0)' : 'translate3d(0, 0, 0)',
+                WebkitTransform: isOpen ? right ? 'translate3d(-' + width + ', 0, 0)' : 'translate3d(' + width + ', 0, 0)' : 'translate3d(0, 0, 0)',
+                transform: isOpen ? right ? 'translate3d(-' + width + ', 0, 0)' : 'translate3d(' + width + ', 0, 0)' : 'translate3d(0, 0, 0)',
+                transition: 'all 0.5s',
+                visibility: isOpen ? 'visible' : 'hidden'
+            };
+        },
+        pageWrap: function pageWrap(isOpen, width, right) {
+            return {
+                MozTransform: isOpen ? '' : right ? 'translate3d(-' + width + ', 0, 0)' : 'translate3d(' + width + ', 0, 0)',
+                MsTransform: isOpen ? '' : right ? 'translate3d(-' + width + ', 0, 0)' : 'translate3d(' + width + ', 0, 0)',
+                OTransform: isOpen ? '' : right ? 'translate3d(-' + width + ', 0, 0)' : 'translate3d(' + width + ', 0, 0)',
+                WebkitTransform: isOpen ? '' : right ? 'translate3d(-' + width + ', 0, 0)' : 'translate3d(' + width + ', 0, 0)',
+                transform: isOpen ? '' : right ? 'translate3d(-' + width + ', 0, 0)' : 'translate3d(' + width + ', 0, 0)',
+                transition: 'all 0.5s',
+                zIndex: 2,
+                position: 'relative'
+            };
+        },
+        burgerIcon: function burgerIcon(isOpen, width, right) {
+            return {
+                MozTransform: isOpen ? right ? 'translate3d(' + width + ', 0, 0)' : 'translate3d(-' + width + ', 0, 0)' : 'translate3d(0, 0, 0)',
+                MsTransform: isOpen ? right ? 'translate3d(' + width + ', 0, 0)' : 'translate3d(-' + width + ', 0, 0)' : 'translate3d(0, 0, 0)',
+                OTransform: isOpen ? right ? 'translate3d(' + width + ', 0, 0)' : 'translate3d(-' + width + ', 0, 0)' : 'translate3d(0, 0, 0)',
+                WebkitTransform: isOpen ? right ? 'translate3d(' + width + ', 0, 0)' : 'translate3d(-' + width + ', 0, 0)' : 'translate3d(0, 0, 0)',
+                transform: isOpen ? right ? 'translate3d(' + width + ', 0, 0)' : 'translate3d(-' + width + ', 0, 0)' : 'translate3d(0, 0, 0)',
+                transition: 'all 0.1s',
+                position: 'relative',
+                zIndex: 3
+            };
+        },
+        outerContainer: function outerContainer(isOpen) {
+            return { overflow: isOpen ? '' : 'hidden' };
+        }
+    };
+exports['default'] = (0, _menuFactory2['default'])(styles);
+module.exports = exports['default'];
+},{"../menuFactory":13}],20:[function(require,module,exports){
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
+function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : { 'default': obj };
+}
+var _menuFactory = require('../menuFactory');
+var _menuFactory2 = _interopRequireDefault(_menuFactory);
+var styles = {
         pageWrap: function pageWrap(isOpen, width) {
             return {
                 MozTransform: isOpen ? '' : 'translate3d(0, 0, -' + width + ')',
@@ -1955,7 +2019,7 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":13}],20:[function(require,module,exports){
+},{"../menuFactory":13}],21:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -1985,7 +2049,7 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":13}],21:[function(require,module,exports){
+},{"../menuFactory":13}],22:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -1996,7 +2060,7 @@ var _menuFactory2 = _interopRequireDefault(_menuFactory);
 var styles = {};
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":13}],22:[function(require,module,exports){
+},{"../menuFactory":13}],23:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -2028,7 +2092,7 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":13}],23:[function(require,module,exports){
+},{"../menuFactory":13}],24:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 exports['default'] = function () {

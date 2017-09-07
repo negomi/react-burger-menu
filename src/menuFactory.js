@@ -225,13 +225,15 @@ export default (styles) => {
             )}
           </div>
           {this.props.customBurgerIcon !== false && (
-            <BurgerIcon
-              onClick={() => this.toggleMenu()}
-              styles={this.props.styles}
-              customIcon={this.props.customBurgerIcon}
-              className={this.props.burgerButtonClassName}
-              barClassName={this.props.burgerBarClassName}
-            />
+            <div style={this.getStyles('burgerIcon')}>
+              <BurgerIcon
+                onClick={() => this.toggleMenu()}
+                styles={this.props.styles}
+                customIcon={this.props.customBurgerIcon}
+                className={this.props.burgerButtonClassName}
+                barClassName={this.props.burgerBarClassName}
+              />
+            </div>
           )}
         </div>
       );

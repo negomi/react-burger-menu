@@ -54,7 +54,11 @@ let styles = {
       display: 'block',
       outline: 'none'
     };
-  }
+  },
+
+  burgerIcon(isOpen, width, right) {
+    return {}
+  },
 
 };
 

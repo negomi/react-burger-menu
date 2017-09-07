@@ -161,7 +161,8 @@ const menus = {
   pushRotate: {buttonText: 'Push Rotate', items: 2},
   scaleDown: {buttonText: 'Scale Down', items: 2},
   scaleRotate: {buttonText: 'Scale Rotate', items: 2},
-  fallDown: {buttonText: 'Fall Down', items: 2}
+  fallDown: {buttonText: 'Fall Down', items: 2},
+  reveal: {buttonText: 'Reveal', items: 1}
 };
 
 ReactDOM.render(<Demo menus={menus} />, document.getElementById('app'));
