@@ -75,6 +75,15 @@ h1 {
   }
 }
 
+.side-vertical-group {
+  display: inline-block;
+  vertical-align: middle;
+  width: 6em;
+  > a {
+    width: 100%;
+  }
+}
+
 .side-button {
   display: inline-block;
   width: 5em;
@@ -86,6 +95,16 @@ h1 {
   letter-spacing: 1px;
   font-size: 0.8em;
   font-weight: 800;
+
+  &.top {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  
+  &.bottom {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
 
   &.left {
     border-top-left-radius: 10px;

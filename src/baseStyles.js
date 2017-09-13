@@ -19,18 +19,26 @@ let styles = {
     };
   },
 
-  menuWrap(isOpen, width, right) {
+  menuWrap(isOpen, width, right, top, bottom) {
+    let transform = right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)';
+    if (top)
+      transform = 'translate3d(0, -100%, 0)';
+    if (bottom)
+      transform = 'translate3d(0, 100%, 0)';
+
     return {
       position: 'fixed',
       right: right ? 0 : 'inherit',
+      top: top ? 0 : 'inherit',
+      bottom: bottom ? 0 : 'inherit',
       zIndex: 2,
-      width,
-      height: '100%',
-      MozTransform: isOpen ? '' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
-      MsTransform: isOpen ? '' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
-      OTransform: isOpen ? '' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
-      WebkitTransform: isOpen ? '' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
-      transform: isOpen ? '' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
+      width: (top || bottom) ? '100%' : width,
+      height: (!top && !bottom) ? '100%' : width,
+      MozTransform: isOpen ? '' : transform,
+      MsTransform: isOpen ? '' : transform,
+      OTransform: isOpen ? '' : transform,
+      WebkitTransform: isOpen ? '' : transform,
+      transform: isOpen ? '' : transform,
       transition: 'all 0.5s'
     };
   },

@@ -117,7 +117,7 @@ export default (styles) => {
       let width = this.props.width;
       if (typeof width !== 'string') width = `${width}px`;
 
-      return style(this.state.isOpen, width, this.props.right, index);
+      return style(this.state.isOpen, width, this.props.right, this.props.top, this.props.bottom, index);
     }
 
     listenForClose(e) {
@@ -260,6 +260,8 @@ export default (styles) => {
     overlayClassName: PropTypes.string,
     pageWrapId: styles && styles.pageWrap ? PropTypes.string.isRequired : PropTypes.string,
     right: PropTypes.bool,
+    top: PropTypes.bool,
+    bottom: PropTypes.bool,
     styles: PropTypes.object,
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
   };

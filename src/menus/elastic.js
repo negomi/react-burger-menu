@@ -14,37 +14,45 @@ const styles = {
     }
   },
 
-  morphShape(isOpen, width, right) {
+  morphShape(isOpen, width, right, top, bottom) {
     return {
       position: 'absolute',
-      width: 120,
-      height: '100%',
+      width: (top || bottom) ? '100%' : 120,
+      height: (!top && !bottom) ? '100%' : 120,
       right: right ? 'inherit' : 0,
       left: right ? 0 : 'inherit',
-      MozTransform: right ? 'rotateY(180deg)' : '',
-      MsTransform: right ? 'rotateY(180deg)' : '',
-      OTransform: right ? 'rotateY(180deg)' : '',
-      WebkitTransform: right ? 'rotateY(180deg)' : '',
-      transform: right ? 'rotateY(180deg)' : ''
+      bottom: bottom ? 'initial' : 0,
+      top: top ? 'initial' : 0,
+      MozTransform: right ? 'rotateY(180)' : '',
+      MsTransform: right ? 'rotateY(180)' : '',
+      OTransform: right ? 'rotateY(180)' : '',
+      WebkitTransform: right ? 'rotateY(180)' : '',
+      transform: right ? 'rotateY(180)' : ''
     };
   },
 
-  menuWrap(isOpen, width, right) {
+  menuWrap(isOpen, width, right, top, bottom) {
+    let transform = right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)';
+    if (top)
+      transform = 'translate3d(0, -100%, 0)';
+    if (bottom)
+      transform = 'translate3d(0, 100%, 0)';
+    
     return {
-      MozTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
-      MsTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
-      OTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
-      WebkitTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
-      transform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
+      MozTransform: isOpen ? 'translate3d(0, 0, 0)' : transform,
+      MsTransform: isOpen ? 'translate3d(0, 0, 0)' : transform,
+      OTransform: isOpen ? 'translate3d(0, 0, 0)' : transform,
+      WebkitTransform: isOpen ? 'translate3d(0, 0, 0)' : transform,
+      transform: isOpen ? 'translate3d(0, 0, 0)' : transform,
       transition: 'all 0.3s'
     };
   },
 
-  menu(isOpen, width, right) {
+  menu(isOpen, width, right, top, bottom) {
     return {
       position: 'fixed',
       right: right ? 0 : 'inherit',
-      width: 180,
+      width: (top || bottom) ? '100%' : 180,
       whiteSpace: 'nowrap',
       boxSizing: 'border-box',
       overflow: 'visible'
@@ -62,13 +70,19 @@ const styles = {
     }
   },
 
-  pageWrap(isOpen, width, right) {
+  pageWrap(isOpen, width, right, top, bottom) {
+    let transform = right ? 'translate3d(-100px, 0, 0)' : 'translate3d(100px, 0, 0)';
+    if (top)
+      transform = 'translate3d(0, 100px, 0)';
+    if (bottom)
+      transform = 'translate3d(0, -100px, 0)';
+
     return {
-      MozTransform: isOpen ? '' : right ? 'translate3d(-100px, 0, 0)' : 'translate3d(100px, 0, 0)',
-      MsTransform: isOpen ? '' : right ? 'translate3d(-100px, 0, 0)' : 'translate3d(100px, 0, 0)',
-      OTransform: isOpen ? '' : right ? 'translate3d(-100px, 0, 0)' : 'translate3d(100px, 0, 0)',
-      WebkitTransform: isOpen ? '' : right ? 'translate3d(-100px, 0, 0)' : 'translate3d(100px, 0, 0)',
-      transform: isOpen ? '' : right ? 'translate3d(-100px, 0, 0)' : 'translate3d(100px, 0, 0)',
+      MozTransform: isOpen ? '' : transform,
+      MsTransform: isOpen ? '' : transform,
+      OTransform: isOpen ? '' : transform,
+      WebkitTransform: isOpen ? '' : transform,
+      transform: isOpen ? '' : transform,
       transition: isOpen ? 'all 0.3s' : 'all 0.3s 0.1s'
     };
   },

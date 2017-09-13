@@ -49,9 +49,9 @@ const styles = {
       OTransform: isOpen ? right ? `translate3d(${width}, 0, 0)` : `translate3d(-${width}, 0, 0)` : `translate3d(0, 0, 0)`,
       WebkitTransform: isOpen ? right ? `translate3d(${width}, 0, 0)` : `translate3d(-${width}, 0, 0)` : `translate3d(0, 0, 0)`,
       transform: isOpen ? right ? `translate3d(${width}, 0, 0)` : `translate3d(-${width}, 0, 0)` : `translate3d(0, 0, 0)`,
-      transition: 'all 0.1s',
+      transition: 'all 0.5s',
       position: 'relative',
-      zIndex: 3
+      zIndex: isOpen ? 0 : 3
     }
   },
 
