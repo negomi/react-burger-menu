@@ -142,7 +142,7 @@ Animation | `pageWrapId` | `outerContainerId`
 
 #### Position
 
-The menu opens from the left by default. To have it open from the right, use the `right` prop. It's just a boolean so you don't need to specify a value. Then set the position of the button using CSS.
+The menu opens from the left by default. To have it open from the right, use the `right` prop, from top or bottom use `top` or `bottom` respectively. It's just a boolean so you don't need to specify a value. Then set the position of the button using CSS.
 
 ``` javascript
 <Menu right />
