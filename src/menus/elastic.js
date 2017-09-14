@@ -23,11 +23,11 @@ const styles = {
       left: right ? 0 : 'inherit',
       bottom: bottom ? 'initial' : 0,
       top: top ? 'initial' : 0,
-      MozTransform: right ? 'rotateY(180)' : '',
-      MsTransform: right ? 'rotateY(180)' : '',
-      OTransform: right ? 'rotateY(180)' : '',
-      WebkitTransform: right ? 'rotateY(180)' : '',
-      transform: right ? 'rotateY(180)' : ''
+      MozTransform: right ? 'rotateY(180deg)' : '',
+      MsTransform: right ? 'rotateY(180deg)' : '',
+      OTransform: right ? 'rotateY(180deg)' : '',
+      WebkitTransform: right ? 'rotateY(180deg)' : '',
+      transform: right ? 'rotateY(180deg)' : ''
     };
   },
 
@@ -55,7 +55,7 @@ const styles = {
       width: (top || bottom) ? '100%' : 180,
       whiteSpace: 'nowrap',
       boxSizing: 'border-box',
-      overflow: 'visible'
+      overflow: (top || bottom) ? 'auto' : 'visible'
     };
   },
 

@@ -29,41 +29,62 @@ const styles = {
     }
   },
 
-  morphShape(isOpen, width, right) {
+  morphShape(isOpen, width, right, top, bottom) {
+    let transform = right ? 'rotateY(180deg)' : 'rotateY(0deg)';
+    if (top)
+      transform = 'rotateY(0)';
+    if (bottom)
+      transform = 'rotateY(0)';
+
     return {
       position: 'absolute',
       width: '100%',
       height: '100%',
       right: right ? 'inherit' : 0,
       left: right ? 0 : 'inherit',
-      MozTransform: right ? 'rotateY(180deg)' : 'rotateY(0deg)',
-      MsTransform: right ? 'rotateY(180deg)' : 'rotateY(0deg)',
-      OTransform: right ? 'rotateY(180deg)' : 'rotateY(0deg)',
-      WebkitTransform: right ? 'rotateY(180deg)' : 'rotateY(0deg)',
-      transform: right ? 'rotateY(180deg)' : 'rotateY(0deg)'
+      bottom: bottom ? 0 : 'initial',
+      top: top ? 0 : 'initial',
+      MozTransform: transform,
+      MsTransform: transform,
+      OTransform: transform,
+      WebkitTransform: transform,
+      transform: transform
     };
   },
 
-  menuWrap(isOpen, width, right) {
+  menuWrap(isOpen, width, right, top, bottom) {
+    let transform = right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)';
+    if (top)
+      transform = 'translate3d(0, -100%, 0)';
+    if (bottom)
+      transform = 'translate3d(0, 100%, 0)';
+
     return {
-      MozTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
-      MsTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
-      OTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
-      WebkitTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
-      transform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
+      MozTransform: isOpen ? 'translate3d(0, 0, 0)' : transform,
+      MsTransform: isOpen ? 'translate3d(0, 0, 0)' : transform,
+      OTransform: isOpen ? 'translate3d(0, 0, 0)' : transform,
+      WebkitTransform: isOpen ? 'translate3d(0, 0, 0)' : transform,
+      transform: isOpen ? 'translate3d(0, 0, 0)' : transform,
       transition: isOpen ? 'transform 0.4s 0s' : 'transform 0.4s'
     };
   },
 
-  menu(isOpen, width, right) {
+  menu(isOpen, width, right, top, bottom) {
     width -= 140;
+    let transform = right ? `translate3d(${width}, 0, 0)` : `translate3d(-${width}, 0, 0)`;
+    if (top)
+      transform = `translate3d(0, ${width}, 0)`;
+    if (bottom)
+      transform = `translate3d(0, -${width}, 0)`;
+
     return {
+      width: (top || bottom) ? '100%' : 'initial',
       position: 'fixed',
-      MozTransform: isOpen ? '' : right ? `translate3d(${width}, 0, 0)` : `translate3d(-${width}, 0, 0)`,
-      MsTransform: isOpen ? '' : right ? `translate3d(${width}, 0, 0)` : `translate3d(-${width}, 0, 0)`,
-      OTransform: isOpen ? '' : right ? `translate3d(${width}, 0, 0)` : `translate3d(-${width}, 0, 0)`,
-      WebkitTransform: isOpen ? '' : right ? `translate3d(${width}, 0, 0)` : `translate3d(-${width}, 0, 0)`,
-      transform: isOpen ? '' : right ? `translate3d(${width}, 0, 0)` : `translate3d(-${width}, 0, 0)`,
+      MozTransform: isOpen ? '' :transform,
+      MsTransform: isOpen ? '' : transform,
+      OTransform: isOpen ? '' : transform,
+      WebkitTransform: isOpen ? '' : transform,
+      transform: isOpen ? '' : transform,
       transition: isOpen ? 'opacity 0.1s 0.4s cubic-bezier(.17, .67, .1, 1.27), transform 0.1s 0.4s cubic-bezier(.17, .67, .1, 1.27)' : 'opacity 0s 0.3s cubic-bezier(.17, .67, .1, 1.27), transform 0s 0.3s cubic-bezier(.17, .67, .1, 1.27)',
       opacity: isOpen ? 1 : 0
     };

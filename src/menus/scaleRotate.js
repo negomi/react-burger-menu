@@ -3,14 +3,19 @@
 import menuFactory from '../menuFactory';
 
 const styles = {
+  pageWrap(isOpen, width, right, top, bottom) {
+    let transform = right ? 'translate3d(-100px, 0, -600px) rotateY(20deg)' : 'translate3d(100px, 0, -600px) rotateY(-20deg)';
+    if (top)
+      transform = `translate3d(0, 100px, -600px) rotateX(20deg)`;
+    if (bottom)
+      transform = `translate3d(0, -100px, -600px) rotateX(-20deg)`;
 
-  pageWrap(isOpen, width, right) {
     return {
-      MozTransform: isOpen ? '' : right ? 'translate3d(-100px, 0, -600px) rotateY(20deg)' : 'translate3d(100px, 0, -600px) rotateY(-20deg)',
-      MsTransform: isOpen ? '' : right ? 'translate3d(-100px, 0, -600px) rotateY(20deg)' : 'translate3d(100px, 0, -600px) rotateY(-20deg)',
-      OTransform: isOpen ? '' : right ? 'translate3d(-100px, 0, -600px) rotateY(20deg)' : 'translate3d(100px, 0, -600px) rotateY(-20deg)',
-      WebkitTransform: isOpen ? '' : right ? 'translate3d(-100px, 0, -600px) rotateY(20deg)' : 'translate3d(100px, 0, -600px) rotateY(-20deg)',
-      transform: isOpen ? '' : right ? 'translate3d(-100px, 0, -600px) rotateY(20deg)' : 'translate3d(100px, 0, -600px) rotateY(-20deg)',
+      MozTransform: isOpen ? '' : transform,
+      MsTransform: isOpen ? '' : transform,
+      OTransform: isOpen ? '' : transform,
+      WebkitTransform: isOpen ? '' : transform,
+      transform: isOpen ? '' : transform,
       transformStyle: 'preserve-3d',
       transition: 'all 0.5s',
       overflow: isOpen ? '' : 'hidden'

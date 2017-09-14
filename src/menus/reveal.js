@@ -16,26 +16,38 @@ const styles = {
     };
   },
 
-  overlay(isOpen, width, right) {
+  overlay(isOpen, width, right, top, bottom) {
+    let transform = right ? `translate3d(-${width}, 0, 0)` : `translate3d(${width}, 0, 0)`;
+    if (top)
+      transform = `translate3d(0, ${width}, 0)`;
+    if (bottom)
+      transform = `translate3d(0, -${width}, 0)`;
+
     return {
       zIndex: 4,
-      MozTransform: isOpen ? right ? `translate3d(-${width}, 0, 0)` : `translate3d(${width}, 0, 0)` : `translate3d(0, 0, 0)`,
-      MsTransform: isOpen ? right ? `translate3d(-${width}, 0, 0)` : `translate3d(${width}, 0, 0)` : `translate3d(0, 0, 0)`,
-      OTransform: isOpen ? right ? `translate3d(-${width}, 0, 0)` : `translate3d(${width}, 0, 0)` : `translate3d(0, 0, 0)`,
-      WebkitTransform: isOpen ? right ? `translate3d(-${width}, 0, 0)` : `translate3d(${width}, 0, 0)` : `translate3d(0, 0, 0)`,
-      transform: isOpen ? right ? `translate3d(-${width}, 0, 0)` : `translate3d(${width}, 0, 0)` : `translate3d(0, 0, 0)`,
+      MozTransform: isOpen ? transform : `translate3d(0, 0, 0)`,
+      MsTransform: isOpen ? transform : `translate3d(0, 0, 0)`,
+      OTransform: isOpen ? transform : `translate3d(0, 0, 0)`,
+      WebkitTransform: isOpen ? transform : `translate3d(0, 0, 0)`,
+      transform: isOpen ? transform : `translate3d(0, 0, 0)`,
       transition: 'all 0.5s',
       visibility: isOpen ? 'visible' : 'hidden'
     };
   },
 
-  pageWrap(isOpen, width, right) {
+  pageWrap(isOpen, width, right, top, bottom) {
+    let transform = right ? `translate3d(-${width}, 0, 0)` : `translate3d(${width}, 0, 0)`;
+    if (top)
+      transform = `translate3d(0, ${width}, 0)`;
+    if (bottom)
+      transform = `translate3d(0, -${width}, 0)`;
+
     return {
-      MozTransform: isOpen ? '' : right ? `translate3d(-${width}, 0, 0)` : `translate3d(${width}, 0, 0)`,
-      MsTransform: isOpen ? '' : right ? `translate3d(-${width}, 0, 0)` : `translate3d(${width}, 0, 0)`,
-      OTransform: isOpen ? '' : right ? `translate3d(-${width}, 0, 0)` : `translate3d(${width}, 0, 0)`,
-      WebkitTransform: isOpen ? '' : right ? `translate3d(-${width}, 0, 0)` : `translate3d(${width}, 0, 0)`,
-      transform: isOpen ? '' : right ? `translate3d(-${width}, 0, 0)` : `translate3d(${width}, 0, 0)`,
+      MozTransform: isOpen ? '' : transform,
+      MsTransform: isOpen ? '' : transform,
+      OTransform: isOpen ? '' : transform,
+      WebkitTransform: isOpen ? '' : transform,
+      transform: isOpen ? '' : transform,
       transition: 'all 0.5s',
       zIndex: 2,
       position: `relative`
