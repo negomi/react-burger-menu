@@ -15,33 +15,34 @@
   "dependencies": {
     "browserify-optional": "^1.0.0",
     "classnames": "^2.1.1",
-    "eve": "~0.4.2",
+    "eve": "~0.5.1",
     "prop-types": "^15.5.8",
-    "snapsvg-cjs": "0.0.4"
+    "snapsvg-cjs": "0.0.6"
   },
   "devDependencies": {
+    "ajv": "^5.2.3",
     "babel-core": "^6.3.26",
-    "babel-eslint": "^7.0.0",
-    "babel-preset-env": "^1.4.0",
+    "babel-eslint": "^8.0.1",
+    "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.3.13",
     "babel-register": "^6.3.13",
-    "chai": "^3.2.0",
-    "eslint": "^3.0.0",
-    "eslint-plugin-react": "^6.0.0",
+    "chai": "^3.5.0",
+    "eslint": "^4.8.0",
+    "eslint-plugin-react": "^7.4.0",
     "gulp": "^3.8.11",
     "gulp-git": "^2.0.0",
-    "gulp-mocha": "^3.0.0",
-    "jsdom": "^9.0.0",
-    "mocha": "^3.0.0",
-    "react": "^15.4.1",
+    "gulp-mocha": "^3.0.1",
+    "jsdom": "^9.12.0",
+    "mocha": "^4.0.1",
+    "react": "^16.0.0",
     "react-component-gulp-tasks": "^0.7.1",
-    "react-dom": "^15.4.1",
-    "react-test-renderer": "^15.5.4",
-    "sinon": "^2.1.0"
+    "react-dom": "^16.0.0",
+    "react-test-renderer": "^16.0.0",
+    "sinon": "^4.0.1"
   },
   "peerDependencies": {
-    "react": ">=0.14.0 <16.0.0",
-    "react-dom": ">=0.14.0 <16.0.0"
+    "react": ">=0.14.0 <=16.0.0",
+    "react-dom": ">=0.14.0 <=16.0.0"
   },
   "browserify": {
     "transform": [
