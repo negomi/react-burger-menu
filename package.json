@@ -79,5 +79,9 @@
     "react",
     "react-component"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "files": [
+    "lib",
+    "dist"
+  ]
 }
