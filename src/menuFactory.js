@@ -128,6 +128,14 @@ export default (styles) => {
       }
     }
 
+    shouldDisableOverlayClick() {
+      if (typeof this.props.disableOverlayClick === 'function') {
+        return this.props.disableOverlayClick();
+      } else {
+        return this.props.disableOverlayClick;
+      }
+    }
+
     componentWillMount() {
       if (!styles) {
         throw new Error('No styles supplied');
@@ -183,7 +191,7 @@ export default (styles) => {
           {!this.props.noOverlay && (
             <div
               className={`bm-overlay ${this.props.overlayClassName}`}
-              onClick={() => !this.props.disableOverlayClick && this.toggleMenu()}
+              onClick={() => !this.shouldDisableOverlayClick() && this.toggleMenu()}
               style={this.getStyles('overlay')}
             />
           )}
@@ -248,7 +256,7 @@ export default (styles) => {
     crossClassName: PropTypes.string,
     customBurgerIcon: PropTypes.oneOfType([PropTypes.element, PropTypes.oneOf([false])]),
     customCrossIcon: PropTypes.oneOfType([PropTypes.element, PropTypes.oneOf([false])]),
-    disableOverlayClick: PropTypes.bool,
+    disableOverlayClick: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
     id: PropTypes.string,
     isOpen: PropTypes.bool,
     itemListClassName: PropTypes.string,
