@@ -1604,6 +1604,16 @@ exports['default'] = function (styles) {
                     }
                 },
                 {
+                    key: 'shouldDisableOverlayClick',
+                    value: function shouldDisableOverlayClick() {
+                        if (typeof this.props.disableOverlayClick === 'function') {
+                            return this.props.disableOverlayClick();
+                        } else {
+                            return this.props.disableOverlayClick;
+                        }
+                    }
+                },
+                {
                     key: 'componentWillMount',
                     value: function componentWillMount() {
                         if (!styles) {
@@ -1664,7 +1674,7 @@ exports['default'] = function (styles) {
                         return _react2['default'].createElement('div', null, !this.props.noOverlay && _react2['default'].createElement('div', {
                             className: 'bm-overlay ' + this.props.overlayClassName,
                             onClick: function () {
-                                return !_this3.props.disableOverlayClick && _this3.toggleMenu();
+                                return !_this3.shouldDisableOverlayClick() && _this3.toggleMenu();
                             },
                             style: this.getStyles('overlay')
                         }), _react2['default'].createElement('div', {
@@ -1729,7 +1739,10 @@ exports['default'] = function (styles) {
             _propTypes2['default'].element,
             _propTypes2['default'].oneOf([false])
         ]),
-        disableOverlayClick: _propTypes2['default'].bool,
+        disableOverlayClick: _propTypes2['default'].oneOfType([
+            _propTypes2['default'].bool,
+            _propTypes2['default'].func
+        ]),
         id: _propTypes2['default'].string,
         isOpen: _propTypes2['default'].bool,
         itemListClassName: _propTypes2['default'].string,
