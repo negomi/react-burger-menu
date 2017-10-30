@@ -194,10 +194,11 @@ You can turn off the default overlay with `noOverlay`.
 <Menu noOverlay />
 ```
 
-You can disable the overlay click event (i.e. prevent overlay clicks from closing the menu) with `disableOverlayClick`.
+You can disable the overlay click event (i.e. prevent overlay clicks from closing the menu) with `disableOverlayClick`. This can either be a boolean, or a function that returns a boolean.
 
 ``` javascript
 <Menu disableOverlayClick />
+<Menu disableOverlayClick={() => shouldDisableOverlayClick()} />
 ```
 
 #### Custom icons
