@@ -1434,11 +1434,11 @@ var _createClass = function () {
             return Constructor;
         };
     }();
-var _get = function get(_x2, _x3, _x4) {
+var _get = function get(_x3, _x4, _x5) {
     var _again = true;
     _function:
         while (_again) {
-            var object = _x2, property = _x3, receiver = _x4;
+            var object = _x3, property = _x4, receiver = _x5;
             _again = false;
             if (object === null)
                 object = Function.prototype;
@@ -1448,9 +1448,9 @@ var _get = function get(_x2, _x3, _x4) {
                 if (parent === null) {
                     return undefined;
                 } else {
-                    _x2 = parent;
-                    _x3 = property;
-                    _x4 = receiver;
+                    _x3 = parent;
+                    _x4 = property;
+                    _x5 = receiver;
                     _again = true;
                     desc = parent = undefined;
                     continue _function;
@@ -1507,17 +1507,20 @@ exports['default'] = function (styles) {
             function Menu(props) {
                 _classCallCheck(this, Menu);
                 _get(Object.getPrototypeOf(Menu.prototype), 'constructor', this).call(this, props);
-                this.state = { isOpen: props && typeof props.isOpen !== 'undefined' ? props.isOpen : false };
+                this.state = { isOpen: false };
             }
             _createClass(Menu, [
                 {
                     key: 'toggleMenu',
                     value: function toggleMenu() {
                         var _this = this;
-                        var newState = { isOpen: !this.state.isOpen };
+                        var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+                        var isOpen = options.isOpen;
+                        var noStateChange = options.noStateChange;
+                        var newState = { isOpen: typeof isOpen !== 'undefined' ? isOpen : !this.state.isOpen };
                         this.applyWrapperStyles();
                         this.setState(newState, function () {
-                            _this.props.onStateChange(newState);
+                            !noStateChange && _this.props.onStateChange(newState);
                             _this.timeoutId && clearTimeout(_this.timeoutId);
                             _this.timeoutId = setTimeout(function () {
                                 _this.timeoutId = null;
@@ -1619,9 +1622,6 @@ exports['default'] = function (styles) {
                         if (!styles) {
                             throw new Error('No styles supplied');
                         }
-                        if (this.props.isOpen) {
-                            this.toggleMenu();
-                        }
                     }
                 },
                 {
@@ -1629,7 +1629,10 @@ exports['default'] = function (styles) {
                     value: function componentDidMount() {
                         window.onkeydown = this.listenForClose.bind(this);
                         if (this.props.isOpen) {
-                            this.toggleMenu();
+                            this.toggleMenu({
+                                isOpen: true,
+                                noStateChange: true
+                            });
                         }
                     }
                 },
