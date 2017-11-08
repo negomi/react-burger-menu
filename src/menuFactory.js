@@ -12,17 +12,20 @@ export default (styles) => {
     constructor (props) {
       super(props);
       this.state = {
-        isOpen: props && typeof props.isOpen !== 'undefined' ? props.isOpen : false
+        isOpen: false
       };
     }
 
-    toggleMenu() {
-      const newState = { isOpen: !this.state.isOpen };
+    toggleMenu(options = {}) {
+      const {isOpen, noStateChange} = options;
+      const newState = {
+        isOpen: typeof isOpen !== 'undefined' ? isOpen : !this.state.isOpen
+      };
 
       this.applyWrapperStyles();
 
       this.setState(newState, () => {
-        this.props.onStateChange(newState);
+        !noStateChange && this.props.onStateChange(newState);
 
         // Timeout ensures wrappers are cleared after animation finishes.
         this.timeoutId && clearTimeout(this.timeoutId);
@@ -140,19 +143,14 @@ export default (styles) => {
       if (!styles) {
         throw new Error('No styles supplied');
       }
-
-      // Allow initial open state to be set by props.
-      if (this.props.isOpen) {
-        this.toggleMenu();
-      }
     }
 
     componentDidMount() {
       window.onkeydown = this.listenForClose.bind(this);
 
-      // Allow initial open state to be set by props for animations with wrapper elements.
+      // Allow initial open state to be set by props.
       if (this.props.isOpen) {
-        this.toggleMenu();
+        this.toggleMenu({isOpen: true, noStateChange: true});
       }
     }
 
