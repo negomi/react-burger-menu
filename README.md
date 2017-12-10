@@ -303,6 +303,11 @@ The component has the following helper classes:
 .bm-overlay {
   background: rgba(0, 0, 0, 0.3);
 }
+
+/* Styling of menu wrapper */
+.bm-menu-wrap {
+  width: 300px;
+}
 ```
 
 #### JavaScript
@@ -342,6 +347,9 @@ var styles = {
   },
   bmOverlay: {
     background: 'rgba(0, 0, 0, 0.3)'
+  },
+  bmMenuWrap: {
+    width: '300px'
   }
 }
 
