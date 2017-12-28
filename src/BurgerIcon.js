@@ -61,7 +61,7 @@ export default class BurgerIcon extends Component {
     return (
       <div
         className={`bm-burger-button ${this.props.className}`.trim()}
-        style={{...{zIndex: 1}, ...this.props.styles.bmBurgerButton}}
+        style={{...{zIndex: 1000}, ...this.props.styles.bmBurgerButton}}
       >
         {icon}
         <button
