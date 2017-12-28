@@ -188,25 +188,25 @@ export default (styles) => {
         <div>
           {!this.props.noOverlay && (
             <div
-              className={`bm-overlay ${this.props.overlayClassName}`}
+              className={`bm-overlay ${this.props.overlayClassName}`.trim()}
               onClick={() => !this.shouldDisableOverlayClick() && this.toggleMenu()}
               style={this.getStyles('overlay')}
             />
           )}
           <div
             id={this.props.id}
-            className={`bm-menu-wrap ${this.props.className}`}
+            className={`bm-menu-wrap ${this.props.className}`.trim()}
             style={this.getStyles('menuWrap')}
           >
             {styles.svg && (
-              <div className={`bm-morph-shape ${this.props.morphShapeClassName}`} style={this.getStyles('morphShape')}>
+              <div className={`bm-morph-shape ${this.props.morphShapeClassName}`.trim()} style={this.getStyles('morphShape')}>
                 <svg width="100%" height="100%" viewBox="0 0 100 800" preserveAspectRatio="none">
                   <path d={styles.svg.pathInitial}/>
                 </svg>
               </div>
             )}
-            <div className={`bm-menu ${this.props.menuClassName}`} style={this.getStyles('menu')} >
-              <nav className={`bm-item-list ${this.props.itemListClassName}`} style={this.getStyles('itemList')}>
+            <div className={`bm-menu ${this.props.menuClassName}`.trim()} style={this.getStyles('menu')} >
+              <nav className={`bm-item-list ${this.props.itemListClassName}`.trim()} style={this.getStyles('itemList')}>
                 {React.Children.map(this.props.children, (item, index) => {
                   if (item) {
                     const extraProps = {

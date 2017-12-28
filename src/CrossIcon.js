@@ -49,7 +49,7 @@ export default class CrossIcon extends Component {
           {['before', 'after'].map((type, i) => (
             <span
               key={i}
-              className={`bm-cross ${this.props.crossClassName}`}
+              className={`bm-cross ${this.props.crossClassName}`.trim()}
               style={{...this.getCrossStyle(type), ...this.props.styles.bmCross}}
             />
           ))}
@@ -59,7 +59,7 @@ export default class CrossIcon extends Component {
 
     return (
       <div
-        className={`bm-cross-button ${this.props.className}`}
+        className={`bm-cross-button ${this.props.className}`.trim()}
         style={{...buttonWrapperStyle, ...this.props.styles.bmCrossButton}}
       >
         {icon}

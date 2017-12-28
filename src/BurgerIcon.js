@@ -50,7 +50,7 @@ export default class BurgerIcon extends Component {
           {[0, 1, 2].map((bar) => (
             <span
               key={bar}
-              className={`bm-burger-bars ${this.props.barClassName}`}
+              className={`bm-burger-bars ${this.props.barClassName}`.trim()}
               style={{...this.getLineStyle(bar), ...this.props.styles.bmBurgerBars}}
             />
           ))}
@@ -60,7 +60,7 @@ export default class BurgerIcon extends Component {
 
     return (
       <div
-        className={`bm-burger-button ${this.props.className}`}
+        className={`bm-burger-button ${this.props.className}`.trim()}
         style={{...{zIndex: 1}, ...this.props.styles.bmBurgerButton}}
       >
         {icon}
