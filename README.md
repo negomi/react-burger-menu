@@ -172,7 +172,9 @@ You can control whether the sidebar is open or closed with the `isOpen` prop. Th
 <Menu isOpen={ false } />
 ```
 
-*If you want to render the menu open initially, you will need to set this property in your parent component's `componentDidMount()` function.*
+You can see a more detailed example of how to use `isOpen` [here](https://github.com/negomi/react-burger-menu/wiki/FAQ#i-want-to-control-the-open-state-programmatically-but-i-dont-understand-how-to-use-the-isopen-prop).
+
+*Note: If you want to render the menu open initially, you will need to set this property in your parent component's `componentDidMount()` function.*
 
 #### State change
 
