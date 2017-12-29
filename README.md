@@ -30,10 +30,10 @@ To run the tests once, run:
 npm test
 ```
 
-To run them with a watcher, TDD style, run:
+To run them with a watcher, run:
 
 ```
-npm run tdd
+npm run test:watch
 ```
 
 ## Installation

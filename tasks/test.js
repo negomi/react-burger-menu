@@ -14,7 +14,11 @@ module.exports = function(gulp, config) {
         })
       )
       .on('error', function(err) {
-        this.emit('end');
+        if (process.argv.includes('watch:tests')) {
+          this.emit('end');
+        } else {
+          process.exit(1);
+        }
       });
   });
 
