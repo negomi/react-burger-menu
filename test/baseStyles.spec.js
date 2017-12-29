@@ -6,7 +6,7 @@ describe('baseStyles', () => {
   it('has correct overlay styles', () => {
     const overlay = baseStyles.overlay(false);
     expect(overlay.position).to.equal('fixed');
-    expect(overlay.zIndex).to.equal(1);
+    expect(overlay.zIndex).to.equal(1000);
     expect(overlay.width).to.equal('100%');
     expect(overlay.height).to.equal('100%');
     expect(overlay.background).to.equal('rgba(0, 0, 0, 0.3)');
@@ -16,7 +16,7 @@ describe('baseStyles', () => {
   it('has correct menuWrap styles', () => {
     const menuWrap = baseStyles.menuWrap(false, 300);
     expect(menuWrap.position).to.equal('fixed');
-    expect(menuWrap.zIndex).to.equal(2);
+    expect(menuWrap.zIndex).to.equal(1100);
     expect(menuWrap.width).to.equal(300);
     expect(menuWrap.height).to.equal('100%');
   });
