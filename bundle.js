@@ -1297,14 +1297,14 @@ var BurgerIcon = function (_Component) {
                         ].map(function (bar) {
                             return _react2['default'].createElement('span', {
                                 key: bar,
-                                className: 'bm-burger-bars ' + _this.props.barClassName,
+                                className: ('bm-burger-bars ' + _this.props.barClassName).trim(),
                                 style: _extends({}, _this.getLineStyle(bar), _this.props.styles.bmBurgerBars)
                             });
                         }));
                     }
                     return _react2['default'].createElement('div', {
-                        className: 'bm-burger-button ' + this.props.className,
-                        style: _extends({ zIndex: 1 }, this.props.styles.bmBurgerButton)
+                        className: ('bm-burger-button ' + this.props.className).trim(),
+                        style: _extends({ zIndex: 1000 }, this.props.styles.bmBurgerButton)
                     }, icon, _react2['default'].createElement('button', {
                         onClick: this.props.onClick,
                         onMouseOver: function () {
@@ -1490,13 +1490,13 @@ var CrossIcon = function (_Component) {
                         ].map(function (type, i) {
                             return _react2['default'].createElement('span', {
                                 key: i,
-                                className: 'bm-cross ' + _this.props.crossClassName,
+                                className: ('bm-cross ' + _this.props.crossClassName).trim(),
                                 style: _extends({}, _this.getCrossStyle(type), _this.props.styles.bmCross)
                             });
                         }));
                     }
                     return _react2['default'].createElement('div', {
-                        className: 'bm-cross-button ' + this.props.className,
+                        className: ('bm-cross-button ' + this.props.className).trim(),
                         style: _extends({}, buttonWrapperStyle, this.props.styles.bmCrossButton)
                     }, icon, _react2['default'].createElement('button', {
                         onClick: this.props.onClick,
@@ -1526,7 +1526,7 @@ var styles = {
         overlay: function overlay(isOpen) {
             return {
                 position: 'fixed',
-                zIndex: 1,
+                zIndex: 1000,
                 width: '100%',
                 height: '100%',
                 background: 'rgba(0, 0, 0, 0.3)',
@@ -1543,7 +1543,7 @@ var styles = {
             return {
                 position: 'fixed',
                 right: right ? 0 : 'inherit',
-                zIndex: 2,
+                zIndex: 1100,
                 width: width,
                 height: '100%',
                 MozTransform: isOpen ? '' : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
@@ -1850,17 +1850,17 @@ exports['default'] = function (styles) {
                     value: function render() {
                         var _this3 = this;
                         return _react2['default'].createElement('div', null, !this.props.noOverlay && _react2['default'].createElement('div', {
-                            className: 'bm-overlay ' + this.props.overlayClassName,
+                            className: ('bm-overlay ' + this.props.overlayClassName).trim(),
                             onClick: function () {
                                 return !_this3.shouldDisableOverlayClick() && _this3.toggleMenu();
                             },
                             style: this.getStyles('overlay')
                         }), _react2['default'].createElement('div', {
                             id: this.props.id,
-                            className: 'bm-menu-wrap ' + this.props.className,
+                            className: ('bm-menu-wrap ' + this.props.className).trim(),
                             style: this.getStyles('menuWrap')
                         }, styles.svg && _react2['default'].createElement('div', {
-                            className: 'bm-morph-shape ' + this.props.morphShapeClassName,
+                            className: ('bm-morph-shape ' + this.props.morphShapeClassName).trim(),
                             style: this.getStyles('morphShape')
                         }, _react2['default'].createElement('svg', {
                             width: '100%',
@@ -1868,10 +1868,10 @@ exports['default'] = function (styles) {
                             viewBox: '0 0 100 800',
                             preserveAspectRatio: 'none'
                         }, _react2['default'].createElement('path', { d: styles.svg.pathInitial }))), _react2['default'].createElement('div', {
-                            className: 'bm-menu ' + this.props.menuClassName,
+                            className: ('bm-menu ' + this.props.menuClassName).trim(),
                             style: this.getStyles('menu')
                         }, _react2['default'].createElement('nav', {
-                            className: 'bm-item-list ' + this.props.itemListClassName,
+                            className: ('bm-item-list ' + this.props.itemListClassName).trim(),
                             style: this.getStyles('itemList')
                         }, _react2['default'].Children.map(this.props.children, function (item, index) {
                             if (item) {
@@ -2246,12 +2246,12 @@ var styles = {
                 OTransform: 'translate3d(0, 0, 0)',
                 WebkitTransform: 'translate3d(0, 0, 0)',
                 transform: 'translate3d(0, 0, 0)',
-                zIndex: 1
+                zIndex: 1000
             };
         },
         overlay: function overlay(isOpen, width, right) {
             return {
-                zIndex: 4,
+                zIndex: 1400,
                 MozTransform: isOpen ? right ? 'translate3d(-' + width + ', 0, 0)' : 'translate3d(' + width + ', 0, 0)' : 'translate3d(0, 0, 0)',
                 MsTransform: isOpen ? right ? 'translate3d(-' + width + ', 0, 0)' : 'translate3d(' + width + ', 0, 0)' : 'translate3d(0, 0, 0)',
                 OTransform: isOpen ? right ? 'translate3d(-' + width + ', 0, 0)' : 'translate3d(' + width + ', 0, 0)' : 'translate3d(0, 0, 0)',
@@ -2269,7 +2269,7 @@ var styles = {
                 WebkitTransform: isOpen ? '' : right ? 'translate3d(-' + width + ', 0, 0)' : 'translate3d(' + width + ', 0, 0)',
                 transform: isOpen ? '' : right ? 'translate3d(-' + width + ', 0, 0)' : 'translate3d(' + width + ', 0, 0)',
                 transition: 'all 0.5s',
-                zIndex: 2,
+                zIndex: 1200,
                 position: 'relative'
             };
         },
@@ -2282,7 +2282,7 @@ var styles = {
                 transform: isOpen ? right ? 'translate3d(' + width + ', 0, 0)' : 'translate3d(-' + width + ', 0, 0)' : 'translate3d(0, 0, 0)',
                 transition: 'all 0.1s',
                 position: 'relative',
-                zIndex: 3
+                zIndex: 1300
             };
         },
         outerContainer: function outerContainer(isOpen) {
