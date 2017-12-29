@@ -456,16 +456,10 @@ describe('menuFactory', () => {
 
   describe('listenForClose method', () => {
 
-    beforeEach(() => {
-      addWrapperElementsToDOM();
-      component.setState({ isOpen: true });
-    });
-
-    afterEach(() => {
-      removeWrapperElementsFromDOM();
-    });
-
     it('closes the menu when escape is pressed', () => {
+      Menu = menuFactory(mockStyles.basic);
+      component = TestUtils.renderIntoDocument(<Menu />);
+      component.setState({ isOpen: true });
       component.listenForClose({ key: 'Escape', target: '' });
       expect(component.state.isOpen).to.be.false;
     });
