@@ -1,14 +1,18 @@
-var mocha = require('gulp-mocha');
-require('babel-register');
-require('../test/utils/dom.js');
+const mocha = require('gulp-mocha');
 
 module.exports = function(gulp, config) {
   gulp.task('test', ['build:lib'], function() {
     var reporterPos = process.argv.indexOf('--reporter');
     var reporter = reporterPos > -1 ? process.argv[reporterPos + 1] : null;
 
-    return gulp.src(config.paths.test, {read: false})
-      .pipe(mocha({reporter: reporter}))
+    return gulp
+      .src(config.paths.test, { read: false })
+      .pipe(
+        mocha({
+          reporter: reporter,
+          require: ['babel-core/register', 'jsdom-global/register']
+        })
+      )
       .on('error', function(err) {
         this.emit('end');
       });
