@@ -7,7 +7,7 @@ An off-canvas sidebar React component with a collection of effects and styles us
 
 ## Demo & examples
 
-Live demo: [negomi.github.io/react-burger-menu](http://negomi.github.io/react-burger-menu/)
+Live demo: [negomi.github.io/react-burger-menu](https://negomi.github.io/react-burger-menu/)
 
 To build the examples locally, run:
 
@@ -20,7 +20,7 @@ Then open [`localhost:8000`](http://localhost:8000) in a browser.
 
 ## Tests
 
-The test suite uses [Mocha](http://mochajs.org/), [Chai](http://chaijs.com/) and [Sinon](http://sinonjs.org/), with [jsdom](https://github.com/tmpvar/jsdom).
+The test suite uses [Mocha](https://mochajs.org/), [Chai](https://chaijs.com/) and [Sinon](https://sinonjs.org/), with [jsdom](https://github.com/tmpvar/jsdom).
 
 *You will need at least Node v4.0.0 (or [io.js](https://iojs.org/en/index.html)) to run the tests, due to jsdom depending on it.*
 
@@ -38,7 +38,7 @@ npm run tdd
 
 ## Installation
 
-The easiest way to use react-burger-menu is to install it from npm and include it in your own React build process (using [Browserify](http://browserify.org), [Webpack](http://webpack.github.io/), etc).
+The easiest way to use react-burger-menu is to install it from npm and include it in your own React build process (using [Browserify](https://browserify.org), [Webpack](https://webpack.github.io/), etc).
 
 You can also use the standalone build by including `dist/react-burger-menu.js` in your page. If you use this, make sure you have already included React, and it is available as a global variable.
 
@@ -84,7 +84,7 @@ class Example extends React.Component {
 
 ### Animations
 
-The example above imported `slide` which renders a menu that slides in on the page when the burger icon is clicked. To use a different animation you can substitute `slide` with any of the following (check out the [demo](http://negomi.github.io/react-burger-menu/) to see the animations in action):
+The example above imported `slide` which renders a menu that slides in on the page when the burger icon is clicked. To use a different animation you can substitute `slide` with any of the following (check out the [demo](https://negomi.github.io/react-burger-menu/) to see the animations in action):
 
 * `slide`
 * `stack`
