@@ -40,17 +40,23 @@ export default class CrossIcon extends Component {
     if (this.props.customIcon) {
       let extraProps = {
         className: 'bm-cross',
-        style: {...{width: '100%', height: '100%'}, ...this.props.styles.bmCross}
+        style: {
+          ...{ width: '100%', height: '100%' },
+          ...this.props.styles.bmCross
+        }
       };
       icon = React.cloneElement(this.props.customIcon, extraProps);
     } else {
       icon = (
-        <span style={{position: 'absolute', top: '6px', right: '14px'}}>
+        <span style={{ position: 'absolute', top: '6px', right: '14px' }}>
           {['before', 'after'].map((type, i) => (
             <span
               key={i}
               className={`bm-cross ${this.props.crossClassName}`.trim()}
-              style={{...this.getCrossStyle(type), ...this.props.styles.bmCross}}
+              style={{
+                ...this.getCrossStyle(type),
+                ...this.props.styles.bmCross
+              }}
             />
           ))}
         </span>
@@ -60,7 +66,7 @@ export default class CrossIcon extends Component {
     return (
       <div
         className={`bm-cross-button ${this.props.className}`.trim()}
-        style={{...buttonWrapperStyle, ...this.props.styles.bmCrossButton}}
+        style={{ ...buttonWrapperStyle, ...this.props.styles.bmCrossButton }}
       >
         {icon}
         <button onClick={this.props.onClick} style={buttonStyle}>

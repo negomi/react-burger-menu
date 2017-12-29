@@ -1,4 +1,4 @@
-react-burger-menu [![Build Status](https://travis-ci.org/negomi/react-burger-menu.svg?branch=master)](https://travis-ci.org/negomi/react-burger-menu)
+react-burger-menu [![Build Status](https://travis-ci.org/negomi/react-burger-menu.svg?branch=master)](https://travis-ci.org/negomi/react-burger-menu) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 =================
 
 An off-canvas sidebar React component with a collection of effects and styles using CSS transitions and SVG path animations.
@@ -22,7 +22,7 @@ Then open [`localhost:8000`](http://localhost:8000) in a browser.
 
 The test suite uses [Mocha](https://mochajs.org/), [Chai](https://chaijs.com/) and [Sinon](https://sinonjs.org/), with [jsdom](https://github.com/tmpvar/jsdom).
 
-*You will need at least Node v4.0.0 (or [io.js](https://iojs.org/en/index.html)) to run the tests, due to jsdom depending on it.*
+*You will need at least Node v4.0.0 to run the tests, due to jsdom depending on it.*
 
 To run the tests once, run:
 

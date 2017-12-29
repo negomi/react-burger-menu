@@ -7,9 +7,9 @@ import baseStyles from './baseStyles';
 import BurgerIcon from './BurgerIcon';
 import CrossIcon from './CrossIcon';
 
-export default (styles) => {
+export default styles => {
   class Menu extends Component {
-    constructor (props) {
+    constructor(props) {
       super(props);
       this.state = {
         isOpen: false
@@ -17,7 +17,7 @@ export default (styles) => {
     }
 
     toggleMenu(options = {}) {
-      const {isOpen, noStateChange} = options;
+      const { isOpen, noStateChange } = options;
       const newState = {
         isOpen: typeof isOpen !== 'undefined' ? isOpen : !this.state.isOpen
       };
@@ -50,7 +50,11 @@ export default (styles) => {
       }
 
       if (styles.outerContainer && this.props.outerContainerId) {
-        this.handleExternalWrapper(this.props.outerContainerId, styles.outerContainer, set);
+        this.handleExternalWrapper(
+          this.props.outerContainerId,
+          styles.outerContainer,
+          set
+        );
       }
     }
 
@@ -77,14 +81,15 @@ export default (styles) => {
       }
 
       // Prevent any horizontal scroll.
-      [html, body].forEach((element) => {
+      [html, body].forEach(element => {
         element.style['overflow-x'] = set ? 'hidden' : '';
       });
     }
 
     // Builds styles incrementally for a given element.
     getStyles(el, index, inline) {
-      const propName = 'bm' + el.replace(el.charAt(0), el.charAt(0).toUpperCase());
+      const propName =
+        'bm' + el.replace(el.charAt(0), el.charAt(0).toUpperCase());
 
       // Set base styles.
       let output = baseStyles[el] ? this.getStyle(baseStyles[el]) : {};
@@ -150,7 +155,7 @@ export default (styles) => {
 
       // Allow initial open state to be set by props.
       if (this.props.isOpen) {
-        this.toggleMenu({isOpen: true, noStateChange: true});
+        this.toggleMenu({ isOpen: true, noStateChange: true });
       }
     }
 
@@ -178,7 +183,10 @@ export default (styles) => {
     }
 
     componentWillReceiveProps(nextProps) {
-      if (typeof nextProps.isOpen !== 'undefined' && nextProps.isOpen !== this.state.isOpen) {
+      if (
+        typeof nextProps.isOpen !== 'undefined' &&
+        nextProps.isOpen !== this.state.isOpen
+      ) {
         this.toggleMenu();
       }
     }
@@ -189,7 +197,9 @@ export default (styles) => {
           {!this.props.noOverlay && (
             <div
               className={`bm-overlay ${this.props.overlayClassName}`.trim()}
-              onClick={() => !this.shouldDisableOverlayClick() && this.toggleMenu()}
+              onClick={() =>
+                !this.shouldDisableOverlayClick() && this.toggleMenu()
+              }
               style={this.getStyles('overlay')}
             />
           )}
@@ -199,14 +209,32 @@ export default (styles) => {
             style={this.getStyles('menuWrap')}
           >
             {styles.svg && (
-              <div className={`bm-morph-shape ${this.props.morphShapeClassName}`.trim()} style={this.getStyles('morphShape')}>
-                <svg width="100%" height="100%" viewBox="0 0 100 800" preserveAspectRatio="none">
-                  <path d={styles.svg.pathInitial}/>
+              <div
+                className={`bm-morph-shape ${
+                  this.props.morphShapeClassName
+                }`.trim()}
+                style={this.getStyles('morphShape')}
+              >
+                <svg
+                  width="100%"
+                  height="100%"
+                  viewBox="0 0 100 800"
+                  preserveAspectRatio="none"
+                >
+                  <path d={styles.svg.pathInitial} />
                 </svg>
               </div>
             )}
-            <div className={`bm-menu ${this.props.menuClassName}`.trim()} style={this.getStyles('menu')} >
-              <nav className={`bm-item-list ${this.props.itemListClassName}`.trim()} style={this.getStyles('itemList')}>
+            <div
+              className={`bm-menu ${this.props.menuClassName}`.trim()}
+              style={this.getStyles('menu')}
+            >
+              <nav
+                className={`bm-item-list ${
+                  this.props.itemListClassName
+                }`.trim()}
+                style={this.getStyles('itemList')}
+              >
                 {React.Children.map(this.props.children, (item, index) => {
                   if (item) {
                     const extraProps = {
@@ -252,8 +280,14 @@ export default (styles) => {
     burgerButtonClassName: PropTypes.string,
     crossButtonClassName: PropTypes.string,
     crossClassName: PropTypes.string,
-    customBurgerIcon: PropTypes.oneOfType([PropTypes.element, PropTypes.oneOf([false])]),
-    customCrossIcon: PropTypes.oneOfType([PropTypes.element, PropTypes.oneOf([false])]),
+    customBurgerIcon: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.oneOf([false])
+    ]),
+    customCrossIcon: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.oneOf([false])
+    ]),
     disableOverlayClick: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
     id: PropTypes.string,
     isOpen: PropTypes.bool,
@@ -262,9 +296,15 @@ export default (styles) => {
     morphShapeClassName: PropTypes.string,
     noOverlay: PropTypes.bool,
     onStateChange: PropTypes.func,
-    outerContainerId: styles && styles.outerContainer ? PropTypes.string.isRequired : PropTypes.string,
+    outerContainerId:
+      styles && styles.outerContainer
+        ? PropTypes.string.isRequired
+        : PropTypes.string,
     overlayClassName: PropTypes.string,
-    pageWrapId: styles && styles.pageWrap ? PropTypes.string.isRequired : PropTypes.string,
+    pageWrapId:
+      styles && styles.pageWrap
+        ? PropTypes.string.isRequired
+        : PropTypes.string,
     right: PropTypes.bool,
     styles: PropTypes.object,
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string])

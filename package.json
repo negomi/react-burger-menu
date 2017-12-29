@@ -35,6 +35,8 @@
     "jsdom": "^11.5.1",
     "jsdom-global": "^3.0.2",
     "mocha": "^4.1.0",
+    "pre-commit": "^1.2.2",
+    "prettier": "^1.9.2",
     "react": "^16.0.0",
     "react-component-gulp-tasks": "github:negomi/react-component-gulp-tasks",
     "react-dom": "^16.0.0",
@@ -59,6 +61,7 @@
     "build": "gulp clean && NODE_ENV=production gulp build",
     "examples": "gulp dev:server",
     "lint": "eslint ./; true",
+    "prettier": "prettier \"src/**/*.js\" --single-quote --ignore-path ./.prettierignore --write && git add . && git status",
     "publish:site": "gulp publish:examples",
     "publish:version": "gulp commit:version && gulp push",
     "start": "gulp dev",
@@ -69,6 +72,9 @@
     "release:minor": "npm run build && gulp bump:minor && gulp release && npm run publish:version",
     "release:major": "npm run build && gulp bump:major && gulp release && npm run publish:version"
   },
+  "pre-commit": [
+    "prettier"
+  ],
   "engines": {
     "node": ">=4.0.0"
   },
