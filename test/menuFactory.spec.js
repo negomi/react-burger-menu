@@ -370,9 +370,9 @@ describe('menuFactory', () => {
   describe('applyWrapperStyles method', () => {
 
     beforeEach(() => {
+      addWrapperElementsToDOM();
       Menu = menuFactory(mockStyles.full);
       component = TestUtils.renderIntoDocument(<Menu pageWrapId={ 'page-wrap' } outerContainerId={ 'outer-container' } />);
-      addWrapperElementsToDOM();
     });
 
     afterEach(() => {
@@ -403,55 +403,54 @@ describe('menuFactory', () => {
     };
 
     beforeEach(() => {
+      addWrapperElementsToDOM();
       Menu = menuFactory(mockStyles.full);
       component = TestUtils.renderIntoDocument(<Menu pageWrapId={ 'page-wrap' } outerContainerId={ 'outer-container' } />);
     });
 
+    afterEach(() => {
+      removeWrapperElementsFromDOM();
+    });
+
     it('errors with the correct message if no wrapper element found', () => {
+      removeWrapperElementsFromDOM();
       const error = sinon.stub(console, 'error');
       component.handleExternalWrapper('page-wrap', mockStyles.full.pageWrap, true);
       assert.ok(error.calledWith("Element with ID 'page-wrap' not found"));
       console.error.restore();
+      addWrapperElementsToDOM();
     });
 
     it('sets styles on external wrapper elements', () => {
-      addWrapperElementsToDOM();
       component.handleExternalWrapper('page-wrap', styles, true);
       let wrapperElement = document.getElementById('page-wrap');
       expect(wrapperElement.style.color).to.equal('red');
       expect(wrapperElement.style.position).to.equal('relative');
-      removeWrapperElementsFromDOM();
     });
 
     it('clears styles from external wrapper elements', () => {
-      addWrapperElementsToDOM();
       let wrapperElement = document.getElementById('page-wrap');
       wrapperElement.style.color = 'red';
       wrapperElement.style.position = 'relative';
       component.handleExternalWrapper('page-wrap', styles, false);
       expect(wrapperElement.style.color).to.be.empty;
       expect(wrapperElement.style.position).to.be.empty;
-      removeWrapperElementsFromDOM();
     });
 
     it('sets styles on html and body elements', () => {
-      addWrapperElementsToDOM();
       let html = document.querySelector('html');
       let body = document.querySelector('body');
       component.handleExternalWrapper('page-wrap', styles, true);
       expect(html.style['overflow-x']).to.equal('hidden');
       expect(body.style['overflow-x']).to.equal('hidden');
-      removeWrapperElementsFromDOM();
     });
 
     it('clears styles from html and body elements', () => {
-      addWrapperElementsToDOM();
       let html = document.querySelector('html');
       let body = document.querySelector('body');
       component.handleExternalWrapper('page-wrap', styles, false);
       expect(html.style['overflow-x']).to.be.empty;
       expect(body.style['overflow-x']).to.be.empty;
-      removeWrapperElementsFromDOM();
     });
   });
 
