@@ -1627,7 +1627,8 @@ exports['default'] = function (styles) {
                 {
                     key: 'componentDidMount',
                     value: function componentDidMount() {
-                        window.onkeydown = this.listenForClose.bind(this);
+                        var listenForClose = this.props.listenForClose || this.listenForClose;
+                        window.onkeydown = listenForClose.bind(this);
                         if (this.props.isOpen) {
                             this.toggleMenu({
                                 isOpen: true,
@@ -1781,7 +1782,8 @@ exports['default'] = function (styles) {
         overlayClassName: '',
         pageWrapId: '',
         styles: {},
-        width: 300
+        width: 300,
+        listenForClose: null
     };
     return Menu;
 };
