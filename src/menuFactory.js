@@ -151,7 +151,8 @@ export default styles => {
     }
 
     componentDidMount() {
-      window.onkeydown = this.listenForClose.bind(this);
+      const listenForClose = this.props.listenForClose || this.listenForClose;
+      window.onkeydown = listenForClose.bind(this);
 
       // Allow initial open state to be set by props.
       if (this.props.isOpen) {
@@ -327,7 +328,8 @@ export default styles => {
     overlayClassName: '',
     pageWrapId: '',
     styles: {},
-    width: 300
+    width: 300,
+    listenForClose: null
   };
 
   return Menu;
