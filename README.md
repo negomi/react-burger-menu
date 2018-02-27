@@ -188,6 +188,14 @@ var isMenuOpen = function(state) {
 <Menu onStateChange={ isMenuOpen } />
 ```
 
+#### Close on Escape
+
+By default, the menu will close when the Escape key is pressed. To disable this behavior, you can pass the `disableCloseOnEsc` prop. This is useful in cases where you want the menu to be open all the time, for example if you're implementing a responsive menu that behaves differently depending on the browser width.
+
+``` javascript
+<Menu disableCloseOnEsc />
+```
+
 #### Overlay
 
 You can turn off the default overlay with `noOverlay`.

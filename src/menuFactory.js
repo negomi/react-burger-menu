@@ -151,7 +151,10 @@ export default styles => {
     }
 
     componentDidMount() {
-      window.onkeydown = this.listenForClose.bind(this);
+      // Bind ESC key handler (unless disabled)
+      if (!this.props.disableCloseOnEsc) {
+        window.onkeydown = this.listenForClose.bind(this);
+      }
 
       // Allow initial open state to be set by props.
       if (this.props.isOpen) {
@@ -288,6 +291,7 @@ export default styles => {
       PropTypes.element,
       PropTypes.oneOf([false])
     ]),
+    disableCloseOnEsc: PropTypes.bool,
     disableOverlayClick: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
     id: PropTypes.string,
     isOpen: PropTypes.bool,
@@ -317,6 +321,7 @@ export default styles => {
     className: '',
     crossButtonClassName: '',
     crossClassName: '',
+    disableCloseOnEsc: false,
     id: '',
     itemListClassName: '',
     menuClassName: '',

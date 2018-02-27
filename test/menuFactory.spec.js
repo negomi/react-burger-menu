@@ -456,7 +456,7 @@ describe('menuFactory', () => {
 
   describe('listenForClose method', () => {
 
-    it('closes the menu when escape is pressed', () => {
+    it('closes the menu when Escape is pressed', () => {
       Menu = menuFactory(mockStyles.basic);
       component = TestUtils.renderIntoDocument(<Menu />);
       component.setState({ isOpen: true });
@@ -504,6 +504,22 @@ describe('menuFactory', () => {
       const parent = TestUtils.renderIntoDocument(<ParentComponent />, container);
       const menu = parent.refs.menu;
       expect(menu.state.isOpen).to.be.false;
+    });
+  });
+
+  describe('disableCloseOnEsc', () => {
+
+    let container;
+
+    beforeEach(() => {
+      Menu = menuFactory(mockStyles.basic);
+      component = TestUtils.renderIntoDocument(<Menu disableCloseOnEsc />);
+    });
+
+    it('should not allow close on Escape key press', () => {
+      component.setState({ isOpen: true });
+      window.onkeydown({ key: 'Escape' });
+      expect(component.state.isOpen).to.be.true;
     });
   });
 
