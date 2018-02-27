@@ -1627,7 +1627,9 @@ exports['default'] = function (styles) {
                 {
                     key: 'componentDidMount',
                     value: function componentDidMount() {
-                        window.onkeydown = this.listenForClose.bind(this);
+                        if (!this.props.disableCloseOnEsc) {
+                            window.onkeydown = this.listenForClose.bind(this);
+                        }
                         if (this.props.isOpen) {
                             this.toggleMenu({
                                 isOpen: true,
@@ -1742,6 +1744,7 @@ exports['default'] = function (styles) {
             _propTypes2['default'].element,
             _propTypes2['default'].oneOf([false])
         ]),
+        disableCloseOnEsc: _propTypes2['default'].bool,
         disableOverlayClick: _propTypes2['default'].oneOfType([
             _propTypes2['default'].bool,
             _propTypes2['default'].func
@@ -1770,6 +1773,7 @@ exports['default'] = function (styles) {
         className: '',
         crossButtonClassName: '',
         crossClassName: '',
+        disableCloseOnEsc: false,
         id: '',
         itemListClassName: '',
         menuClassName: '',
