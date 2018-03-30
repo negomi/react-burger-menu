@@ -151,8 +151,10 @@ export default styles => {
     }
 
     componentDidMount() {
-      // Bind ESC key handler (unless disabled)
-      if (!this.props.disableCloseOnEsc) {
+      // Bind ESC key handler (unless disabled or custom function supplied).
+      if (this.props.customOnKeyDown) {
+        window.onkeydown = this.props.customOnKeyDown;
+      } else if (!this.props.disableCloseOnEsc) {
         window.onkeydown = this.listenForClose.bind(this);
       }
 
@@ -291,6 +293,7 @@ export default styles => {
       PropTypes.element,
       PropTypes.oneOf([false])
     ]),
+    customOnKeyDown: PropTypes.func,
     disableCloseOnEsc: PropTypes.bool,
     disableOverlayClick: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
     id: PropTypes.string,

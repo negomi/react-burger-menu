@@ -507,7 +507,7 @@ describe('menuFactory', () => {
     });
   });
 
-  describe('disableCloseOnEsc', () => {
+  describe('disableCloseOnEsc prop', () => {
 
     it('should not allow close on Escape key press', () => {
       Menu = menuFactory(mockStyles.basic);
@@ -515,6 +515,20 @@ describe('menuFactory', () => {
       component.setState({ isOpen: true });
       window.onkeydown({ key: 'Escape' });
       expect(component.state.isOpen).to.be.true;
+    });
+  });
+
+  describe('customOnKeyDown prop', () => {
+
+    it('should be set for window.onkeydown instead of listenForClose', () => {
+      Menu = menuFactory(mockStyles.basic);
+      const customOnKeyDown = sinon.spy();
+      component = TestUtils.renderIntoDocument(<Menu customOnKeyDown={customOnKeyDown} />);
+      const listenForClose = sinon.spy(component, 'listenForClose');
+      component.setState({ isOpen: true });
+      window.onkeydown();
+      expect(customOnKeyDown.called).to.be.true;
+      expect(listenForClose.called).to.be.false;
     });
   });
 
