@@ -433,8 +433,8 @@ describe('menuFactory', () => {
       wrapperElement.style.color = 'red';
       wrapperElement.style.position = 'relative';
       component.handleExternalWrapper('page-wrap', styles, false);
-      expect(wrapperElement.style.color).to.be.empty;
-      expect(wrapperElement.style.position).to.be.empty;
+      expect(wrapperElement.style.color).to.equal('');
+      expect(wrapperElement.style.position).to.equal('');
     });
 
     it('sets styles on html and body elements', () => {
@@ -449,8 +449,8 @@ describe('menuFactory', () => {
       let html = document.querySelector('html');
       let body = document.querySelector('body');
       component.handleExternalWrapper('page-wrap', styles, false);
-      expect(html.style['overflow-x']).to.be.empty;
-      expect(body.style['overflow-x']).to.be.empty;
+      expect(html.style['overflow-x']).to.equal('');
+      expect(body.style['overflow-x']).to.equal('');
     });
   });
 
@@ -509,14 +509,9 @@ describe('menuFactory', () => {
 
   describe('disableCloseOnEsc', () => {
 
-    let container;
-
-    beforeEach(() => {
+    it('should not allow close on Escape key press', () => {
       Menu = menuFactory(mockStyles.basic);
       component = TestUtils.renderIntoDocument(<Menu disableCloseOnEsc />);
-    });
-
-    it('should not allow close on Escape key press', () => {
       component.setState({ isOpen: true });
       window.onkeydown({ key: 'Escape' });
       expect(component.state.isOpen).to.be.true;
