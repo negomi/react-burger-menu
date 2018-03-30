@@ -12571,29 +12571,34 @@ function objectToString(o) {
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"./package.json":27,"estraverse":28,"esutils":31,"source-map":78}],27:[function(require,module,exports){
 module.exports={
-  "_from": "escodegen@~1.2.0",
+  "_args": [
+    [
+      "escodegen@1.2.0",
+      "/Users/imogen/code/react-burger-menu"
+    ]
+  ],
+  "_from": "escodegen@1.2.0",
   "_id": "escodegen@1.2.0",
   "_inBundle": false,
   "_integrity": "sha1-Cd55Z3kcyVi3+Jot220jRRrzJ+E=",
   "_location": "/escodegen",
   "_phantomChildren": {},
   "_requested": {
-    "type": "range",
+    "type": "version",
     "registry": true,
-    "raw": "escodegen@~1.2.0",
+    "raw": "escodegen@1.2.0",
     "name": "escodegen",
     "escapedName": "escodegen",
-    "rawSpec": "~1.2.0",
+    "rawSpec": "1.2.0",
     "saveSpec": null,
-    "fetchSpec": "~1.2.0"
+    "fetchSpec": "1.2.0"
   },
   "_requiredBy": [
     "/ast-transform"
   ],
   "_resolved": "https://registry.npmjs.org/escodegen/-/escodegen-1.2.0.tgz",
-  "_shasum": "09de7967791cc958b7f89a2ddb6d23451af327e1",
-  "_spec": "escodegen@~1.2.0",
-  "_where": "/Users/imogen/code/react-burger-menu/node_modules/ast-transform",
+  "_spec": "1.2.0",
+  "_where": "/Users/imogen/code/react-burger-menu",
   "bin": {
     "esgenerate": "./bin/esgenerate.js",
     "escodegen": "./bin/escodegen.js"
@@ -12601,14 +12606,12 @@ module.exports={
   "bugs": {
     "url": "https://github.com/Constellation/escodegen/issues"
   },
-  "bundleDependencies": false,
   "dependencies": {
     "esprima": "~1.0.4",
     "estraverse": "~1.5.0",
     "esutils": "~1.0.0",
     "source-map": "~0.1.30"
   },
-  "deprecated": false,
   "description": "ECMAScript code generator",
   "devDependencies": {
     "bower": "*",
