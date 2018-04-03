@@ -1393,9 +1393,6 @@ var styles = {
                 display: 'block',
                 outline: 'none'
             };
-        },
-        burgerIcon: function burgerIcon(isOpen, width, right) {
-            return {};
         }
     };
 exports['default'] = styles;
@@ -1592,9 +1589,8 @@ exports['default'] = function (styles) {
                     key: 'getStyle',
                     value: function getStyle(style, index) {
                         var width = this.props.width;
-                        if (typeof width !== 'string')
-                            width = width + 'px';
-                        return style(this.state.isOpen, width, this.props.right, index);
+                        var formattedWidth = typeof width !== 'string' ? width + 'px' : width;
+                        return style(this.state.isOpen, formattedWidth, this.props.right, index);
                     }
                 },
                 {
