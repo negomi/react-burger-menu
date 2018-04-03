@@ -30,7 +30,7 @@ main {
   padding: 3em 2em;
   text-align: center;
   background: #b4bad2;
-  overflow: scroll;
+  overflow: auto;
 }
 h1 {
   font-weight: 800;
