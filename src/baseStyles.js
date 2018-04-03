@@ -1,6 +1,6 @@
 'use strict';
 
-let styles = {
+const styles = {
   overlay(isOpen) {
     return {
       position: 'fixed',
@@ -63,10 +63,6 @@ let styles = {
       display: 'block',
       outline: 'none'
     };
-  },
-
-  burgerIcon(isOpen, width, right) {
-    return {};
   }
 };
 

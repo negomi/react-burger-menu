@@ -122,10 +122,9 @@ export default styles => {
     }
 
     getStyle(style, index) {
-      let width = this.props.width;
-      if (typeof width !== 'string') width = `${width}px`;
-
-      return style(this.state.isOpen, width, this.props.right, index);
+      const { width } = this.props;
+      const formattedWidth = typeof width !== 'string' ? `${width}px` : width;
+      return style(this.state.isOpen, formattedWidth, this.props.right, index);
     }
 
     listenForClose(e) {
