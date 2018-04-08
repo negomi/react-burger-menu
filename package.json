@@ -20,7 +20,7 @@
     "snapsvg-cjs": "0.0.6"
   },
   "devDependencies": {
-    "ajv": "^5.2.3",
+    "ajv": "^6.4.0",
     "babel-core": "^6.3.26",
     "babel-eslint": "^8.2.2",
     "babel-preset-env": "^1.6.0",
