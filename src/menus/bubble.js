@@ -54,19 +54,29 @@ const styles = {
     return {
       MozTransform: isOpen
         ? 'translate3d(0, 0, 0)'
-        : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
+        : right
+          ? 'translate3d(100%, 0, 0)'
+          : 'translate3d(-100%, 0, 0)',
       MsTransform: isOpen
         ? 'translate3d(0, 0, 0)'
-        : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
+        : right
+          ? 'translate3d(100%, 0, 0)'
+          : 'translate3d(-100%, 0, 0)',
       OTransform: isOpen
         ? 'translate3d(0, 0, 0)'
-        : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
+        : right
+          ? 'translate3d(100%, 0, 0)'
+          : 'translate3d(-100%, 0, 0)',
       WebkitTransform: isOpen
         ? 'translate3d(0, 0, 0)'
-        : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
+        : right
+          ? 'translate3d(100%, 0, 0)'
+          : 'translate3d(-100%, 0, 0)',
       transform: isOpen
         ? 'translate3d(0, 0, 0)'
-        : right ? 'translate3d(100%, 0, 0)' : 'translate3d(-100%, 0, 0)',
+        : right
+          ? 'translate3d(100%, 0, 0)'
+          : 'translate3d(-100%, 0, 0)',
       transition: isOpen ? 'transform 0.4s 0s' : 'transform 0.4s'
     };
   },
