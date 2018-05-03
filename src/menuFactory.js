@@ -82,7 +82,12 @@ export default styles => {
 
       // Prevent any horizontal scroll.
       [html, body].forEach(element => {
-        element.style['overflow-x'] = set ? 'hidden' : '';
+        if (this.props.preventBodyScrollX) {
+          element.style['overflow-x'] = set ? 'hidden' : '';
+        }
+        if (this.props.preventBodyScrollY) {
+          element.style['overflow-y'] = set ? 'hidden' : '';
+        }
       });
     }
 
@@ -313,7 +318,9 @@ export default styles => {
         : PropTypes.string,
     right: PropTypes.bool,
     styles: PropTypes.object,
-    width: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+    width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    preventBodyScrollX: PropTypes.bool,
+    preventBodyScrollY: PropTypes.bool
   };
 
   Menu.defaultProps = {
@@ -334,7 +341,9 @@ export default styles => {
     overlayClassName: '',
     pageWrapId: '',
     styles: {},
-    width: 300
+    width: 300,
+    preventBodyScrollX: true,
+    preventBodyScrollY: false
   };
 
   return Menu;
