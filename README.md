@@ -251,6 +251,14 @@ You can also disable the icon elements so they won't be included at all, by pass
 
 This can be useful if you want exclusive external control of the menu, using the `isOpen` prop.
 
+#### Prevent Scrolling On Body
+
+When the menu is open, you can prevent the background from scrolling on the x or y axis. Simply just set the `preventBodyScrollX` and `preventBodyScrollY` to true or false to prevent the scrolling or not.
+
+```javascript
+<Menu preventBodyScrollX={true} preventBodyScrollY={true}/>
+```
+
 #### Custom ID and/or classNames
 
 There are optional `id` and `className` props, which will simply add an ID or custom className to the rendered menu's outermost element. This is not required for any functionality, but could be useful for things like styling with CSS modules.

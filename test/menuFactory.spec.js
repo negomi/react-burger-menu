@@ -405,7 +405,7 @@ describe('menuFactory', () => {
     beforeEach(() => {
       addWrapperElementsToDOM();
       Menu = menuFactory(mockStyles.full);
-      component = TestUtils.renderIntoDocument(<Menu pageWrapId={ 'page-wrap' } outerContainerId={ 'outer-container' } />);
+      component = TestUtils.renderIntoDocument(<Menu pageWrapId={ 'page-wrap' } outerContainerId={ 'outer-container' } preventBodyScrollX={ true } preventBodyScrollY={ true }/>);
     });
 
     afterEach(() => {
@@ -443,6 +443,8 @@ describe('menuFactory', () => {
       component.handleExternalWrapper('page-wrap', styles, true);
       expect(html.style['overflow-x']).to.equal('hidden');
       expect(body.style['overflow-x']).to.equal('hidden');
+      expect(html.style['overflow-y']).to.equal('hidden');
+      expect(body.style['overflow-y']).to.equal('hidden');
     });
 
     it('clears styles from html and body elements', () => {
@@ -451,6 +453,8 @@ describe('menuFactory', () => {
       component.handleExternalWrapper('page-wrap', styles, false);
       expect(html.style['overflow-x']).to.equal('');
       expect(body.style['overflow-x']).to.equal('');
+      expect(html.style['overflow-y']).to.equal('');
+      expect(body.style['overflow-y']).to.equal('');
     });
   });
 
