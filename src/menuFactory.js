@@ -243,6 +243,7 @@ export default styles => {
                   if (item) {
                     const extraProps = {
                       key: index,
+                      className: `bm-item ${this.props.itemClassName}`,
                       style: this.getStyles('item', index, item.props.style)
                     };
                     return React.cloneElement(item, extraProps);
@@ -297,6 +298,7 @@ export default styles => {
     disableOverlayClick: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
     id: PropTypes.string,
     isOpen: PropTypes.bool,
+    itemClassName: PropTypes.string,
     itemListClassName: PropTypes.string,
     menuClassName: PropTypes.string,
     morphShapeClassName: PropTypes.string,
@@ -325,6 +327,7 @@ export default styles => {
     crossClassName: '',
     disableCloseOnEsc: false,
     id: '',
+    itemClassName: '',
     itemListClassName: '',
     menuClassName: '',
     morphShapeClassName: '',

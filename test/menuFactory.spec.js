@@ -48,6 +48,9 @@ describe('menuFactory', () => {
     bmItemList: {
       color: 'white'
     },
+    bmItem: {
+      color: 'white'
+    },
     bmOverlay: {
       background: 'rgba(0, 0, 0, 0.5)'
     }
@@ -268,6 +271,21 @@ describe('menuFactory', () => {
       component = TestUtils.renderIntoDocument(<Menu itemListClassName={ 'custom-class' } />);
       const itemList = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-item-list');
       expect(itemList.classList.toString()).to.contain('custom-class');
+    });
+  });
+
+  describe('item element', () => {
+
+    it('can be styled with props', () => {
+      component = TestUtils.renderIntoDocument(<Menu styles={mockStylesProp}><div>A child</div></Menu >);
+      const item = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-item');
+      expect(item.style.color).to.equal('white');
+    });
+
+    it('accepts an optional itemClassName', () => {
+      component = TestUtils.renderIntoDocument(<Menu itemClassName={'custom-class'}><div>A child</div></Menu >);
+      const item = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-item');
+      expect(item.classList.toString()).to.contain('custom-class');
     });
   });
 

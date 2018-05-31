@@ -329,6 +329,11 @@ The component has the following helper classes:
   padding: 0.8em;
 }
 
+/* Individual item */
+.bm-item {
+  display: inline-block;
+}
+
 /* Styling of overlay */
 .bm-overlay {
   background: rgba(0, 0, 0, 0.3);
@@ -369,6 +374,9 @@ var styles = {
   bmItemList: {
     color: '#b8b7ad',
     padding: '0.8em'
+  },
+  bmItem: {
+    display: 'inline-block'
   },
   bmOverlay: {
     background: 'rgba(0, 0, 0, 0.3)'
