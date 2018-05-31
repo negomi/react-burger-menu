@@ -1877,6 +1877,7 @@ exports['default'] = function (styles) {
                             if (item) {
                                 var extraProps = {
                                         key: index,
+                                        className: 'bm-item ' + _this3.props.itemClassName,
                                         style: _this3.getStyles('item', index, item.props.style)
                                     };
                                 return _react2['default'].cloneElement(item, extraProps);
@@ -1925,6 +1926,7 @@ exports['default'] = function (styles) {
         ]),
         id: _propTypes2['default'].string,
         isOpen: _propTypes2['default'].bool,
+        itemClassName: _propTypes2['default'].string,
         itemListClassName: _propTypes2['default'].string,
         menuClassName: _propTypes2['default'].string,
         morphShapeClassName: _propTypes2['default'].string,
@@ -1949,6 +1951,7 @@ exports['default'] = function (styles) {
         crossClassName: '',
         disableCloseOnEsc: false,
         id: '',
+        itemClassName: '',
         itemListClassName: '',
         menuClassName: '',
         morphShapeClassName: '',
