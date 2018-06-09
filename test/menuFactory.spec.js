@@ -287,6 +287,12 @@ describe('menuFactory', () => {
       const item = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-item');
       expect(item.classList.toString()).to.contain('custom-class');
     });
+
+    it('retains any className already present', () => {
+      component = TestUtils.renderIntoDocument(<Menu itemClassName={'custom-class'}><div className="existing-class">A child</div></Menu >);
+      const item = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-item');
+      expect(item.classList.toString()).to.contain('existing-class');
+    });
   });
 
   describe('overlay', () => {

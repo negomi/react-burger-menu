@@ -241,9 +241,16 @@ export default styles => {
               >
                 {React.Children.map(this.props.children, (item, index) => {
                   if (item) {
+                    const classList = [
+                      'bm-item',
+                      this.props.itemClassName,
+                      item.props.className
+                    ]
+                      .filter(className => !!className)
+                      .join(' ');
                     const extraProps = {
                       key: index,
-                      className: `bm-item ${this.props.itemClassName}`,
+                      className: classList,
                       style: this.getStyles('item', index, item.props.style)
                     };
                     return React.cloneElement(item, extraProps);
