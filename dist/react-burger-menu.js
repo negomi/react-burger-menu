@@ -1700,9 +1700,16 @@ exports['default'] = function (styles) {
                             style: this.getStyles('itemList')
                         }, _react2['default'].Children.map(this.props.children, function (item, index) {
                             if (item) {
+                                var classList = [
+                                        'bm-item',
+                                        _this3.props.itemClassName,
+                                        item.props.className
+                                    ].filter(function (className) {
+                                        return !!className;
+                                    }).join(' ');
                                 var extraProps = {
                                         key: index,
-                                        className: 'bm-item ' + _this3.props.itemClassName,
+                                        className: classList,
                                         style: _this3.getStyles('item', index, item.props.style)
                                     };
                                 return _react2['default'].cloneElement(item, extraProps);
