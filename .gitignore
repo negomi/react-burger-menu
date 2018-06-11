@@ -12,6 +12,7 @@ lib-cov
 coverage
 coverage.html
 .cover*
+.nyc_output
 
 # Dependency directory
 node_modules

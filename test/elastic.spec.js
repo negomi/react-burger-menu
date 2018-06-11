@@ -4,8 +4,8 @@ import React from 'react';
 import TestUtils from 'react-dom/test-utils';
 import { expect } from 'chai';
 import createShallowComponent from './utils/createShallowComponent';
-import BurgerMenu from '../lib/BurgerMenu';
-const Menu = BurgerMenu.elastic;
+import BurgerMenu from '../src/BurgerMenu';
+const Menu = BurgerMenu.elastic.default;
 
 describe('elastic', () => {
 

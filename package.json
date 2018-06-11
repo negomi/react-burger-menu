@@ -23,10 +23,12 @@
     "ajv": "^6.4.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
+    "babel-plugin-istanbul": "^4.1.6",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.3.13",
     "babel-register": "^6.3.13",
     "chai": "^4.1.2",
+    "cross-env": "^5.1.6",
     "eslint": "^4.19.1",
     "eslint-plugin-react": "^7.7.0",
     "gulp": "^3.8.11",
@@ -35,6 +37,7 @@
     "jsdom": "^11.9.0",
     "jsdom-global": "^3.0.2",
     "mocha": "^5.1.1",
+    "nyc": "^12.0.2",
     "pre-commit": "^1.2.2",
     "prettier": "^1.12.1",
     "react": "^16.3.2",
@@ -65,9 +68,9 @@
     "publish:site": "gulp publish:examples",
     "publish:version": "gulp commit:version && gulp push",
     "start": "gulp dev",
-    "test": "gulp test --reporter list",
-    "test:watch": "gulp watch:tests --reporter min",
-    "watch": "gulp watch:lib",
+    "test": "cross-env NODE_ENV=test mocha --require babel-register --require jsdom-global/register --reporter list",
+    "test:watch": "npm test -- --watch --reporter min",
+    "coverage": "nyc npm test && nyc report --reporter=lcov",
     "release": "npm run build && gulp bump && gulp release && npm run publish:version",
     "release:minor": "npm run build && gulp bump:minor && gulp release && npm run publish:version",
     "release:major": "npm run build && gulp bump:major && gulp release && npm run publish:version"
@@ -90,5 +93,15 @@
   "files": [
     "lib",
     "dist"
-  ]
+  ],
+  "nyc": {
+    "include": [
+      "**/src/**/*.js"
+    ],
+    "exclude": [
+      "**/src/snapsvgImporter.js"
+    ],
+    "sourceMap": false,
+    "instrument": false
+  }
 }
