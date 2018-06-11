@@ -1,6 +1,5 @@
 var gulp = require('gulp');
 var initGulpTasks = require('react-component-gulp-tasks');
-var initTestTasks = require('./tasks/test');
 var initReleaseTasks = require('./tasks/release');
 
 /**
@@ -53,13 +52,6 @@ var taskConfig = {
 
 };
 
-var testConfig = {
-  paths: {
-    src: 'src/**/*.js',
-    test: 'test/*.js'
-  }
-};
-
 var releaseConfig = {
   files: [
     'dist',
@@ -72,5 +64,4 @@ var releaseConfig = {
 };
 
 initGulpTasks(gulp, taskConfig);
-initTestTasks(gulp, testConfig);
 initReleaseTasks(gulp, releaseConfig);
