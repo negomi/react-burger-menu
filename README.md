@@ -361,6 +361,9 @@ var styles = {
   bmBurgerBars: {
     background: '#373a47'
   },
+  bmBurgerBarsHover: {
+    background: #a90000;
+  },
   bmCrossButton: {
     height: '24px',
     width: '24px'
