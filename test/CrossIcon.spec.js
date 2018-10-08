@@ -132,7 +132,7 @@ describe('CrossIcon component', () => {
         margin: 0,
         padding: 0,
         border: 'none',
-        textIndent: -9999,
+        textIndent: -32768,
         background: 'transparent',
         color: 'transparent',
         outline: 'none',
