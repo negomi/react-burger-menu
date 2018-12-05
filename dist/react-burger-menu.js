@@ -1389,10 +1389,7 @@ var styles = {
             return { height: '100%' };
         },
         item: function item() {
-            return {
-                display: 'block',
-                outline: 'none'
-            };
+            return { display: 'block' };
         }
     };
 exports['default'] = styles;

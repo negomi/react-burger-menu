@@ -42,7 +42,6 @@ describe('slide', () => {
   it('has correct item styles', () => {
     const firstItem = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-item-list').children[0];
     expect(firstItem.style.display).to.equal('block');
-    expect(firstItem.style.outline).to.equal('none');
   });
 
   it('can be positioned on the right', () => {

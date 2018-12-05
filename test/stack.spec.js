@@ -40,7 +40,6 @@ describe('stack', () => {
     component = TestUtils.renderIntoDocument(<Menu><div>An item</div></Menu>);
     firstItem = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-item-list').children[0];
     expect(firstItem.style.display).to.equal('block');
-    expect(firstItem.style.outline).to.equal('none');
   });
 
   it('can be positioned on the right', () => {
