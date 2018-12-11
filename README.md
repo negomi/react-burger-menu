@@ -311,6 +311,12 @@ The component has the following helper classes:
   background: #bdc3c7;
 }
 
+/* Menu wrapper styles */
+.bm-menu-wrap {
+  position: fixed;
+  height: 100%;
+}
+
 /* General sidebar styles */
 .bm-menu {
   background: #373a47;
@@ -362,6 +368,10 @@ var styles = {
   },
   bmCross: {
     background: '#bdc3c7'
+  },
+  bmMenuWrap: {
+    position: 'fixed',
+    height: '100%'
   },
   bmMenu: {
     background: '#373a47',
