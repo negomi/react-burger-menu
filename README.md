@@ -311,7 +311,7 @@ The component has the following helper classes:
   background: #bdc3c7;
 }
 
-/* Menu wrapper styles */
+/* Sidebar wrapper styles */
 .bm-menu-wrap {
   position: fixed;
   height: 100%;
