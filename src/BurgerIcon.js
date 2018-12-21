@@ -33,9 +33,9 @@ export default class BurgerIcon extends Component {
       margin: 0,
       padding: 0,
       border: 'none',
-      opacity: 0,
       fontSize: 8,
-      cursor: 'pointer'
+      cursor: 'pointer',
+      background: 'transparent'
     };
 
     if (this.props.customIcon) {
@@ -76,7 +76,7 @@ export default class BurgerIcon extends Component {
           onMouseOut={() => this.setState({ hover: false })}
           style={buttonStyle}
         >
-          Open Menu
+          <span style={{ opacity: 0 }}>Open Menu</span>
         </button>
       </div>
     );
