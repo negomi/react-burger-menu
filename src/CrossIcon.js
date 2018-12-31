@@ -34,7 +34,6 @@ export default class CrossIcon extends Component {
       fontSize: 0,
       background: 'transparent',
       color: 'transparent',
-      outline: 'none',
       cursor: 'pointer'
     };
 

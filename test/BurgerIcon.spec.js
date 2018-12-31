@@ -112,7 +112,7 @@ describe('BurgerIcon component', () => {
 
     it('contains descriptive text', () => {
       const button = TestUtils.findRenderedDOMComponentWithTag(component, 'button');
-      expect(button.innerHTML).to.equal('Open Menu');
+      expect(button.innerHTML).to.equal('<span style="opacity: 0;">Open Menu</span>');
     });
 
     it('responds to hover events', () => {
@@ -144,9 +144,9 @@ describe('BurgerIcon component', () => {
         margin: 0,
         padding: 0,
         border: 'none',
-        opacity: 0,
         fontSize: 8,
-        cursor: 'pointer'
+        cursor: 'pointer',
+        background: 'transparent'
       };
       expect(button.props.style).to.deep.equal(expected);
     });
