@@ -300,6 +300,11 @@ The component has the following helper classes:
   background: #373a47;
 }
 
+/* Color/shape of burger icon bars on hover*/
+.bm-burger-bars-hover {
+  background: #a90000;
+}
+
 /* Position and sizing of clickable cross button */
 .bm-cross-button {
   height: 24px;
@@ -355,6 +360,9 @@ var styles = {
   },
   bmBurgerBars: {
     background: '#373a47'
+  },
+  bmBurgerBarsHover: {
+    background: #a90000;
   },
   bmCrossButton: {
     height: '24px',
