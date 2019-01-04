@@ -42,7 +42,6 @@ describe('bubble', () => {
 
   it('has correct item styles', () => {
     expect(firstItem.props.style.display).to.equal('block');
-    expect(firstItem.props.style.outline).to.equal('none');
     expect(firstItem.props.style.opacity).to.equal(0);
   });
 

@@ -1289,7 +1289,6 @@ var CrossIcon = function (_Component) {
                             fontSize: 0,
                             background: 'transparent',
                             color: 'transparent',
-                            outline: 'none',
                             cursor: 'pointer'
                         };
                     if (this.props.customIcon) {
@@ -1390,10 +1389,7 @@ var styles = {
             return { height: '100%' };
         },
         item: function item() {
-            return {
-                display: 'block',
-                outline: 'none'
-            };
+            return { display: 'block' };
         }
     };
 exports['default'] = styles;

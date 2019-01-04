@@ -61,7 +61,6 @@ describe('elastic', () => {
 
   it('has correct item styles', () => {
     expect(firstItem.props.style.display).to.equal('block');
-    expect(firstItem.props.style.outline).to.equal('none');
   });
 
   it('has correct morph shape styles', () => {

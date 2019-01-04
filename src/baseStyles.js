@@ -70,8 +70,7 @@ const styles = {
 
   item() {
     return {
-      display: 'block',
-      outline: 'none'
+      display: 'block'
     };
   }
 };
