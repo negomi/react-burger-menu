@@ -34,28 +34,28 @@ const styles = {
       MozTransform: isOpen
         ? 'translate3d(0, 0, 0)'
         : right
-          ? 'translate3d(100%, 0, 0)'
-          : 'translate3d(-100%, 0, 0)',
+        ? 'translate3d(100%, 0, 0)'
+        : 'translate3d(-100%, 0, 0)',
       MsTransform: isOpen
         ? 'translate3d(0, 0, 0)'
         : right
-          ? 'translate3d(100%, 0, 0)'
-          : 'translate3d(-100%, 0, 0)',
+        ? 'translate3d(100%, 0, 0)'
+        : 'translate3d(-100%, 0, 0)',
       OTransform: isOpen
         ? 'translate3d(0, 0, 0)'
         : right
-          ? 'translate3d(100%, 0, 0)'
-          : 'translate3d(-100%, 0, 0)',
+        ? 'translate3d(100%, 0, 0)'
+        : 'translate3d(-100%, 0, 0)',
       WebkitTransform: isOpen
         ? 'translate3d(0, 0, 0)'
         : right
-          ? 'translate3d(100%, 0, 0)'
-          : 'translate3d(-100%, 0, 0)',
+        ? 'translate3d(100%, 0, 0)'
+        : 'translate3d(-100%, 0, 0)',
       transform: isOpen
         ? 'translate3d(0, 0, 0)'
         : right
-          ? 'translate3d(100%, 0, 0)'
-          : 'translate3d(-100%, 0, 0)',
+        ? 'translate3d(100%, 0, 0)'
+        : 'translate3d(-100%, 0, 0)',
       transition: 'all 0.3s'
     };
   },
@@ -87,28 +87,28 @@ const styles = {
       MozTransform: isOpen
         ? ''
         : right
-          ? 'translate3d(-100px, 0, 0)'
-          : 'translate3d(100px, 0, 0)',
+        ? 'translate3d(-100px, 0, 0)'
+        : 'translate3d(100px, 0, 0)',
       MsTransform: isOpen
         ? ''
         : right
-          ? 'translate3d(-100px, 0, 0)'
-          : 'translate3d(100px, 0, 0)',
+        ? 'translate3d(-100px, 0, 0)'
+        : 'translate3d(100px, 0, 0)',
       OTransform: isOpen
         ? ''
         : right
-          ? 'translate3d(-100px, 0, 0)'
-          : 'translate3d(100px, 0, 0)',
+        ? 'translate3d(-100px, 0, 0)'
+        : 'translate3d(100px, 0, 0)',
       WebkitTransform: isOpen
         ? ''
         : right
-          ? 'translate3d(-100px, 0, 0)'
-          : 'translate3d(100px, 0, 0)',
+        ? 'translate3d(-100px, 0, 0)'
+        : 'translate3d(100px, 0, 0)',
       transform: isOpen
         ? ''
         : right
-          ? 'translate3d(-100px, 0, 0)'
-          : 'translate3d(100px, 0, 0)',
+        ? 'translate3d(-100px, 0, 0)'
+        : 'translate3d(100px, 0, 0)',
       transition: isOpen ? 'all 0.3s' : 'all 0.3s 0.1s'
     };
   },

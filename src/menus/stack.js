@@ -8,28 +8,28 @@ const styles = {
       MozTransform: isOpen
         ? ''
         : right
-          ? `translate3d(${width}, 0, 0)`
-          : `translate3d(-${width}, 0, 0)`,
+        ? `translate3d(${width}, 0, 0)`
+        : `translate3d(-${width}, 0, 0)`,
       MsTransform: isOpen
         ? ''
         : right
-          ? `translate3d(${width}, 0, 0)`
-          : `translate3d(-${width}, 0, 0)`,
+        ? `translate3d(${width}, 0, 0)`
+        : `translate3d(-${width}, 0, 0)`,
       OTransform: isOpen
         ? ''
         : right
-          ? `translate3d(${width}, 0, 0)`
-          : `translate3d(-${width}, 0, 0)`,
+        ? `translate3d(${width}, 0, 0)`
+        : `translate3d(-${width}, 0, 0)`,
       WebkitTransform: isOpen
         ? ''
         : right
-          ? `translate3d(${width}, 0, 0)`
-          : `translate3d(-${width}, 0, 0)`,
+        ? `translate3d(${width}, 0, 0)`
+        : `translate3d(-${width}, 0, 0)`,
       transform: isOpen
         ? ''
         : right
-          ? `translate3d(${width}, 0, 0)`
-          : `translate3d(-${width}, 0, 0)`,
+        ? `translate3d(${width}, 0, 0)`
+        : `translate3d(-${width}, 0, 0)`,
       transition: isOpen
         ? 'transform 0.8s cubic-bezier(0.7, 0, 0.3, 1)'
         : 'transform 0.4s cubic-bezier(0.7, 0, 0.3, 1)'
