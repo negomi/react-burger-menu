@@ -27,6 +27,15 @@ export default styles => {
       this.setState(newState, () => {
         !noStateChange && this.props.onStateChange(newState);
 
+        // For accessibility reasons, ensures that when we toggle open,
+        // we focus the first menu item if one exists.
+        if (newState.isOpen) {
+          const firstItem = document.querySelector('.bm-item');
+          if (firstItem) {
+            firstItem.focus();
+          }
+        }
+
         // Timeout ensures wrappers are cleared after animation finishes.
         this.timeoutId && clearTimeout(this.timeoutId);
         this.timeoutId = setTimeout(() => {
@@ -251,7 +260,8 @@ export default styles => {
                     const extraProps = {
                       key: index,
                       className: classList,
-                      style: this.getStyles('item', index, item.props.style)
+                      style: this.getStyles('item', index, item.props.style),
+                      tabIndex: this.state.isOpen ? 0 : -1
                     };
                     return React.cloneElement(item, extraProps);
                   }

@@ -144,9 +144,9 @@ describe('BurgerIcon component', () => {
         margin: 0,
         padding: 0,
         border: 'none',
-        opacity: 0,
-        fontSize: 8,
-        cursor: 'pointer'
+        fontSize: 0,
+        cursor: 'pointer',
+        background: 'transparent'
       };
       expect(button.props.style).to.deep.equal(expected);
     });
