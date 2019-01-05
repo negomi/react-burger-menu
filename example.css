@@ -138,6 +138,9 @@ h1 {
   margin-left: 10px;
   font-weight: 700;
 }
+.bm-item:focus {
+  outline: none;
+}
 .menu-1 .bm-cross {
   background: #bdc3c7;
 }
