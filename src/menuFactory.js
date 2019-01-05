@@ -14,10 +14,9 @@ export default styles => {
       this.state = {
         isOpen: false
       };
-      this.applyProperFocus = this.applyProperFocus.bind(this);
     }
 
-    toggleMenu(e, options = {}) {
+    toggleMenu(options = {}) {
       const { isOpen, noStateChange } = options;
       const newState = {
         isOpen: typeof isOpen !== 'undefined' ? isOpen : !this.state.isOpen
@@ -25,17 +24,18 @@ export default styles => {
 
       this.applyWrapperStyles();
 
-      this.applyProperFocus(e);
-
       this.setState(newState, () => {
         !noStateChange && this.props.onStateChange(newState);
 
-        const links = document.querySelectorAll('.bm-item');
+        // For accessibility reasons, ensures that when we toggle open,
+        // we focus the first menu item if one exists.
         if (newState.isOpen) {
-          links.forEach(link => (link.tabIndex = 0));
-        } else {
-          links.forEach(link => (link.tabIndex = -1));
+          const firstItem = document.querySelector('.bm-item');
+          if (firstItem) {
+            firstItem.focus();
+          }
         }
+
         // Timeout ensures wrappers are cleared after animation finishes.
         this.timeoutId && clearTimeout(this.timeoutId);
         this.timeoutId = setTimeout(() => {
@@ -64,20 +64,6 @@ export default styles => {
           styles.outerContainer,
           set
         );
-      }
-    }
-
-    // For accessibility reasons, ensures that when we open the nav,
-    // it focuses on the first link, and when we close it, it's on
-    // the hamburger menu.
-    applyProperFocus(e) {
-      const firstLink = document.querySelector('.bm-item-list')
-        .firstElementChild;
-      const openButton = document.querySelector('.bm-burger-button button');
-      if (!this.state.isOpen) {
-        firstLink.focus();
-      } else {
-        openButton.focus();
       }
     }
 
@@ -184,11 +170,6 @@ export default styles => {
       if (this.props.isOpen) {
         this.toggleMenu({ isOpen: true, noStateChange: true });
       }
-
-      if (!this.state.isOpen) {
-        const links = document.querySelectorAll('.bm-item');
-        links.forEach(link => (link.tabIndex = -1));
-      }
     }
 
     componentWillUnmount() {
@@ -279,7 +260,8 @@ export default styles => {
                     const extraProps = {
                       key: index,
                       className: classList,
-                      style: this.getStyles('item', index, item.props.style)
+                      style: this.getStyles('item', index, item.props.style),
+                      tabIndex: this.state.isOpen ? 0 : -1
                     };
                     return React.cloneElement(item, extraProps);
                   }
@@ -289,8 +271,7 @@ export default styles => {
             {this.props.customCrossIcon !== false && (
               <div style={this.getStyles('closeButton')}>
                 <CrossIcon
-                  onKeyPress={e => this.applyProperFocus(e)}
-                  onClick={e => this.toggleMenu(e)}
+                  onClick={() => this.toggleMenu()}
                   styles={this.props.styles}
                   customIcon={this.props.customCrossIcon}
                   className={this.props.crossButtonClassName}
@@ -302,8 +283,7 @@ export default styles => {
           {this.props.customBurgerIcon !== false && (
             <div style={this.getStyles('burgerIcon')}>
               <BurgerIcon
-                onKeyPress={e => this.applyProperFocus(e)}
-                onClick={e => this.toggleMenu(e)}
+                onClick={() => this.toggleMenu()}
                 styles={this.props.styles}
                 customIcon={this.props.customBurgerIcon}
                 className={this.props.burgerButtonClassName}
