@@ -34,6 +34,8 @@ export default styles => {
           if (firstItem) {
             firstItem.focus();
           }
+        } else {
+          document.activeElement.blur();
         }
 
         // Timeout ensures wrappers are cleared after animation finishes.
@@ -276,6 +278,7 @@ export default styles => {
                   customIcon={this.props.customCrossIcon}
                   className={this.props.crossButtonClassName}
                   crossClassName={this.props.crossClassName}
+                  tabIndex={this.state.isOpen ? 0 : -1}
                 />
               </div>
             )}

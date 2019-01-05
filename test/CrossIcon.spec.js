@@ -134,7 +134,6 @@ describe('CrossIcon component', () => {
         border: 'none',
         fontSize: 0,
         background: 'transparent',
-        color: 'transparent',
         cursor: 'pointer'
       };
       expect(button.props.style).to.deep.equal(expected);

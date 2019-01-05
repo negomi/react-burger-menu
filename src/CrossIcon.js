@@ -33,7 +33,6 @@ export default class CrossIcon extends Component {
       border: 'none',
       fontSize: 0,
       background: 'transparent',
-      color: 'transparent',
       cursor: 'pointer'
     };
 
@@ -69,7 +68,11 @@ export default class CrossIcon extends Component {
         style={{ ...buttonWrapperStyle, ...this.props.styles.bmCrossButton }}
       >
         {icon}
-        <button onClick={this.props.onClick} style={buttonStyle}>
+        <button
+          onClick={this.props.onClick}
+          style={buttonStyle}
+          tabIndex={this.props.tabIndex}
+        >
           Close Menu
         </button>
       </div>
@@ -80,11 +83,13 @@ export default class CrossIcon extends Component {
 CrossIcon.propTypes = {
   crossClassName: PropTypes.string,
   customIcon: PropTypes.element,
-  styles: PropTypes.object
+  styles: PropTypes.object,
+  tabIndex: PropTypes.number
 };
 
 CrossIcon.defaultProps = {
   crossClassName: '',
   className: '',
-  styles: {}
+  styles: {},
+  tabIndex: 0
 };
