@@ -311,7 +311,10 @@ The component has the following helper classes:
   background: #bdc3c7;
 }
 
-/* Sidebar wrapper styles */
+/*
+Sidebar wrapper styles
+Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+*/
 .bm-menu-wrap {
   position: fixed;
   height: 100%;
