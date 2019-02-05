@@ -1185,7 +1185,7 @@ var BurgerIcon = function (_Component) {
                         ].map(function (bar) {
                             return _react2['default'].createElement('span', {
                                 key: bar,
-                                className: ('bm-burger-bars ' + _this.props.barClassName + ' ' + (_this.state.hover && 'bm-burger-bars-hover')).trim(),
+                                className: ('bm-burger-bars ' + _this.props.barClassName + ' ' + (_this.state.hover ? 'bm-burger-bars-hover' : '')).trim(),
                                 style: _extends({}, _this.getLineStyle(bar), _this.props.styles.bmBurgerBars)
                             });
                         }));
