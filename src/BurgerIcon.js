@@ -54,8 +54,9 @@ export default class BurgerIcon extends Component {
           {[0, 1, 2].map(bar => (
             <span
               key={bar}
-              className={`bm-burger-bars ${this.props.barClassName} ${this.state
-                .hover && 'bm-burger-bars-hover'}`.trim()}
+              className={`bm-burger-bars ${this.props.barClassName} ${
+                this.state.hover ? 'bm-burger-bars-hover' : ''
+              }`.trim()}
               style={{
                 ...this.getLineStyle(bar),
                 ...this.props.styles.bmBurgerBars
