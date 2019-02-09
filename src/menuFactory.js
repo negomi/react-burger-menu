@@ -35,7 +35,11 @@ export default styles => {
             firstItem.focus();
           }
         } else {
-          document.activeElement.blur();
+          if (document.activeElement) {
+            document.activeElement.blur();
+          } else {
+            document.body.blur(); // Needed for IE
+          }
         }
 
         // Timeout ensures wrappers are cleared after animation finishes.
