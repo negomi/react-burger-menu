@@ -1415,7 +1415,11 @@ exports['default'] = function (styles) {
                                     firstItem.focus();
                                 }
                             } else {
-                                document.activeElement.blur();
+                                if (document.activeElement) {
+                                    document.activeElement.blur();
+                                } else {
+                                    document.body.blur();
+                                }
                             }
                             _this.timeoutId && clearTimeout(_this.timeoutId);
                             _this.timeoutId = setTimeout(function () {
