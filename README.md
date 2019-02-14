@@ -272,10 +272,13 @@ You can also pass custom classNames to the other elements:
 <Menu overlayClassName={ "my-class" } />
 ```
 
-And to the `body` element (applied when the menu is open):
+And to the `html` and `body` elements (applied when the menu is open):
 ```javascript
+<Menu htmlClassName={ "my-class" } />
 <Menu bodyClassName={ "my-class" } />
 ```
+
+*Note: Passing these props will prevent the menu from applying styles to the `html` or `body` elements automatically. See [here](https://github.com/negomi/react-burger-menu/wiki/FAQ#why-is-overflow-x-hidden-being-set-on-the-html-and-body-elements) for more explanation.*
 
 ### Styling
 
