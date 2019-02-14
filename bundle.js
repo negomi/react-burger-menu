@@ -1606,9 +1606,14 @@ exports['default'] = function (styles) {
                     key: 'applyWrapperStyles',
                     value: function applyWrapperStyles() {
                         var set = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
+                        var applyClass = function applyClass(el, className) {
+                            return el.classList[set ? 'add' : 'remove'](className);
+                        };
+                        if (this.props.htmlClassName) {
+                            applyClass(document.querySelector('html'), this.props.htmlClassName);
+                        }
                         if (this.props.bodyClassName) {
-                            var body = document.querySelector('body');
-                            body.classList[set ? 'add' : 'remove'](this.props.bodyClassName);
+                            applyClass(document.querySelector('body'), this.props.bodyClassName);
                         }
                         if (styles.pageWrap && this.props.pageWrapId) {
                             this.handleExternalWrapper(this.props.pageWrapId, styles.pageWrap, set);
@@ -1621,8 +1626,6 @@ exports['default'] = function (styles) {
                 {
                     key: 'handleExternalWrapper',
                     value: function handleExternalWrapper(id, wrapperStyles, set) {
-                        var html = document.querySelector('html');
-                        var body = document.querySelector('body');
                         var wrapper = document.getElementById(id);
                         if (!wrapper) {
                             console.error('Element with ID \'' + id + '\' not found');
@@ -1634,12 +1637,15 @@ exports['default'] = function (styles) {
                                 wrapper.style[prop] = set ? builtStyles[prop] : '';
                             }
                         }
-                        [
-                            html,
-                            body
-                        ].forEach(function (element) {
-                            element.style['overflow-x'] = set ? 'hidden' : '';
-                        });
+                        var applyOverflow = function applyOverflow(el) {
+                            return el.style['overflow-x'] = set ? 'hidden' : '';
+                        };
+                        if (!this.props.htmlClassName) {
+                            applyOverflow(document.querySelector('html'));
+                        }
+                        if (!this.props.bodyClassName) {
+                            applyOverflow(document.querySelector('body'));
+                        }
                     }
                 },
                 {
@@ -1832,6 +1838,7 @@ exports['default'] = function (styles) {
             _propTypes2['default'].bool,
             _propTypes2['default'].func
         ]),
+        htmlClassName: _propTypes2['default'].string,
         id: _propTypes2['default'].string,
         isOpen: _propTypes2['default'].bool,
         itemClassName: _propTypes2['default'].string,
@@ -1858,6 +1865,7 @@ exports['default'] = function (styles) {
         crossButtonClassName: '',
         crossClassName: '',
         disableCloseOnEsc: false,
+        htmlClassName: '',
         id: '',
         itemClassName: '',
         itemListClassName: '',
