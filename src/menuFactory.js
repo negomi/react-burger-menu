@@ -55,9 +55,14 @@ export default styles => {
 
     // Applies component-specific styles to external wrapper elements.
     applyWrapperStyles(set = true) {
+      const applyClass = (el, className) =>
+        el.classList[set ? 'add' : 'remove'](className);
+
+      if (this.props.htmlClassName) {
+        applyClass(document.querySelector('html'), this.props.htmlClassName);
+      }
       if (this.props.bodyClassName) {
-        const body = document.querySelector('body');
-        body.classList[set ? 'add' : 'remove'](this.props.bodyClassName);
+        applyClass(document.querySelector('body'), this.props.bodyClassName);
       }
 
       if (styles.pageWrap && this.props.pageWrapId) {
@@ -78,8 +83,6 @@ export default styles => {
     // Throws and returns if the required external elements don't exist,
     // which means any external page animations won't be applied.
     handleExternalWrapper(id, wrapperStyles, set) {
-      const html = document.querySelector('html');
-      const body = document.querySelector('body');
       const wrapper = document.getElementById(id);
 
       if (!wrapper) {
@@ -96,9 +99,18 @@ export default styles => {
       }
 
       // Prevent any horizontal scroll.
-      [html, body].forEach(element => {
-        element.style['overflow-x'] = set ? 'hidden' : '';
-      });
+      // Only set overflow-x as an inline style if htmlClassName or
+      // bodyClassName is not passed in. Otherwise, it is up to the caller to
+      // decide if they want to set the overflow style in CSS using the custom
+      // class names.
+      const applyOverflow = el =>
+        (el.style['overflow-x'] = set ? 'hidden' : '');
+      if (!this.props.htmlClassName) {
+        applyOverflow(document.querySelector('html'));
+      }
+      if (!this.props.bodyClassName) {
+        applyOverflow(document.querySelector('body'));
+      }
     }
 
     // Builds styles incrementally for a given element.
@@ -320,6 +332,7 @@ export default styles => {
     customOnKeyDown: PropTypes.func,
     disableCloseOnEsc: PropTypes.bool,
     disableOverlayClick: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+    htmlClassName: PropTypes.string,
     id: PropTypes.string,
     isOpen: PropTypes.bool,
     itemClassName: PropTypes.string,
@@ -350,6 +363,7 @@ export default styles => {
     crossButtonClassName: '',
     crossClassName: '',
     disableCloseOnEsc: false,
+    htmlClassName: '',
     id: '',
     itemClassName: '',
     itemListClassName: '',

@@ -70,6 +70,12 @@ describe('menuFactory', () => {
     document.body.removeChild(outerContainer);
   }
 
+  function clearHtmlBodyInlineStyles() {
+    const html = document.querySelector('html');
+    const body = document.querySelector('body');
+    [html, body].forEach(el => el.removeAttribute('style'));
+  }
+
   it('exists and is not undefined', () => {
     assert.isDefined(menuFactory, 'menuFactory is defined');
   });
@@ -107,6 +113,15 @@ describe('menuFactory', () => {
       component = createShallowComponent(<Menu className={ 'custom-class' } />);
       const menuWrap = component.props.children[1];
       expect(menuWrap.props.className).to.contain('custom-class');
+    });
+
+    it('accepts an optional htmlClassName, applied only when menu is open', () => {
+      component = TestUtils.renderIntoDocument(<Menu htmlClassName={ 'custom-class' } />);
+      const html = document.querySelector('html');
+      expect(html.classList.contains('custom-class')).to.be.false;
+      component.toggleMenu();
+      expect(html.classList.contains('custom-class')).to.be.true;
+      component.toggleMenu();
     });
 
     it('accepts an optional bodyClassName, applied only when menu is open', () => {
@@ -434,6 +449,7 @@ describe('menuFactory', () => {
 
     afterEach(() => {
       removeWrapperElementsFromDOM();
+      clearHtmlBodyInlineStyles();
     });
 
     it('errors with the correct message if no wrapper element found', () => {
@@ -467,6 +483,15 @@ describe('menuFactory', () => {
       component.handleExternalWrapper('page-wrap', styles, true);
       expect(html.style['overflow-x']).to.equal('hidden');
       expect(body.style['overflow-x']).to.equal('hidden');
+    });
+
+    it('does not set styles on html and body elements if custom classes are used', () => {
+      const component = TestUtils.renderIntoDocument(<Menu pageWrapId={ 'page-wrap' } outerContainerId={ 'outer-container' } htmlClassName="custom-html" bodyClassName="custom-body" />);
+      let html = document.querySelector('html');
+      let body = document.querySelector('body');
+      component.handleExternalWrapper('page-wrap', styles, true);
+      expect(html.style['overflow-x']).to.equal('');
+      expect(body.style['overflow-x']).to.equal('');
     });
 
     it('clears styles from html and body elements', () => {
