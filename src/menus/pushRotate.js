@@ -39,7 +39,7 @@ const styles = {
   outerContainer(isOpen) {
     return {
       perspective: '1500px',
-      overflow: isOpen ? '' : 'hidden'
+      overflow: isOpen ? 'hidden' : ''
     };
   }
 };
