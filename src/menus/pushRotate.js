@@ -32,7 +32,9 @@ const styles = {
         : `translate3d(${width}, 0, 0) rotateY(-15deg)`,
       transformOrigin: right ? '100% 50%' : '0% 50%',
       transformStyle: 'preserve-3d',
-      transition: 'all 0.5s'
+      transition: 'all 0.5s',
+      height: 'auto',
+      overflowY: 'hidden'
     };
   },
 
