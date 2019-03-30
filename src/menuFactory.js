@@ -319,6 +319,7 @@ export default styles => {
     bodyClassName: PropTypes.string,
     burgerBarClassName: PropTypes.string,
     burgerButtonClassName: PropTypes.string,
+    className: PropTypes.string,
     crossButtonClassName: PropTypes.string,
     crossClassName: PropTypes.string,
     customBurgerIcon: PropTypes.oneOfType([
