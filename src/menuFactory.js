@@ -27,18 +27,20 @@ export default styles => {
       this.setState(newState, () => {
         !noStateChange && this.props.onStateChange(newState);
 
-        // For accessibility reasons, ensures that when we toggle open,
-        // we focus the first menu item if one exists.
-        if (newState.isOpen) {
-          const firstItem = document.querySelector('.bm-item');
-          if (firstItem) {
-            firstItem.focus();
-          }
-        } else {
-          if (document.activeElement) {
-            document.activeElement.blur();
+        if (!this.props.disableAutoFocus) {
+          // For accessibility reasons, ensures that when we toggle open,
+          // we focus the first menu item if one exists.
+          if (newState.isOpen) {
+            const firstItem = document.querySelector('.bm-item');
+            if (firstItem) {
+              firstItem.focus();
+            }
           } else {
-            document.body.blur(); // Needed for IE
+            if (document.activeElement) {
+              document.activeElement.blur();
+            } else {
+              document.body.blur(); // Needed for IE
+            }
           }
         }
 
@@ -331,6 +333,7 @@ export default styles => {
       PropTypes.oneOf([false])
     ]),
     customOnKeyDown: PropTypes.func,
+    disableAutoFocus: PropTypes.bool,
     disableCloseOnEsc: PropTypes.bool,
     disableOverlayClick: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
     htmlClassName: PropTypes.string,
@@ -363,6 +366,7 @@ export default styles => {
     className: '',
     crossButtonClassName: '',
     crossClassName: '',
+    disableAutoFocus: false,
     disableCloseOnEsc: false,
     htmlClassName: '',
     id: '',

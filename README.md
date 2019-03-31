@@ -280,6 +280,14 @@ And to the `html` and `body` elements (applied when the menu is open):
 
 *Note: Passing these props will prevent the menu from applying styles to the `html` or `body` elements automatically. See [here](https://github.com/negomi/react-burger-menu/wiki/FAQ#why-is-overflow-x-hidden-being-set-on-the-html-and-body-elements) for more explanation.*
 
+#### Focusing the first menu item
+
+By default, the menu will set focus on the first item when opened. This is to help with keyboard navigation. If you don't want this functionality, you can pass the `disableAutoFocus` prop.
+
+``` javascript
+<Menu disableAutoFocus />
+```
+
 ### Styling
 
 All the animations are handled internally by the component. However, the visual styles (colors, fonts etc.) are not, and need to be supplied, either with CSS or with a JavaScript object passed as the `styles` prop.
