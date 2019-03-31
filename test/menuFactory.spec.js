@@ -6,6 +6,7 @@ import TestUtils from 'react-dom/test-utils';
 import { assert, expect } from 'chai';
 import sinon from 'sinon';
 import createShallowComponent from './utils/createShallowComponent';
+import createMountedComponent from './utils/createMountedComponent';
 import menuFactory from '../src/menuFactory';
 
 describe('menuFactory', () => {
@@ -180,6 +181,26 @@ describe('menuFactory', () => {
       const overlay = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-overlay');
       TestUtils.Simulate.click(overlay);
       expect(component.state.isOpen).to.be.true;
+    });
+  });
+
+  describe('react <StrictMode>', () => {
+    let stubConsoleError;
+    let errorLogs = [];
+
+    beforeEach(() => {
+      errorLogs = [];
+      stubConsoleError = sinon.stub(console, 'error').callsFake((...args) => errorLogs.push(args));
+    });
+
+    afterEach(() => {
+      stubConsoleError.restore();
+    });
+
+    it('renders without strict mode warnings', () => {
+      Menu = menuFactory(mockStyles.basic);
+      component = createMountedComponent(<React.StrictMode><Menu /></React.StrictMode>);
+      expect(errorLogs).to.deep.equal([]);
     });
   });
 
