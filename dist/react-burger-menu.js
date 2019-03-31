@@ -1396,6 +1396,9 @@ exports['default'] = function (styles) {
                 _classCallCheck(this, Menu);
                 _get(Object.getPrototypeOf(Menu.prototype), 'constructor', this).call(this, props);
                 this.state = { isOpen: false };
+                if (!styles) {
+                    throw new Error('No styles supplied');
+                }
             }
             _createClass(Menu, [
                 {
@@ -1409,16 +1412,18 @@ exports['default'] = function (styles) {
                         this.applyWrapperStyles();
                         this.setState(newState, function () {
                             !noStateChange && _this.props.onStateChange(newState);
-                            if (newState.isOpen) {
-                                var firstItem = document.querySelector('.bm-item');
-                                if (firstItem) {
-                                    firstItem.focus();
-                                }
-                            } else {
-                                if (document.activeElement) {
-                                    document.activeElement.blur();
+                            if (!_this.props.disableAutoFocus) {
+                                if (newState.isOpen) {
+                                    var firstItem = document.querySelector('.bm-item');
+                                    if (firstItem) {
+                                        firstItem.focus();
+                                    }
                                 } else {
-                                    document.body.blur();
+                                    if (document.activeElement) {
+                                        document.activeElement.blur();
+                                    } else {
+                                        document.body.blur();
+                                    }
                                 }
                             }
                             _this.timeoutId && clearTimeout(_this.timeoutId);
@@ -1522,14 +1527,6 @@ exports['default'] = function (styles) {
                     }
                 },
                 {
-                    key: 'componentWillMount',
-                    value: function componentWillMount() {
-                        if (!styles) {
-                            throw new Error('No styles supplied');
-                        }
-                    }
-                },
-                {
                     key: 'componentDidMount',
                     value: function componentDidMount() {
                         if (this.props.customOnKeyDown) {
@@ -1556,6 +1553,11 @@ exports['default'] = function (styles) {
                     key: 'componentDidUpdate',
                     value: function componentDidUpdate() {
                         var _this2 = this;
+                        var wasToggled = typeof this.props.isOpen !== 'undefined' && this.props.isOpen !== this.state.isOpen;
+                        if (wasToggled) {
+                            this.toggleMenu();
+                            return;
+                        }
                         if (styles.svg) {
                             (function () {
                                 var morphShape = _reactDom2['default'].findDOMNode(_this2, 'bm-morph-shape');
@@ -1568,14 +1570,6 @@ exports['default'] = function (styles) {
                                     }, 300);
                                 }
                             }());
-                        }
-                    }
-                },
-                {
-                    key: 'componentWillReceiveProps',
-                    value: function componentWillReceiveProps(nextProps) {
-                        if (typeof nextProps.isOpen !== 'undefined' && nextProps.isOpen !== this.state.isOpen) {
-                            this.toggleMenu();
                         }
                     }
                 },
@@ -1651,6 +1645,7 @@ exports['default'] = function (styles) {
         bodyClassName: _propTypes2['default'].string,
         burgerBarClassName: _propTypes2['default'].string,
         burgerButtonClassName: _propTypes2['default'].string,
+        className: _propTypes2['default'].string,
         crossButtonClassName: _propTypes2['default'].string,
         crossClassName: _propTypes2['default'].string,
         customBurgerIcon: _propTypes2['default'].oneOfType([
@@ -1662,6 +1657,7 @@ exports['default'] = function (styles) {
             _propTypes2['default'].oneOf([false])
         ]),
         customOnKeyDown: _propTypes2['default'].func,
+        disableAutoFocus: _propTypes2['default'].bool,
         disableCloseOnEsc: _propTypes2['default'].bool,
         disableOverlayClick: _propTypes2['default'].oneOfType([
             _propTypes2['default'].bool,
@@ -1693,6 +1689,7 @@ exports['default'] = function (styles) {
         className: '',
         crossButtonClassName: '',
         crossClassName: '',
+        disableAutoFocus: false,
         disableCloseOnEsc: false,
         htmlClassName: '',
         id: '',
