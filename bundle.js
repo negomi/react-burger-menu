@@ -1722,9 +1722,9 @@ exports['default'] = function (styles) {
                 },
                 {
                     key: 'componentDidUpdate',
-                    value: function componentDidUpdate() {
+                    value: function componentDidUpdate(prevProps) {
                         var _this2 = this;
-                        var wasToggled = typeof this.props.isOpen !== 'undefined' && this.props.isOpen !== this.state.isOpen;
+                        var wasToggled = typeof this.props.isOpen !== 'undefined' && this.props.isOpen !== this.state.isOpen && this.props.isOpen !== prevProps.isOpen;
                         if (wasToggled) {
                             this.toggleMenu();
                             return;
