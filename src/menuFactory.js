@@ -163,7 +163,12 @@ export default styles => {
     listenForClose(e) {
       e = e || window.event;
 
-      if (this.state.isOpen && (e.key === 'Escape' || e.keyCode === 27)) {
+      // Close on ESC, unless disabled
+      if (
+        !this.props.disableCloseOnEsc &&
+        this.state.isOpen &&
+        (e.key === 'Escape' || e.keyCode === 27)
+      ) {
         this.toggleMenu();
       }
     }
@@ -177,10 +182,10 @@ export default styles => {
     }
 
     componentDidMount() {
-      // Bind ESC key handler (unless disabled or custom function supplied).
+      // Bind ESC key handler (unless custom function supplied).
       if (this.props.customOnKeyDown) {
         window.onkeydown = this.props.customOnKeyDown;
-      } else if (!this.props.disableCloseOnEsc) {
+      } else {
         window.onkeydown = this.listenForClose.bind(this);
       }
 
