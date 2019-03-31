@@ -14,6 +14,10 @@ export default styles => {
       this.state = {
         isOpen: false
       };
+
+      if (!styles) {
+        throw new Error('No styles supplied');
+      }
     }
 
     toggleMenu(options = {}) {
@@ -172,12 +176,6 @@ export default styles => {
       }
     }
 
-    componentWillMount() {
-      if (!styles) {
-        throw new Error('No styles supplied');
-      }
-    }
-
     componentDidMount() {
       // Bind ESC key handler (unless disabled or custom function supplied).
       if (this.props.customOnKeyDown) {
@@ -199,6 +197,15 @@ export default styles => {
     }
 
     componentDidUpdate() {
+      const wasToggled =
+        typeof this.props.isOpen !== 'undefined' &&
+        this.props.isOpen !== this.state.isOpen;
+      if (wasToggled) {
+        this.toggleMenu();
+        // Toggling changes SVG animation requirements, so we defer these until the next componentDidUpdate
+        return;
+      }
+
       if (styles.svg) {
         const morphShape = ReactDOM.findDOMNode(this, 'bm-morph-shape');
         const path = styles.svg.lib(morphShape).select('path');
@@ -212,15 +219,6 @@ export default styles => {
             path.attr('d', styles.svg.pathInitial);
           }, 300);
         }
-      }
-    }
-
-    componentWillReceiveProps(nextProps) {
-      if (
-        typeof nextProps.isOpen !== 'undefined' &&
-        nextProps.isOpen !== this.state.isOpen
-      ) {
-        this.toggleMenu();
       }
     }
 

@@ -63,7 +63,7 @@
     "build": "gulp clean && NODE_ENV=production gulp build",
     "examples": "gulp dev:server",
     "lint": "eslint ./; true",
-    "prettier": "prettier \"src/**/*.js\" --single-quote --ignore-path ./.prettierignore --write && git add . && git status",
+    "prettier": "prettier \"src/**/*.js\" --single-quote --no-config --ignore-path ./.prettierignore --write && git add . && git status",
     "publish:site": "gulp publish:examples",
     "publish:version": "gulp commit:version && gulp push",
     "start": "gulp dev",
