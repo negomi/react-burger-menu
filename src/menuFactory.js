@@ -196,10 +196,11 @@ export default styles => {
       this.applyWrapperStyles(false);
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps) {
       const wasToggled =
         typeof this.props.isOpen !== 'undefined' &&
-        this.props.isOpen !== this.state.isOpen;
+        this.props.isOpen !== this.state.isOpen &&
+        this.props.isOpen !== prevProps.isOpen;
       if (wasToggled) {
         this.toggleMenu();
         // Toggling changes SVG animation requirements, so we defer these until the next componentDidUpdate
