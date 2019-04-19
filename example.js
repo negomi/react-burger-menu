@@ -241,26 +241,15 @@ var Demo = function (_Component2) {
                 key: 'getMenu',
                 value: function getMenu() {
                     var Menu = _reactBurgerMenu2['default'][this.state.currentMenu];
-                    var items = this.getItems();
-                    var jsx = undefined;
-                    if (this.state.side === 'right') {
-                        jsx = _react2['default'].createElement(MenuWrap, {
-                            wait: 20,
-                            side: this.state.side
-                        }, _react2['default'].createElement(Menu, {
-                            id: this.state.currentMenu,
-                            pageWrapId: 'page-wrap',
-                            outerContainerId: 'outer-container',
-                            right: true
-                        }, items));
-                    } else {
-                        jsx = _react2['default'].createElement(MenuWrap, { wait: 20 }, _react2['default'].createElement(Menu, {
-                            id: this.state.currentMenu,
-                            pageWrapId: 'page-wrap',
-                            outerContainerId: 'outer-container'
-                        }, items));
-                    }
-                    return jsx;
+                    return _react2['default'].createElement(MenuWrap, {
+                        wait: 20,
+                        side: this.state.side
+                    }, _react2['default'].createElement(Menu, {
+                        id: this.state.currentMenu,
+                        pageWrapId: 'page-wrap',
+                        outerContainerId: 'outer-container',
+                        right: this.state.side === 'right'
+                    }, this.getItems()));
                 }
             },
             {
