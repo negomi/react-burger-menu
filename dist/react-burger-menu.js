@@ -1467,7 +1467,7 @@ var BurgerIcon = function (_Component) {
                         };
                     if (this.props.customIcon) {
                         var extraProps = {
-                                className: 'bm-icon',
+                                className: ('bm-icon ' + (this.props.customIcon.props.className || '')).trim(),
                                 style: _extends({
                                     width: '100%',
                                     height: '100%'
