@@ -99,28 +99,14 @@ class Demo extends Component {
 
   getMenu() {
     const Menu = BurgerMenu[this.state.currentMenu];
-    const items = this.getItems();
-    let jsx;
 
-    if (this.state.side === 'right') {
-      jsx = (
-        <MenuWrap wait={20} side={this.state.side}>
-          <Menu id={this.state.currentMenu} pageWrapId={'page-wrap'} outerContainerId={'outer-container'} right>
-            {items}
-          </Menu>
-        </MenuWrap>
-      );
-    } else {
-      jsx = (
-        <MenuWrap wait={20}>
-          <Menu id={this.state.currentMenu} pageWrapId={'page-wrap'} outerContainerId={'outer-container'}>
-            {items}
-          </Menu>
-        </MenuWrap>
-      );
-    }
-
-    return jsx;
+    return (
+      <MenuWrap wait={20} side={this.state.side}>
+        <Menu id={this.state.currentMenu} pageWrapId={'page-wrap'} outerContainerId={'outer-container'} right={this.state.side === 'right'}>
+          {this.getItems()}
+        </Menu>
+      </MenuWrap>
+    );
   }
 
   render() {
