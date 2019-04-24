@@ -1672,7 +1672,7 @@ var CrossIcon = function (_Component) {
                         };
                     if (this.props.customIcon) {
                         var extraProps = {
-                                className: 'bm-cross',
+                                className: ('bm-cross ' + (this.props.customIcon.props.className || '')).trim(),
                                 style: _extends({
                                     width: '100%',
                                     height: '100%'
