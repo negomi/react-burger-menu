@@ -38,7 +38,8 @@ export default class CrossIcon extends Component {
 
     if (this.props.customIcon) {
       let extraProps = {
-        className: 'bm-cross',
+        className: `bm-cross ${this.props.customIcon.props.className ||
+          ''}`.trim(),
         style: {
           ...{ width: '100%', height: '100%' },
           ...this.props.styles.bmCross
