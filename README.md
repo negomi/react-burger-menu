@@ -231,6 +231,16 @@ You can disable the overlay click event (i.e. prevent overlay clicks from closin
 <Menu disableOverlayClick={() => shouldDisableOverlayClick()} />
 ```
 
+#### Transitions
+
+You can disable all transitions/animations by passing `noTransition`.
+
+``` javascript
+<Menu noTransition />
+```
+
+This is useful if you want the menu to remain open across re-mounts, for example during SPA route changes.
+
 #### Custom icons
 
 You can replace the default bars that make up the burger and cross icons with custom `ReactElement`s. Pass them as the `customBurgerIcon` and `customCrossIcon` props respectively.

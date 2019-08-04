@@ -1984,6 +1984,9 @@ exports['default'] = function (styles) {
                         if (inline) {
                             output = _extends({}, output, inline);
                         }
+                        if (this.props.noTransition) {
+                            delete output.transition;
+                        }
                         return output;
                     }
                 },
@@ -2159,6 +2162,7 @@ exports['default'] = function (styles) {
         menuClassName: _propTypes2['default'].string,
         morphShapeClassName: _propTypes2['default'].string,
         noOverlay: _propTypes2['default'].bool,
+        noTransition: _propTypes2['default'].bool,
         onStateChange: _propTypes2['default'].func,
         outerContainerId: styles && styles.outerContainer ? _propTypes2['default'].string.isRequired : _propTypes2['default'].string,
         overlayClassName: _propTypes2['default'].string,
@@ -2186,6 +2190,7 @@ exports['default'] = function (styles) {
         menuClassName: '',
         morphShapeClassName: '',
         noOverlay: false,
+        noTransition: false,
         onStateChange: function onStateChange() {
         },
         outerContainerId: '',

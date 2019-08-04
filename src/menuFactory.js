@@ -151,6 +151,12 @@ export default styles => {
         };
       }
 
+      // Remove transition if required
+      // (useful if rendering open initially).
+      if (this.props.noTransition) {
+        delete output.transition;
+      }
+
       return output;
     }
 
@@ -348,6 +354,7 @@ export default styles => {
     menuClassName: PropTypes.string,
     morphShapeClassName: PropTypes.string,
     noOverlay: PropTypes.bool,
+    noTransition: PropTypes.bool,
     onStateChange: PropTypes.func,
     outerContainerId:
       styles && styles.outerContainer
@@ -379,6 +386,7 @@ export default styles => {
     menuClassName: '',
     morphShapeClassName: '',
     noOverlay: false,
+    noTransition: false,
     onStateChange: () => {},
     outerContainerId: '',
     overlayClassName: '',
