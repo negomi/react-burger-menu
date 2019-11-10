@@ -253,9 +253,7 @@ export default styles => {
           >
             {styles.svg && (
               <div
-                className={`bm-morph-shape ${
-                  this.props.morphShapeClassName
-                }`.trim()}
+                className={`bm-morph-shape ${this.props.morphShapeClassName}`.trim()}
                 style={this.getStyles('morphShape')}
               >
                 <svg
@@ -273,9 +271,7 @@ export default styles => {
               style={this.getStyles('menu')}
             >
               <nav
-                className={`bm-item-list ${
-                  this.props.itemListClassName
-                }`.trim()}
+                className={`bm-item-list ${this.props.itemListClassName}`.trim()}
                 style={this.getStyles('itemList')}
               >
                 {React.Children.map(this.props.children, (item, index) => {
