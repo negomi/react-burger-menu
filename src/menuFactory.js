@@ -315,6 +315,7 @@ export default styles => {
                 customIcon={this.props.customBurgerIcon}
                 className={this.props.burgerButtonClassName}
                 barClassName={this.props.burgerBarClassName}
+                onIconStateChange={this.props.onIconStateChange}
               />
             </div>
           )}
@@ -363,7 +364,8 @@ export default styles => {
         : PropTypes.string,
     right: PropTypes.bool,
     styles: PropTypes.object,
-    width: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+    width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    onIconStateChange: PropTypes.func
   };
 
   Menu.defaultProps = {
@@ -388,7 +390,8 @@ export default styles => {
     overlayClassName: '',
     pageWrapId: '',
     styles: {},
-    width: 300
+    width: 300,
+    onIconStateChange: () => {}
   };
 
   return Menu;

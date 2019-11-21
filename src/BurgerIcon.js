@@ -79,8 +79,16 @@ export default class BurgerIcon extends Component {
         {icon}
         <button
           onClick={this.props.onClick}
-          onMouseOver={() => this.setState({ hover: true })}
-          onMouseOut={() => this.setState({ hover: false })}
+          onMouseOver={() => {
+            this.setState({ hover: true });
+            if (this.props.onIconStateChange)
+              this.props.onIconStateChange({ isMouseIn: true });
+          }}
+          onMouseOut={() => {
+            this.setState({ hover: false });
+            if (this.props.onIconStateChange)
+              this.props.onIconStateChange({ isMouseIn: false });
+          }}
           style={buttonStyle}
         >
           Open Menu

@@ -150,5 +150,16 @@ describe('BurgerIcon component', () => {
       };
       expect(button.props.style).to.deep.equal(expected);
     });
+
+    it('exposes icon state from hover event handler', () => {
+      let isMouseIn = false;
+      function handleIconStateChange(iconState){isMouseIn = iconState.isMouseIn;}
+      component = TestUtils.renderIntoDocument(<BurgerIcon onIconStateChange={handleIconStateChange}/>);  
+      const button = TestUtils.findRenderedDOMComponentWithTag(component, 'button');
+      TestUtils.SimulateNative.mouseOver(button);
+      expect(isMouseIn).to.be.true;
+      TestUtils.SimulateNative.mouseOut(button);
+      expect(isMouseIn).to.be.false;
+    });    
   });
 });
