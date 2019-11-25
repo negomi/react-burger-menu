@@ -153,8 +153,8 @@ describe('BurgerIcon component', () => {
 
     it('exposes icon state from hover event handler', () => {
       let isMouseIn = false;
-      function handleIconStateChange(iconState){isMouseIn = iconState.isMouseIn;}
-      component = TestUtils.renderIntoDocument(<BurgerIcon onIconStateChange={handleIconStateChange}/>);  
+      function handleIconHoverChange(hoverState){isMouseIn = hoverState.isMouseIn;}
+      component = TestUtils.renderIntoDocument(<BurgerIcon onIconHoverChange={handleIconHoverChange}/>);  
       const button = TestUtils.findRenderedDOMComponentWithTag(component, 'button');
       TestUtils.SimulateNative.mouseOver(button);
       expect(isMouseIn).to.be.true;

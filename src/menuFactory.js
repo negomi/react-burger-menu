@@ -365,7 +365,7 @@ export default styles => {
     right: PropTypes.bool,
     styles: PropTypes.object,
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    onIconStateChange: PropTypes.func
+    onIconHoverChange: PropTypes.func
   };
 
   Menu.defaultProps = {
@@ -391,7 +391,7 @@ export default styles => {
     pageWrapId: '',
     styles: {},
     width: 300,
-    onIconStateChange: () => {}
+    onIconHoverChange: () => {}
   };
 
   return Menu;
