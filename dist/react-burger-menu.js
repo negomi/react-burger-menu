@@ -1493,10 +1493,14 @@ var BurgerIcon = function (_Component) {
                     }, icon, _react2['default'].createElement('button', {
                         onClick: this.props.onClick,
                         onMouseOver: function () {
-                            return _this.setState({ hover: true });
+                            _this.setState({ hover: true });
+                            if (_this.props.onIconHoverChange)
+                                _this.props.onIconHoverChange({ isMouseIn: true });
                         },
                         onMouseOut: function () {
-                            return _this.setState({ hover: false });
+                            _this.setState({ hover: false });
+                            if (_this.props.onIconHoverChange)
+                                _this.props.onIconHoverChange({ isMouseIn: false });
                         },
                         style: buttonStyle
                     }, 'Open Menu'));
@@ -2125,7 +2129,8 @@ exports['default'] = function (styles) {
                             styles: this.props.styles,
                             customIcon: this.props.customBurgerIcon,
                             className: this.props.burgerButtonClassName,
-                            barClassName: this.props.burgerBarClassName
+                            barClassName: this.props.burgerBarClassName,
+                            onIconStateChange: this.props.onIconStateChange
                         })));
                     }
                 }
@@ -2172,7 +2177,8 @@ exports['default'] = function (styles) {
         width: _propTypes2['default'].oneOfType([
             _propTypes2['default'].number,
             _propTypes2['default'].string
-        ])
+        ]),
+        onIconHoverChange: _propTypes2['default'].func
     };
     Menu.defaultProps = {
         bodyClassName: '',
@@ -2197,7 +2203,9 @@ exports['default'] = function (styles) {
         overlayClassName: '',
         pageWrapId: '',
         styles: {},
-        width: 300
+        width: 300,
+        onIconHoverChange: function onIconHoverChange() {
+        }
     };
     return Menu;
 };
