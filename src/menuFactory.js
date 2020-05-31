@@ -352,6 +352,7 @@ export default styles => {
     morphShapeClassName: PropTypes.string,
     noOverlay: PropTypes.bool,
     noTransition: PropTypes.bool,
+    onIconHoverChange: PropTypes.func,
     onStateChange: PropTypes.func,
     outerContainerId:
       styles && styles.outerContainer
@@ -364,8 +365,7 @@ export default styles => {
         : PropTypes.string,
     right: PropTypes.bool,
     styles: PropTypes.object,
-    width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    onIconHoverChange: PropTypes.func
+    width: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
   };
 
   Menu.defaultProps = {
