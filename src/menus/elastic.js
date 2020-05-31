@@ -2,6 +2,9 @@
 
 import Snap from '../snapsvgImporter';
 import menuFactory from '../menuFactory';
+import { pxToNum } from '../utils';
+
+const MORPH_SHAPE_WIDTH = 120;
 
 const styles = {
   svg: {
@@ -17,7 +20,7 @@ const styles = {
   morphShape(isOpen, width, right) {
     return {
       position: 'absolute',
-      width: 120,
+      width: MORPH_SHAPE_WIDTH,
       height: '100%',
       right: right ? 'inherit' : 0,
       left: right ? 0 : 'inherit',
@@ -64,7 +67,7 @@ const styles = {
     return {
       position: 'fixed',
       right: right ? 0 : 'inherit',
-      width: 180,
+      width: pxToNum(width) - MORPH_SHAPE_WIDTH,
       whiteSpace: 'nowrap',
       boxSizing: 'border-box',
       overflow: 'visible'
