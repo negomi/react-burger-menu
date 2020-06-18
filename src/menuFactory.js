@@ -205,6 +205,9 @@ export default styles => {
       window.onkeydown = null;
 
       this.applyWrapperStyles(false);
+
+      // Avoid potentially attempting to update an unmounted component.
+      this.timeoutId && clearTimeout(this.timeoutId);
     }
 
     componentDidUpdate(prevProps) {
