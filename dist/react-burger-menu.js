@@ -2042,6 +2042,7 @@ exports['default'] = function (styles) {
                     value: function componentWillUnmount() {
                         window.onkeydown = null;
                         this.applyWrapperStyles(false);
+                        this.timeoutId && clearTimeout(this.timeoutId);
                     }
                 },
                 {
