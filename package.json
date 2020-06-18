@@ -65,7 +65,7 @@
     "build": "gulp clean && NODE_ENV=production gulp build",
     "examples": "gulp dev:server",
     "lint": "eslint ./; true",
-    "prettier": "prettier \"src/**/*.js\" --single-quote --no-config --ignore-path ./.prettierignore --write && git add . && git status",
+    "prettier": "prettier \"src/**/*.js\" --single-quote --no-config --ignore-path ./.prettierignore --write",
     "publish:site": "gulp publish:examples",
     "publish:version": "gulp commit:version && gulp push",
     "start": "gulp dev",
@@ -80,7 +80,7 @@
     "prettier"
   ],
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=4.0.0 <11.0.0"
   },
   "readmeFilename": "README.md",
   "keywords": [
