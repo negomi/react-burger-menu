@@ -9,7 +9,7 @@ An off-canvas sidebar React component with a collection of effects and styles us
 
 Live demo: [negomi.github.io/react-burger-menu](https://negomi.github.io/react-burger-menu/)
 
-To build the examples locally, run:
+To build the examples locally, first make sure you're using Node <11.0.0. Then run:
 
 ```
 npm install
