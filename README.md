@@ -182,7 +182,7 @@ You can see a more detailed example of how to use `isOpen` [here](https://github
 If you keep the menu state yourself it might be convenient to pass a custom function to be used when the user triggers something that should open the menu.
 
 Called when:
-* The user clicks the burger icon
+* The user clicks on the burger icon
 
 ``` javascript
 <Menu onOpen={ handleOnOpen } />
@@ -193,7 +193,7 @@ Called when:
 If you keep the menu state yourself it might be convenient to pass a custom function to be used when the user triggers something that should close the menu.
 
 Called when:
-* The user clicks the cross icon
+* The user clicks on the cross icon
 * The user clicks on the overlay
 * The user hits the escape key
 
