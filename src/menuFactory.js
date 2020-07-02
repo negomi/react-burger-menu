@@ -58,7 +58,7 @@ export default styles => {
         }, 500);
       });
     }
-    
+
     open() {
       if (typeof this.props.onOpen === 'function') {
         this.props.onOpen();
@@ -66,7 +66,7 @@ export default styles => {
         this.toggleMenu();
       }
     }
-    
+
     close() {
       if (typeof this.props.onClose === 'function') {
         this.props.onClose();
@@ -76,7 +76,11 @@ export default styles => {
     }
 
     overlayClick() {
-      if (this.props.disableOverlayClick === true || (typeof this.props.disableOverlayClick === 'function' && this.props.disableOverlayClick())) {
+      if (
+        this.props.disableOverlayClick === true ||
+        (typeof this.props.disableOverlayClick === 'function' &&
+          this.props.disableOverlayClick())
+      ) {
         return;
       } else {
         this.close();
@@ -199,7 +203,7 @@ export default styles => {
         this.state.isOpen &&
         (e.key === 'Escape' || e.keyCode === 27)
       ) {
-          this.close();
+        this.close();
       }
     }
 
