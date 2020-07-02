@@ -177,6 +177,30 @@ You can see a more detailed example of how to use `isOpen` [here](https://github
 
 *Note: If you want to render the menu open initially, you will need to set this property in your parent component's `componentDidMount()` function.*
 
+#### Open menu handler
+
+If you keep the menu state yourself it might be convenient to pass a custom function to be used when the user triggers something that should open the menu.
+
+Called when:
+* The user clicks the burger icon
+
+``` javascript
+<Menu onOpen={ handleOnOpen } />
+```
+
+#### Close menu handler
+
+If you keep the menu state yourself it might be convenient to pass a custom function to be used when the user triggers something that should close the menu.
+
+Called when:
+* The user clicks the cross icon
+* The user clicks on the overlay
+* The user hits the escape key
+
+``` javascript
+<Menu onClose={ handleOnOpen } />
+```
+
 #### State change
 
 You can detect whether the sidebar is open or closed by passing a callback function to `onStateChange`. The callback will receive an object containing the new state as its first argument.

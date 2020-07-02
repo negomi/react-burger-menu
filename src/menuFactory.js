@@ -58,6 +58,30 @@ export default styles => {
         }, 500);
       });
     }
+    
+    open() {
+      if (typeof this.props.onOpen === 'function') {
+        this.props.onOpen();
+      } else {
+        this.toggleMenu();
+      }
+    }
+    
+    close() {
+      if (typeof this.props.onClose === 'function') {
+        this.props.onClose();
+      } else {
+        this.toggleMenu();
+      }
+    }
+
+    overlayClick() {
+      if (this.props.disableOverlayClick === true || (typeof this.props.disableOverlayClick === 'function' && this.props.disableOverlayClick())) {
+        return;
+      } else {
+        this.close();
+      }
+    }
 
     // Applies component-specific styles to external wrapper elements.
     applyWrapperStyles(set = true) {
@@ -175,15 +199,7 @@ export default styles => {
         this.state.isOpen &&
         (e.key === 'Escape' || e.keyCode === 27)
       ) {
-        this.toggleMenu();
-      }
-    }
-
-    shouldDisableOverlayClick() {
-      if (typeof this.props.disableOverlayClick === 'function') {
-        return this.props.disableOverlayClick();
-      } else {
-        return this.props.disableOverlayClick;
+          this.close();
       }
     }
 
@@ -243,9 +259,7 @@ export default styles => {
           {!this.props.noOverlay && (
             <div
               className={`bm-overlay ${this.props.overlayClassName}`.trim()}
-              onClick={() =>
-                !this.shouldDisableOverlayClick() && this.toggleMenu()
-              }
+              onClick={() => this.overlayClick()}
               style={this.getStyles('overlay')}
             />
           )}
@@ -300,7 +314,7 @@ export default styles => {
             {this.props.customCrossIcon !== false && (
               <div style={this.getStyles('closeButton')}>
                 <CrossIcon
-                  onClick={() => this.toggleMenu()}
+                  onClick={() => this.close()}
                   styles={this.props.styles}
                   customIcon={this.props.customCrossIcon}
                   className={this.props.crossButtonClassName}
@@ -313,7 +327,7 @@ export default styles => {
           {this.props.customBurgerIcon !== false && (
             <div style={this.getStyles('burgerIcon')}>
               <BurgerIcon
-                onClick={() => this.toggleMenu()}
+                onClick={() => this.open()}
                 styles={this.props.styles}
                 customIcon={this.props.customBurgerIcon}
                 className={this.props.burgerButtonClassName}
@@ -355,7 +369,9 @@ export default styles => {
     morphShapeClassName: PropTypes.string,
     noOverlay: PropTypes.bool,
     noTransition: PropTypes.bool,
+    onClose: PropTypes.func,
     onIconHoverChange: PropTypes.func,
+    onOpen: PropTypes.func,
     onStateChange: PropTypes.func,
     outerContainerId:
       styles && styles.outerContainer
