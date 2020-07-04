@@ -188,6 +188,8 @@ Called when:
 <Menu onOpen={ handleOnOpen } />
 ```
 
+*Note: The menu will NOT open automatically if you pass this prop, so you must handle it yourself.*
+
 #### Close menu handler
 
 If you keep the menu state yourself it might be convenient to pass a custom function to be used when the user triggers something that should close the menu.
@@ -200,6 +202,8 @@ Called when:
 ``` javascript
 <Menu onClose={ handleOnClose } />
 ```
+
+*Note: The menu will NOT close automatically if you pass this prop, so you must handle it yourself.*
 
 #### State change
 
