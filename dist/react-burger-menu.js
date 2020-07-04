@@ -1494,13 +1494,15 @@ var BurgerIcon = function (_Component) {
                         onClick: this.props.onClick,
                         onMouseOver: function () {
                             _this.setState({ hover: true });
-                            if (_this.props.onIconHoverChange)
+                            if (_this.props.onIconHoverChange) {
                                 _this.props.onIconHoverChange({ isMouseIn: true });
+                            }
                         },
                         onMouseOut: function () {
                             _this.setState({ hover: false });
-                            if (_this.props.onIconHoverChange)
+                            if (_this.props.onIconHoverChange) {
                                 _this.props.onIconHoverChange({ isMouseIn: false });
+                            }
                         },
                         style: buttonStyle
                     }, 'Open Menu'));
@@ -1929,6 +1931,36 @@ exports['default'] = function (styles) {
                     }
                 },
                 {
+                    key: 'open',
+                    value: function open() {
+                        if (typeof this.props.onOpen === 'function') {
+                            this.props.onOpen();
+                        } else {
+                            this.toggleMenu();
+                        }
+                    }
+                },
+                {
+                    key: 'close',
+                    value: function close() {
+                        if (typeof this.props.onClose === 'function') {
+                            this.props.onClose();
+                        } else {
+                            this.toggleMenu();
+                        }
+                    }
+                },
+                {
+                    key: 'overlayClick',
+                    value: function overlayClick() {
+                        if (this.props.disableOverlayClick === true || typeof this.props.disableOverlayClick === 'function' && this.props.disableOverlayClick()) {
+                            return;
+                        } else {
+                            this.close();
+                        }
+                    }
+                },
+                {
                     key: 'applyWrapperStyles',
                     value: function applyWrapperStyles() {
                         var set = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
@@ -2007,17 +2039,7 @@ exports['default'] = function (styles) {
                     value: function listenForClose(e) {
                         e = e || window.event;
                         if (!this.props.disableCloseOnEsc && this.state.isOpen && (e.key === 'Escape' || e.keyCode === 27)) {
-                            this.toggleMenu();
-                        }
-                    }
-                },
-                {
-                    key: 'shouldDisableOverlayClick',
-                    value: function shouldDisableOverlayClick() {
-                        if (typeof this.props.disableOverlayClick === 'function') {
-                            return this.props.disableOverlayClick();
-                        } else {
-                            return this.props.disableOverlayClick;
+                            this.close();
                         }
                     }
                 },
@@ -2076,7 +2098,7 @@ exports['default'] = function (styles) {
                         return _react2['default'].createElement('div', null, !this.props.noOverlay && _react2['default'].createElement('div', {
                             className: ('bm-overlay ' + this.props.overlayClassName).trim(),
                             onClick: function () {
-                                return !_this3.shouldDisableOverlayClick() && _this3.toggleMenu();
+                                return _this3.overlayClick();
                             },
                             style: this.getStyles('overlay')
                         }), _react2['default'].createElement('div', {
@@ -2116,7 +2138,7 @@ exports['default'] = function (styles) {
                             }
                         }))), this.props.customCrossIcon !== false && _react2['default'].createElement('div', { style: this.getStyles('closeButton') }, _react2['default'].createElement(_CrossIcon2['default'], {
                             onClick: function () {
-                                return _this3.toggleMenu();
+                                return _this3.close();
                             },
                             styles: this.props.styles,
                             customIcon: this.props.customCrossIcon,
@@ -2125,7 +2147,7 @@ exports['default'] = function (styles) {
                             tabIndex: this.state.isOpen ? 0 : -1
                         }))), this.props.customBurgerIcon !== false && _react2['default'].createElement('div', { style: this.getStyles('burgerIcon') }, _react2['default'].createElement(_BurgerIcon2['default'], {
                             onClick: function () {
-                                return _this3.toggleMenu();
+                                return _this3.open();
                             },
                             styles: this.props.styles,
                             customIcon: this.props.customBurgerIcon,
@@ -2169,7 +2191,9 @@ exports['default'] = function (styles) {
         morphShapeClassName: _propTypes2['default'].string,
         noOverlay: _propTypes2['default'].bool,
         noTransition: _propTypes2['default'].bool,
+        onClose: _propTypes2['default'].func,
         onIconHoverChange: _propTypes2['default'].func,
+        onOpen: _propTypes2['default'].func,
         onStateChange: _propTypes2['default'].func,
         outerContainerId: styles && styles.outerContainer ? _propTypes2['default'].string.isRequired : _propTypes2['default'].string,
         overlayClassName: _propTypes2['default'].string,
