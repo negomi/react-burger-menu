@@ -198,7 +198,7 @@ Called when:
 * The user hits the escape key
 
 ``` javascript
-<Menu onClose={ handleOnOpen } />
+<Menu onClose={ handleOnClose } />
 ```
 
 #### State change
