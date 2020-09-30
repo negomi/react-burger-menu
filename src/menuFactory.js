@@ -267,6 +267,18 @@ export default styles => {
               style={this.getStyles('overlay')}
             />
           )}
+          {this.props.customBurgerIcon !== false && (
+            <div style={this.getStyles('burgerIcon')}>
+              <BurgerIcon
+                onClick={() => this.open()}
+                styles={this.props.styles}
+                customIcon={this.props.customBurgerIcon}
+                className={this.props.burgerButtonClassName}
+                barClassName={this.props.burgerBarClassName}
+                onIconStateChange={this.props.onIconStateChange}
+              />
+            </div>
+          )}
           <div
             id={this.props.id}
             className={`bm-menu-wrap ${this.props.className}`.trim()}
@@ -328,18 +340,6 @@ export default styles => {
               </div>
             )}
           </div>
-          {this.props.customBurgerIcon !== false && (
-            <div style={this.getStyles('burgerIcon')}>
-              <BurgerIcon
-                onClick={() => this.open()}
-                styles={this.props.styles}
-                customIcon={this.props.customBurgerIcon}
-                className={this.props.burgerButtonClassName}
-                barClassName={this.props.burgerBarClassName}
-                onIconStateChange={this.props.onIconStateChange}
-              />
-            </div>
-          )}
         </div>
       );
     }
