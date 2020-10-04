@@ -2101,7 +2101,16 @@ exports['default'] = function (styles) {
                                 return _this3.overlayClick();
                             },
                             style: this.getStyles('overlay')
-                        }), _react2['default'].createElement('div', {
+                        }), this.props.customBurgerIcon !== false && _react2['default'].createElement('div', { style: this.getStyles('burgerIcon') }, _react2['default'].createElement(_BurgerIcon2['default'], {
+                            onClick: function () {
+                                return _this3.open();
+                            },
+                            styles: this.props.styles,
+                            customIcon: this.props.customBurgerIcon,
+                            className: this.props.burgerButtonClassName,
+                            barClassName: this.props.burgerBarClassName,
+                            onIconStateChange: this.props.onIconStateChange
+                        })), _react2['default'].createElement('div', {
                             id: this.props.id,
                             className: ('bm-menu-wrap ' + this.props.className).trim(),
                             style: this.getStyles('menuWrap')
@@ -2116,7 +2125,7 @@ exports['default'] = function (styles) {
                         }, _react2['default'].createElement('path', { d: styles.svg.pathInitial }))), _react2['default'].createElement('div', {
                             className: ('bm-menu ' + this.props.menuClassName).trim(),
                             style: this.getStyles('menu')
-                        }, _react2['default'].createElement('nav', {
+                        }, _react2['default'].createElement(this.props.itemListElement, {
                             className: ('bm-item-list ' + this.props.itemListClassName).trim(),
                             style: this.getStyles('itemList')
                         }, _react2['default'].Children.map(this.props.children, function (item, index) {
@@ -2145,16 +2154,7 @@ exports['default'] = function (styles) {
                             className: this.props.crossButtonClassName,
                             crossClassName: this.props.crossClassName,
                             tabIndex: this.state.isOpen ? 0 : -1
-                        }))), this.props.customBurgerIcon !== false && _react2['default'].createElement('div', { style: this.getStyles('burgerIcon') }, _react2['default'].createElement(_BurgerIcon2['default'], {
-                            onClick: function () {
-                                return _this3.open();
-                            },
-                            styles: this.props.styles,
-                            customIcon: this.props.customBurgerIcon,
-                            className: this.props.burgerButtonClassName,
-                            barClassName: this.props.burgerBarClassName,
-                            onIconStateChange: this.props.onIconStateChange
-                        })));
+                        }))));
                     }
                 }
             ]);
@@ -2187,6 +2187,10 @@ exports['default'] = function (styles) {
         isOpen: _propTypes2['default'].bool,
         itemClassName: _propTypes2['default'].string,
         itemListClassName: _propTypes2['default'].string,
+        itemListElement: _propTypes2['default'].oneOf([
+            'div',
+            'nav'
+        ]),
         menuClassName: _propTypes2['default'].string,
         morphShapeClassName: _propTypes2['default'].string,
         noOverlay: _propTypes2['default'].bool,
@@ -2230,7 +2234,8 @@ exports['default'] = function (styles) {
         styles: {},
         width: 300,
         onIconHoverChange: function onIconHoverChange() {
-        }
+        },
+        itemListElement: 'nav'
     };
     return Menu;
 };
