@@ -21,7 +21,7 @@ describe('slide', () => {
 
   it('has correct menuWrap styles', () => {
     component = createShallowComponent(<Menu><div>An item</div></Menu>);
-    const menuWrap = component.props.children[1];
+    const menuWrap = component.props.children[2];
     expect(menuWrap.props.style.position).to.equal('fixed');
     expect(menuWrap.props.style.zIndex).to.equal(1100);
     expect(menuWrap.props.style.width).to.equal('300px');

@@ -35,7 +35,7 @@ describe('reveal', () => {
 
   it('has correct menuWrap styles', () => {
     component = createShallowComponent(<Menu pageWrapId={ 'page-wrap' } outerContainerId={ 'outer-container' }><div>An item</div></Menu>);
-    menuWrap = component.props.children[1];
+    menuWrap = component.props.children[2];
     expect(menuWrap.props.style.position).to.equal('fixed');
     expect(menuWrap.props.style.zIndex).to.equal(1000);
     expect(menuWrap.props.style.width).to.equal('300px');

@@ -106,13 +106,13 @@ describe('menuFactory', () => {
 
     it('accepts an optional ID', () => {
       component = createShallowComponent(<Menu id={ 'menu-wrap' } />);
-      const menuWrap = component.props.children[1];
+      const menuWrap = component.props.children[2];
       expect(menuWrap.props.id).to.equal('menu-wrap');
     });
 
     it('accepts an optional className', () => {
       component = createShallowComponent(<Menu className={ 'custom-class' } />);
-      const menuWrap = component.props.children[1];
+      const menuWrap = component.props.children[2];
       expect(menuWrap.props.className).to.contain('custom-class');
     });
 

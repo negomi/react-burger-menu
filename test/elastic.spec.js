@@ -27,7 +27,7 @@ describe('elastic', () => {
 
   beforeEach(() => {
     component = createShallowComponent(<Menu pageWrapId={ 'page-wrap' } outerContainerId={ 'outer-container' }><div>An item</div></Menu>);
-    menuWrap = component.props.children[1];
+    menuWrap = component.props.children[2];
     morphShape = menuWrap.props.children[0];
     svg = morphShape.props.children;
     menu = menuWrap.props.children[1];

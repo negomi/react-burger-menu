@@ -13,7 +13,7 @@ describe('stack', () => {
 
   beforeEach(() => {
     component = createShallowComponent(<Menu><div>An item</div></Menu>);
-    menuWrap = component.props.children[1];
+    menuWrap = component.props.children[2];
   });
 
   it('has correct menuWrap styles', () => {
