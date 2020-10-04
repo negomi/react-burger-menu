@@ -8,7 +8,7 @@ module.exports = function(gulp, config) {
   });
 
   gulp.task('push', function() {
-    git.push('origin', 'master', function(err) {
+    git.push('origin', 'main', function(err) {
       if (err) throw err;
     });
   });
