@@ -327,6 +327,14 @@ By default, the menu will set focus on the first item when opened. This is to he
 <Menu disableAutoFocus />
 ```
 
+#### Custom item list element
+
+The menu's children are all wrapped in a `nav` element by default, as navigation is likely the most common use case for this component. However, it's a general purpose sidebar, so you can change this to a `div` if you're not using it for navigation:
+
+``` javascript
+<Menu itemListElement="div" />
+```
+
 ### Styling
 
 All the animations are handled internally by the component. However, the visual styles (colors, fonts etc.) are not, and need to be supplied, either with CSS or with a JavaScript object passed as the `styles` prop.

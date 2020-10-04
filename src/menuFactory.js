@@ -303,11 +303,13 @@ export default styles => {
               className={`bm-menu ${this.props.menuClassName}`.trim()}
               style={this.getStyles('menu')}
             >
-              <nav
-                className={`bm-item-list ${this.props.itemListClassName}`.trim()}
-                style={this.getStyles('itemList')}
-              >
-                {React.Children.map(this.props.children, (item, index) => {
+              {React.createElement(
+                this.props.itemListElement,
+                {
+                  className: `bm-item-list ${this.props.itemListClassName}`.trim(),
+                  style: this.getStyles('itemList')
+                },
+                React.Children.map(this.props.children, (item, index) => {
                   if (item) {
                     const classList = [
                       'bm-item',
@@ -324,8 +326,8 @@ export default styles => {
                     };
                     return React.cloneElement(item, extraProps);
                   }
-                })}
-              </nav>
+                })
+              )}
             </div>
             {this.props.customCrossIcon !== false && (
               <div style={this.getStyles('closeButton')}>
@@ -369,6 +371,7 @@ export default styles => {
     isOpen: PropTypes.bool,
     itemClassName: PropTypes.string,
     itemListClassName: PropTypes.string,
+    itemListElement: PropTypes.oneOf(['div', 'nav']),
     menuClassName: PropTypes.string,
     morphShapeClassName: PropTypes.string,
     noOverlay: PropTypes.bool,
@@ -414,7 +417,8 @@ export default styles => {
     pageWrapId: '',
     styles: {},
     width: 300,
-    onIconHoverChange: () => {}
+    onIconHoverChange: () => {},
+    itemListElement: 'nav'
   };
 
   return Menu;
