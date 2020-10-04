@@ -205,34 +205,6 @@ var Demo = function (_Component2) {
                                 href: ''
                             }, _react2['default'].createElement('i', { className: 'fa fa-fw fa-money' }), _react2['default'].createElement('span', null, 'Credits'))
                         ];
-                        break;
-                    default:
-                        items = [
-                            _react2['default'].createElement('a', {
-                                key: '0',
-                                href: ''
-                            }, _react2['default'].createElement('i', { className: 'fa fa-fw fa-star-o' }), _react2['default'].createElement('span', null, 'Favorites')),
-                            _react2['default'].createElement('a', {
-                                key: '1',
-                                href: ''
-                            }, _react2['default'].createElement('i', { className: 'fa fa-fw fa-bell-o' }), _react2['default'].createElement('span', null, 'Alerts')),
-                            _react2['default'].createElement('a', {
-                                key: '2',
-                                href: ''
-                            }, _react2['default'].createElement('i', { className: 'fa fa-fw fa-envelope-o' }), _react2['default'].createElement('span', null, 'Messages')),
-                            _react2['default'].createElement('a', {
-                                key: '3',
-                                href: ''
-                            }, _react2['default'].createElement('i', { className: 'fa fa-fw fa-comment-o' }), _react2['default'].createElement('span', null, 'Comments')),
-                            _react2['default'].createElement('a', {
-                                key: '4',
-                                href: ''
-                            }, _react2['default'].createElement('i', { className: 'fa fa-fw fa-bar-chart-o' }), _react2['default'].createElement('span', null, 'Analytics')),
-                            _react2['default'].createElement('a', {
-                                key: '5',
-                                href: ''
-                            }, _react2['default'].createElement('i', { className: 'fa fa-fw fa-newspaper-o' }), _react2['default'].createElement('span', null, 'Reading List'))
-                        ];
                     }
                     return items;
                 }
@@ -269,18 +241,18 @@ var Demo = function (_Component2) {
                     }, this.getMenu(), _react2['default'].createElement('main', { id: 'page-wrap' }, _react2['default'].createElement('h1', null, _react2['default'].createElement('a', { href: 'https://github.com/negomi/react-burger-menu' }, 'react-burger-menu')), _react2['default'].createElement('a', {
                         className: (0, _classnames2['default'])({
                             'side-button': true,
-                            'left': true,
-                            'active': this.state.side === 'left'
+                            left: true,
+                            active: this.state.side === 'left'
                         }),
                         onClick: this.changeSide.bind(this, 'left')
                     }, 'Left'), _react2['default'].createElement('a', {
                         className: (0, _classnames2['default'])({
                             'side-button': true,
-                            'right': true,
-                            'active': this.state.side === 'right'
+                            right: true,
+                            active: this.state.side === 'right'
                         }),
                         onClick: this.changeSide.bind(this, 'right')
-                    }, 'Right'), _react2['default'].createElement('h2', { className: 'description' }, 'An off-canvas sidebar React component with a collection of effects and styles using CSS transitions and SVG path animations.'), _react2['default'].createElement('nav', { className: 'demo-buttons' }, buttons), 'Inspired by ', _react2['default'].createElement('a', { href: 'https://github.com/codrops/OffCanvasMenuEffects' }, 'Off-Canvas Menu Effects'), ' and ', _react2['default'].createElement('a', { href: 'https://github.com/codrops/SidebarTransitions' }, 'Sidebar Transitions'), ' by Codrops'));
+                    }, 'Right'), _react2['default'].createElement('h2', { className: 'description' }, 'An off-canvas sidebar React component with a collection of effects and styles using CSS transitions and SVG path animations.'), _react2['default'].createElement('nav', { className: 'demo-buttons' }, buttons), 'Inspired by', ' ', _react2['default'].createElement('a', { href: 'https://github.com/codrops/OffCanvasMenuEffects' }, 'Off-Canvas Menu Effects'), ' ', 'and', ' ', _react2['default'].createElement('a', { href: 'https://github.com/codrops/SidebarTransitions' }, 'Sidebar Transitions'), ' ', 'by Codrops'));
                 }
             }
         ]);
