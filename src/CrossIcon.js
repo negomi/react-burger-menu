@@ -71,7 +71,6 @@ export default class CrossIcon extends Component {
           ...this.props.styles.bmCrossButton
         }}
       >
-        {icon}
         <button
           onClick={this.props.onClick}
           style={buttonStyle}
@@ -79,6 +78,7 @@ export default class CrossIcon extends Component {
         >
           Close Menu
         </button>
+        {icon}
       </div>
     );
   }

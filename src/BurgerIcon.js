@@ -76,7 +76,6 @@ export default class BurgerIcon extends Component {
           ...this.props.styles.bmBurgerButton
         }}
       >
-        {icon}
         <button
           onClick={this.props.onClick}
           onMouseOver={() => {
@@ -95,6 +94,7 @@ export default class BurgerIcon extends Component {
         >
           Open Menu
         </button>
+        {icon}
       </div>
     );
   }
