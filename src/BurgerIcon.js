@@ -78,6 +78,7 @@ export default class BurgerIcon extends Component {
       >
         {icon}
         <button
+          id="react-burger-menu-btn"
           onClick={this.props.onClick}
           onMouseOver={() => {
             this.setState({ hover: true });
