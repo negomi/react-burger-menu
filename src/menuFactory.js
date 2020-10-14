@@ -20,8 +20,79 @@ export default styles => {
       }
     }
 
+    focusOnFirstMenuItem() {
+      const firstItem = document.querySelector('.bm-item:first-child');
+      if (firstItem) {
+        firstItem.focus();
+      }
+    }
+
+    focusOnLastMenuItem() {
+      const lastItem = document.querySelector('.bm-item:last-child');
+      if (lastItem) {
+        lastItem.focus();
+      }
+    }
+
+    focusOnCrossButton() {
+      const crossButton = document.getElementById('react-burger-cross-btn');
+      if (crossButton) {
+        crossButton.focus();
+      }
+    }
+
+    focusOnMenuButton() {
+      const menuButton = document.getElementById('react-burger-menu-btn');
+      if (menuButton) {
+        menuButton.focus();
+      }
+    }
+
+    focusOnNextMenuItem() {
+      const currentMenuItem = document.querySelector('.bm-item:focus');
+      const lastItem = document.querySelector('.bm-item:last-child');
+      const isCrossButtonFocused = document.querySelector(
+        '#react-burger-cross-btn:focus'
+      );
+      if (currentMenuItem) {
+        const sibling = currentMenuItem.nextElementSibling;
+        if (sibling) {
+          sibling.focus();
+        } else if (currentMenuItem === lastItem) {
+          this.focusOnCrossButton();
+        }
+      } else if (isCrossButtonFocused) {
+        this.focusOnFirstMenuItem();
+      } else {
+        // If there's no current item, first item will come to focus
+        this.focusOnFirstMenuItem();
+      }
+    }
+
+    focusOnPreviousMenuItem() {
+      const currentMenuItem = document.querySelector('.bm-item:focus');
+      const firstMenuItem = document.querySelector('.bm-item:first-child');
+      const isCrossButtonFocused = document.querySelector(
+        '#react-burger-cross-btn:focus'
+      );
+      if (currentMenuItem) {
+        const sibling = currentMenuItem.previousElementSibling;
+        if (sibling) {
+          sibling.focus();
+        }
+        if (currentMenuItem === firstMenuItem) {
+          this.focusOnCrossButton();
+        }
+      } else if (isCrossButtonFocused) {
+        this.focusOnLastMenuItem();
+      } else {
+        // If there's no current item, first item will come to focus
+        this.focusOnFirstMenuItem();
+      }
+    }
+
     toggleMenu(options = {}) {
-      const { isOpen, noStateChange } = options;
+      const { isOpen, noStateChange, focusOnLastItem } = options;
       const newState = {
         isOpen: typeof isOpen !== 'undefined' ? isOpen : !this.state.isOpen
       };
@@ -33,12 +104,11 @@ export default styles => {
 
         if (!this.props.disableAutoFocus) {
           // For accessibility reasons, ensures that when we toggle open,
-          // we focus the first menu item if one exists.
+          // we focus the first or last menu item according to given parameter.
           if (newState.isOpen) {
-            const firstItem = document.querySelector('.bm-item');
-            if (firstItem) {
-              firstItem.focus();
-            }
+            focusOnLastItem
+              ? this.focusOnLastMenuItem()
+              : this.focusOnFirstMenuItem();
           } else {
             if (document.activeElement) {
               document.activeElement.blur();
@@ -194,16 +264,49 @@ export default styles => {
       return style(this.state.isOpen, formattedWidth, this.props.right, index);
     }
 
-    listenForClose(e) {
+    listenForKeyDowns(e) {
       e = e || window.event;
-
-      // Close on ESC, unless disabled
-      if (
-        !this.props.disableCloseOnEsc &&
-        this.state.isOpen &&
-        (e.key === 'Escape' || e.keyCode === 27)
-      ) {
-        this.close();
+      const menuButton = document.getElementById('react-burger-menu-btn');
+      // Key downs came from menu button
+      if (e.target === menuButton) {
+        // If down arrow, space or enter, open menu and focus on first menuitem
+        if (
+          !this.state.isOpen &&
+          (e.key === 'ArrowDown' || e.key === ' ' || e.key === 'Enter')
+        ) {
+          this.toggleMenu({ focusOnLastItem: false });
+        }
+        // If arrow up, open menu and focus on last menuitem
+        if (!this.state.isOpen && e.key === 'ArrowUp') {
+          this.toggleMenu({ focusOnLastItem: true });
+        }
+      }
+      // Key downs came from somewhere else, checking their values while menu is open
+      else {
+        // Close on ESC, unless disabled
+        if (
+          !this.props.disableCloseOnEsc &&
+          this.state.isOpen &&
+          (e.key === 'Escape' || e.keyCode === 27)
+        ) {
+          this.close();
+          this.focusOnMenuButton();
+        }
+        if (this.state.isOpen && e.key === 'ArrowDown') {
+          this.focusOnNextMenuItem();
+        }
+        if (this.state.isOpen && e.key === 'ArrowUp') {
+          this.focusOnPreviousMenuItem();
+        }
+        if (this.state.isOpen && e.key === 'Home') {
+          this.focusOnFirstMenuItem();
+        }
+        if (this.state.isOpen && e.key === 'End') {
+          this.focusOnLastMenuItem();
+        }
+        if (this.state.isOpen && e.key === 'Tab') {
+          this.close();
+        }
       }
     }
 
@@ -212,7 +315,7 @@ export default styles => {
       if (this.props.customOnKeyDown) {
         window.onkeydown = this.props.customOnKeyDown;
       } else {
-        window.onkeydown = this.listenForClose.bind(this);
+        window.onkeydown = this.listenForKeyDowns.bind(this);
       }
 
       // Allow initial open state to be set by props.
@@ -322,7 +425,7 @@ export default styles => {
                       key: index,
                       className: classList,
                       style: this.getStyles('item', index, item.props.style),
-                      tabIndex: this.state.isOpen ? 0 : -1
+                      tabIndex: -1
                     };
                     return React.cloneElement(item, extraProps);
                   }
@@ -337,7 +440,7 @@ export default styles => {
                   customIcon={this.props.customCrossIcon}
                   className={this.props.crossButtonClassName}
                   crossClassName={this.props.crossClassName}
-                  tabIndex={this.state.isOpen ? 0 : -1}
+                  tabIndex={-1}
                 />
               </div>
             )}

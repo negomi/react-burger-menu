@@ -95,7 +95,7 @@ describe('menuFactory', () => {
 
     it('sets global keydown event handler', () => {
       component = TestUtils.renderIntoDocument(<Menu />);
-      expect(window.onkeydown.name).to.contain('listenForClose');
+      expect(window.onkeydown.name).to.contain('listenForKeyDowns');
     });
 
     it('contains an overlay', () => {
@@ -524,19 +524,17 @@ describe('menuFactory', () => {
     });
   });
 
-  describe('listenForClose method', () => {
-
+  describe('listenForKeyDowns method', () => {
     it('closes the menu when Escape is pressed', () => {
       Menu = menuFactory(mockStyles.basic);
       component = TestUtils.renderIntoDocument(<Menu />);
       component.setState({ isOpen: true });
-      component.listenForClose({ key: 'Escape', target: '' });
+      component.listenForKeyDowns({ key: 'Escape', target: '' });
       expect(component.state.isOpen).to.be.false;
     });
   });
 
   describe('isOpen prop', () => {
-
     let container;
 
     beforeEach(() => {
@@ -589,21 +587,21 @@ describe('menuFactory', () => {
   });
 
   describe('customOnKeyDown prop', () => {
-
-    it('should be set for window.onkeydown instead of listenForClose', () => {
+    it('should be set for window.onkeydown instead of listenForKeyDowns', () => {
       Menu = menuFactory(mockStyles.basic);
       const customOnKeyDown = sinon.spy();
-      component = TestUtils.renderIntoDocument(<Menu customOnKeyDown={customOnKeyDown} />);
-      const listenForClose = sinon.spy(component, 'listenForClose');
+      component = TestUtils.renderIntoDocument(
+        <Menu customOnKeyDown={customOnKeyDown} />
+      );
+      const listenForKeyDowns = sinon.spy(component, 'listenForKeyDowns');
       component.setState({ isOpen: true });
       window.onkeydown();
       expect(customOnKeyDown.called).to.be.true;
-      expect(listenForClose.called).to.be.false;
+      expect(listenForKeyDowns.called).to.be.false;
     });
   });
 
   describe('open state', () => {
-
     let container;
 
     beforeEach(() => {
