@@ -21,14 +21,18 @@ export default styles => {
     }
 
     focusOnFirstMenuItem() {
-      const firstItem = document.querySelector('.bm-item:first-child');
+      const firstItem = Array.from(
+        document.getElementsByClassName('bm-item')
+      ).shift();
       if (firstItem) {
         firstItem.focus();
       }
     }
 
     focusOnLastMenuItem() {
-      const lastItem = document.querySelector('.bm-item:last-child');
+      const lastItem = Array.from(
+        document.getElementsByClassName('bm-item')
+      ).pop();
       if (lastItem) {
         lastItem.focus();
       }
@@ -48,47 +52,29 @@ export default styles => {
       }
     }
 
-    focusOnNextMenuItem() {
-      const currentMenuItem = document.querySelector('.bm-item:focus');
-      const lastItem = document.querySelector('.bm-item:last-child');
-      const isCrossButtonFocused = document.querySelector(
-        '#react-burger-cross-btn:focus'
-      );
-      if (currentMenuItem) {
-        const sibling = currentMenuItem.nextElementSibling;
+    focusOnMenuItem(siblingType) {
+      if (document.activeElement.className.includes('bm-item')) {
+        const sibling = document.activeElement[siblingType];
         if (sibling) {
           sibling.focus();
-        } else if (currentMenuItem === lastItem) {
+        } else {
           this.focusOnCrossButton();
         }
-      } else if (isCrossButtonFocused) {
-        this.focusOnFirstMenuItem();
       } else {
-        // If there's no current item, first item will come to focus
-        this.focusOnFirstMenuItem();
+        if (siblingType === 'previousElementSibling') {
+          this.focusOnLastMenuItem();
+        } else {
+          this.focusOnFirstMenuItem();
+        }
       }
     }
 
+    focusOnNextMenuItem() {
+      this.focusOnMenuItem('nextElementSibling');
+    }
+
     focusOnPreviousMenuItem() {
-      const currentMenuItem = document.querySelector('.bm-item:focus');
-      const firstMenuItem = document.querySelector('.bm-item:first-child');
-      const isCrossButtonFocused = document.querySelector(
-        '#react-burger-cross-btn:focus'
-      );
-      if (currentMenuItem) {
-        const sibling = currentMenuItem.previousElementSibling;
-        if (sibling) {
-          sibling.focus();
-        }
-        if (currentMenuItem === firstMenuItem) {
-          this.focusOnCrossButton();
-        }
-      } else if (isCrossButtonFocused) {
-        this.focusOnLastMenuItem();
-      } else {
-        // If there's no current item, first item will come to focus
-        this.focusOnFirstMenuItem();
-      }
+      this.focusOnMenuItem('previousElementSibling');
     }
 
     toggleMenu(options = {}) {
@@ -266,57 +252,67 @@ export default styles => {
 
     listenForKeyDowns(e) {
       e = e || window.event;
-      const menuButton = document.getElementById('react-burger-menu-btn');
-      // Key downs came from menu button
-      if (e.target === menuButton) {
-        // If down arrow, space or enter, open menu and focus on first menuitem
-        if (
-          !this.state.isOpen &&
-          (e.key === 'ArrowDown' || e.key === ' ' || e.key === 'Enter')
-        ) {
-          this.toggleMenu({ focusOnLastItem: false });
+
+      const ARROW_DOWN = 'ArrowDown';
+      const ARROW_UP = 'ArrowUp';
+      const ENTER = 'Enter';
+      const ESCAPE = 'Escape';
+      const SPACE = ' ';
+      const HOME = 'Home';
+      const END = 'End';
+      const TAB = 'Tab';
+
+      if (this.state.isOpen) {
+        switch (e.key) {
+          case ESCAPE:
+            // Close on ESC, unless disabled
+            if (!this.props.disableCloseOnEsc) {
+              this.close();
+              this.focusOnMenuButton();
+            }
+            break;
+          case ARROW_DOWN:
+            this.focusOnNextMenuItem();
+            break;
+          case ARROW_UP:
+            this.focusOnPreviousMenuItem();
+            break;
+          case HOME:
+            this.focusOnFirstMenuItem();
+            break;
+          case END:
+            this.focusOnLastMenuItem();
+            break;
+          case TAB:
+            this.close();
+            break;
         }
-        // If arrow up, open menu and focus on last menuitem
-        if (!this.state.isOpen && e.key === 'ArrowUp') {
-          this.toggleMenu({ focusOnLastItem: true });
-        }
-      }
-      // Key downs came from somewhere else, checking their values while menu is open
-      else {
-        // Close on ESC, unless disabled
-        if (
-          !this.props.disableCloseOnEsc &&
-          this.state.isOpen &&
-          (e.key === 'Escape' || e.keyCode === 27)
-        ) {
-          this.close();
-          this.focusOnMenuButton();
-        }
-        if (this.state.isOpen && e.key === 'ArrowDown') {
-          this.focusOnNextMenuItem();
-        }
-        if (this.state.isOpen && e.key === 'ArrowUp') {
-          this.focusOnPreviousMenuItem();
-        }
-        if (this.state.isOpen && e.key === 'Home') {
-          this.focusOnFirstMenuItem();
-        }
-        if (this.state.isOpen && e.key === 'End') {
-          this.focusOnLastMenuItem();
-        }
-        if (this.state.isOpen && e.key === 'Tab') {
-          this.close();
+      } else {
+        // Key downs came from menu button
+        if (e.target === document.getElementById('react-burger-menu-btn')) {
+          switch (e.key) {
+            case ARROW_DOWN:
+            case ENTER:
+            case SPACE:
+              // If down arrow, space or enter, open menu and focus on first menuitem
+              this.toggleMenu();
+              break;
+            case ARROW_UP:
+              // If arrow up, open menu and focus on last menuitem
+              this.toggleMenu({ focusOnLastItem: true });
+              break;
+          }
         }
       }
     }
 
     componentDidMount() {
-      // Bind ESC key handler (unless custom function supplied).
-      if (this.props.customOnKeyDown) {
-        window.onkeydown = this.props.customOnKeyDown;
-      } else {
-        window.onkeydown = this.listenForKeyDowns.bind(this);
-      }
+      this.onKeyDown = this.props.customOnKeyDown
+        ? this.props.customOnKeyDown
+        : this.listenForKeyDowns.bind(this);
+
+      // Bind keydown handlers (or custom function if supplied).
+      window.addEventListener('keydown', this.onKeyDown);
 
       // Allow initial open state to be set by props.
       if (this.props.isOpen) {
@@ -325,7 +321,7 @@ export default styles => {
     }
 
     componentWillUnmount() {
-      window.onkeydown = null;
+      window.removeEventListener('keydown', this.onKeyDown);
 
       this.applyWrapperStyles(false);
 
