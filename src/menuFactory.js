@@ -382,6 +382,7 @@ export default styles => {
             id={this.props.id}
             className={`bm-menu-wrap ${this.props.className}`.trim()}
             style={this.getStyles('menuWrap')}
+            aria-hidden={!this.state.isOpen}
           >
             {styles.svg && (
               <div
@@ -436,7 +437,6 @@ export default styles => {
                   customIcon={this.props.customCrossIcon}
                   className={this.props.crossButtonClassName}
                   crossClassName={this.props.crossClassName}
-                  tabIndex={-1}
                 />
               </div>
             )}
