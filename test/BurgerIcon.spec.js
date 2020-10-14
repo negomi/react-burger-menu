@@ -7,7 +7,6 @@ import createShallowComponent from './utils/createShallowComponent';
 import BurgerIcon from '../src/BurgerIcon';
 
 describe('BurgerIcon component', () => {
-
   let component;
   const mockStylesProp = {
     bmBurgerButton: {
@@ -23,56 +22,65 @@ describe('BurgerIcon component', () => {
   });
 
   describe('when rendered successfully', () => {
-
     beforeEach(() => {
       component = createShallowComponent(<BurgerIcon />);
     });
 
     it('contains three span elements', () => {
-      expect(component.props.children[0].props.children).to.have.length(3);
+      expect(component.props.children[1].props.children).to.have.length(3);
     });
 
     it('contains a button element', () => {
-      expect(component.props.children[1].type).to.equal('button');
+      expect(component.props.children[0].type).to.equal('button');
     });
   });
 
   describe('wrapper element', () => {
-
     it('has the correct class', () => {
       component = createShallowComponent(<BurgerIcon />);
       expect(component.props.className).to.contain('bm-burger-button');
     });
 
     it('can be styled with props', () => {
-      component = createShallowComponent(<BurgerIcon styles={ mockStylesProp } />);
+      component = createShallowComponent(
+        <BurgerIcon styles={mockStylesProp} />
+      );
       expect(component.props.style.width).to.equal('40px');
     });
 
     it('accepts an optional className', () => {
-      component = createShallowComponent(<BurgerIcon className={ 'custom-class' } />);
+      component = createShallowComponent(
+        <BurgerIcon className={'custom-class'} />
+      );
       expect(component.props.className).to.contain('custom-class');
     });
   });
 
   describe('visual icon', () => {
-
     let icon;
 
     beforeEach(() => {
       component = createShallowComponent(<BurgerIcon />);
-      icon = component.props.children[0];
+      icon = component.props.children[1];
     });
 
     it('has the correct class', () => {
-      expect(icon.props.children[0].props.className).to.contain('bm-burger-bars');
-      expect(icon.props.children[1].props.className).to.contain('bm-burger-bars');
-      expect(icon.props.children[2].props.className).to.contain('bm-burger-bars');
+      expect(icon.props.children[0].props.className).to.contain(
+        'bm-burger-bars'
+      );
+      expect(icon.props.children[1].props.className).to.contain(
+        'bm-burger-bars'
+      );
+      expect(icon.props.children[2].props.className).to.contain(
+        'bm-burger-bars'
+      );
     });
 
     it('accepts an optional barClassName', () => {
-      component = createShallowComponent(<BurgerIcon barClassName={ 'custom-class' } />);
-      icon = component.props.children[0];
+      component = createShallowComponent(
+        <BurgerIcon barClassName={'custom-class'} />
+      );
+      icon = component.props.children[1];
       expect(icon.props.children[0].props.className).to.contain('custom-class');
     });
 
@@ -89,8 +97,10 @@ describe('BurgerIcon component', () => {
     });
 
     it('can be styled with props', () => {
-      component = createShallowComponent(<BurgerIcon styles={ mockStylesProp } />);
-      icon = component.props.children[0];
+      component = createShallowComponent(
+        <BurgerIcon styles={mockStylesProp} />
+      );
+      icon = component.props.children[1];
       expect(icon.props.children[0].props.style.background).to.equal('red');
       expect(icon.props.children[1].props.style.background).to.equal('red');
       expect(icon.props.children[2].props.style.background).to.equal('red');
@@ -98,25 +108,30 @@ describe('BurgerIcon component', () => {
 
     it('can be a custom element', () => {
       const element = <img src="icon.jpg" />;
-      component = createShallowComponent(<BurgerIcon customIcon={ element } />);
-      expect(component.props.children[0].type).to.equal('img');
-      expect(component.props.children[0].props.src).to.equal('icon.jpg');
+      component = createShallowComponent(<BurgerIcon customIcon={element} />);
+      expect(component.props.children[1].type).to.equal('img');
+      expect(component.props.children[1].props.src).to.equal('icon.jpg');
     });
   });
 
   describe('button', () => {
-
     beforeEach(() => {
       component = TestUtils.renderIntoDocument(<BurgerIcon />);
     });
 
     it('contains descriptive text', () => {
-      const button = TestUtils.findRenderedDOMComponentWithTag(component, 'button');
+      const button = TestUtils.findRenderedDOMComponentWithTag(
+        component,
+        'button'
+      );
       expect(button.innerHTML).to.equal('Open Menu');
     });
 
     it('responds to hover events', () => {
-      const button = TestUtils.findRenderedDOMComponentWithTag(component, 'button');
+      const button = TestUtils.findRenderedDOMComponentWithTag(
+        component,
+        'button'
+      );
       TestUtils.SimulateNative.mouseOver(button);
       expect(component.state.hover).to.be.true;
       TestUtils.SimulateNative.mouseOut(button);
@@ -125,16 +140,23 @@ describe('BurgerIcon component', () => {
 
     it('behaves correctly when clicked', () => {
       let clickHandled = false;
-      function handleClick() { clickHandled = true; }
-      component = TestUtils.renderIntoDocument(<BurgerIcon onClick={ handleClick } />);
-      const button = TestUtils.findRenderedDOMComponentWithTag(component, 'button');
+      function handleClick() {
+        clickHandled = true;
+      }
+      component = TestUtils.renderIntoDocument(
+        <BurgerIcon onClick={handleClick} />
+      );
+      const button = TestUtils.findRenderedDOMComponentWithTag(
+        component,
+        'button'
+      );
       TestUtils.Simulate.click(button);
       expect(clickHandled).to.be.true;
     });
 
     it('has the correct styles', () => {
       component = createShallowComponent(<BurgerIcon />);
-      const button = component.props.children[1];
+      const button = component.props.children[0];
       const expected = {
         position: 'absolute',
         left: 0,
@@ -153,13 +175,20 @@ describe('BurgerIcon component', () => {
 
     it('exposes icon state from hover event handler', () => {
       let isMouseIn = false;
-      function handleIconHoverChange(hoverState){isMouseIn = hoverState.isMouseIn;}
-      component = TestUtils.renderIntoDocument(<BurgerIcon onIconHoverChange={handleIconHoverChange}/>);  
-      const button = TestUtils.findRenderedDOMComponentWithTag(component, 'button');
+      function handleIconHoverChange(hoverState) {
+        isMouseIn = hoverState.isMouseIn;
+      }
+      component = TestUtils.renderIntoDocument(
+        <BurgerIcon onIconHoverChange={handleIconHoverChange} />
+      );
+      const button = TestUtils.findRenderedDOMComponentWithTag(
+        component,
+        'button'
+      );
       TestUtils.SimulateNative.mouseOver(button);
       expect(isMouseIn).to.be.true;
       TestUtils.SimulateNative.mouseOut(button);
       expect(isMouseIn).to.be.false;
-    });    
+    });
   });
 });

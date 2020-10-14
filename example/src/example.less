@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:400,700,800);
+@import url(https://fonts.googleapis.com/css?family=Raleway:400, 700, 800);
 
 *, *:after, *:before { -webkit-box-sizing: border-box; box-sizing: border-box; }
 
@@ -130,6 +130,21 @@ h1 {
   top: 36px;
 }
 
+// Outline for burger button focus state
+.bm-burger-button button:focus {
+  outline: 2px solid #c94e50;
+  outline-offset: 8px;
+}
+
+// Background color for burger bars focus state
+.bm-burger-button {
+  button:focus + span {
+    span.bm-burger-bars {
+      background-color: #c94e50;
+    }
+  }
+}
+
 .right .bm-burger-button {
   left: initial;
   right: 36px;
@@ -181,6 +196,21 @@ h1 {
     padding: 2.5em 1.5em 0;
     font-size: 1.15em;
   }
+
+  // Outline for cross button focus state
+  .bm-cross-button button:focus {
+    outline: 2px solid #c94e50;
+    outline-offset: 2px;
+  }
+
+  // Background color for cross focus state
+  .bm-cross-button {
+    button:focus + span {
+      span.bm-cross {
+        background-color: #c94e50;
+      }
+    }
+  }
 }
 
 .menu-2 {
@@ -200,6 +230,20 @@ h1 {
     font-size: 1.7em;
     vertical-align: middle;
     color: #282a35;
+  }
+  // Outline for cross button focus state
+  .bm-cross-button button:focus {
+    outline: 2px solid #c94e50;
+    outline-offset: 2px;
+  }
+
+  // Background color for cross focus state
+  .bm-cross-button {
+    button:focus + span {
+      span.bm-cross {
+        background-color: #c94e50;
+      }
+    }
   }
 }
 
@@ -221,6 +265,20 @@ h1 {
     text-transform: uppercase;
     letter-spacing: 1px;
     font-size: 0.75em;
+  }
+  // Outline for cross button focus state
+  .bm-cross-button button:focus {
+    outline: 2px solid #c94e50;
+    outline-offset: 2px;
+  }
+
+  // Background color for cross focus state
+  .bm-cross-button {
+    button:focus + span {
+      span.bm-cross {
+        background-color: #c94e50;
+      }
+    }
   }
 }
 
@@ -261,6 +319,20 @@ h1 {
       background: rgba(0, 0, 0, 0.2);
       box-shadow: inset 0 -1px rgba(0, 0, 0, 0);
       color: #b8b7ad;
+    }
+  }
+  // Outline for cross button focus state
+  .bm-cross-button button:focus {
+    outline: 2px solid #c94e50;
+    outline-offset: 2px;
+  }
+
+  // Background color for cross focus state
+  .bm-cross-button {
+    button:focus + span {
+      span.bm-cross {
+        background-color: #c94e50;
+      }
     }
   }
 }
