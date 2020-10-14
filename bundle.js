@@ -1461,6 +1461,7 @@ var BurgerIcon = function (_Component) {
                             position: 'absolute',
                             left: 0,
                             top: 0,
+                            zIndex: 1,
                             width: '100%',
                             height: '100%',
                             margin: 0,
@@ -1495,7 +1496,8 @@ var BurgerIcon = function (_Component) {
                     return _react2['default'].createElement('div', {
                         className: ('bm-burger-button ' + this.props.className).trim(),
                         style: _extends({ zIndex: 1000 }, this.props.styles.bmBurgerButton)
-                    }, icon, _react2['default'].createElement('button', {
+                    }, _react2['default'].createElement('button', {
+                        id: 'react-burger-menu-btn',
                         onClick: this.props.onClick,
                         onMouseOver: function () {
                             _this.setState({ hover: true });
@@ -1510,7 +1512,7 @@ var BurgerIcon = function (_Component) {
                             }
                         },
                         style: buttonStyle
-                    }, 'Open Menu'));
+                    }, 'Open Menu'), icon);
                 }
             }
         ]);
@@ -1654,6 +1656,7 @@ var CrossIcon = function (_Component) {
                             position: 'absolute',
                             left: 0,
                             top: 0,
+                            zIndex: 1,
                             width: '100%',
                             height: '100%',
                             margin: 0,
@@ -1693,11 +1696,12 @@ var CrossIcon = function (_Component) {
                     return _react2['default'].createElement('div', {
                         className: ('bm-cross-button ' + this.props.className).trim(),
                         style: _extends({}, buttonWrapperStyle, this.props.styles.bmCrossButton)
-                    }, icon, _react2['default'].createElement('button', {
+                    }, _react2['default'].createElement('button', {
+                        id: 'react-burger-cross-btn',
                         onClick: this.props.onClick,
                         style: buttonStyle,
-                        tabIndex: this.props.tabIndex
-                    }, 'Close Menu'));
+                        tabIndex: -1
+                    }, 'Close Menu'), icon);
                 }
             }
         ]);
@@ -1707,14 +1711,12 @@ exports['default'] = CrossIcon;
 CrossIcon.propTypes = {
     crossClassName: _propTypes2['default'].string,
     customIcon: _propTypes2['default'].element,
-    styles: _propTypes2['default'].object,
-    tabIndex: _propTypes2['default'].number
+    styles: _propTypes2['default'].object
 };
 CrossIcon.defaultProps = {
     crossClassName: '',
     className: '',
-    styles: {},
-    tabIndex: 0
+    styles: {}
 };
 module.exports = exports['default'];
 },{"prop-types":6,"react":undefined}],13:[function(require,module,exports){
@@ -1881,22 +1883,87 @@ exports['default'] = function (styles) {
             }
             _createClass(Menu, [
                 {
+                    key: 'focusOnFirstMenuItem',
+                    value: function focusOnFirstMenuItem() {
+                        var firstItem = Array.from(document.getElementsByClassName('bm-item')).shift();
+                        if (firstItem) {
+                            firstItem.focus();
+                        }
+                    }
+                },
+                {
+                    key: 'focusOnLastMenuItem',
+                    value: function focusOnLastMenuItem() {
+                        var lastItem = Array.from(document.getElementsByClassName('bm-item')).pop();
+                        if (lastItem) {
+                            lastItem.focus();
+                        }
+                    }
+                },
+                {
+                    key: 'focusOnCrossButton',
+                    value: function focusOnCrossButton() {
+                        var crossButton = document.getElementById('react-burger-cross-btn');
+                        if (crossButton) {
+                            crossButton.focus();
+                        }
+                    }
+                },
+                {
+                    key: 'focusOnMenuButton',
+                    value: function focusOnMenuButton() {
+                        var menuButton = document.getElementById('react-burger-menu-btn');
+                        if (menuButton) {
+                            menuButton.focus();
+                        }
+                    }
+                },
+                {
+                    key: 'focusOnMenuItem',
+                    value: function focusOnMenuItem(siblingType) {
+                        if (document.activeElement.className.includes('bm-item')) {
+                            var sibling = document.activeElement[siblingType];
+                            if (sibling) {
+                                sibling.focus();
+                            } else {
+                                this.focusOnCrossButton();
+                            }
+                        } else {
+                            if (siblingType === 'previousElementSibling') {
+                                this.focusOnLastMenuItem();
+                            } else {
+                                this.focusOnFirstMenuItem();
+                            }
+                        }
+                    }
+                },
+                {
+                    key: 'focusOnNextMenuItem',
+                    value: function focusOnNextMenuItem() {
+                        this.focusOnMenuItem('nextElementSibling');
+                    }
+                },
+                {
+                    key: 'focusOnPreviousMenuItem',
+                    value: function focusOnPreviousMenuItem() {
+                        this.focusOnMenuItem('previousElementSibling');
+                    }
+                },
+                {
                     key: 'toggleMenu',
                     value: function toggleMenu() {
                         var _this = this;
                         var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
                         var isOpen = options.isOpen;
                         var noStateChange = options.noStateChange;
+                        var focusOnLastItem = options.focusOnLastItem;
                         var newState = { isOpen: typeof isOpen !== 'undefined' ? isOpen : !this.state.isOpen };
                         this.applyWrapperStyles();
                         this.setState(newState, function () {
                             !noStateChange && _this.props.onStateChange(newState);
                             if (!_this.props.disableAutoFocus) {
                                 if (newState.isOpen) {
-                                    var firstItem = document.querySelector('.bm-item');
-                                    if (firstItem) {
-                                        firstItem.focus();
-                                    }
+                                    focusOnLastItem ? _this.focusOnLastMenuItem() : _this.focusOnFirstMenuItem();
                                 } else {
                                     if (document.activeElement) {
                                         document.activeElement.blur();
@@ -2020,22 +2087,62 @@ exports['default'] = function (styles) {
                     }
                 },
                 {
-                    key: 'listenForClose',
-                    value: function listenForClose(e) {
+                    key: 'listenForKeyDowns',
+                    value: function listenForKeyDowns(e) {
                         e = e || window.event;
-                        if (!this.props.disableCloseOnEsc && this.state.isOpen && (e.key === 'Escape' || e.keyCode === 27)) {
-                            this.close();
+                        var ARROW_DOWN = 'ArrowDown';
+                        var ARROW_UP = 'ArrowUp';
+                        var ENTER = 'Enter';
+                        var ESCAPE = 'Escape';
+                        var SPACE = ' ';
+                        var HOME = 'Home';
+                        var END = 'End';
+                        var TAB = 'Tab';
+                        if (this.state.isOpen) {
+                            switch (e.key) {
+                            case ESCAPE:
+                                if (!this.props.disableCloseOnEsc) {
+                                    this.close();
+                                    this.focusOnMenuButton();
+                                }
+                                break;
+                            case ARROW_DOWN:
+                                this.focusOnNextMenuItem();
+                                break;
+                            case ARROW_UP:
+                                this.focusOnPreviousMenuItem();
+                                break;
+                            case HOME:
+                                this.focusOnFirstMenuItem();
+                                break;
+                            case END:
+                                this.focusOnLastMenuItem();
+                                break;
+                            case TAB:
+                                this.close();
+                                break;
+                            }
+                        } else {
+                            if (e.target === document.getElementById('react-burger-menu-btn')) {
+                                switch (e.key) {
+                                case ARROW_DOWN:
+                                case ENTER:
+                                case SPACE:
+                                    this.toggleMenu();
+                                    break;
+                                case ARROW_UP:
+                                    this.toggleMenu({ focusOnLastItem: true });
+                                    break;
+                                }
+                            }
                         }
                     }
                 },
                 {
                     key: 'componentDidMount',
                     value: function componentDidMount() {
-                        if (this.props.customOnKeyDown) {
-                            window.onkeydown = this.props.customOnKeyDown;
-                        } else {
-                            window.onkeydown = this.listenForClose.bind(this);
-                        }
+                        this.onKeyDown = this.props.customOnKeyDown ? this.props.customOnKeyDown : this.listenForKeyDowns.bind(this);
+                        window.addEventListener('keydown', this.onKeyDown);
                         if (this.props.isOpen) {
                             this.toggleMenu({
                                 isOpen: true,
@@ -2047,7 +2154,7 @@ exports['default'] = function (styles) {
                 {
                     key: 'componentWillUnmount',
                     value: function componentWillUnmount() {
-                        window.onkeydown = null;
+                        window.removeEventListener('keydown', this.onKeyDown);
                         this.applyWrapperStyles(false);
                         this.timeoutId && clearTimeout(this.timeoutId);
                     }
@@ -2098,7 +2205,8 @@ exports['default'] = function (styles) {
                         })), _react2['default'].createElement('div', {
                             id: this.props.id,
                             className: ('bm-menu-wrap ' + this.props.className).trim(),
-                            style: this.getStyles('menuWrap')
+                            style: this.getStyles('menuWrap'),
+                            'aria-hidden': !this.state.isOpen
                         }, styles.svg && _react2['default'].createElement('div', {
                             className: ('bm-morph-shape ' + this.props.morphShapeClassName).trim(),
                             style: this.getStyles('morphShape')
@@ -2126,7 +2234,7 @@ exports['default'] = function (styles) {
                                         key: index,
                                         className: classList,
                                         style: _this3.getStyles('item', index, item.props.style),
-                                        tabIndex: _this3.state.isOpen ? 0 : -1
+                                        tabIndex: -1
                                     };
                                 return _react2['default'].cloneElement(item, extraProps);
                             }
@@ -2137,8 +2245,7 @@ exports['default'] = function (styles) {
                             styles: this.props.styles,
                             customIcon: this.props.customCrossIcon,
                             className: this.props.crossButtonClassName,
-                            crossClassName: this.props.crossClassName,
-                            tabIndex: this.state.isOpen ? 0 : -1
+                            crossClassName: this.props.crossClassName
                         }))));
                     }
                 }

@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:400,700,800);
+@import url(https://fonts.googleapis.com/css?family=Raleway:400, 700, 800);
 *,
 *:after,
 *:before {
@@ -111,6 +111,13 @@ h1 {
   left: 36px;
   top: 36px;
 }
+.bm-burger-button button:focus {
+  outline: 2px solid #c94e50;
+  outline-offset: 8px;
+}
+.bm-burger-button button:focus + span span.bm-burger-bars {
+  background-color: #c94e50;
+}
 .right .bm-burger-button {
   left: initial;
   right: 36px;
@@ -148,6 +155,13 @@ h1 {
   padding: 2.5em 1.5em 0;
   font-size: 1.15em;
 }
+.menu-1 .bm-cross-button button:focus {
+  outline: 2px solid #c94e50;
+  outline-offset: 2px;
+}
+.menu-1 .bm-cross-button button:focus + span span.bm-cross {
+  background-color: #c94e50;
+}
 .menu-2 .bm-cross {
   background: #999;
 }
@@ -161,6 +175,13 @@ h1 {
   font-size: 1.7em;
   vertical-align: middle;
   color: #282a35;
+}
+.menu-2 .bm-cross-button button:focus {
+  outline: 2px solid #c94e50;
+  outline-offset: 2px;
+}
+.menu-2 .bm-cross-button button:focus + span span.bm-cross {
+  background-color: #c94e50;
 }
 .menu-3 .bm-cross {
   background: #888;
@@ -176,6 +197,13 @@ h1 {
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 0.75em;
+}
+.menu-3 .bm-cross-button button:focus {
+  outline: 2px solid #c94e50;
+  outline-offset: 2px;
+}
+.menu-3 .bm-cross-button button:focus + span span.bm-cross {
+  background-color: #c94e50;
 }
 .menu-4 .bm-cross {
   background: #888;
@@ -209,6 +237,13 @@ h1 {
   box-shadow: inset 0 -1px rgba(0, 0, 0, 0);
   color: #b8b7ad;
 }
+.menu-4 .bm-cross-button button:focus {
+  outline: 2px solid #c94e50;
+  outline-offset: 2px;
+}
+.menu-4 .bm-cross-button button:focus + span span.bm-cross {
+  background-color: #c94e50;
+}
 #slide .bm-cross,
 #stack .bm-cross,
 #reveal .bm-cross {
@@ -219,6 +254,17 @@ h1 {
 #reveal .bm-menu {
   padding: 2.5em 1.5em 0;
   font-size: 1.15em;
+}
+#slide .bm-cross-button button:focus,
+#stack .bm-cross-button button:focus,
+#reveal .bm-cross-button button:focus {
+  outline: 2px solid #c94e50;
+  outline-offset: 2px;
+}
+#slide .bm-cross-button button:focus + span span.bm-cross,
+#stack .bm-cross-button button:focus + span span.bm-cross,
+#reveal .bm-cross-button button:focus + span span.bm-cross {
+  background-color: #c94e50;
 }
 #bubble .bm-cross,
 #push .bm-cross {
@@ -238,6 +284,15 @@ h1 {
   vertical-align: middle;
   color: #282a35;
 }
+#bubble .bm-cross-button button:focus,
+#push .bm-cross-button button:focus {
+  outline: 2px solid #c94e50;
+  outline-offset: 2px;
+}
+#bubble .bm-cross-button button:focus + span span.bm-cross,
+#push .bm-cross-button button:focus + span span.bm-cross {
+  background-color: #c94e50;
+}
 #elastic .bm-cross {
   background: #888;
 }
@@ -252,6 +307,13 @@ h1 {
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 0.75em;
+}
+#elastic .bm-cross-button button:focus {
+  outline: 2px solid #c94e50;
+  outline-offset: 2px;
+}
+#elastic .bm-cross-button button:focus + span span.bm-cross {
+  background-color: #c94e50;
 }
 #scaleDown .bm-cross,
 #scaleRotate .bm-cross,
@@ -308,4 +370,17 @@ h1 {
   background: rgba(0, 0, 0, 0.2);
   box-shadow: inset 0 -1px rgba(0, 0, 0, 0);
   color: #b8b7ad;
+}
+#scaleDown .bm-cross-button button:focus,
+#scaleRotate .bm-cross-button button:focus,
+#pushRotate .bm-cross-button button:focus,
+#fallDown .bm-cross-button button:focus {
+  outline: 2px solid #c94e50;
+  outline-offset: 2px;
+}
+#scaleDown .bm-cross-button button:focus + span span.bm-cross,
+#scaleRotate .bm-cross-button button:focus + span span.bm-cross,
+#pushRotate .bm-cross-button button:focus + span span.bm-cross,
+#fallDown .bm-cross-button button:focus + span span.bm-cross {
+  background-color: #c94e50;
 }
