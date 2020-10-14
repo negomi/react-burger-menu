@@ -93,11 +93,6 @@ describe('menuFactory', () => {
       component = createShallowComponent(<Menu />);
     });
 
-    it('sets global keydown event handler', () => {
-      component = TestUtils.renderIntoDocument(<Menu />);
-      expect(window.onkeydown.name).to.contain('listenForKeyDowns');
-    });
-
     it('contains an overlay', () => {
       const overlay = component.props.children[0];
       expect(component.type).to.equal('div');
@@ -161,9 +156,13 @@ describe('menuFactory', () => {
     });
 
     it('closes on Escape key press', () => {
+      const events = {};
+      window.addEventListener = sinon.spy((event, cb) => {
+        events[event] = cb;
+      });
       component = TestUtils.renderIntoDocument(<Menu />);
       component.setState({ isOpen: true });
-      window.onkeydown({ key: 'Escape' });
+      events.keydown({ key: 'Escape' });
       expect(component.state.isOpen).to.be.false;
     });
 
@@ -205,19 +204,26 @@ describe('menuFactory', () => {
   });
 
   describe('when unmounted', () => {
+    const events = {};
 
     function unmountComponent() {
       ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(component).parentNode);
     }
 
     beforeEach(() => {
+      window.addEventListener = sinon.spy((event, cb) => {
+        events[event] = cb;
+      });
+      window.removeEventListener = sinon.spy((event) => {
+        delete events[event];
+      });
       component = TestUtils.renderIntoDocument(<Menu />);
     });
 
     it('clears global keydown event handler', () => {
-      assert.ok(window.onkeydown);
+      assert.ok(events.keydown);
       unmountComponent();
-      assert.notOk(window.onkeydown);
+      assert.notOk(events.keydown);
     });
 
     it('clears wrapper styles', () => {
@@ -576,18 +582,25 @@ describe('menuFactory', () => {
   });
 
   describe('disableCloseOnEsc prop', () => {
-
     it('should not allow close on Escape key press', () => {
+      const events = {};
+      window.addEventListener = sinon.spy((event, cb) => {
+        events[event] = cb;
+      });
       Menu = menuFactory(mockStyles.basic);
       component = TestUtils.renderIntoDocument(<Menu disableCloseOnEsc />);
       component.setState({ isOpen: true });
-      window.onkeydown({ key: 'Escape' });
+      events.keydown({ key: 'Escape' });
       expect(component.state.isOpen).to.be.true;
     });
   });
 
   describe('customOnKeyDown prop', () => {
-    it('should be set for window.onkeydown instead of listenForKeyDowns', () => {
+    it('should be set for window keydown event instead of listenForKeyDowns', () => {
+      const events = {};
+      window.addEventListener = sinon.spy((event, cb) => {
+        events[event] = cb;
+      });
       Menu = menuFactory(mockStyles.basic);
       const customOnKeyDown = sinon.spy();
       component = TestUtils.renderIntoDocument(
@@ -595,7 +608,7 @@ describe('menuFactory', () => {
       );
       const listenForKeyDowns = sinon.spy(component, 'listenForKeyDowns');
       component.setState({ isOpen: true });
-      window.onkeydown();
+      events.keydown();
       expect(customOnKeyDown.called).to.be.true;
       expect(listenForKeyDowns.called).to.be.false;
     });

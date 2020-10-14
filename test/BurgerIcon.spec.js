@@ -168,7 +168,8 @@ describe('BurgerIcon component', () => {
         border: 'none',
         fontSize: 0,
         cursor: 'pointer',
-        background: 'transparent'
+        background: 'transparent',
+        zIndex: 1
       };
       expect(button.props.style).to.deep.equal(expected);
     });
