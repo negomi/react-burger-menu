@@ -2097,7 +2097,6 @@ exports['default'] = function (styles) {
                         var SPACE = ' ';
                         var HOME = 'Home';
                         var END = 'End';
-                        var TAB = 'Tab';
                         if (this.state.isOpen) {
                             switch (e.key) {
                             case ESCAPE:
@@ -2117,9 +2116,6 @@ exports['default'] = function (styles) {
                                 break;
                             case END:
                                 this.focusOnLastMenuItem();
-                                break;
-                            case TAB:
-                                this.close();
                                 break;
                             }
                         } else {
@@ -2615,13 +2611,12 @@ var _menuFactory2 = _interopRequireDefault(_menuFactory);
 var styles = {
         menuWrap: function menuWrap(isOpen, width, right) {
             return {
-                visibility: isOpen ? 'visible' : 'hidden',
                 MozTransform: 'translate3d(0, 0, 0)',
                 MsTransform: 'translate3d(0, 0, 0)',
                 OTransform: 'translate3d(0, 0, 0)',
                 WebkitTransform: 'translate3d(0, 0, 0)',
                 transform: 'translate3d(0, 0, 0)',
-                zIndex: 1000
+                zIndex: -1
             };
         },
         overlay: function overlay(isOpen, width, right) {
