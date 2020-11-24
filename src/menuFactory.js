@@ -260,7 +260,6 @@ export default styles => {
       const SPACE = ' ';
       const HOME = 'Home';
       const END = 'End';
-      const TAB = 'Tab';
 
       if (this.state.isOpen) {
         switch (e.key) {
@@ -282,9 +281,6 @@ export default styles => {
             break;
           case END:
             this.focusOnLastMenuItem();
-            break;
-          case TAB:
-            this.close();
             break;
         }
       } else {
