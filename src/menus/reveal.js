@@ -5,13 +5,12 @@ import menuFactory from '../menuFactory';
 const styles = {
   menuWrap(isOpen, width, right) {
     return {
-      visibility: isOpen ? 'visible' : 'hidden',
       MozTransform: 'translate3d(0, 0, 0)',
       MsTransform: 'translate3d(0, 0, 0)',
       OTransform: 'translate3d(0, 0, 0)',
       WebkitTransform: 'translate3d(0, 0, 0)',
       transform: 'translate3d(0, 0, 0)',
-      zIndex: 1000
+      zIndex: -1
     };
   },
 
