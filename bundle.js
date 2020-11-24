@@ -2616,7 +2616,7 @@ var styles = {
                 OTransform: 'translate3d(0, 0, 0)',
                 WebkitTransform: 'translate3d(0, 0, 0)',
                 transform: 'translate3d(0, 0, 0)',
-                zIndex: -1
+                zIndex: isOpen ? 1000 : -1
             };
         },
         overlay: function overlay(isOpen, width, right) {
