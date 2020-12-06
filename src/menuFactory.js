@@ -26,10 +26,19 @@ export default styles => {
   const HOME = 'Home';
   const END = 'End';
 
+  function usePrevious(value) {
+    const ref = React.useRef(value);
+    React.useEffect(() => {
+      ref.current = value;
+    });
+    return ref.current;
+  }
+
   const Menu = props => {
     const [isOpen, setIsOpen] = React.useState(false);
     const timeoutId = React.useRef();
     const toggleOptions = React.useRef({});
+    const prevIsOpenProp = usePrevious(props.isOpen);
 
     React.useEffect(() => {
       if (props.isOpen) {
@@ -44,7 +53,9 @@ export default styles => {
 
     React.useEffect(() => {
       const wasToggled =
-        typeof props.isOpen !== 'undefined' && props.isOpen !== isOpen; // TODO: missing comparison here?
+        typeof props.isOpen !== 'undefined' &&
+        props.isOpen !== isOpen &&
+        props.isOpen !== prevIsOpenProp;
 
       if (wasToggled) {
         toggleMenu();
@@ -53,7 +64,6 @@ export default styles => {
       }
 
       if (styles.svg) {
-        console.log(styles.svg);
         const morphShape = ReactDOM.findDOMNode(this, 'bm-morph-shape');
         const path = styles.svg.lib(morphShape).select('path');
 
