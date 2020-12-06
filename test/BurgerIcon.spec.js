@@ -132,9 +132,9 @@ describe('BurgerIcon component', () => {
         component,
         'button'
       );
-      TestUtils.SimulateNative.mouseOver(button);
+      TestUtils.Simulate.mouseOver(button);
       expect(component.state.hover).to.be.true;
-      TestUtils.SimulateNative.mouseOut(button);
+      TestUtils.Simulate.mouseOut(button);
       expect(component.state.hover).to.be.false;
     });
 
@@ -186,9 +186,9 @@ describe('BurgerIcon component', () => {
         component,
         'button'
       );
-      TestUtils.SimulateNative.mouseOver(button);
+      TestUtils.Simulate.mouseOver(button);
       expect(isMouseIn).to.be.true;
-      TestUtils.SimulateNative.mouseOut(button);
+      TestUtils.Simulate.mouseOut(button);
       expect(isMouseIn).to.be.false;
     });
   });

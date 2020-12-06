@@ -11,9 +11,9 @@ class MenuWrap extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidUpdate(prevProps) {
     const sideChanged =
-      this.props.children.props.right !== nextProps.children.props.right;
+      this.props.children.props.right !== prevProps.children.props.right;
 
     if (sideChanged) {
       this.setState({ hidden: true });
