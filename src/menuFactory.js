@@ -1,233 +1,171 @@
 'use strict';
 
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import baseStyles from './baseStyles';
-import BurgerIcon from './BurgerIcon';
-import CrossIcon from './CrossIcon';
+import baseStyles from './helpers/baseStyles';
+import {
+  focusOnFirstMenuItem,
+  focusOnLastMenuItem,
+  focusOnMenuButton,
+  focusOnNextMenuItem,
+  focusOnPreviousMenuItem
+} from './helpers/dom';
+import BurgerIcon from './components/BurgerIcon';
+import CrossIcon from './components/CrossIcon';
 
 export default styles => {
-  class Menu extends Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        isOpen: false
+  if (!styles) {
+    throw new Error('No styles supplied');
+  }
+
+  const ARROW_DOWN = 'ArrowDown';
+  const ARROW_UP = 'ArrowUp';
+  const ESCAPE = 'Escape';
+  const SPACE = ' ';
+  const HOME = 'Home';
+  const END = 'End';
+
+  const Menu = props => {
+    const [isOpen, setIsOpen] = React.useState(false);
+    const timeoutId = React.useRef();
+    const toggleOptions = React.useRef({});
+
+    React.useEffect(() => {
+      if (props.isOpen) {
+        toggleMenu({ isOpen: true, noStateChange: true });
+      }
+
+      return function cleanup() {
+        applyWrapperStyles(false);
+        clearCurrentTimeout();
       };
+    }, []);
 
-      if (!styles) {
-        throw new Error('No styles supplied');
+    React.useEffect(() => {
+      const wasToggled =
+        typeof props.isOpen !== 'undefined' && props.isOpen !== isOpen; // TODO: missing comparison here?
+
+      if (wasToggled) {
+        toggleMenu();
+        // Toggling changes SVG animation requirements, so defer these until next update
+        return;
       }
-    }
 
-    focusOnFirstMenuItem() {
-      const firstItem = Array.from(
-        document.getElementsByClassName('bm-item')
-      ).shift();
-      if (firstItem) {
-        firstItem.focus();
-      }
-    }
+      if (styles.svg) {
+        console.log(styles.svg);
+        const morphShape = ReactDOM.findDOMNode(this, 'bm-morph-shape');
+        const path = styles.svg.lib(morphShape).select('path');
 
-    focusOnLastMenuItem() {
-      const lastItem = Array.from(
-        document.getElementsByClassName('bm-item')
-      ).pop();
-      if (lastItem) {
-        lastItem.focus();
-      }
-    }
-
-    focusOnCrossButton() {
-      const crossButton = document.getElementById('react-burger-cross-btn');
-      if (crossButton) {
-        crossButton.focus();
-      }
-    }
-
-    focusOnMenuButton() {
-      const menuButton = document.getElementById('react-burger-menu-btn');
-      if (menuButton) {
-        menuButton.focus();
-      }
-    }
-
-    focusOnMenuItem(siblingType) {
-      if (document.activeElement.className.includes('bm-item')) {
-        const sibling = document.activeElement[siblingType];
-        if (sibling) {
-          sibling.focus();
+        if (isOpen) {
+          // Animate SVG path
+          styles.svg.animate(path);
         } else {
-          this.focusOnCrossButton();
-        }
-      } else {
-        if (siblingType === 'previousElementSibling') {
-          this.focusOnLastMenuItem();
-        } else {
-          this.focusOnFirstMenuItem();
+          // Reset path (timeout ensures animation happens off screen)
+          setTimeout(() => {
+            path.attr('d', styles.svg.pathInitial);
+          }, 300);
         }
       }
-    }
+    });
 
-    focusOnNextMenuItem() {
-      this.focusOnMenuItem('nextElementSibling');
-    }
+    React.useEffect(() => {
+      const { noStateChange, focusOnLastItem } = toggleOptions.current;
 
-    focusOnPreviousMenuItem() {
-      this.focusOnMenuItem('previousElementSibling');
-    }
+      if (!noStateChange) {
+        props.onStateChange({ isOpen });
+      }
 
-    toggleMenu(options = {}) {
-      const { isOpen, noStateChange, focusOnLastItem } = options;
-      const newState = {
-        isOpen: typeof isOpen !== 'undefined' ? isOpen : !this.state.isOpen
-      };
-
-      this.applyWrapperStyles();
-
-      this.setState(newState, () => {
-        !noStateChange && this.props.onStateChange(newState);
-
-        if (!this.props.disableAutoFocus) {
-          // For accessibility reasons, ensures that when we toggle open,
-          // we focus the first or last menu item according to given parameter.
-          if (newState.isOpen) {
-            focusOnLastItem
-              ? this.focusOnLastMenuItem()
-              : this.focusOnFirstMenuItem();
+      if (!props.disableAutoFocus) {
+        // For accessibility reasons, ensures that when we toggle open,
+        // we focus the first or last menu item according to given parameter
+        if (isOpen) {
+          focusOnLastItem ? focusOnLastMenuItem() : focusOnFirstMenuItem();
+        } else {
+          if (document.activeElement) {
+            document.activeElement.blur();
           } else {
-            if (document.activeElement) {
-              document.activeElement.blur();
-            } else {
-              document.body.blur(); // Needed for IE
-            }
+            document.body.blur(); // Needed for IE
           }
         }
-
-        // Timeout ensures wrappers are cleared after animation finishes.
-        this.timeoutId && clearTimeout(this.timeoutId);
-        this.timeoutId = setTimeout(() => {
-          this.timeoutId = null;
-          if (!newState.isOpen) {
-            this.applyWrapperStyles(false);
-          }
-        }, 500);
-      });
-    }
-
-    open() {
-      if (typeof this.props.onOpen === 'function') {
-        this.props.onOpen();
-      } else {
-        this.toggleMenu();
-      }
-    }
-
-    close() {
-      if (typeof this.props.onClose === 'function') {
-        this.props.onClose();
-      } else {
-        this.toggleMenu();
-      }
-    }
-
-    overlayClick() {
-      if (
-        this.props.disableOverlayClick === true ||
-        (typeof this.props.disableOverlayClick === 'function' &&
-          this.props.disableOverlayClick())
-      ) {
-        return;
-      } else {
-        this.close();
-      }
-    }
-
-    // Applies component-specific styles to external wrapper elements.
-    applyWrapperStyles(set = true) {
-      const applyClass = (el, className) =>
-        el.classList[set ? 'add' : 'remove'](className);
-
-      if (this.props.htmlClassName) {
-        applyClass(document.querySelector('html'), this.props.htmlClassName);
-      }
-      if (this.props.bodyClassName) {
-        applyClass(document.querySelector('body'), this.props.bodyClassName);
       }
 
-      if (styles.pageWrap && this.props.pageWrapId) {
-        this.handleExternalWrapper(this.props.pageWrapId, styles.pageWrap, set);
-      }
-
-      if (styles.outerContainer && this.props.outerContainerId) {
-        this.handleExternalWrapper(
-          this.props.outerContainerId,
-          styles.outerContainer,
-          set
-        );
-      }
-    }
-
-    // Sets or unsets styles on DOM elements outside the menu component.
-    // This is necessary for correct page interaction with some of the menus.
-    // Throws and returns if the required external elements don't exist,
-    // which means any external page animations won't be applied.
-    handleExternalWrapper(id, wrapperStyles, set) {
-      const wrapper = document.getElementById(id);
-
-      if (!wrapper) {
-        console.error("Element with ID '" + id + "' not found");
-        return;
-      }
-
-      const builtStyles = this.getStyle(wrapperStyles);
-
-      for (const prop in builtStyles) {
-        if (builtStyles.hasOwnProperty(prop)) {
-          wrapper.style[prop] = set ? builtStyles[prop] : '';
+      // Timeout ensures wrappers are cleared after animation finishes
+      clearCurrentTimeout();
+      timeoutId.current = setTimeout(() => {
+        timeoutId.current = null;
+        if (!isOpen) {
+          applyWrapperStyles(false);
         }
-      }
+      }, 500);
 
-      // Prevent any horizontal scroll.
-      // Only set overflow-x as an inline style if htmlClassName or
-      // bodyClassName is not passed in. Otherwise, it is up to the caller to
-      // decide if they want to set the overflow style in CSS using the custom
-      // class names.
-      const applyOverflow = el =>
-        (el.style['overflow-x'] = set ? 'hidden' : '');
-      if (!this.props.htmlClassName) {
-        applyOverflow(document.querySelector('html'));
-      }
-      if (!this.props.bodyClassName) {
-        applyOverflow(document.querySelector('body'));
+      // Bind keydown handlers (or custom function if supplied)
+      const defaultOnKeyDown = isOpen ? onKeyDownOpen : onKeyDownClosed;
+      const onKeyDown = props.customOnKeyDown || defaultOnKeyDown;
+      window.addEventListener('keydown', onKeyDown);
+
+      return function cleanup() {
+        window.removeEventListener('keydown', onKeyDown);
+      };
+    }, [isOpen]);
+
+    function toggleMenu(options = {}) {
+      toggleOptions.current = options;
+
+      applyWrapperStyles();
+
+      setIsOpen(open =>
+        typeof options.isOpen !== 'undefined' ? options.isOpen : !open
+      );
+    }
+
+    function open() {
+      if (typeof props.onOpen === 'function') {
+        props.onOpen();
+      } else {
+        toggleMenu();
       }
     }
 
-    // Builds styles incrementally for a given element.
-    getStyles(el, index, inline) {
+    function close() {
+      if (typeof props.onClose === 'function') {
+        props.onClose();
+      } else {
+        toggleMenu();
+      }
+    }
+
+    function getStyle(style, index) {
+      const { width, right } = props;
+      const formattedWidth = typeof width !== 'string' ? `${width}px` : width;
+      return style(isOpen, formattedWidth, right, index);
+    }
+
+    // Builds styles incrementally for a given element
+    function getStyles(el, index, inline) {
       const propName =
         'bm' + el.replace(el.charAt(0), el.charAt(0).toUpperCase());
 
-      // Set base styles.
-      let output = baseStyles[el] ? this.getStyle(baseStyles[el]) : {};
+      // Set base styles
+      let output = baseStyles[el] ? getStyle(baseStyles[el]) : {};
 
-      // Add animation-specific styles.
+      // Add animation-specific styles
       if (styles[el]) {
         output = {
           ...output,
-          ...this.getStyle(styles[el], index + 1)
+          ...getStyle(styles[el], index + 1)
         };
       }
 
-      // Add custom styles.
-      if (this.props.styles[propName]) {
+      // Add custom styles
+      if (props.styles[propName]) {
         output = {
           ...output,
-          ...this.props.styles[propName]
+          ...props.styles[propName]
         };
       }
 
-      // Add element inline styles.
+      // Add element inline styles
       if (inline) {
         output = {
           ...output,
@@ -236,211 +174,223 @@ export default styles => {
       }
 
       // Remove transition if required
-      // (useful if rendering open initially).
-      if (this.props.noTransition) {
+      // (useful if rendering open initially)
+      if (props.noTransition) {
         delete output.transition;
       }
 
       return output;
     }
 
-    getStyle(style, index) {
-      const { width } = this.props;
-      const formattedWidth = typeof width !== 'string' ? `${width}px` : width;
-      return style(this.state.isOpen, formattedWidth, this.props.right, index);
-    }
+    // Sets or unsets styles on DOM elements outside the menu component
+    // This is necessary for correct page interaction with some of the menus
+    // Throws and returns if the required external elements don't exist,
+    // which means any external page animations won't be applied
+    function handleExternalWrapper(id, wrapperStyles, set) {
+      const wrapper = document.getElementById(id);
 
-    listenForKeyDowns(e) {
-      e = e || window.event;
-
-      const ARROW_DOWN = 'ArrowDown';
-      const ARROW_UP = 'ArrowUp';
-      const ENTER = 'Enter';
-      const ESCAPE = 'Escape';
-      const SPACE = ' ';
-      const HOME = 'Home';
-      const END = 'End';
-
-      if (this.state.isOpen) {
-        switch (e.key) {
-          case ESCAPE:
-            // Close on ESC, unless disabled
-            if (!this.props.disableCloseOnEsc) {
-              this.close();
-              this.focusOnMenuButton();
-            }
-            break;
-          case ARROW_DOWN:
-            this.focusOnNextMenuItem();
-            break;
-          case ARROW_UP:
-            this.focusOnPreviousMenuItem();
-            break;
-          case HOME:
-            this.focusOnFirstMenuItem();
-            break;
-          case END:
-            this.focusOnLastMenuItem();
-            break;
-        }
-      } else {
-        // Key downs came from menu button
-        if (e.target === document.getElementById('react-burger-menu-btn')) {
-          switch (e.key) {
-            case ARROW_DOWN:
-            case ENTER:
-            case SPACE:
-              // If down arrow, space or enter, open menu and focus on first menuitem
-              this.toggleMenu();
-              break;
-            case ARROW_UP:
-              // If arrow up, open menu and focus on last menuitem
-              this.toggleMenu({ focusOnLastItem: true });
-              break;
-          }
-        }
-      }
-    }
-
-    componentDidMount() {
-      this.onKeyDown = this.props.customOnKeyDown
-        ? this.props.customOnKeyDown
-        : this.listenForKeyDowns.bind(this);
-
-      // Bind keydown handlers (or custom function if supplied).
-      window.addEventListener('keydown', this.onKeyDown);
-
-      // Allow initial open state to be set by props.
-      if (this.props.isOpen) {
-        this.toggleMenu({ isOpen: true, noStateChange: true });
-      }
-    }
-
-    componentWillUnmount() {
-      window.removeEventListener('keydown', this.onKeyDown);
-
-      this.applyWrapperStyles(false);
-
-      // Avoid potentially attempting to update an unmounted component.
-      this.timeoutId && clearTimeout(this.timeoutId);
-    }
-
-    componentDidUpdate(prevProps) {
-      const wasToggled =
-        typeof this.props.isOpen !== 'undefined' &&
-        this.props.isOpen !== this.state.isOpen &&
-        this.props.isOpen !== prevProps.isOpen;
-      if (wasToggled) {
-        this.toggleMenu();
-        // Toggling changes SVG animation requirements, so we defer these until the next componentDidUpdate
+      if (!wrapper) {
+        console.error("Element with ID '" + id + "' not found");
         return;
       }
 
-      if (styles.svg) {
-        const morphShape = ReactDOM.findDOMNode(this, 'bm-morph-shape');
-        const path = styles.svg.lib(morphShape).select('path');
+      const builtStyles = getStyle(wrapperStyles);
 
-        if (this.state.isOpen) {
-          // Animate SVG path.
-          styles.svg.animate(path);
-        } else {
-          // Reset path (timeout ensures animation happens off screen).
-          setTimeout(() => {
-            path.attr('d', styles.svg.pathInitial);
-          }, 300);
+      for (const prop in builtStyles) {
+        if (builtStyles.hasOwnProperty(prop)) {
+          wrapper.style[prop] = set ? builtStyles[prop] : '';
+        }
+      }
+
+      // Prevent any horizontal scroll
+      // Only set overflow-x as an inline style if htmlClassName or
+      // bodyClassName is not passed in. Otherwise, it is up to the caller to
+      // decide if they want to set the overflow style in CSS using the custom
+      // class names
+      const applyOverflow = el =>
+        (el.style['overflow-x'] = set ? 'hidden' : '');
+      if (!props.htmlClassName) {
+        applyOverflow(document.querySelector('html'));
+      }
+      if (!props.bodyClassName) {
+        applyOverflow(document.querySelector('body'));
+      }
+    }
+
+    // Applies component-specific styles to external wrapper elements
+    function applyWrapperStyles(set = true) {
+      const applyClass = (el, className) =>
+        el.classList[set ? 'add' : 'remove'](className);
+
+      if (props.htmlClassName) {
+        applyClass(document.querySelector('html'), props.htmlClassName);
+      }
+      if (props.bodyClassName) {
+        applyClass(document.querySelector('body'), props.bodyClassName);
+      }
+
+      if (styles.pageWrap && props.pageWrapId) {
+        handleExternalWrapper(props.pageWrapId, styles.pageWrap, set);
+      }
+
+      if (styles.outerContainer && props.outerContainerId) {
+        handleExternalWrapper(
+          props.outerContainerId,
+          styles.outerContainer,
+          set
+        );
+      }
+    }
+
+    // Avoids potentially attempting to update an unmounted component
+    function clearCurrentTimeout() {
+      if (timeoutId.current) {
+        clearTimeout(timeoutId.current);
+      }
+    }
+
+    function onKeyDownOpen(e) {
+      e = e || window.event;
+      switch (e.key) {
+        case ESCAPE:
+          // Close on ESC, unless disabled
+          if (!props.disableCloseOnEsc) {
+            close();
+            focusOnMenuButton();
+          }
+          break;
+        case ARROW_DOWN:
+          focusOnNextMenuItem();
+          break;
+        case ARROW_UP:
+          focusOnPreviousMenuItem();
+          break;
+        case HOME:
+          focusOnFirstMenuItem();
+          break;
+        case END:
+          focusOnLastMenuItem();
+          break;
+      }
+    }
+
+    function onKeyDownClosed(e) {
+      e = e || window.event;
+      // Key downs came from menu button
+      if (e.target === document.getElementById('react-burger-menu-btn')) {
+        switch (e.key) {
+          case ARROW_DOWN:
+          case SPACE:
+            // If down arrow, space or enter, open menu and focus on first menuitem
+            toggleMenu();
+            break;
+          case ARROW_UP:
+            // If arrow up, open menu and focus on last menuitem
+            toggleMenu({ focusOnLastItem: true });
+            break;
         }
       }
     }
 
-    render() {
-      return (
-        <div>
-          {!this.props.noOverlay && (
-            <div
-              className={`bm-overlay ${this.props.overlayClassName}`.trim()}
-              onClick={() => this.overlayClick()}
-              style={this.getStyles('overlay')}
+    function handleOverlayClick() {
+      if (
+        props.disableOverlayClick === true ||
+        (typeof props.disableOverlayClick === 'function' &&
+          props.disableOverlayClick())
+      ) {
+        return;
+      } else {
+        close();
+      }
+    }
+
+    return (
+      <div>
+        {!props.noOverlay && (
+          <div
+            className={`bm-overlay ${props.overlayClassName}`.trim()}
+            onClick={handleOverlayClick}
+            style={getStyles('overlay')}
+          />
+        )}
+        {props.customBurgerIcon !== false && (
+          <div style={getStyles('burgerIcon')}>
+            <BurgerIcon
+              onClick={open}
+              styles={props.styles}
+              customIcon={props.customBurgerIcon}
+              className={props.burgerButtonClassName}
+              barClassName={props.burgerBarClassName}
+              onIconStateChange={props.onIconStateChange}
             />
-          )}
-          {this.props.customBurgerIcon !== false && (
-            <div style={this.getStyles('burgerIcon')}>
-              <BurgerIcon
-                onClick={() => this.open()}
-                styles={this.props.styles}
-                customIcon={this.props.customBurgerIcon}
-                className={this.props.burgerButtonClassName}
-                barClassName={this.props.burgerBarClassName}
-                onIconStateChange={this.props.onIconStateChange}
-              />
+          </div>
+        )}
+        <div
+          id={props.id}
+          className={`bm-menu-wrap ${props.className}`.trim()}
+          style={getStyles('menuWrap')}
+          aria-hidden={!isOpen}
+        >
+          {styles.svg && (
+            <div
+              className={`bm-morph-shape ${props.morphShapeClassName}`.trim()}
+              style={getStyles('morphShape')}
+            >
+              <svg
+                width="100%"
+                height="100%"
+                viewBox="0 0 100 800"
+                preserveAspectRatio="none"
+              >
+                <path d={styles.svg.pathInitial} />
+              </svg>
             </div>
           )}
           <div
-            id={this.props.id}
-            className={`bm-menu-wrap ${this.props.className}`.trim()}
-            style={this.getStyles('menuWrap')}
-            aria-hidden={!this.state.isOpen}
+            className={`bm-menu ${props.menuClassName}`.trim()}
+            style={getStyles('menu')}
           >
-            {styles.svg && (
-              <div
-                className={`bm-morph-shape ${this.props.morphShapeClassName}`.trim()}
-                style={this.getStyles('morphShape')}
-              >
-                <svg
-                  width="100%"
-                  height="100%"
-                  viewBox="0 0 100 800"
-                  preserveAspectRatio="none"
-                >
-                  <path d={styles.svg.pathInitial} />
-                </svg>
-              </div>
-            )}
-            <div
-              className={`bm-menu ${this.props.menuClassName}`.trim()}
-              style={this.getStyles('menu')}
-            >
-              {React.createElement(
-                this.props.itemListElement,
-                {
-                  className: `bm-item-list ${this.props.itemListClassName}`.trim(),
-                  style: this.getStyles('itemList')
-                },
-                React.Children.map(this.props.children, (item, index) => {
-                  if (item) {
-                    const classList = [
-                      'bm-item',
-                      this.props.itemClassName,
-                      item.props.className
-                    ]
-                      .filter(className => !!className)
-                      .join(' ');
-                    const extraProps = {
-                      key: index,
-                      className: classList,
-                      style: this.getStyles('item', index, item.props.style),
-                      tabIndex: -1
-                    };
-                    return React.cloneElement(item, extraProps);
-                  }
-                })
-              )}
-            </div>
-            {this.props.customCrossIcon !== false && (
-              <div style={this.getStyles('closeButton')}>
-                <CrossIcon
-                  onClick={() => this.close()}
-                  styles={this.props.styles}
-                  customIcon={this.props.customCrossIcon}
-                  className={this.props.crossButtonClassName}
-                  crossClassName={this.props.crossClassName}
-                />
-              </div>
+            {React.createElement(
+              props.itemListElement,
+              {
+                className: `bm-item-list ${props.itemListClassName}`.trim(),
+                style: getStyles('itemList')
+              },
+              React.Children.map(props.children, (item, index) => {
+                if (item) {
+                  const classList = [
+                    'bm-item',
+                    props.itemClassName,
+                    item.props.className
+                  ]
+                    .filter(className => !!className)
+                    .join(' ');
+                  const extraProps = {
+                    key: index,
+                    className: classList,
+                    style: getStyles('item', index, item.props.style),
+                    tabIndex: -1
+                  };
+                  return React.cloneElement(item, extraProps);
+                }
+              })
             )}
           </div>
+          {props.customCrossIcon !== false && (
+            <div style={getStyles('closeButton')}>
+              <CrossIcon
+                onClick={close}
+                styles={props.styles}
+                customIcon={props.customCrossIcon}
+                className={props.crossButtonClassName}
+                crossClassName={props.crossClassName}
+              />
+            </div>
+          )}
         </div>
-      );
-    }
-  }
+      </div>
+    );
+  };
 
   Menu.propTypes = {
     bodyClassName: PropTypes.string,
