@@ -1773,6 +1773,117 @@ module.exports = exports['default'];
 },{}],14:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
+exports.focusOnFirstMenuItem = focusOnFirstMenuItem;
+exports.focusOnLastMenuItem = focusOnLastMenuItem;
+exports.focusOnCrossButton = focusOnCrossButton;
+exports.focusOnMenuButton = focusOnMenuButton;
+exports.focusOnMenuItem = focusOnMenuItem;
+exports.focusOnNextMenuItem = focusOnNextMenuItem;
+exports.focusOnPreviousMenuItem = focusOnPreviousMenuItem;
+function focusOnFirstMenuItem() {
+    var firstItem = Array.from(document.getElementsByClassName('bm-item')).shift();
+    if (firstItem) {
+        firstItem.focus();
+    }
+}
+function focusOnLastMenuItem() {
+    var lastItem = Array.from(document.getElementsByClassName('bm-item')).pop();
+    if (lastItem) {
+        lastItem.focus();
+    }
+}
+function focusOnCrossButton() {
+    var crossButton = document.getElementById('react-burger-cross-btn');
+    if (crossButton) {
+        crossButton.focus();
+    }
+}
+function focusOnMenuButton() {
+    var menuButton = document.getElementById('react-burger-menu-btn');
+    if (menuButton) {
+        menuButton.focus();
+    }
+}
+function focusOnMenuItem(siblingType) {
+    if (document.activeElement.className.includes('bm-item')) {
+        var sibling = document.activeElement[siblingType];
+        if (sibling) {
+            sibling.focus();
+        } else {
+            focusOnCrossButton();
+        }
+    } else {
+        if (siblingType === 'previousElementSibling') {
+            focusOnLastMenuItem();
+        } else {
+            focusOnFirstMenuItem();
+        }
+    }
+}
+function focusOnNextMenuItem() {
+    focusOnMenuItem('nextElementSibling');
+}
+function focusOnPreviousMenuItem() {
+    focusOnMenuItem('previousElementSibling');
+}
+},{}],15:[function(require,module,exports){
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
+exports['default'] = function () {
+    var Snap = undefined;
+    try {
+        Snap = require('snapsvg-cjs');
+    } finally {
+        return Snap;
+    }
+};
+module.exports = exports['default'];
+},{"snapsvg-cjs":undefined}],16:[function(require,module,exports){
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
+var pxToNum = function pxToNum(val) {
+    return parseInt(val.slice(0, -2), 10);
+};
+exports.pxToNum = pxToNum;
+},{}],17:[function(require,module,exports){
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
+var _slicedToArray = function () {
+        function sliceIterator(arr, i) {
+            var _arr = [];
+            var _n = true;
+            var _d = false;
+            var _e = undefined;
+            try {
+                for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+                    _arr.push(_s.value);
+                    if (i && _arr.length === i)
+                        break;
+                }
+            } catch (err) {
+                _d = true;
+                _e = err;
+            } finally {
+                try {
+                    if (!_n && _i['return'])
+                        _i['return']();
+                } finally {
+                    if (_d)
+                        throw _e;
+                }
+            }
+            return _arr;
+        }
+        return function (arr, i) {
+            if (Array.isArray(arr)) {
+                return arr;
+            } else if (Symbol.iterator in Object(arr)) {
+                return sliceIterator(arr, i);
+            } else {
+                throw new TypeError('Invalid attempt to destructure non-iterable instance');
+            }
+        };
+    }();
 var _extends = Object.assign || function (target) {
         for (var i = 1; i < arguments.length; i++) {
             var source = arguments[i];
@@ -1784,79 +1895,8 @@ var _extends = Object.assign || function (target) {
         }
         return target;
     };
-var _createClass = function () {
-        function defineProperties(target, props) {
-            for (var i = 0; i < props.length; i++) {
-                var descriptor = props[i];
-                descriptor.enumerable = descriptor.enumerable || false;
-                descriptor.configurable = true;
-                if ('value' in descriptor)
-                    descriptor.writable = true;
-                Object.defineProperty(target, descriptor.key, descriptor);
-            }
-        }
-        return function (Constructor, protoProps, staticProps) {
-            if (protoProps)
-                defineProperties(Constructor.prototype, protoProps);
-            if (staticProps)
-                defineProperties(Constructor, staticProps);
-            return Constructor;
-        };
-    }();
-var _get = function get(_x3, _x4, _x5) {
-    var _again = true;
-    _function:
-        while (_again) {
-            var object = _x3, property = _x4, receiver = _x5;
-            _again = false;
-            if (object === null)
-                object = Function.prototype;
-            var desc = Object.getOwnPropertyDescriptor(object, property);
-            if (desc === undefined) {
-                var parent = Object.getPrototypeOf(object);
-                if (parent === null) {
-                    return undefined;
-                } else {
-                    _x3 = parent;
-                    _x4 = property;
-                    _x5 = receiver;
-                    _again = true;
-                    desc = parent = undefined;
-                    continue _function;
-                }
-            } else if ('value' in desc) {
-                return desc.value;
-            } else {
-                var getter = desc.get;
-                if (getter === undefined) {
-                    return undefined;
-                }
-                return getter.call(receiver);
-            }
-        }
-};
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : { 'default': obj };
-}
-function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
-        throw new TypeError('Cannot call a class as a function');
-    }
-}
-function _inherits(subClass, superClass) {
-    if (typeof superClass !== 'function' && superClass !== null) {
-        throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);
-    }
-    subClass.prototype = Object.create(superClass && superClass.prototype, {
-        constructor: {
-            value: subClass,
-            enumerable: false,
-            writable: true,
-            configurable: true
-        }
-    });
-    if (superClass)
-        Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
 }
 var _react = require('react');
 var _react2 = _interopRequireDefault(_react);
@@ -1864,390 +1904,291 @@ var _reactDom = require('react-dom');
 var _reactDom2 = _interopRequireDefault(_reactDom);
 var _propTypes = require('prop-types');
 var _propTypes2 = _interopRequireDefault(_propTypes);
-var _baseStyles = require('./baseStyles');
-var _baseStyles2 = _interopRequireDefault(_baseStyles);
-var _BurgerIcon = require('./BurgerIcon');
-var _BurgerIcon2 = _interopRequireDefault(_BurgerIcon);
-var _CrossIcon = require('./CrossIcon');
-var _CrossIcon2 = _interopRequireDefault(_CrossIcon);
+var _helpersBaseStyles = require('./helpers/baseStyles');
+var _helpersBaseStyles2 = _interopRequireDefault(_helpersBaseStyles);
+var _helpersDom = require('./helpers/dom');
+var _componentsBurgerIcon = require('./components/BurgerIcon');
+var _componentsBurgerIcon2 = _interopRequireDefault(_componentsBurgerIcon);
+var _componentsCrossIcon = require('./components/CrossIcon');
+var _componentsCrossIcon2 = _interopRequireDefault(_componentsCrossIcon);
 exports['default'] = function (styles) {
-    var Menu = function (_Component) {
-            _inherits(Menu, _Component);
-            function Menu(props) {
-                _classCallCheck(this, Menu);
-                _get(Object.getPrototypeOf(Menu.prototype), 'constructor', this).call(this, props);
-                this.state = { isOpen: false };
-                if (!styles) {
-                    throw new Error('No styles supplied');
+    if (!styles) {
+        throw new Error('No styles supplied');
+    }
+    var ARROW_DOWN = 'ArrowDown';
+    var ARROW_UP = 'ArrowUp';
+    var ESCAPE = 'Escape';
+    var SPACE = ' ';
+    var HOME = 'Home';
+    var END = 'End';
+    function usePrevious(value) {
+        var ref = _react2['default'].useRef(value);
+        _react2['default'].useEffect(function () {
+            ref.current = value;
+        });
+        return ref.current;
+    }
+    var Menu = function Menu(props) {
+        var _React$useState = _react2['default'].useState(false);
+        var _React$useState2 = _slicedToArray(_React$useState, 2);
+        var isOpen = _React$useState2[0];
+        var setIsOpen = _React$useState2[1];
+        var timeoutId = _react2['default'].useRef();
+        var toggleOptions = _react2['default'].useRef({});
+        var prevIsOpenProp = usePrevious(props.isOpen);
+        _react2['default'].useEffect(function () {
+            if (props.isOpen) {
+                toggleMenu({
+                    isOpen: true,
+                    noStateChange: true
+                });
+            }
+            return function cleanup() {
+                applyWrapperStyles(false);
+                clearCurrentTimeout();
+            };
+        }, []);
+        _react2['default'].useEffect(function () {
+            var wasToggled = typeof props.isOpen !== 'undefined' && props.isOpen !== isOpen && props.isOpen !== prevIsOpenProp;
+            if (wasToggled) {
+                toggleMenu();
+                return;
+            }
+            if (styles.svg) {
+                (function () {
+                    var morphShape = _reactDom2['default'].findDOMNode(undefined, 'bm-morph-shape');
+                    var path = styles.svg.lib(morphShape).select('path');
+                    if (isOpen) {
+                        styles.svg.animate(path);
+                    } else {
+                        setTimeout(function () {
+                            path.attr('d', styles.svg.pathInitial);
+                        }, 300);
+                    }
+                }());
+            }
+        });
+        _react2['default'].useEffect(function () {
+            var _toggleOptions$current = toggleOptions.current;
+            var noStateChange = _toggleOptions$current.noStateChange;
+            var focusOnLastItem = _toggleOptions$current.focusOnLastItem;
+            if (!noStateChange) {
+                props.onStateChange({ isOpen: isOpen });
+            }
+            if (!props.disableAutoFocus) {
+                if (isOpen) {
+                    focusOnLastItem ? (0, _helpersDom.focusOnLastMenuItem)() : (0, _helpersDom.focusOnFirstMenuItem)();
+                } else {
+                    if (document.activeElement) {
+                        document.activeElement.blur();
+                    } else {
+                        document.body.blur();
+                    }
                 }
             }
-            _createClass(Menu, [
-                {
-                    key: 'focusOnFirstMenuItem',
-                    value: function focusOnFirstMenuItem() {
-                        var firstItem = Array.from(document.getElementsByClassName('bm-item')).shift();
-                        if (firstItem) {
-                            firstItem.focus();
-                        }
-                    }
-                },
-                {
-                    key: 'focusOnLastMenuItem',
-                    value: function focusOnLastMenuItem() {
-                        var lastItem = Array.from(document.getElementsByClassName('bm-item')).pop();
-                        if (lastItem) {
-                            lastItem.focus();
-                        }
-                    }
-                },
-                {
-                    key: 'focusOnCrossButton',
-                    value: function focusOnCrossButton() {
-                        var crossButton = document.getElementById('react-burger-cross-btn');
-                        if (crossButton) {
-                            crossButton.focus();
-                        }
-                    }
-                },
-                {
-                    key: 'focusOnMenuButton',
-                    value: function focusOnMenuButton() {
-                        var menuButton = document.getElementById('react-burger-menu-btn');
-                        if (menuButton) {
-                            menuButton.focus();
-                        }
-                    }
-                },
-                {
-                    key: 'focusOnMenuItem',
-                    value: function focusOnMenuItem(siblingType) {
-                        if (document.activeElement.className.includes('bm-item')) {
-                            var sibling = document.activeElement[siblingType];
-                            if (sibling) {
-                                sibling.focus();
-                            } else {
-                                this.focusOnCrossButton();
-                            }
-                        } else {
-                            if (siblingType === 'previousElementSibling') {
-                                this.focusOnLastMenuItem();
-                            } else {
-                                this.focusOnFirstMenuItem();
-                            }
-                        }
-                    }
-                },
-                {
-                    key: 'focusOnNextMenuItem',
-                    value: function focusOnNextMenuItem() {
-                        this.focusOnMenuItem('nextElementSibling');
-                    }
-                },
-                {
-                    key: 'focusOnPreviousMenuItem',
-                    value: function focusOnPreviousMenuItem() {
-                        this.focusOnMenuItem('previousElementSibling');
-                    }
-                },
-                {
-                    key: 'toggleMenu',
-                    value: function toggleMenu() {
-                        var _this = this;
-                        var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-                        var isOpen = options.isOpen;
-                        var noStateChange = options.noStateChange;
-                        var focusOnLastItem = options.focusOnLastItem;
-                        var newState = { isOpen: typeof isOpen !== 'undefined' ? isOpen : !this.state.isOpen };
-                        this.applyWrapperStyles();
-                        this.setState(newState, function () {
-                            !noStateChange && _this.props.onStateChange(newState);
-                            if (!_this.props.disableAutoFocus) {
-                                if (newState.isOpen) {
-                                    focusOnLastItem ? _this.focusOnLastMenuItem() : _this.focusOnFirstMenuItem();
-                                } else {
-                                    if (document.activeElement) {
-                                        document.activeElement.blur();
-                                    } else {
-                                        document.body.blur();
-                                    }
-                                }
-                            }
-                            _this.timeoutId && clearTimeout(_this.timeoutId);
-                            _this.timeoutId = setTimeout(function () {
-                                _this.timeoutId = null;
-                                if (!newState.isOpen) {
-                                    _this.applyWrapperStyles(false);
-                                }
-                            }, 500);
-                        });
-                    }
-                },
-                {
-                    key: 'open',
-                    value: function open() {
-                        if (typeof this.props.onOpen === 'function') {
-                            this.props.onOpen();
-                        } else {
-                            this.toggleMenu();
-                        }
-                    }
-                },
-                {
-                    key: 'close',
-                    value: function close() {
-                        if (typeof this.props.onClose === 'function') {
-                            this.props.onClose();
-                        } else {
-                            this.toggleMenu();
-                        }
-                    }
-                },
-                {
-                    key: 'overlayClick',
-                    value: function overlayClick() {
-                        if (this.props.disableOverlayClick === true || typeof this.props.disableOverlayClick === 'function' && this.props.disableOverlayClick()) {
-                            return;
-                        } else {
-                            this.close();
-                        }
-                    }
-                },
-                {
-                    key: 'applyWrapperStyles',
-                    value: function applyWrapperStyles() {
-                        var set = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
-                        var applyClass = function applyClass(el, className) {
-                            return el.classList[set ? 'add' : 'remove'](className);
-                        };
-                        if (this.props.htmlClassName) {
-                            applyClass(document.querySelector('html'), this.props.htmlClassName);
-                        }
-                        if (this.props.bodyClassName) {
-                            applyClass(document.querySelector('body'), this.props.bodyClassName);
-                        }
-                        if (styles.pageWrap && this.props.pageWrapId) {
-                            this.handleExternalWrapper(this.props.pageWrapId, styles.pageWrap, set);
-                        }
-                        if (styles.outerContainer && this.props.outerContainerId) {
-                            this.handleExternalWrapper(this.props.outerContainerId, styles.outerContainer, set);
-                        }
-                    }
-                },
-                {
-                    key: 'handleExternalWrapper',
-                    value: function handleExternalWrapper(id, wrapperStyles, set) {
-                        var wrapper = document.getElementById(id);
-                        if (!wrapper) {
-                            console.error('Element with ID \'' + id + '\' not found');
-                            return;
-                        }
-                        var builtStyles = this.getStyle(wrapperStyles);
-                        for (var prop in builtStyles) {
-                            if (builtStyles.hasOwnProperty(prop)) {
-                                wrapper.style[prop] = set ? builtStyles[prop] : '';
-                            }
-                        }
-                        var applyOverflow = function applyOverflow(el) {
-                            return el.style['overflow-x'] = set ? 'hidden' : '';
-                        };
-                        if (!this.props.htmlClassName) {
-                            applyOverflow(document.querySelector('html'));
-                        }
-                        if (!this.props.bodyClassName) {
-                            applyOverflow(document.querySelector('body'));
-                        }
-                    }
-                },
-                {
-                    key: 'getStyles',
-                    value: function getStyles(el, index, inline) {
-                        var propName = 'bm' + el.replace(el.charAt(0), el.charAt(0).toUpperCase());
-                        var output = _baseStyles2['default'][el] ? this.getStyle(_baseStyles2['default'][el]) : {};
-                        if (styles[el]) {
-                            output = _extends({}, output, this.getStyle(styles[el], index + 1));
-                        }
-                        if (this.props.styles[propName]) {
-                            output = _extends({}, output, this.props.styles[propName]);
-                        }
-                        if (inline) {
-                            output = _extends({}, output, inline);
-                        }
-                        if (this.props.noTransition) {
-                            delete output.transition;
-                        }
-                        return output;
-                    }
-                },
-                {
-                    key: 'getStyle',
-                    value: function getStyle(style, index) {
-                        var width = this.props.width;
-                        var formattedWidth = typeof width !== 'string' ? width + 'px' : width;
-                        return style(this.state.isOpen, formattedWidth, this.props.right, index);
-                    }
-                },
-                {
-                    key: 'listenForKeyDowns',
-                    value: function listenForKeyDowns(e) {
-                        e = e || window.event;
-                        var ARROW_DOWN = 'ArrowDown';
-                        var ARROW_UP = 'ArrowUp';
-                        var ENTER = 'Enter';
-                        var ESCAPE = 'Escape';
-                        var SPACE = ' ';
-                        var HOME = 'Home';
-                        var END = 'End';
-                        if (this.state.isOpen) {
-                            switch (e.key) {
-                            case ESCAPE:
-                                if (!this.props.disableCloseOnEsc) {
-                                    this.close();
-                                    this.focusOnMenuButton();
-                                }
-                                break;
-                            case ARROW_DOWN:
-                                this.focusOnNextMenuItem();
-                                break;
-                            case ARROW_UP:
-                                this.focusOnPreviousMenuItem();
-                                break;
-                            case HOME:
-                                this.focusOnFirstMenuItem();
-                                break;
-                            case END:
-                                this.focusOnLastMenuItem();
-                                break;
-                            }
-                        } else {
-                            if (e.target === document.getElementById('react-burger-menu-btn')) {
-                                switch (e.key) {
-                                case ARROW_DOWN:
-                                case ENTER:
-                                case SPACE:
-                                    this.toggleMenu();
-                                    break;
-                                case ARROW_UP:
-                                    this.toggleMenu({ focusOnLastItem: true });
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                },
-                {
-                    key: 'componentDidMount',
-                    value: function componentDidMount() {
-                        this.onKeyDown = this.props.customOnKeyDown ? this.props.customOnKeyDown : this.listenForKeyDowns.bind(this);
-                        window.addEventListener('keydown', this.onKeyDown);
-                        if (this.props.isOpen) {
-                            this.toggleMenu({
-                                isOpen: true,
-                                noStateChange: true
-                            });
-                        }
-                    }
-                },
-                {
-                    key: 'componentWillUnmount',
-                    value: function componentWillUnmount() {
-                        window.removeEventListener('keydown', this.onKeyDown);
-                        this.applyWrapperStyles(false);
-                        this.timeoutId && clearTimeout(this.timeoutId);
-                    }
-                },
-                {
-                    key: 'componentDidUpdate',
-                    value: function componentDidUpdate(prevProps) {
-                        var _this2 = this;
-                        var wasToggled = typeof this.props.isOpen !== 'undefined' && this.props.isOpen !== this.state.isOpen && this.props.isOpen !== prevProps.isOpen;
-                        if (wasToggled) {
-                            this.toggleMenu();
-                            return;
-                        }
-                        if (styles.svg) {
-                            (function () {
-                                var morphShape = _reactDom2['default'].findDOMNode(_this2, 'bm-morph-shape');
-                                var path = styles.svg.lib(morphShape).select('path');
-                                if (_this2.state.isOpen) {
-                                    styles.svg.animate(path);
-                                } else {
-                                    setTimeout(function () {
-                                        path.attr('d', styles.svg.pathInitial);
-                                    }, 300);
-                                }
-                            }());
-                        }
-                    }
-                },
-                {
-                    key: 'render',
-                    value: function render() {
-                        var _this3 = this;
-                        return _react2['default'].createElement('div', null, !this.props.noOverlay && _react2['default'].createElement('div', {
-                            className: ('bm-overlay ' + this.props.overlayClassName).trim(),
-                            onClick: function () {
-                                return _this3.overlayClick();
-                            },
-                            style: this.getStyles('overlay')
-                        }), this.props.customBurgerIcon !== false && _react2['default'].createElement('div', { style: this.getStyles('burgerIcon') }, _react2['default'].createElement(_BurgerIcon2['default'], {
-                            onClick: function () {
-                                return _this3.open();
-                            },
-                            styles: this.props.styles,
-                            customIcon: this.props.customBurgerIcon,
-                            className: this.props.burgerButtonClassName,
-                            barClassName: this.props.burgerBarClassName,
-                            onIconStateChange: this.props.onIconStateChange
-                        })), _react2['default'].createElement('div', {
-                            id: this.props.id,
-                            className: ('bm-menu-wrap ' + this.props.className).trim(),
-                            style: this.getStyles('menuWrap'),
-                            'aria-hidden': !this.state.isOpen
-                        }, styles.svg && _react2['default'].createElement('div', {
-                            className: ('bm-morph-shape ' + this.props.morphShapeClassName).trim(),
-                            style: this.getStyles('morphShape')
-                        }, _react2['default'].createElement('svg', {
-                            width: '100%',
-                            height: '100%',
-                            viewBox: '0 0 100 800',
-                            preserveAspectRatio: 'none'
-                        }, _react2['default'].createElement('path', { d: styles.svg.pathInitial }))), _react2['default'].createElement('div', {
-                            className: ('bm-menu ' + this.props.menuClassName).trim(),
-                            style: this.getStyles('menu')
-                        }, _react2['default'].createElement(this.props.itemListElement, {
-                            className: ('bm-item-list ' + this.props.itemListClassName).trim(),
-                            style: this.getStyles('itemList')
-                        }, _react2['default'].Children.map(this.props.children, function (item, index) {
-                            if (item) {
-                                var classList = [
-                                        'bm-item',
-                                        _this3.props.itemClassName,
-                                        item.props.className
-                                    ].filter(function (className) {
-                                        return !!className;
-                                    }).join(' ');
-                                var extraProps = {
-                                        key: index,
-                                        className: classList,
-                                        style: _this3.getStyles('item', index, item.props.style),
-                                        tabIndex: -1
-                                    };
-                                return _react2['default'].cloneElement(item, extraProps);
-                            }
-                        }))), this.props.customCrossIcon !== false && _react2['default'].createElement('div', { style: this.getStyles('closeButton') }, _react2['default'].createElement(_CrossIcon2['default'], {
-                            onClick: function () {
-                                return _this3.close();
-                            },
-                            styles: this.props.styles,
-                            customIcon: this.props.customCrossIcon,
-                            className: this.props.crossButtonClassName,
-                            crossClassName: this.props.crossClassName
-                        }))));
-                    }
+            clearCurrentTimeout();
+            timeoutId.current = setTimeout(function () {
+                timeoutId.current = null;
+                if (!isOpen) {
+                    applyWrapperStyles(false);
                 }
-            ]);
-            return Menu;
-        }(_react.Component);
+            }, 500);
+            var defaultOnKeyDown = isOpen ? onKeyDownOpen : onKeyDownClosed;
+            var onKeyDown = props.customOnKeyDown || defaultOnKeyDown;
+            window.addEventListener('keydown', onKeyDown);
+            return function cleanup() {
+                window.removeEventListener('keydown', onKeyDown);
+            };
+        }, [isOpen]);
+        function toggleMenu() {
+            var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+            toggleOptions.current = options;
+            applyWrapperStyles();
+            setIsOpen(function (open) {
+                return typeof options.isOpen !== 'undefined' ? options.isOpen : !open;
+            });
+        }
+        function open() {
+            if (typeof props.onOpen === 'function') {
+                props.onOpen();
+            } else {
+                toggleMenu();
+            }
+        }
+        function close() {
+            if (typeof props.onClose === 'function') {
+                props.onClose();
+            } else {
+                toggleMenu();
+            }
+        }
+        function getStyle(style, index) {
+            var width = props.width;
+            var right = props.right;
+            var formattedWidth = typeof width !== 'string' ? width + 'px' : width;
+            return style(isOpen, formattedWidth, right, index);
+        }
+        function getStyles(el, index, inline) {
+            var propName = 'bm' + el.replace(el.charAt(0), el.charAt(0).toUpperCase());
+            var output = _helpersBaseStyles2['default'][el] ? getStyle(_helpersBaseStyles2['default'][el]) : {};
+            if (styles[el]) {
+                output = _extends({}, output, getStyle(styles[el], index + 1));
+            }
+            if (props.styles[propName]) {
+                output = _extends({}, output, props.styles[propName]);
+            }
+            if (inline) {
+                output = _extends({}, output, inline);
+            }
+            if (props.noTransition) {
+                delete output.transition;
+            }
+            return output;
+        }
+        function handleExternalWrapper(id, wrapperStyles, set) {
+            var wrapper = document.getElementById(id);
+            if (!wrapper) {
+                console.error('Element with ID \'' + id + '\' not found');
+                return;
+            }
+            var builtStyles = getStyle(wrapperStyles);
+            for (var prop in builtStyles) {
+                if (builtStyles.hasOwnProperty(prop)) {
+                    wrapper.style[prop] = set ? builtStyles[prop] : '';
+                }
+            }
+            var applyOverflow = function applyOverflow(el) {
+                return el.style['overflow-x'] = set ? 'hidden' : '';
+            };
+            if (!props.htmlClassName) {
+                applyOverflow(document.querySelector('html'));
+            }
+            if (!props.bodyClassName) {
+                applyOverflow(document.querySelector('body'));
+            }
+        }
+        function applyWrapperStyles() {
+            var set = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
+            var applyClass = function applyClass(el, className) {
+                return el.classList[set ? 'add' : 'remove'](className);
+            };
+            if (props.htmlClassName) {
+                applyClass(document.querySelector('html'), props.htmlClassName);
+            }
+            if (props.bodyClassName) {
+                applyClass(document.querySelector('body'), props.bodyClassName);
+            }
+            if (styles.pageWrap && props.pageWrapId) {
+                handleExternalWrapper(props.pageWrapId, styles.pageWrap, set);
+            }
+            if (styles.outerContainer && props.outerContainerId) {
+                handleExternalWrapper(props.outerContainerId, styles.outerContainer, set);
+            }
+        }
+        function clearCurrentTimeout() {
+            if (timeoutId.current) {
+                clearTimeout(timeoutId.current);
+            }
+        }
+        function onKeyDownOpen(e) {
+            e = e || window.event;
+            switch (e.key) {
+            case ESCAPE:
+                if (!props.disableCloseOnEsc) {
+                    close();
+                    (0, _helpersDom.focusOnMenuButton)();
+                }
+                break;
+            case ARROW_DOWN:
+                (0, _helpersDom.focusOnNextMenuItem)();
+                break;
+            case ARROW_UP:
+                (0, _helpersDom.focusOnPreviousMenuItem)();
+                break;
+            case HOME:
+                (0, _helpersDom.focusOnFirstMenuItem)();
+                break;
+            case END:
+                (0, _helpersDom.focusOnLastMenuItem)();
+                break;
+            }
+        }
+        function onKeyDownClosed(e) {
+            e = e || window.event;
+            if (e.target === document.getElementById('react-burger-menu-btn')) {
+                switch (e.key) {
+                case ARROW_DOWN:
+                case SPACE:
+                    toggleMenu();
+                    break;
+                case ARROW_UP:
+                    toggleMenu({ focusOnLastItem: true });
+                    break;
+                }
+            }
+        }
+        function handleOverlayClick() {
+            if (props.disableOverlayClick === true || typeof props.disableOverlayClick === 'function' && props.disableOverlayClick()) {
+                return;
+            } else {
+                close();
+            }
+        }
+        return _react2['default'].createElement('div', null, !props.noOverlay && _react2['default'].createElement('div', {
+            className: ('bm-overlay ' + props.overlayClassName).trim(),
+            onClick: handleOverlayClick,
+            style: getStyles('overlay')
+        }), props.customBurgerIcon !== false && _react2['default'].createElement('div', { style: getStyles('burgerIcon') }, _react2['default'].createElement(_componentsBurgerIcon2['default'], {
+            onClick: open,
+            styles: props.styles,
+            customIcon: props.customBurgerIcon,
+            className: props.burgerButtonClassName,
+            barClassName: props.burgerBarClassName,
+            onIconStateChange: props.onIconStateChange
+        })), _react2['default'].createElement('div', {
+            id: props.id,
+            className: ('bm-menu-wrap ' + props.className).trim(),
+            style: getStyles('menuWrap'),
+            'aria-hidden': !isOpen
+        }, styles.svg && _react2['default'].createElement('div', {
+            className: ('bm-morph-shape ' + props.morphShapeClassName).trim(),
+            style: getStyles('morphShape')
+        }, _react2['default'].createElement('svg', {
+            width: '100%',
+            height: '100%',
+            viewBox: '0 0 100 800',
+            preserveAspectRatio: 'none'
+        }, _react2['default'].createElement('path', { d: styles.svg.pathInitial }))), _react2['default'].createElement('div', {
+            className: ('bm-menu ' + props.menuClassName).trim(),
+            style: getStyles('menu')
+        }, _react2['default'].createElement(props.itemListElement, {
+            className: ('bm-item-list ' + props.itemListClassName).trim(),
+            style: getStyles('itemList')
+        }, _react2['default'].Children.map(props.children, function (item, index) {
+            if (item) {
+                var classList = [
+                        'bm-item',
+                        props.itemClassName,
+                        item.props.className
+                    ].filter(function (className) {
+                        return !!className;
+                    }).join(' ');
+                var extraProps = {
+                        key: index,
+                        className: classList,
+                        style: getStyles('item', index, item.props.style),
+                        tabIndex: -1
+                    };
+                return _react2['default'].cloneElement(item, extraProps);
+            }
+        }))), props.customCrossIcon !== false && _react2['default'].createElement('div', { style: getStyles('closeButton') }, _react2['default'].createElement(_componentsCrossIcon2['default'], {
+            onClick: close,
+            styles: props.styles,
+            customIcon: props.customCrossIcon,
+            className: props.crossButtonClassName,
+            crossClassName: props.crossClassName
+        }))));
+    };
     Menu.propTypes = {
         bodyClassName: _propTypes2['default'].string,
         burgerBarClassName: _propTypes2['default'].string,
@@ -2328,21 +2269,21 @@ exports['default'] = function (styles) {
     return Menu;
 };
 module.exports = exports['default'];
-},{"./BurgerIcon":11,"./CrossIcon":12,"./baseStyles":13,"prop-types":6,"react":undefined,"react-dom":undefined}],15:[function(require,module,exports){
+},{"./components/BurgerIcon":11,"./components/CrossIcon":12,"./helpers/baseStyles":13,"./helpers/dom":14,"prop-types":6,"react":undefined,"react-dom":undefined}],18:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : { 'default': obj };
 }
-var _snapsvgImporter = require('../snapsvgImporter');
-var _snapsvgImporter2 = _interopRequireDefault(_snapsvgImporter);
+var _helpersSnapsvgImporter = require('../helpers/snapsvgImporter');
+var _helpersSnapsvgImporter2 = _interopRequireDefault(_helpersSnapsvgImporter);
 var _menuFactory = require('../menuFactory');
 var _menuFactory2 = _interopRequireDefault(_menuFactory);
-var _utils = require('../utils');
+var _helpersUtils = require('../helpers/utils');
 var BUBBLE_WIDTH = 140;
 var styles = {
         svg: {
-            lib: _snapsvgImporter2['default'],
+            lib: _helpersSnapsvgImporter2['default'],
             pathInitial: 'M-7.312,0H0c0,0,0,113.839,0,400c0,264.506,0,400,0,400h-7.312V0z',
             pathOpen: 'M-7.312,0H15c0,0,66,113.339,66,399.5C81,664.006,15,800,15,800H-7.312V0z;M-7.312,0H100c0,0,0,113.839,0,400c0,264.506,0,400,0,400H-7.312V0z',
             animate: function animate(path) {
@@ -2386,7 +2327,7 @@ var styles = {
             };
         },
         menu: function menu(isOpen, width, right) {
-            var finalWidth = (0, _utils.pxToNum)(width) - BUBBLE_WIDTH;
+            var finalWidth = (0, _helpersUtils.pxToNum)(width) - BUBBLE_WIDTH;
             return {
                 position: 'fixed',
                 MozTransform: isOpen ? '' : right ? 'translate3d(' + finalWidth + ', 0, 0)' : 'translate3d(-' + finalWidth + ', 0, 0)',
@@ -2399,7 +2340,7 @@ var styles = {
             };
         },
         item: function item(isOpen, width, right, nthChild) {
-            var finalWidth = (0, _utils.pxToNum)(width) - BUBBLE_WIDTH;
+            var finalWidth = (0, _helpersUtils.pxToNum)(width) - BUBBLE_WIDTH;
             return {
                 MozTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(' + finalWidth + ', 0, 0)' : 'translate3d(-' + finalWidth + ', 0, 0)',
                 MsTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(' + finalWidth + ', 0, 0)' : 'translate3d(-' + finalWidth + ', 0, 0)',
@@ -2411,7 +2352,7 @@ var styles = {
             };
         },
         closeButton: function closeButton(isOpen, width, right) {
-            var finalWidth = (0, _utils.pxToNum)(width) - BUBBLE_WIDTH;
+            var finalWidth = (0, _helpersUtils.pxToNum)(width) - BUBBLE_WIDTH;
             return {
                 MozTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(' + finalWidth + ', 0, 0)' : 'translate3d(-' + finalWidth + ', 0, 0)',
                 MsTransform: isOpen ? 'translate3d(0, 0, 0)' : right ? 'translate3d(' + finalWidth + ', 0, 0)' : 'translate3d(-' + finalWidth + ', 0, 0)',
@@ -2425,21 +2366,21 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":14,"../snapsvgImporter":25,"../utils":26}],16:[function(require,module,exports){
+},{"../helpers/snapsvgImporter":15,"../helpers/utils":16,"../menuFactory":17}],19:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : { 'default': obj };
 }
-var _snapsvgImporter = require('../snapsvgImporter');
-var _snapsvgImporter2 = _interopRequireDefault(_snapsvgImporter);
+var _helpersSnapsvgImporter = require('../helpers/snapsvgImporter');
+var _helpersSnapsvgImporter2 = _interopRequireDefault(_helpersSnapsvgImporter);
 var _menuFactory = require('../menuFactory');
 var _menuFactory2 = _interopRequireDefault(_menuFactory);
-var _utils = require('../utils');
+var _helpersUtils = require('../helpers/utils');
 var MORPH_SHAPE_WIDTH = 120;
 var styles = {
         svg: {
-            lib: _snapsvgImporter2['default'],
+            lib: _helpersSnapsvgImporter2['default'],
             pathInitial: 'M-1,0h101c0,0-97.833,153.603-97.833,396.167C2.167,627.579,100,800,100,800H-1V0z',
             pathOpen: 'M-1,0h101c0,0,0-1,0,395c0,404,0,405,0,405H-1V0z',
             animate: function animate(path) {
@@ -2474,7 +2415,7 @@ var styles = {
             return {
                 position: 'fixed',
                 right: right ? 0 : 'inherit',
-                width: (0, _utils.pxToNum)(width) - MORPH_SHAPE_WIDTH,
+                width: (0, _helpersUtils.pxToNum)(width) - MORPH_SHAPE_WIDTH,
                 whiteSpace: 'nowrap',
                 boxSizing: 'border-box',
                 overflow: 'visible'
@@ -2506,7 +2447,7 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":14,"../snapsvgImporter":25,"../utils":26}],17:[function(require,module,exports){
+},{"../helpers/snapsvgImporter":15,"../helpers/utils":16,"../menuFactory":17}],20:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -2545,7 +2486,7 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":14}],18:[function(require,module,exports){
+},{"../menuFactory":17}],21:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -2570,7 +2511,7 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":14}],19:[function(require,module,exports){
+},{"../menuFactory":17}],22:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -2600,7 +2541,7 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":14}],20:[function(require,module,exports){
+},{"../menuFactory":17}],23:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -2661,7 +2602,7 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":14}],21:[function(require,module,exports){
+},{"../menuFactory":17}],24:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -2688,7 +2629,7 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":14}],22:[function(require,module,exports){
+},{"../menuFactory":17}],25:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -2718,7 +2659,7 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":14}],23:[function(require,module,exports){
+},{"../menuFactory":17}],26:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -2729,7 +2670,7 @@ var _menuFactory2 = _interopRequireDefault(_menuFactory);
 var styles = {};
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":14}],24:[function(require,module,exports){
+},{"../menuFactory":17}],27:[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 function _interopRequireDefault(obj) {
@@ -2761,26 +2702,7 @@ var styles = {
     };
 exports['default'] = (0, _menuFactory2['default'])(styles);
 module.exports = exports['default'];
-},{"../menuFactory":14}],25:[function(require,module,exports){
-'use strict';
-Object.defineProperty(exports, '__esModule', { value: true });
-exports['default'] = function () {
-    var Snap = undefined;
-    try {
-        Snap = require('snapsvg-cjs');
-    } finally {
-        return Snap;
-    }
-};
-module.exports = exports['default'];
-},{"snapsvg-cjs":undefined}],26:[function(require,module,exports){
-'use strict';
-Object.defineProperty(exports, '__esModule', { value: true });
-var pxToNum = function pxToNum(val) {
-    return parseInt(val.slice(0, -2), 10);
-};
-exports.pxToNum = pxToNum;
-},{}],"react-burger-menu":[function(require,module,exports){
+},{"../menuFactory":17}],"react-burger-menu":[function(require,module,exports){
 'use strict';
 Object.defineProperty(exports, '__esModule', { value: true });
 exports['default'] = {
@@ -2796,4 +2718,4 @@ exports['default'] = {
     reveal: require('./menus/reveal')
 };
 module.exports = exports['default'];
-},{"./menus/bubble":15,"./menus/elastic":16,"./menus/fallDown":17,"./menus/push":18,"./menus/pushRotate":19,"./menus/reveal":20,"./menus/scaleDown":21,"./menus/scaleRotate":22,"./menus/slide":23,"./menus/stack":24}]},{},[]);
+},{"./menus/bubble":18,"./menus/elastic":19,"./menus/fallDown":20,"./menus/push":21,"./menus/pushRotate":22,"./menus/reveal":23,"./menus/scaleDown":24,"./menus/scaleRotate":25,"./menus/slide":26,"./menus/stack":27}]},{},[]);

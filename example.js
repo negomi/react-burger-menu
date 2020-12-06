@@ -91,10 +91,10 @@ var MenuWrap = function (_Component) {
         }
         _createClass(MenuWrap, [
             {
-                key: 'componentWillReceiveProps',
-                value: function componentWillReceiveProps(nextProps) {
+                key: 'componentDidUpdate',
+                value: function componentDidUpdate(prevProps) {
                     var _this = this;
-                    var sideChanged = this.props.children.props.right !== nextProps.children.props.right;
+                    var sideChanged = this.props.children.props.right !== prevProps.children.props.right;
                     if (sideChanged) {
                         this.setState({ hidden: true });
                         setTimeout(function () {
