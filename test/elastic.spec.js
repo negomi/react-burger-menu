@@ -1,14 +1,12 @@
 'use strict';
 
 import React from 'react';
-import TestUtils from 'react-dom/test-utils';
 import { expect } from 'chai';
 import createShallowComponent from './utils/createShallowComponent';
 import BurgerMenu from '../src/BurgerMenu';
 const Menu = BurgerMenu.elastic.default;
 
 describe('elastic', () => {
-
   let component, menuWrap, morphShape, svg, menu, itemList, firstItem;
 
   function addWrapperElementsToDOM() {
@@ -26,7 +24,11 @@ describe('elastic', () => {
   }
 
   beforeEach(() => {
-    component = createShallowComponent(<Menu pageWrapId={ 'page-wrap' } outerContainerId={ 'outer-container' }><div>An item</div></Menu>);
+    component = createShallowComponent(
+      <Menu pageWrapId={'page-wrap'} outerContainerId={'outer-container'}>
+        <div>An item</div>
+      </Menu>
+    );
     menuWrap = component.props.children[2];
     morphShape = menuWrap.props.children[0];
     svg = morphShape.props.children;
@@ -72,21 +74,30 @@ describe('elastic', () => {
 
   it('has correct initial SVG path', () => {
     let path = svg.props.children;
-    expect(path.props.d).to.equal('M-1,0h101c0,0-97.833,153.603-97.833,396.167C2.167,627.579,100,800,100,800H-1V0z');
+    expect(path.props.d).to.equal(
+      'M-1,0h101c0,0-97.833,153.603-97.833,396.167C2.167,627.579,100,800,100,800H-1V0z'
+    );
   });
 
   it('can be positioned on the right', () => {
-    component = TestUtils.renderIntoDocument(<Menu pageWrapId={ 'page-wrap' } outerContainerId={ 'outer-container' } right><div>An item</div></Menu>);
-    menuWrap = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-menu-wrap');
-    menu = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-menu');
-    morphShape = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-morph-shape');
-    itemList = TestUtils.findRenderedDOMComponentWithClass(component, 'bm-item-list');
-    expect(menuWrap.style.right).to.equal('0px');
-    expect(morphShape.style.transform).to.equal('rotateY(180deg)');
-    expect(morphShape.style.left).to.equal('0px');
-    expect(menu.style.right).to.equal('0px');
-    expect(itemList.style.height).to.equal('100%');
-    expect(itemList.style.position).to.equal('relative');
-    expect(itemList.style.left).to.equal('-110px');
+    component = createShallowComponent(
+      <Menu pageWrapId={'page-wrap'} outerContainerId={'outer-container'} right>
+        <div>An item</div>
+      </Menu>
+    );
+    menuWrap = component.props.children[2];
+    morphShape = menuWrap.props.children[0];
+    svg = morphShape.props.children;
+    menu = menuWrap.props.children[1];
+    itemList = menu.props.children;
+    firstItem = menu.props.children.props.children[0];
+
+    expect(menuWrap.props.style.right).to.equal(0);
+    expect(morphShape.props.style.transform).to.equal('rotateY(180deg)');
+    expect(morphShape.props.style.left).to.equal(0);
+    expect(menu.props.style.right).to.equal(0);
+    expect(itemList.props.style.height).to.equal('100%');
+    expect(itemList.props.style.position).to.equal('relative');
+    expect(itemList.props.style.left).to.equal('-110px');
   });
 });
