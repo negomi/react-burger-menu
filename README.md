@@ -225,9 +225,9 @@ By default, the menu will close when the Escape key is pressed. To disable this 
 <Menu disableCloseOnEsc />
 ```
 
-#### Custom `window.onkeydown` handler
+#### Custom `keydown` handler
 
-For more control over global keypress functionality, you can override the handler that this component sets for `window.onkeydown`, and pass a custom function. This could be useful if you are using multiple instances of this component, for example, and want to implement functionality to ensure that a single press of the Escape key closes them all.
+For more control over global keypress functionality, you can override the handler that this component sets for `window.addEventListener('keydown', handler)`, and pass a custom function. This could be useful if you are using multiple instances of this component, for example, and want to implement functionality to ensure that a single press of the Escape key closes them all.
 
 ``` javascript
 const closeAllMenusOnEsc = (e) => {
@@ -238,8 +238,6 @@ const closeAllMenusOnEsc = (e) => {
   }
 };
 
-// Because we can only set one window.onkeydown handler, the last menu you include will override any handlers set by previous ones.
-// For that reason, it's recommended that you pass the same function to all menus to avoid unexpected behavior.
 <MenuOne customOnKeyDown={closeAllMenusOnEsc} isOpen={areMenusOpen} />
 <MenuTwo customOnKeyDown={closeAllMenusOnEsc} isOpen={areMenusOpen} />
 ```
