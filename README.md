@@ -22,8 +22,6 @@ Then open [`localhost:8000`](http://localhost:8000) in a browser.
 
 The test suite uses [Mocha](https://mochajs.org/), [Chai](https://chaijs.com/) and [Sinon](https://sinonjs.org/), with [jsdom](https://github.com/tmpvar/jsdom).
 
-*You will need at least Node v4.0.0 to run the tests, due to jsdom depending on it.*
-
 To run the tests once, run:
 
 ```
@@ -42,16 +40,14 @@ The easiest way to use react-burger-menu is to install it from npm and include i
 
 You can also use the standalone build by including `dist/react-burger-menu.js` in your page. If you use this, make sure you have already included React, and it is available as a global variable.
 
-If you're using React 0.14+:
-
+Version 3.x uses Hooks, so if you're using React 16.8+:
 ```
 npm install react-burger-menu --save
 ```
 
-If you're using React 0.13.3:
-
+If you're using an earlier version of React:
 ```
-npm install react-burger-menu@1.1.6 --save
+npm install react-burger-menu@^2.9.2 --save
 ```
 
 ## Usage
