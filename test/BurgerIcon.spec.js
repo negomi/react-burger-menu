@@ -4,7 +4,7 @@ import React from 'react';
 import TestUtils from 'react-dom/test-utils';
 import { assert, expect } from 'chai';
 import createShallowComponent from './utils/createShallowComponent';
-import BurgerIcon from '../src/BurgerIcon';
+import BurgerIcon from '../src/components/BurgerIcon';
 
 describe('BurgerIcon component', () => {
   let component;

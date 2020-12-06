@@ -1,8 +1,8 @@
 'use strict';
 
-import Snap from '../snapsvgImporter';
+import Snap from '../helpers/snapsvgImporter';
 import menuFactory from '../menuFactory';
-import { pxToNum } from '../utils';
+import { pxToNum } from '../helpers/utils';
 
 const BUBBLE_WIDTH = 140;
 
