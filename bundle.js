@@ -1700,7 +1700,7 @@ var CrossIcon = function (_Component) {
                         id: 'react-burger-cross-btn',
                         onClick: this.props.onClick,
                         style: buttonStyle,
-                        tabIndex: -1
+                        tabIndex: this.props.isOpen ? 0 : -1
                     }, 'Close Menu'), icon);
                 }
             }
@@ -1711,12 +1711,14 @@ exports['default'] = CrossIcon;
 CrossIcon.propTypes = {
     crossClassName: _propTypes2['default'].string,
     customIcon: _propTypes2['default'].element,
+    isOpen: _propTypes2['default'].bool,
     styles: _propTypes2['default'].object
 };
 CrossIcon.defaultProps = {
     crossClassName: '',
     className: '',
-    styles: {}
+    styles: {},
+    isOpen: false
 };
 module.exports = exports['default'];
 },{"prop-types":6,"react":undefined}],13:[function(require,module,exports){
@@ -2177,7 +2179,7 @@ exports['default'] = function (styles) {
                         key: index,
                         className: classList,
                         style: getStyles('item', index, item.props.style),
-                        tabIndex: -1
+                        tabIndex: isOpen ? 0 : -1
                     };
                 return _react2['default'].cloneElement(item, extraProps);
             }
@@ -2186,7 +2188,8 @@ exports['default'] = function (styles) {
             styles: props.styles,
             customIcon: props.customCrossIcon,
             className: props.crossButtonClassName,
-            crossClassName: props.crossClassName
+            crossClassName: props.crossClassName,
+            isOpen: isOpen
         }))));
     };
     Menu.propTypes = {
