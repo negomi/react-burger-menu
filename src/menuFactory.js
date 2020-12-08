@@ -379,7 +379,7 @@ export default styles => {
                     key: index,
                     className: classList,
                     style: getStyles('item', index, item.props.style),
-                    tabIndex: -1
+                    tabIndex: isOpen ? 0 : -1
                   };
                   return React.cloneElement(item, extraProps);
                 }
@@ -394,6 +394,7 @@ export default styles => {
                 customIcon={props.customCrossIcon}
                 className={props.crossButtonClassName}
                 crossClassName={props.crossClassName}
+                isOpen={isOpen}
               />
             </div>
           )}
