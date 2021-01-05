@@ -1973,7 +1973,7 @@ exports['default'] = function (styles) {
             }
             if (styles.svg) {
                 (function () {
-                    var morphShape = _reactDom2['default'].findDOMNode(undefined, 'bm-morph-shape');
+                    var morphShape = document.getElementById('bm-morph-shape');
                     var path = styles.svg.lib(morphShape).select('path');
                     if (isOpen) {
                         styles.svg.animate(path);
@@ -2168,6 +2168,7 @@ exports['default'] = function (styles) {
             style: getStyles('menuWrap'),
             'aria-hidden': !isOpen
         }, styles.svg && _react2['default'].createElement('div', {
+            id: 'bm-morph-shape',
             className: ('bm-morph-shape ' + props.morphShapeClassName).trim(),
             style: getStyles('morphShape')
         }, _react2['default'].createElement('svg', {
