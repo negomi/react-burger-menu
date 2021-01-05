@@ -64,7 +64,7 @@ export default styles => {
       }
 
       if (styles.svg) {
-        const morphShape = ReactDOM.findDOMNode(this, 'bm-morph-shape');
+        const morphShape = document.getElementById('bm-morph-shape');
         const path = styles.svg.lib(morphShape).select('path');
 
         if (isOpen) {
@@ -343,6 +343,7 @@ export default styles => {
         >
           {styles.svg && (
             <div
+              id="bm-morph-shape"
               className={`bm-morph-shape ${props.morphShapeClassName}`.trim()}
               style={getStyles('morphShape')}
             >
