@@ -75,7 +75,11 @@
     "coverage": "nyc npm test && nyc report --reporter=lcov",
     "release": "npm run build && gulp bump && gulp release && npm run publish:version",
     "release:minor": "npm run build && gulp bump:minor && gulp release && npm run publish:version",
-    "release:major": "npm run build && gulp bump:major && gulp release && npm run publish:version"
+    "release:major": "npm run build && gulp bump:major && gulp release && npm run publish:version",
+    "preinstall": "npx npm-force-resolutions"
+  },
+  "resolutions": {
+    "graceful-fs": "^4.2.4"
   },
   "pre-commit": [
     "prettier"
