@@ -1,5 +1,23 @@
 'use strict';
 
+function getMenuWrapTransforms(isOpen, right) {
+  let value = ''
+  if (isOpen) {
+    if (right) {
+      value = '0'
+    } else {
+      return ''
+    }
+  } else {
+    if (right) {
+      value = '100%'
+    } else {
+      value = '-100%'
+    }
+  }
+  return 'translate3d(' + value + ', 0, 0)'
+}
+
 const styles = {
   overlay(isOpen) {
     return {
@@ -25,32 +43,12 @@ const styles = {
       zIndex: 1100,
       width,
       height: '100%',
-      MozTransform: isOpen
-        ? ''
-        : right
-        ? 'translate3d(100%, 0, 0)'
-        : 'translate3d(-100%, 0, 0)',
-      MsTransform: isOpen
-        ? ''
-        : right
-        ? 'translate3d(100%, 0, 0)'
-        : 'translate3d(-100%, 0, 0)',
-      OTransform: isOpen
-        ? ''
-        : right
-        ? 'translate3d(100%, 0, 0)'
-        : 'translate3d(-100%, 0, 0)',
-      WebkitTransform: isOpen
-        ? ''
-        : right
-        ? 'translate3d(100%, 0, 0)'
-        : 'translate3d(-100%, 0, 0)',
-      transform: isOpen
-        ? ''
-        : right
-        ? 'translate3d(100%, 0, 0)'
-        : 'translate3d(-100%, 0, 0)',
-      transition: 'all 0.5s'
+      MozTransform: getMenuWrapTransforms(isOpen, right),
+      MsTransform: getMenuWrapTransforms(isOpen, right),
+      OTransform: getMenuWrapTransforms(isOpen, right),
+      WebkitTransform: getMenuWrapTransforms(isOpen, right),
+      transform: getMenuWrapTransforms(isOpen, right),
+      transition: 'transform 0.5s'
     };
   },
 
