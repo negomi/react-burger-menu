@@ -340,6 +340,7 @@ export default styles => {
           className={`bm-menu-wrap ${props.className}`.trim()}
           style={getStyles('menuWrap')}
           aria-hidden={!isOpen}
+          hidden={!isOpen}
         >
           {styles.svg && (
             <div
