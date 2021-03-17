@@ -2021,8 +2021,10 @@ exports['default'] = function (styles) {
             var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
             toggleOptions.current = options;
             applyWrapperStyles();
-            setIsOpen(function (open) {
-                return typeof options.isOpen !== 'undefined' ? options.isOpen : !open;
+            setTimeout(function () {
+                setIsOpen(function (open) {
+                    return typeof options.isOpen !== 'undefined' ? options.isOpen : !open;
+                });
             });
         }
         function open() {
@@ -2100,6 +2102,12 @@ exports['default'] = function (styles) {
             }
             if (styles.outerContainer && props.outerContainerId) {
                 handleExternalWrapper(props.outerContainerId, styles.outerContainer, set);
+            }
+            var menuWrap = document.querySelector('.bm-menu-wrap');
+            if (set) {
+                menuWrap.removeAttribute('hidden');
+            } else {
+                menuWrap.setAttribute('hidden', true);
             }
         }
         function clearCurrentTimeout() {
