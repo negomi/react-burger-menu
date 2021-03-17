@@ -124,9 +124,12 @@ export default styles => {
 
       applyWrapperStyles();
 
-      setIsOpen(open =>
-        typeof options.isOpen !== 'undefined' ? options.isOpen : !open
-      );
+      // Ensures wrapper styles are applied before the menu is toggled
+      setTimeout(() => {
+        setIsOpen(open =>
+          typeof options.isOpen !== 'undefined' ? options.isOpen : !open
+        );
+      });
     }
 
     function open() {
@@ -249,6 +252,13 @@ export default styles => {
           styles.outerContainer,
           set
         );
+      }
+
+      const menuWrap = document.querySelector('.bm-menu-wrap');
+      if (set) {
+        menuWrap.removeAttribute('hidden');
+      } else {
+        menuWrap.setAttribute('hidden', true);
       }
     }
 
