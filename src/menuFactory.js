@@ -255,10 +255,12 @@ export default styles => {
       }
 
       const menuWrap = document.querySelector('.bm-menu-wrap');
-      if (set) {
-        menuWrap.removeAttribute('hidden');
-      } else {
-        menuWrap.setAttribute('hidden', true);
+      if (menuWrap) {
+        if (set) {
+          menuWrap.removeAttribute('hidden');
+        } else {
+          menuWrap.setAttribute('hidden', true);
+        }
       }
     }
 
