@@ -2104,10 +2104,12 @@ exports['default'] = function (styles) {
                 handleExternalWrapper(props.outerContainerId, styles.outerContainer, set);
             }
             var menuWrap = document.querySelector('.bm-menu-wrap');
-            if (set) {
-                menuWrap.removeAttribute('hidden');
-            } else {
-                menuWrap.setAttribute('hidden', true);
+            if (menuWrap) {
+                if (set) {
+                    menuWrap.removeAttribute('hidden');
+                } else {
+                    menuWrap.setAttribute('hidden', true);
+                }
             }
         }
         function clearCurrentTimeout() {
