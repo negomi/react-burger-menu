@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "acorn": "^6.3.0",
-    "ajv": "5.0.0",
+    "ajv": "6.12.3",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.6",
     "babel-plugin-istanbul": "^4.1.6",
