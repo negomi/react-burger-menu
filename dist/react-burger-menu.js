@@ -1508,6 +1508,7 @@ var BurgerIcon = function (_Component) {
                         className: ('bm-burger-button ' + this.props.className).trim(),
                         style: _extends({ zIndex: 1000 }, this.props.styles.bmBurgerButton)
                     }, _react2['default'].createElement('button', {
+                        type: 'button',
                         id: 'react-burger-menu-btn',
                         onClick: this.props.onClick,
                         onMouseOver: function () {
@@ -1710,6 +1711,7 @@ var CrossIcon = function (_Component) {
                         className: ('bm-cross-button ' + this.props.className).trim(),
                         style: _extends({}, buttonWrapperStyle, this.props.styles.bmCrossButton)
                     }, _react2['default'].createElement('button', {
+                        type: 'button',
                         id: 'react-burger-cross-btn',
                         onClick: this.props.onClick,
                         style: buttonStyle,
