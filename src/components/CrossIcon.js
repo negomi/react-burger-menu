@@ -73,6 +73,7 @@ export default class CrossIcon extends Component {
         }}
       >
         <button
+          type="button"
           id="react-burger-cross-btn"
           onClick={this.props.onClick}
           style={buttonStyle}
