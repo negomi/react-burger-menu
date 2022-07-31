@@ -9,7 +9,6 @@ html {
 body {
   height: 100%;
   background: #444;
-  color: #fffce1;
   font-family: 'Raleway', Arial, sans-serif;
 }
 
@@ -17,7 +16,7 @@ body {
   height: 100%;
 }
 
-a {
+main a {
   color: #4e4a46;
   text-decoration: none;
 
@@ -28,6 +27,7 @@ a {
 }
 
 main {
+  color: #fffce1;
   height: 100%;
   padding: 3em 2em;
   text-align: center;
@@ -357,4 +357,98 @@ h1 {
 #pushRotate,
 #fallDown {
   .menu-4;
+}
+
+// Carbon ad
+
+#carbonads * {
+  margin: initial;
+  padding: initial;
+}
+
+#carbonads {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', Helvetica, Arial,
+    sans-serif;
+}
+
+@media screen and (max-width: 40em) {
+  #carbonads {
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+}
+
+@media screen and (max-width: 80em) {
+  main {
+    padding-bottom: 12em;
+  }
+}
+
+#carbonads {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  max-width: 330px;
+  background-color: hsl(0, 0%, 98%);
+  box-shadow: 0 1px 4px 1px hsla(0, 0%, 0%, 0.1);
+  z-index: 100;
+  border-radius: 5px;
+}
+
+#carbonads a {
+  color: inherit;
+  text-decoration: none;
+}
+
+#carbonads a:hover {
+  color: inherit;
+}
+
+#carbonads span {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+
+#carbonads .carbon-wrap {
+  display: flex;
+  border-radius: 5px;
+}
+
+#carbonads .carbon-img {
+  display: block;
+  margin: 0;
+  line-height: 1;
+}
+
+#carbonads .carbon-img img {
+  display: block;
+}
+
+#carbonads .carbon-text {
+  font-size: 13px;
+  padding: 10px;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  text-align: left;
+}
+
+#carbonads .carbon-poweredby {
+  display: block;
+  padding: 6px 8px;
+  background: #f1f1f2;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  font-size: 8px;
+  line-height: 1;
+  border-top-left-radius: 3px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border-bottom-right-radius: 5px;
 }
