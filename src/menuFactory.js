@@ -392,7 +392,7 @@ export default styles => {
                     key: index,
                     className: classList,
                     style: getStyles('item', index, item.props.style),
-                    tabIndex: isOpen ? 0 : -1
+                    ...(!isOpen && { tabIndex: -1 })
                   };
                   return React.cloneElement(item, extraProps);
                 }
