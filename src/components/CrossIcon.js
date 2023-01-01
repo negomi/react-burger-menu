@@ -77,7 +77,7 @@ export default class CrossIcon extends Component {
           id="react-burger-cross-btn"
           onClick={this.props.onClick}
           style={buttonStyle}
-          {...(!this.props.isOpen && { tabIndex: -1})}
+          {...(!this.props.isOpen && { tabIndex: -1 })}
         >
           Close Menu
         </button>
