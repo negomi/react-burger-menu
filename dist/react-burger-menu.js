@@ -1710,13 +1710,12 @@ var CrossIcon = function (_Component) {
                     return _react2['default'].createElement('div', {
                         className: ('bm-cross-button ' + this.props.className).trim(),
                         style: _extends({}, buttonWrapperStyle, this.props.styles.bmCrossButton)
-                    }, _react2['default'].createElement('button', {
+                    }, _react2['default'].createElement('button', _extends({
                         type: 'button',
                         id: 'react-burger-cross-btn',
                         onClick: this.props.onClick,
-                        style: buttonStyle,
-                        tabIndex: this.props.isOpen ? 0 : -1
-                    }, 'Close Menu'), icon);
+                        style: buttonStyle
+                    }, !this.props.isOpen && { tabIndex: -1 }), 'Close Menu'), icon);
                 }
             }
         ]);
@@ -2203,12 +2202,11 @@ exports['default'] = function (styles) {
                     ].filter(function (className) {
                         return !!className;
                     }).join(' ');
-                var extraProps = {
+                var extraProps = _extends({
                         key: index,
                         className: classList,
-                        style: getStyles('item', index, item.props.style),
-                        tabIndex: isOpen ? 0 : -1
-                    };
+                        style: getStyles('item', index, item.props.style)
+                    }, !isOpen && { tabIndex: -1 });
                 return _react2['default'].cloneElement(item, extraProps);
             }
         }))), props.customCrossIcon !== false && _react2['default'].createElement('div', { style: getStyles('closeButton') }, _react2['default'].createElement(_componentsCrossIcon2['default'], {
