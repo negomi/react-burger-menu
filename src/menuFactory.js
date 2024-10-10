@@ -35,6 +35,33 @@ export default styles => {
   }
 
   const Menu = props => {
+    const defaultProps = {
+      bodyClassName: '',
+      burgerBarClassName: '',
+      burgerButtonClassName: '',
+      className: '',
+      crossButtonClassName: '',
+      crossClassName: '',
+      disableAutoFocus: false,
+      disableCloseOnEsc: false,
+      htmlClassName: '',
+      id: '',
+      itemClassName: '',
+      itemListClassName: '',
+      menuClassName: '',
+      morphShapeClassName: '',
+      noOverlay: false,
+      noTransition: false,
+      onStateChange: () => {},
+      outerContainerId: '',
+      overlayClassName: '',
+      pageWrapId: '',
+      styles: {},
+      width: 300,
+      onIconHoverChange: () => {},
+      itemListElement: 'nav'
+    };
+    props = { ...defaultProps, ...props };
     const [isOpen, setIsOpen] = React.useState(false);
     const timeoutId = React.useRef();
     const toggleOptions = React.useRef({});
@@ -461,33 +488,6 @@ export default styles => {
     right: PropTypes.bool,
     styles: PropTypes.object,
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
-  };
-
-  Menu.defaultProps = {
-    bodyClassName: '',
-    burgerBarClassName: '',
-    burgerButtonClassName: '',
-    className: '',
-    crossButtonClassName: '',
-    crossClassName: '',
-    disableAutoFocus: false,
-    disableCloseOnEsc: false,
-    htmlClassName: '',
-    id: '',
-    itemClassName: '',
-    itemListClassName: '',
-    menuClassName: '',
-    morphShapeClassName: '',
-    noOverlay: false,
-    noTransition: false,
-    onStateChange: () => {},
-    outerContainerId: '',
-    overlayClassName: '',
-    pageWrapId: '',
-    styles: {},
-    width: 300,
-    onIconHoverChange: () => {},
-    itemListElement: 'nav'
   };
 
   return Menu;
