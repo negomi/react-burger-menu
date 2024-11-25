@@ -1932,6 +1932,35 @@ exports['default'] = function (styles) {
         return ref.current;
     }
     var Menu = function Menu(props) {
+        var defaultProps = {
+                bodyClassName: '',
+                burgerBarClassName: '',
+                burgerButtonClassName: '',
+                className: '',
+                crossButtonClassName: '',
+                crossClassName: '',
+                disableAutoFocus: false,
+                disableCloseOnEsc: false,
+                htmlClassName: '',
+                id: '',
+                itemClassName: '',
+                itemListClassName: '',
+                menuClassName: '',
+                morphShapeClassName: '',
+                noOverlay: false,
+                noTransition: false,
+                onStateChange: function onStateChange() {
+                },
+                outerContainerId: '',
+                overlayClassName: '',
+                pageWrapId: '',
+                styles: {},
+                width: 300,
+                onIconHoverChange: function onIconHoverChange() {
+                },
+                itemListElement: 'nav'
+            };
+        props = _extends({}, defaultProps, props);
         var _React$useState = _react2['default'].useState(false);
         var _React$useState2 = _slicedToArray(_React$useState, 2);
         var isOpen = _React$useState2[0];
@@ -2028,8 +2057,9 @@ exports['default'] = function (styles) {
             }
         }
         function getStyle(style, index) {
-            var width = props.width;
-            var right = props.right;
+            var _props = props;
+            var width = _props.width;
+            var right = _props.right;
             var formattedWidth = typeof width !== 'string' ? width + 'px' : width;
             return style(isOpen, formattedWidth, right, index);
         }
@@ -2251,34 +2281,6 @@ exports['default'] = function (styles) {
             _propTypes2['default'].number,
             _propTypes2['default'].string
         ])
-    };
-    Menu.defaultProps = {
-        bodyClassName: '',
-        burgerBarClassName: '',
-        burgerButtonClassName: '',
-        className: '',
-        crossButtonClassName: '',
-        crossClassName: '',
-        disableAutoFocus: false,
-        disableCloseOnEsc: false,
-        htmlClassName: '',
-        id: '',
-        itemClassName: '',
-        itemListClassName: '',
-        menuClassName: '',
-        morphShapeClassName: '',
-        noOverlay: false,
-        noTransition: false,
-        onStateChange: function onStateChange() {
-        },
-        outerContainerId: '',
-        overlayClassName: '',
-        pageWrapId: '',
-        styles: {},
-        width: 300,
-        onIconHoverChange: function onIconHoverChange() {
-        },
-        itemListElement: 'nav'
     };
     return Menu;
 };
